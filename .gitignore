@@ -62,3 +62,12 @@ replyagent.html
 data/
 *.png
 !images/eggermath-logo.png
+
+# Temporary / archive files
+mega*.txt
+clone-and-redesign-website.zip
+
+# Embedded / standalone repos (not part of Astro build)
+browser-emulation/
+gba-emulator-js/
+retro-gaming-guide/
