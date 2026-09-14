@@ -6,6 +6,7 @@ import TouchControls from '../../components/TouchControls.astro';
 import { games, SITE } from '../../data/games.js';
 import { gameTranslations, supportedLangs, langNames } from '../../data/translations.js';
 import { regionalKeywords } from '../../data/keywords.js';
+import { gameGuideLinks, systemHubs } from '../../data/game-links.js';
 
 export function getStaticPaths() {
   const paths = [];
@@ -23,6 +24,8 @@ const pageTitle = tr.title || `Play ${game.title} Online Free`;
 const pageDesc = tr.desc || game.desc;
 const langName = langNames[lang] || lang;
 const relatedGames = games.filter(g => g.genre === game.genre && g.slug !== game.slug).slice(0, 4);
+const guideLinks = gameGuideLinks[game.slug] || [];
+const hub = systemHubs[game.system] || systemHubs['GBA'];
 
 // Pick 3 most relevant regional keywords for this game+lang (no stuffing: used in desc + schema only)
 function pickKeywords(game, lang) {
@@ -140,6 +143,10 @@ const jsonLd = {
 >
   <NoscriptFallback />
 
+  <nav class="game-breadcrumb">
+    <a href={`/${lang}/`}>Home</a> <span class="bc-sep">›</span> <a href={`/${lang}${hub.href}`}>{hub.label}</a> <span class="bc-sep">›</span> <span class="bc-current">{game.title}</span>
+  </nav>
+
   <nav class="game-topbar">
     <a href="/" class="back-link">
       <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
@@ -256,9 +263,36 @@ const jsonLd = {
     <details><summary>What are the controls?</summary><p>D-Pad: WASD/Arrows, A: K, B: J{game.system === 'GBA' ? ', L: Q, R: E' : ''}, Start: Enter, Select: Right Shift. Mobile: touch controls.</p></details>
   </section>
 
+  {guideLinks.length > 0 && (
+    <section class="game-guides">
+      <h3>Related Guides</h3>
+      <ul class="guide-links">
+        {guideLinks.map(link => (
+          <li><a href={`/${lang}${link.href}`}>{link.label}</a></li>
+        ))}
+      </ul>
+    </section>
+  )}
+
   </EmulatorLayout>
 
 <style>
+  .game-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 20px;
+    font-size: 12px;
+    color: var(--text-muted);
+    background: rgba(0,0,0,0.2);
+  }
+  .game-breadcrumb a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .game-breadcrumb a:hover { text-decoration: underline; }
+  .bc-sep { color: rgba(255,255,255,0.2); }
+  .bc-current { color: var(--text); font-weight: 500; }
   .game-topbar {
     display: flex;
     align-items: center;
@@ -486,6 +520,29 @@ const jsonLd = {
   .game-faq details { padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
   .game-faq summary { cursor: pointer; font-weight: 600; font-size: 0.9rem; color: var(--text); }
   .game-faq p { font-size: 0.85rem; color: var(--text-muted); margin-top: 6px; }
+  .game-guides {
+    max-width: 800px;
+    margin: 24px auto 0;
+    padding: 16px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+  }
+  .game-guides h3 { font-size: 1.1rem; margin-bottom: 8px; color: var(--text); }
+  .guide-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .guide-links li a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  .guide-links li a:hover { text-decoration: underline; }
   @media (max-width: 600px) { .related-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (pointer: coarse) {
     .desktop-only { display: none !important; }
