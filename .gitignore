@@ -24,7 +24,7 @@ Thumbs.db
 # Test artifacts
 .playwright-mcp/
 
-# Dev scripts
+# Dev scripts (root-level utility scripts)
 check-*.js
 fix-*.js
 test-*.js
@@ -32,6 +32,12 @@ import_*.js
 remove-game.js
 api-body*.json
 broken-*.json
+add_games.js
+copy_lang.js
+gen_t.js
+gen_t2.js
+gen_translations.js
+auto-campaign.mjs
 
 # PSP Emulator — exclude local dev files and large ROMs
 psp-emulator-web/*.iso
@@ -70,4 +76,45 @@ clone-and-redesign-website.zip
 # Embedded / standalone repos (not part of Astro build)
 browser-emulation/
 gba-emulator-js/
+gba-emulator-web/
+gba-wasm-web/
 retro-gaming-guide/
+akka/
+arena-design/
+chatbot/
+dashboard/
+
+# Root-level legacy files (build uses eggermath-astro/)
+BingSiteAuth.xml
+google*.html
+yandex_*.html
+search-index.json
+server.js
+sw.js
+index.html
+robots.txt
+sitemap.xml
+sitemap-hreflang.xml
+og-image.svg
+favicon.svg
+site.webmanifest
+BACKLINK-STRATEGY.md
+DISTRIBUTION-KIT.md
+EGGERMATH-7DAY-SPRINT.md
+QUORA-TEMPLATES.md
+devto-article.md
+medium-article.md
+opencode.json
+
+# Root-level legacy directories
+css/
+js/
+pages/
+logo/
+dist/
+tools/
+scripts/
+
+# Root package files (real package is in eggermath-astro/)
+package.json
+package-lock.json
