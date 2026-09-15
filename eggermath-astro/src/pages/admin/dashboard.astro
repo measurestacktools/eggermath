@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { games, SITE } from '../../data/games.js';
+import { blogPosts } from '../../data/blog-posts.js';
+import { blogTranslations, blogLangs } from '../../data/blog-translations.js';
+
+const gbaCount = games.filter(g => g.system === 'GBA').length;
+const gbcCount = games.filter(g => g.system === 'GBC').length;
+const gbCount = games.filter(g => g.system === 'GB').length;
+const genreCounts = {};
+games.forEach(g => { genreCounts[g.genre] = (genreCounts[g.genre] || 0) + 1; });
+const seriesCounts = {};
+games.forEach(g => { if (g.series) seriesCounts[g.series] = (seriesCounts[g.series] || 0) + 1; });
+
+const translatedSlugs = Object.keys(blogTranslations);
+const blogTranslationCoverage = Math.round((translatedSlugs.length / blogPosts.length) * 100);
+
+const seoChecklist = [
+  { label: 'Unique meta descriptions on all game pages', status: true },
+  { label: 'JSON-LD VideoGame schema on game pages', status: true },
+  { label: 'JSON-LD FAQPage schema matches visible FAQ', status: true },
+  { label: 'Internal linking: game → blog posts', status: true },
+  { label: 'Related games scoring (series > system > genre)', status: true },
+  { label: 'Breadcrumb schema on game pages', status: true },
+  { label: 'Blog index auto-discovers all posts from data', status: true },
+  { label: 'FAQ page has comprehensive content + links', status: true },
+  { label: 'Sitemap generated with all pages', status: true },
+  { label: 'IndexNow ping on build', status: true },
+  { label: 'Hreflang tags on all pages', status: true },
+  { label: 'OG/Twitter meta tags on all pages', status: true },
+  { label: 'Age-gated ad delivery', status: true },
+  { label: 'Mobile touch controls', status: true },
+  { label: 'iPhone dual-core loader', status: true },
+];
+---
+
+<BaseLayout title="Admin Dashboard | EggerMath" description="Site health and metrics dashboard">
+<main style="max-width:1000px;margin:0 auto;padding:24px">
+  <h1 style="font-size:2rem;margin-bottom:8px">Admin Dashboard</h1>
+  <p style="color:#888;margin-bottom:32px">Site health, content inventory, and SEO checklist.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-bottom:32px;">
+    <div style="padding:20px;background:#111;border:1px solid #1e1e22;border-radius:12px;text-align:center;">
+      <div style="font-size:2rem;color:#c4a35a;font-weight:700;">{games.length}</div>
+      <div style="color:#888;font-size:14px;">Total Games</div>
+    </div>
+    <div style="padding:20px;background:#111;border:1px solid #1e1e22;border-radius:12px;text-align:center;">
+      <div style="font-size:2rem;color:#c4a35a;font-weight:700;">{blogPosts.length}</div>
+      <div style="color:#888;font-size:14px;">Blog Posts</div>
+    </div>
+    <div style="padding:20px;background:#111;border:1px solid #1e1e22;border-radius:12px;text-align:center;">
+      <div style="font-size:2rem;color:#c4a35a;font-weight:700;">{translatedSlugs.length}/{blogPosts.length}</div>
+      <div style="color:#888;font-size:14px;">Blog Posts Translated</div>
+    </div>
+    <div style="padding:20px;background:#111;border:1px solid #1e1e22;border-radius:12px;text-align:center;">
+      <div style="font-size:2rem;color:#c4a35a;font-weight:700;">{blogLangs.length}</div>
+      <div style="color:#888;font-size:14px;">Blog Languages</div>
+    </div>
+    <div style="padding:20px;background:#111;border:1px solid #1e1e22;border-radius:12px;text-align:center;">
+      <div style="font-size:2rem;color:#c4a35a;font-weight:700;">1107</div>
+      <div style="color:#888;font-size:14px;">Pages Built</div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px;">
+    <div style="padding:20px;background:#111;border:1px solid #1e1e22;border-radius:12px;">
+      <h2 style="font-size:1.2rem;margin-bottom:12px;color:#c4a35a;">Games by System</h2>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;justify-content:space-between;color:#ccc;"><span>GBA</span><span style="color:#c4a35a;">{gbaCount}</span></div>
+        <div style="display:flex;justify-content:space-between;color:#ccc;"><span>GBC</span><span style="color:#c4a35a;">{gbcCount}</span></div>
+        <div style="display:flex;justify-content:space-between;color:#ccc;"><span>GB</span><span style="color:#c4a35a;">{gbCount}</span></div>
+      </div>
+    </div>
+    <div style="padding:20px;background:#111;border:1px solid #1e1e22;border-radius:12px;">
+      <h2 style="font-size:1.2rem;margin-bottom:12px;color:#c4a35a;">Games by Genre</h2>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        {Object.entries(genreCounts).sort((a,b) => b[1]-a[1]).map(([genre, count]) => (
+          <div style="display:flex;justify-content:space-between;color:#ccc;"><span>{genre}</span><span style="color:#c4a35a;">{count}</span></div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <div style="padding:20px;background:#111;border:1px solid #1e1e22;border-radius:12px;margin-bottom:32px;">
+    <h2 style="font-size:1.2rem;margin-bottom:12px;color:#c4a35a;">Series Coverage</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      {Object.entries(seriesCounts).sort((a,b) => b[1]-a[1]).map(([series, count]) => (
+        <span style="padding:6px 12px;background:#1a1a2e;border:1px solid #1e1e22;border-radius:6px;color:#ccc;font-size:13px;">{series} ({count})</span>
+      ))}
+    </div>
+  </div>
+
+  <div style="padding:20px;background:#111;border:1px solid #1e1e22;border-radius:12px;margin-bottom:32px;">
+    <h2 style="font-size:1.2rem;margin-bottom:12px;color:#c4a35a;">SEO Checklist</h2>
+    <div style="display:flex;flex-direction:column;gap:6px;">
+      {seoChecklist.map(item => (
+        <div style="display:flex;align-items:center;gap:8px;color:#ccc;font-size:14px;">
+          <span style={item.status ? 'color:#2ecc71' : 'color:#e74c3c'}>{item.status ? '✓' : '✗'}</span>
+          {item.label}
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div style="padding:20px;background:#111;border:1px solid #1e1e22;border-radius:12px;margin-bottom:32px;">
+    <h2 style="font-size:1.2rem;margin-bottom:12px;color:#c4a35a;">Quick Links</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;">
+      <a href="/" style="color:#c4a35a;font-size:14px;">Homepage</a>
+      <a href="/blog" style="color:#c4a35a;font-size:14px;">Blog Index</a>
+      <a href="/faq/gba-emulator-online" style="color:#c4a35a;font-size:14px;">FAQ Page</a>
+      <a href="/pages/about" style="color:#c4a35a;font-size:14px;">About</a>
+      <a href="/pages/privacy" style="color:#c4a35a;font-size:14px;">Privacy Policy</a>
+      <a href="/sitemap-0.xml" style="color:#c4a35a;font-size:14px;">Sitemap</a>
+    </div>
+  </div>
+</main>
+</BaseLayout>
