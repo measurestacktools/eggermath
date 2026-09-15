@@ -1,19 +1,20 @@
 ---
+import { controls } from '../data/controls.js';
 const { system = 'GBA' } = Astro.props;
-const isGBA = system === 'GBA';
+const c = system === 'GBA' ? controls.gba : controls.gb;
 ---
 <div class="controls-help" id="controls-help">
   <h3>Keyboard Controls</h3>
-  <div class="row"><span>D-Pad</span><span>WASD / Arrow Keys</span></div>
-  <div class="row"><span>A Button</span><span>K</span></div>
-  <div class="row"><span>B Button</span><span>J</span></div>
-  {isGBA && <div class="row"><span>L</span><span>Q</span></div>}
-  {isGBA && <div class="row"><span>R</span><span>E</span></div>}
-  <div class="row"><span>Start</span><span>Enter</span></div>
-  <div class="row"><span>Select</span><span>Right Shift</span></div>
-  <div class="row"><span>Save State</span><span>F5</span></div>
-  <div class="row"><span>Load State</span><span>F9</span></div>
-  <div class="row"><span>Switch Slot</span><span>F7</span></div>
-  <div class="row"><span>Fullscreen</span><span>Double-click canvas</span></div>
+  <div class="row"><span>{c.dpad.label}</span><span>{c.dpad.keys}</span></div>
+  <div class="row"><span>{c.a.label}</span><span>{c.a.key}</span></div>
+  <div class="row"><span>{c.b.label}</span><span>{c.b.key}</span></div>
+  {c.l && <div class="row"><span>{c.l.label}</span><span>{c.l.key}</span></div>}
+  {c.r && <div class="row"><span>{c.r.label}</span><span>{c.r.key}</span></div>}
+  <div class="row"><span>{c.start.label}</span><span>{c.start.key}</span></div>
+  <div class="row"><span>{c.select.label}</span><span>{c.select.key}</span></div>
+  <div class="row"><span>{c.save.label}</span><span>{c.save.key}</span></div>
+  <div class="row"><span>{c.load.label}</span><span>{c.load.key}</span></div>
+  <div class="row"><span>{c.slot.label}</span><span>{c.slot.key}</span></div>
+  <div class="row"><span>{c.fullscreen.label}</span><span>{c.fullscreen.key}</span></div>
 </div>
 <div class="mobile-note">Touch controls active. Connect a keyboard or controller for better experience.</div>

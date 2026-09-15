@@ -1,6 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/games.js';
+import { getControlsText } from '../../data/controls.js';
+
+const gbaControls = getControlsText('GBA');
 
 const faqs = [
   {
@@ -33,7 +36,7 @@ const faqs = [
   },
   {
     q: 'How do keyboard controls work?',
-    a: 'D-Pad: WASD or Arrow Keys. A button: K. B button: J. L shoulder: Q. R shoulder: E. Start: Enter. Select: Right Shift. Save: F5. Load: F9. Slot: F7. Double-click the canvas for fullscreen.'
+    a: `${gbaControls}. Mobile: touch controls.`
   }
 ];
 

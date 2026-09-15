@@ -7,6 +7,7 @@ import { games, SITE } from '../../data/games.js';
 import { gameTranslations, supportedLangs, langNames } from '../../data/translations.js';
 import { regionalKeywords } from '../../data/keywords.js';
 import { gameGuideLinks, systemHubs } from '../../data/game-links.js';
+import { getControlsText } from '../../data/controls.js';
 
 export function getStaticPaths() {
   const paths = [];
@@ -47,7 +48,7 @@ const faqs = [
   { q: `How to play ${game.title} on iPhone?`, a: `Open this page on Safari, tap to start. Touch controls appear automatically. Save via Save button — works offline after first load.` },
   { q: `Is ${game.title} free?`, a: `Yes, ${game.title} is free on EggerMath via browser mGBA emulator. No download, no signup.` },
   { q: `Can I save progress?`, a: `Click Save (F5) and Load (F9). 10 slots via Slot button / F7. Stored in browser.` },
-  { q: `What are the controls?`, a: `D-Pad: WASD/Arrows, A: K, B: J${game.system === 'GBA' ? ', L: Q, R: E' : ''}, Start: Enter, Select: Right Shift. Mobile: touch controls.` },
+  { q: `What are the controls?`, a: `${getControlsText(game.system)}. Mobile: touch controls.` },
 ];
 
 // Pick 3 most relevant regional keywords for this game+lang (no stuffing: used in desc + schema only)
