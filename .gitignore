@@ -65,7 +65,7 @@ ai-analytics/
 claude-seo/
 chatbot.html
 replyagent.html
-data/
+/data/
 *.png
 !images/eggermath-logo.png
 
@@ -106,14 +106,14 @@ devto-article.md
 medium-article.md
 opencode.json
 
-# Root-level legacy directories
-css/
-js/
-pages/
-logo/
-dist/
-tools/
-scripts/
+# Root-level legacy directories (not under eggermath-astro/)
+/css/
+/js/
+/pages/
+/logo/
+/dist/
+/tools/
+/scripts/
 
 # Root package files (real package is in eggermath-astro/)
 package.json
