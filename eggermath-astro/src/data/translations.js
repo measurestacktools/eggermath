@@ -1,6 +1,6 @@
 export const gameTranslations = {
   'pokemon-emerald': {
-    'en': { title: 'Play Pokemon Emerald Online Free', desc: 'Play Pokemon Emerald online. Free GBA emulator.' },
+    'en': { title: 'Play Pokemon Emerald Online Free' },
     'pt-BR': { title: 'Jogue Pokemon Emerald Online Gratis', desc: 'Jogue Pokemon Emerald online. Emulador GBA gratuito.' },
     'es': { title: 'Jugar Pokemon Emerald Online Gratis', desc: 'Juega Pokemon Emerald online. Emulador GBA gratuito.' },
     'ja': { title: 'Pokemon Emeraldをオンラインで無料プレイ', desc: 'Pokemon Emeraldをブラウザでプレイします。無料のGBAエミュレーター。' },
@@ -33,7 +33,7 @@ export const gameTranslations = {
     'bn': { title: 'Pokemon Emerald অনলাইনে বিনামূল্যে খেলুন', desc: 'Pokemon Emerald অনলাইনে খেলুন। বিনামূল্যে GBA এমুলেটর।' },
   },
   'pokemon-firered': {
-    'en': { title: 'Play Pokemon FireRed Online Free', desc: 'Play Pokemon FireRed online. Free GBA emulator.' },
+    'en': { title: 'Play Pokemon FireRed Online Free' },
     'pt-BR': { title: 'Jogue Pokemon FireRed Online Gratis', desc: 'Jogue Pokemon FireRed online. Emulador GBA gratuito.' },
     'es': { title: 'Jugar Pokemon FireRed Online Gratis', desc: 'Juega Pokemon FireRed online. Emulador GBA gratuito.' },
     'ja': { title: 'Pokemon FireRedをオンラインで無料プレイ', desc: 'Pokemon FireRedをブラウザでプレイします。無料のGBAエミュレーター。' },
@@ -66,7 +66,7 @@ export const gameTranslations = {
     'bn': { title: 'Pokemon FireRed অনলাইনে বিনামূল্যে খেলুন', desc: 'Pokemon FireRed অনলাইনে খেলুন। বিনামূল্যে GBA এমুলেটর।' },
   },
   'pokemon-leafgreen': {
-    'en': { title: 'Play Pokemon LeafGreen Online Free', desc: 'Play Pokemon LeafGreen online. Free GBA emulator.' },
+    'en': { title: 'Play Pokemon LeafGreen Online Free' },
     'pt-BR': { title: 'Jogue Pokemon LeafGreen Online Gratis', desc: 'Jogue Pokemon LeafGreen online. Emulador GBA gratuito.' },
     'es': { title: 'Jugar Pokemon LeafGreen Online Gratis', desc: 'Juega Pokemon LeafGreen online. Emulador GBA gratuito.' },
     'ja': { title: 'Pokemon LeafGreenをオンラインで無料プレイ', desc: 'Pokemon LeafGreenをブラウザでプレイします。無料のGBAエミュレーター。' },
@@ -99,7 +99,7 @@ export const gameTranslations = {
     'bn': { title: 'Pokemon LeafGreen অনলাইনে বিনামূল্যে খেলুন', desc: 'Pokemon LeafGreen অনলাইনে খেলুন। বিনামূল্যে GBA এমুলেটর।' },
   },
   'pokemon-ruby': {
-    'en': { title: 'Play Pokemon Ruby Online Free', desc: 'Play Pokemon Ruby online. Free GBA emulator.' },
+    'en': { title: 'Play Pokemon Ruby Online Free' },
     'pt-BR': { title: 'Jogue Pokemon Ruby Online Gratis', desc: 'Jogue Pokemon Ruby online. Emulador GBA gratuito.' },
     'es': { title: 'Jugar Pokemon Ruby Online Gratis', desc: 'Juega Pokemon Ruby online. Emulador GBA gratuito.' },
     'ja': { title: 'Pokemon Rubyをオンラインで無料プレイ', desc: 'Pokemon Rubyをブラウザでプレイします。無料のGBAエミュレーター。' },
@@ -132,7 +132,7 @@ export const gameTranslations = {
     'bn': { title: 'Pokemon Ruby অনলাইনে বিনামূল্যে খেলুন', desc: 'Pokemon Ruby অনলাইনে খেলুন। বিনামূল্যে GBA এমুলেটর।' },
   },
   'pokemon-sapphire': {
-    'en': { title: 'Play Pokemon Sapphire Online Free', desc: 'Play Pokemon Sapphire online. Free GBA emulator.' },
+    'en': { title: 'Play Pokemon Sapphire Online Free' },
     'pt-BR': { title: 'Jogue Pokemon Sapphire Online Gratis', desc: 'Jogue Pokemon Sapphire online. Emulador GBA gratuito.' },
     'es': { title: 'Jugar Pokemon Sapphire Online Gratis', desc: 'Juega Pokemon Sapphire online. Emulador GBA gratuito.' },
     'ja': { title: 'Pokemon Sapphireをオンラインで無料プレイ', desc: 'Pokemon Sapphireをブラウザでプレイします。無料のGBAエミュレーター。' },
@@ -165,7 +165,7 @@ export const gameTranslations = {
     'bn': { title: 'Pokemon Sapphire অনলাইনে বিনামূল্যে খেলুন', desc: 'Pokemon Sapphire অনলাইনে খেলুন। বিনামূল্যে GBA এমুলেটর।' },
   },
   'pokemon-ultra-violet': {
-    'en': { title: 'Play Pokemon Ultra Violet Online Free', desc: 'Play Pokemon Ultra Violet online. Free GBA emulator.' },
+    'en': { title: 'Play Pokemon Ultra Violet Online Free' },
     'pt-BR': { title: 'Jogue Pokemon Ultra Violet Online Gratis', desc: 'Jogue Pokemon Ultra Violet online. Emulador GBA gratuito.' },
     'es': { title: 'Jugar Pokemon Ultra Violet Online Gratis', desc: 'Juega Pokemon Ultra Violet online. Emulador GBA gratuito.' },
     'ja': { title: 'Pokemon Ultra Violetをオンラインで無料プレイ', desc: 'Pokemon Ultra Violetをブラウザでプレイします。無料のGBAエミュレーター。' },
@@ -198,7 +198,7 @@ export const gameTranslations = {
     'bn': { title: 'Pokemon Ultra Violet অনলাইনে বিনামূল্যে খেলুন', desc: 'Pokemon Ultra Violet অনলাইনে খেলুন। বিনামূল্যে GBA এমুলেটর।' },
   },
   'pokemon-jupiter': {
-    'en': { title: 'Play Pokemon Jupiter Online Free', desc: 'Play Pokemon Jupiter online. Free GBA emulator.' },
+    'en': { title: 'Play Pokemon Jupiter Online Free' },
     'pt-BR': { title: 'Jogue Pokemon Jupiter Online Gratis', desc: 'Jogue Pokemon Jupiter online. Emulador GBA gratuito.' },
     'es': { title: 'Jugar Pokemon Jupiter Online Gratis', desc: 'Juega Pokemon Jupiter online. Emulador GBA gratuito.' },
     'ja': { title: 'Pokemon Jupiterをオンラインで無料プレイ', desc: 'Pokemon Jupiterをブラウザでプレイします。無料のGBAエミュレーター。' },
@@ -231,7 +231,7 @@ export const gameTranslations = {
     'bn': { title: 'Pokemon Jupiter অনলাইনে বিনামূল্যে খেলুন', desc: 'Pokemon Jupiter অনলাইনে খেলুন। বিনামূল্যে GBA এমুলেটর।' },
   },
   'zelda-minish-cap': {
-    'en': { title: 'Play Zelda: Minish Cap Online Free', desc: 'Play Zelda: Minish Cap online. Free GBA emulator.' },
+    'en': { title: 'Play Zelda: Minish Cap Online Free' },
     'pt-BR': { title: 'Jogue Zelda: Minish Cap Online Gratis', desc: 'Jogue Zelda: Minish Cap online. Emulador GBA gratuito.' },
     'es': { title: 'Jugar Zelda: Minish Cap Online Gratis', desc: 'Juega Zelda: Minish Cap online. Emulador GBA gratuito.' },
     'ja': { title: 'Zelda: Minish Capをオンラインで無料プレイ', desc: 'Zelda: Minish Capをブラウザでプレイします。無料のGBAエミュレーター。' },
@@ -264,7 +264,7 @@ export const gameTranslations = {
     'bn': { title: 'Zelda: Minish Cap অনলাইনে বিনামূল্যে খেলুন', desc: 'Zelda: Minish Cap অনলাইনে খেলুন। বিনামূল্যে GBA এমুলেটর।' },
   },
   'zelda-a-link-to-the-past': {
-    'en': { title: 'Play Zelda: A Link to the Past Online Free', desc: 'Play Zelda: A Link to the Past online. Free GBA emulator.' },
+    'en': { title: 'Play Zelda: A Link to the Past Online Free' },
     'pt-BR': { title: 'Jogue Zelda: A Link to the Past Online Gratis', desc: 'Jogue Zelda: A Link to the Past online. Emulador GBA gratuito.' },
     'es': { title: 'Jugar Zelda: A Link to the Past Online Gratis', desc: 'Juega Zelda: A Link to the Past online. Emulador GBA gratuito.' },
     'ja': { title: 'Zelda: A Link to the Pastをオンラインで無料プレイ', desc: 'Zelda: A Link to the Pastをブラウザでプレイします。無料のGBAエミュレーター。' },
@@ -297,7 +297,7 @@ export const gameTranslations = {
     'bn': { title: 'Zelda: A Link to the Past অনলাইনে বিনামূল্যে খেলুন', desc: 'Zelda: A Link to the Past অনলাইনে খেলুন। বিনামূল্যে GBA এমুলেটর।' },
   },
   'mario-kart-super-circuit': {
-    'en': { title: 'Play Mario Kart Super Circuit Online Free', desc: 'Play Mario Kart Super Circuit online. Free GBA emulator.' },
+    'en': { title: 'Play Mario Kart Super Circuit Online Free' },
     'pt-BR': { title: 'Jogue Mario Kart Super Circuit Online Gratis', desc: 'Jogue Mario Kart Super Circuit online. Emulador GBA gratuito.' },
     'es': { title: 'Jugar Mario Kart Super Circuit Online Gratis', desc: 'Juega Mario Kart Super Circuit online. Emulador GBA gratuito.' },
     'ja': { title: 'Mario Kart Super Circuitをオンラインで無料プレイ', desc: 'Mario Kart Super Circuitをブラウザでプレイします。無料のGBAエミュレーター。' },
@@ -330,7 +330,7 @@ export const gameTranslations = {
     'bn': { title: 'Mario Kart Super Circuit অনলাইনে বিনামূল্যে খেলুন', desc: 'Mario Kart Super Circuit অনলাইনে খেলুন। বিনামূল্যে GBA এমুলেটর।' },
   },
   'super-mario-world': {
-    'en': { title: 'Play Super Mario World Online Free', desc: 'Play Super Mario World online. Free GBA emulator.' },
+    'en': { title: 'Play Super Mario World Online Free' },
     'pt-BR': { title: 'Jogue Super Mario World Online Gratis', desc: 'Jogue Super Mario World online. Emulador GBA gratuito.' },
     'es': { title: 'Jugar Super Mario World Online Gratis', desc: 'Juega Super Mario World online. Emulador GBA gratuito.' },
     'ja': { title: 'Super Mario Worldをオンラインで無料プレイ', desc: 'Super Mario Worldをブラウザでプレイします。無料のGBAエミュレーター。' },
@@ -363,7 +363,7 @@ export const gameTranslations = {
     'bn': { title: 'Super Mario World অনলাইনে বিনামূল্যে খেলুন', desc: 'Super Mario World অনলাইনে খেলুন। বিনামূল্যে GBA এমুলেটর।' },
   },
   'mario-luigi-superstar-saga': {
-    'en': { title: 'Play Mario & Luigi: Superstar Saga Online Free', desc: 'Play Mario & Luigi: Superstar Saga online. Free GBA emulator.' },
+    'en': { title: 'Play Mario & Luigi: Superstar Saga Online Free' },
     'pt-BR': { title: 'Jogue Mario & Luigi: Superstar Saga Online Gratis', desc: 'Jogue Mario & Luigi: Superstar Saga online. Emulador GBA gratuito.' },
     'es': { title: 'Jugar Mario & Luigi: Superstar Saga Online Gratis', desc: 'Juega Mario & Luigi: Superstar Saga online. Emulador GBA gratuito.' },
     'ja': { title: 'Mario & Luigi: Superstar Sagaをオンラインで無料プレイ', desc: 'Mario & Luigi: Superstar Sagaをブラウザでプレイします。無料のGBAエミュレーター。' },
@@ -396,7 +396,7 @@ export const gameTranslations = {
     'bn': { title: 'Mario & Luigi: Superstar Saga অনলাইনে বিনামূল্যে খেলুন', desc: 'Mario & Luigi: Superstar Saga অনলাইনে খেলুন। বিনামূল্যে GBA এমুলেটর।' },
   },
   'classic-nes-super-mario-bros': {
-    'en': { title: 'Play Classic NES: Super Mario Bros Online Free', desc: 'Play Classic NES: Super Mario Bros online. Free GBA emulator.' },
+    'en': { title: 'Play Classic NES: Super Mario Bros Online Free' },
     'pt-BR': { title: 'Jogue Classic NES: Super Mario Bros Online Gratis', desc: 'Jogue Classic NES: Super Mario Bros online. Emulador GBA gratuito.' },
     'es': { title: 'Jugar Classic NES: Super Mario Bros Online Gratis', desc: 'Juega Classic NES: Super Mario Bros online. Emulador GBA gratuito.' },
     'ja': { title: 'Classic NES: Super Mario Brosをオンラインで無料プレイ', desc: 'Classic NES: Super Mario Brosをブラウザでプレイします。無料のGBAエミュレーター。' },
@@ -429,7 +429,7 @@ export const gameTranslations = {
     'bn': { title: 'Classic NES: Super Mario Bros অনলাইনে বিনামূল্যে খেলুন', desc: 'Classic NES: Super Mario Bros অনলাইনে খেলুন। বিনামূল্যে GBA এমুলেটর।' },
   },
   'metroid-fusion': {
-    'en': { title: 'Play Metroid Fusion Online Free', desc: 'Play Metroid Fusion online. Free GBA emulator.' },
+    'en': { title: 'Play Metroid Fusion Online Free' },
     'pt-BR': { title: 'Jogue Metroid Fusion Online Gratis', desc: 'Jogue Metroid Fusion online. Emulador GBA gratuito.' },
     'es': { title: 'Jugar Metroid Fusion Online Gratis', desc: 'Juega Metroid Fusion online. Emulador GBA gratuito.' },
     'ja': { title: 'Metroid Fusionをオンラインで無料プレイ', desc: 'Metroid Fusionをブラウザでプレイします。無料のGBAエミュレーター。' },
@@ -462,7 +462,7 @@ export const gameTranslations = {
     'bn': { title: 'Metroid Fusion অনলাইনে বিনামূল্যে খেলুন', desc: 'Metroid Fusion অনলাইনে খেলুন। বিনামূল্যে GBA এমুলেটর।' },
   },
   'metroid-zero-mission': {
-    'en': { title: 'Play Metroid: Zero Mission Online Free', desc: 'Play Metroid: Zero Mission online. Free GBA emulator.' },
+    'en': { title: 'Play Metroid: Zero Mission Online Free' },
     'pt-BR': { title: 'Jogue Metroid: Zero Mission Online Gratis', desc: 'Jogue Metroid: Zero Mission online. Emulador GBA gratuito.' },
     'es': { title: 'Jugar Metroid: Zero Mission Online Gratis', desc: 'Juega Metroid: Zero Mission online. Emulador GBA gratuito.' },
     'ja': { title: 'Metroid: Zero Missionをオンラインで無料プレイ', desc: 'Metroid: Zero Missionをブラウザでプレイします。無料のGBAエミュレーター。' },
@@ -495,7 +495,7 @@ export const gameTranslations = {
     'bn': { title: 'Metroid: Zero Mission অনলাইনে বিনামূল্যে খেলুন', desc: 'Metroid: Zero Mission অনলাইনে খেলুন। বিনামূল্যে GBA এমুলেটর।' },
   },
   'kirby-nightmare-in-dream-land': {
-    'en': { title: 'Play Kirby: Nightmare in Dream Land Online Free', desc: 'Play Kirby: Nightmare in Dream Land online. Free GBA emulator.' },
+    'en': { title: 'Play Kirby: Nightmare in Dream Land Online Free' },
     'pt-BR': { title: 'Jogue Kirby: Nightmare in Dream Land Online Gratis', desc: 'Jogue Kirby: Nightmare in Dream Land online. Emulador GBA gratuito.' },
     'es': { title: 'Jugar Kirby: Nightmare in Dream Land Online Gratis', desc: 'Juega Kirby: Nightmare in Dream Land online. Emulador GBA gratuito.' },
     'ja': { title: 'Kirby: Nightmare in Dream Landをオンラインで無料プレイ', desc: 'Kirby: Nightmare in Dream Landをブラウザでプレイします。無料のGBAエミュレーター。' },
@@ -528,7 +528,7 @@ export const gameTranslations = {
     'bn': { title: 'Kirby: Nightmare in Dream Land অনলাইনে বিনামূল্যে খেলুন', desc: 'Kirby: Nightmare in Dream Land অনলাইনে খেলুন। বিনামূল্যে GBA এমুলেটর।' },
   },
   'kirby-amazing-mirror': {
-    'en': { title: 'Play Kirby & the Amazing Mirror Online Free', desc: 'Play Kirby & the Amazing Mirror online. Free GBA emulator.' },
+    'en': { title: 'Play Kirby & the Amazing Mirror Online Free' },
     'pt-BR': { title: 'Jogue Kirby & the Amazing Mirror Online Gratis', desc: 'Jogue Kirby & the Amazing Mirror online. Emulador GBA gratuito.' },
     'es': { title: 'Jugar Kirby & the Amazing Mirror Online Gratis', desc: 'Juega Kirby & the Amazing Mirror online. Emulador GBA gratuito.' },
     'ja': { title: 'Kirby & the Amazing Mirrorをオンラインで無料プレイ', desc: 'Kirby & the Amazing Mirrorをブラウザでプレイします。無料のGBAエミュレーター。' },
@@ -561,7 +561,7 @@ export const gameTranslations = {
     'bn': { title: 'Kirby & the Amazing Mirror অনলাইনে বিনামূল্যে খেলুন', desc: 'Kirby & the Amazing Mirror অনলাইনে খেলুন। বিনামূল্যে GBA এমুলেটর।' },
   },
   'castlevania-aria-of-sorrow': {
-    'en': { title: 'Play Castlevania: Aria of Sorrow Online Free', desc: 'Play Castlevania: Aria of Sorrow online. Free GBA emulator.' },
+    'en': { title: 'Play Castlevania: Aria of Sorrow Online Free' },
     'pt-BR': { title: 'Jogue Castlevania: Aria of Sorrow Online Gratis', desc: 'Jogue Castlevania: Aria of Sorrow online. Emulador GBA gratuito.' },
     'es': { title: 'Jugar Castlevania: Aria of Sorrow Online Gratis', desc: 'Juega Castlevania: Aria of Sorrow online. Emulador GBA gratuito.' },
     'ja': { title: 'Castlevania: Aria of Sorrowをオンラインで無料プレイ', desc: 'Castlevania: Aria of Sorrowをブラウザでプレイします。無料のGBAエミュレーター。' },
@@ -594,7 +594,7 @@ export const gameTranslations = {
     'bn': { title: 'Castlevania: Aria of Sorrow অনলাইনে বিনামূল্যে খেলুন', desc: 'Castlevania: Aria of Sorrow অনলাইনে খেলুন। বিনামূল্যে GBA এমুলেটর।' },
   },
   'donkey-kong-country': {
-    'en': { title: 'Play Donkey Kong Country Online Free', desc: 'Play Donkey Kong Country online. Free GBA emulator.' },
+    'en': { title: 'Play Donkey Kong Country Online Free' },
     'pt-BR': { title: 'Jogue Donkey Kong Country Online Gratis', desc: 'Jogue Donkey Kong Country online. Emulador GBA gratuito.' },
     'es': { title: 'Jugar Donkey Kong Country Online Gratis', desc: 'Juega Donkey Kong Country online. Emulador GBA gratuito.' },
     'ja': { title: 'Donkey Kong Countryをオンラインで無料プレイ', desc: 'Donkey Kong Countryをブラウザでプレイします。無料のGBAエミュレーター。' },
@@ -627,7 +627,7 @@ export const gameTranslations = {
     'bn': { title: 'Donkey Kong Country অনলাইনে বিনামূল্যে খেলুন', desc: 'Donkey Kong Country অনলাইনে খেলুন। বিনামূল্যে GBA এমুলেটর।' },
   },
   'fire-emblem-sacred-stones': {
-    'en': { title: 'Play Fire Emblem: Sacred Stones Online Free', desc: 'Play Fire Emblem: Sacred Stones online. Free GBA emulator.' },
+    'en': { title: 'Play Fire Emblem: Sacred Stones Online Free' },
     'pt-BR': { title: 'Jogue Fire Emblem: Sacred Stones Online Gratis', desc: 'Jogue Fire Emblem: Sacred Stones online. Emulador GBA gratuito.' },
     'es': { title: 'Jugar Fire Emblem: Sacred Stones Online Gratis', desc: 'Juega Fire Emblem: Sacred Stones online. Emulador GBA gratuito.' },
     'ja': { title: 'Fire Emblem: Sacred Stonesをオンラインで無料プレイ', desc: 'Fire Emblem: Sacred Stonesをブラウザでプレイします。無料のGBAエミュレーター。' },
@@ -660,7 +660,7 @@ export const gameTranslations = {
     'bn': { title: 'Fire Emblem: Sacred Stones অনলাইনে বিনামূল্যে খেলুন', desc: 'Fire Emblem: Sacred Stones অনলাইনে খেলুন। বিনামূল্যে GBA এমুলেটর।' },
   },
   'sonic-advance-3': {
-    'en': { title: 'Play Sonic Advance 3 Online Free', desc: 'Play Sonic Advance 3 online. Free GBA emulator.' },
+    'en': { title: 'Play Sonic Advance 3 Online Free' },
     'pt-BR': { title: 'Jogue Sonic Advance 3 Online Gratis', desc: 'Jogue Sonic Advance 3 online. Emulador GBA gratuito.' },
     'es': { title: 'Jugar Sonic Advance 3 Online Gratis', desc: 'Juega Sonic Advance 3 online. Emulador GBA gratuito.' },
     'ja': { title: 'Sonic Advance 3をオンラインで無料プレイ', desc: 'Sonic Advance 3をブラウザでプレイします。無料のGBAエミュレーター。' },
@@ -693,7 +693,7 @@ export const gameTranslations = {
     'bn': { title: 'Sonic Advance 3 অনলাইনে বিনামূল্যে খেলুন', desc: 'Sonic Advance 3 অনলাইনে খেলুন। বিনামূল্যে GBA এমুলেটর।' },
   },
   'dragon-ball-advanced-adventure': {
-    'en': { title: 'Play Dragon Ball: Advanced Adventure Online Free', desc: 'Play Dragon Ball: Advanced Adventure online. Free GBA emulator.' },
+    'en': { title: 'Play Dragon Ball: Advanced Adventure Online Free' },
     'pt-BR': { title: 'Jogue Dragon Ball: Advanced Adventure Online Gratis', desc: 'Jogue Dragon Ball: Advanced Adventure online. Emulador GBA gratuito.' },
     'es': { title: 'Jugar Dragon Ball: Advanced Adventure Online Gratis', desc: 'Juega Dragon Ball: Advanced Adventure online. Emulador GBA gratuito.' },
     'ja': { title: 'Dragon Ball: Advanced Adventureをオンラインで無料プレイ', desc: 'Dragon Ball: Advanced Adventureをブラウザでプレイします。無料のGBAエミュレーター。' },
@@ -726,7 +726,7 @@ export const gameTranslations = {
     'bn': { title: 'Dragon Ball: Advanced Adventure অনলাইনে বিনামূল্যে খেলুন', desc: 'Dragon Ball: Advanced Adventure অনলাইনে খেলুন। বিনামূল্যে GBA এমুলেটর।' },
   },
   'harvest-moon-friends-of-mineral-town': {
-    'en': { title: 'Play Harvest Moon Online Free', desc: 'Play Harvest Moon online. Free GBA emulator.' },
+    'en': { title: 'Play Harvest Moon Online Free' },
     'pt-BR': { title: 'Jogue Harvest Moon Online Gratis', desc: 'Jogue Harvest Moon online. Emulador GBA gratuito.' },
     'es': { title: 'Jugar Harvest Moon Online Gratis', desc: 'Juega Harvest Moon online. Emulador GBA gratuito.' },
     'ja': { title: 'Harvest Moonをオンラインで無料プレイ', desc: 'Harvest Moonをブラウザでプレイします。無料のGBAエミュレーター。' },
@@ -759,7 +759,7 @@ export const gameTranslations = {
     'bn': { title: 'Harvest Moon অনলাইনে বিনামূল্যে খেলুন', desc: 'Harvest Moon অনলাইনে খেলুন। বিনামূল্যে GBA এমুলেটর।' },
   },
   'crash-bandicoot-huge-adventure': {
-    'en': { title: 'Play Crash Bandicoot Online Free', desc: 'Play Crash Bandicoot online. Free GBA emulator.' },
+    'en': { title: 'Play Crash Bandicoot Online Free' },
     'pt-BR': { title: 'Jogue Crash Bandicoot Online Gratis', desc: 'Jogue Crash Bandicoot online. Emulador GBA gratuito.' },
     'es': { title: 'Jugar Crash Bandicoot Online Gratis', desc: 'Juega Crash Bandicoot online. Emulador GBA gratuito.' },
     'ja': { title: 'Crash Bandicootをオンラインで無料プレイ', desc: 'Crash Bandicootをブラウザでプレイします。無料のGBAエミュレーター。' },
@@ -792,7 +792,7 @@ export const gameTranslations = {
     'bn': { title: 'Crash Bandicoot অনলাইনে বিনামূল্যে খেলুন', desc: 'Crash Bandicoot অনলাইনে খেলুন। বিনামূল্যে GBA এমুলেটর।' },
   },
   'gta-advance': {
-    'en': { title: 'Play GTA Advance Online Free', desc: 'Play GTA Advance online. Free GBA emulator.' },
+    'en': { title: 'Play GTA Advance Online Free' },
     'pt-BR': { title: 'Jogue GTA Advance Online Gratis', desc: 'Jogue GTA Advance online. Emulador GBA gratuito.' },
     'es': { title: 'Jugar GTA Advance Online Gratis', desc: 'Juega GTA Advance online. Emulador GBA gratuito.' },
     'ja': { title: 'GTA Advanceをオンラインで無料プレイ', desc: 'GTA Advanceをブラウザでプレイします。無料のGBAエミュレーター。' },
@@ -825,7 +825,7 @@ export const gameTranslations = {
     'bn': { title: 'GTA Advance অনলাইনে বিনামূল্যে খেলুন', desc: 'GTA Advance অনলাইনে খেলুন। বিনামূল্যে GBA এমুলেটর।' },
   },
   'golden-sun': {
-    'en': { title: 'Play Golden Sun Online Free', desc: 'Play Golden Sun online. Free GBA emulator.' },
+    'en': { title: 'Play Golden Sun Online Free' },
     'pt-BR': { title: 'Jogue Golden Sun Online Gratis', desc: 'Jogue Golden Sun online. Emulador GBA gratuito.' },
     'es': { title: 'Jugar Golden Sun Online Gratis', desc: 'Juega Golden Sun online. Emulador GBA gratuito.' },
     'ja': { title: 'Golden Sunをオンラインで無料プレイ', desc: 'Golden Sunをブラウザでプレイします。無料のGBAエミュレーター。' },
@@ -858,7 +858,7 @@ export const gameTranslations = {
     'bn': { title: 'Golden Sun অনলাইনে বিনামূল্যে খেলুন', desc: 'Golden Sun অনলাইনে খেলুন। বিনামূল্যে GBA এমুলেটর।' },
   },
   'super-mario-advance': {
-    'en': { title: 'Play Super Mario Advance Online Free', desc: 'Play Super Mario Advance online. Free GBA emulator.' },
+    'en': { title: 'Play Super Mario Advance Online Free' },
     'pt-BR': { title: 'Jogue Super Mario Advance Online Gratis', desc: 'Jogue Super Mario Advance online. Emulador GBA gratuito.' },
     'es': { title: 'Jugar Super Mario Advance Online Gratis', desc: 'Juega Super Mario Advance online. Emulador GBA gratuito.' },
     'ja': { title: 'Super Mario Advanceをオンラインで無料プレイ', desc: 'Super Mario Advanceをブラウザでプレイします。無料のGBAエミュレーター。' },
@@ -891,7 +891,7 @@ export const gameTranslations = {
     'bn': { title: 'Super Mario Advance অনলাইনে বিনামূল্যে খেলুন', desc: 'Super Mario Advance অনলাইনে খেলুন। বিনামূল্যে GBA এমুলেটর।' },
   },
   'super-mario-bros-3': {
-    'en': { title: 'Play Super Mario Bros. 3 Online Free', desc: 'Play Super Mario Bros. 3 online. Free GBA emulator.' },
+    'en': { title: 'Play Super Mario Bros. 3 Online Free' },
     'pt-BR': { title: 'Jogue Super Mario Bros. 3 Online Gratis', desc: 'Jogue Super Mario Bros. 3 online. Emulador GBA gratuito.' },
     'es': { title: 'Jugar Super Mario Bros. 3 Online Gratis', desc: 'Juega Super Mario Bros. 3 online. Emulador GBA gratuito.' },
     'ja': { title: 'Super Mario Bros. 3をオンラインで無料プレイ', desc: 'Super Mario Bros. 3をブラウザでプレイします。無料のGBAエミュレーター。' },
@@ -924,7 +924,7 @@ export const gameTranslations = {
     'bn': { title: 'Super Mario Bros. 3 অনলাইনে বিনামূল্যে খেলুন', desc: 'Super Mario Bros. 3 অনলাইনে খেলুন। বিনামূল্যে GBA এমুলেটর।' },
   },
   'pokemon-crystal': {
-    'en': { title: 'Play Pokemon Crystal Online Free', desc: 'Play Pokemon Crystal online. Free GBC emulator.' },
+    'en': { title: 'Play Pokemon Crystal Online Free' },
     'pt-BR': { title: 'Jogue Pokemon Crystal Online Gratis', desc: 'Jogue Pokemon Crystal online. Emulador GBC gratuito.' },
     'es': { title: 'Jugar Pokemon Crystal Online Gratis', desc: 'Juega Pokemon Crystal online. Emulador GBC gratuito.' },
     'ja': { title: 'Pokemon Crystalをオンラインで無料プレイ', desc: 'Pokemon Crystalをブラウザでプレイします。無料のGBCエミュレーター。' },
@@ -957,7 +957,7 @@ export const gameTranslations = {
     'bn': { title: 'Pokemon Crystal অনলাইনে বিনামূল্যে খেলুন', desc: 'Pokemon Crystal অনলাইনে খেলুন। বিনামূল্যে GBC এমুলেটর।' },
   },
   'pokemon-gold': {
-    'en': { title: 'Play Pokemon Gold Online Free', desc: 'Play Pokemon Gold online. Free GBC emulator.' },
+    'en': { title: 'Play Pokemon Gold Online Free' },
     'pt-BR': { title: 'Jogue Pokemon Gold Online Gratis', desc: 'Jogue Pokemon Gold online. Emulador GBC gratuito.' },
     'es': { title: 'Jugar Pokemon Gold Online Gratis', desc: 'Juega Pokemon Gold online. Emulador GBC gratuito.' },
     'ja': { title: 'Pokemon Goldをオンラインで無料プレイ', desc: 'Pokemon Goldをブラウザでプレイします。無料のGBCエミュレーター。' },
@@ -990,7 +990,7 @@ export const gameTranslations = {
     'bn': { title: 'Pokemon Gold অনলাইনে বিনামূল্যে খেলুন', desc: 'Pokemon Gold অনলাইনে খেলুন। বিনামূল্যে GBC এমুলেটর।' },
   },
   'pokemon-silver': {
-    'en': { title: 'Play Pokemon Silver Online Free', desc: 'Play Pokemon Silver online. Free GBC emulator.' },
+    'en': { title: 'Play Pokemon Silver Online Free' },
     'pt-BR': { title: 'Jogue Pokemon Silver Online Gratis', desc: 'Jogue Pokemon Silver online. Emulador GBC gratuito.' },
     'es': { title: 'Jugar Pokemon Silver Online Gratis', desc: 'Juega Pokemon Silver online. Emulador GBC gratuito.' },
     'ja': { title: 'Pokemon Silverをオンラインで無料プレイ', desc: 'Pokemon Silverをブラウザでプレイします。無料のGBCエミュレーター。' },
@@ -1023,7 +1023,7 @@ export const gameTranslations = {
     'bn': { title: 'Pokemon Silver অনলাইনে বিনামূল্যে খেলুন', desc: 'Pokemon Silver অনলাইনে খেলুন। বিনামূল্যে GBC এমুলেটর।' },
   },
   'pokemon-yellow': {
-    'en': { title: 'Play Pokemon Yellow Online Free', desc: 'Play Pokemon Yellow online. Free GB emulator.' },
+    'en': { title: 'Play Pokemon Yellow Online Free' },
     'pt-BR': { title: 'Jogue Pokemon Yellow Online Gratis', desc: 'Jogue Pokemon Yellow online. Emulador GB gratuito.' },
     'es': { title: 'Jugar Pokemon Yellow Online Gratis', desc: 'Juega Pokemon Yellow online. Emulador GB gratuito.' },
     'ja': { title: 'Pokemon Yellowをオンラインで無料プレイ', desc: 'Pokemon Yellowをブラウザでプレイします。無料のGBエミュレーター。' },
@@ -1056,7 +1056,7 @@ export const gameTranslations = {
     'bn': { title: 'Pokemon Yellow অনলাইনে বিনামূল্যে খেলুন', desc: 'Pokemon Yellow অনলাইনে খেলুন। বিনামূল্যে GB এমুলেটর।' },
   },
   'dbz-legendary-super-warriors': {
-    'en': { title: 'Play DBZ: Legendary Super Warriors Online Free', desc: 'Play DBZ: Legendary Super Warriors online. Free GBC emulator.' },
+    'en': { title: 'Play DBZ: Legendary Super Warriors Online Free' },
     'pt-BR': { title: 'Jogue DBZ: Legendary Super Warriors Online Gratis', desc: 'Jogue DBZ: Legendary Super Warriors online. Emulador GBC gratuito.' },
     'es': { title: 'Jugar DBZ: Legendary Super Warriors Online Gratis', desc: 'Juega DBZ: Legendary Super Warriors online. Emulador GBC gratuito.' },
     'ja': { title: 'DBZ: Legendary Super Warriorsをオンラインで無料プレイ', desc: 'DBZ: Legendary Super Warriorsをブラウザでプレイします。無料のGBCエミュレーター。' },
@@ -1089,7 +1089,7 @@ export const gameTranslations = {
     'bn': { title: 'DBZ: Legendary Super Warriors অনলাইনে বিনামূল্যে খেলুন', desc: 'DBZ: Legendary Super Warriors অনলাইনে খেলুন। বিনামূল্যে GBC এমুলেটর।' },
   },
   'shantae': {
-    'en': { title: 'Play Shantae Online Free', desc: 'Play Shantae online. Free GBC emulator.' },
+    'en': { title: 'Play Shantae Online Free' },
     'pt-BR': { title: 'Jogue Shantae Online Gratis', desc: 'Jogue Shantae online. Emulador GBC gratuito.' },
     'es': { title: 'Jugar Shantae Online Gratis', desc: 'Juega Shantae online. Emulador GBC gratuito.' },
     'ja': { title: 'Shantaeをオンラインで無料プレイ', desc: 'Shantaeをブラウザでプレイします。無料のGBCエミュレーター。' },
@@ -1122,7 +1122,7 @@ export const gameTranslations = {
     'bn': { title: 'Shantae অনলাইনে বিনামূল্যে খেলুন', desc: 'Shantae অনলাইনে খেলুন। বিনামূল্যে GBC এমুলেটর।' },
   },
   'super-mario-bros-deluxe': {
-    'en': { title: 'Play Super Mario Bros. Deluxe Online Free', desc: 'Play Super Mario Bros. Deluxe online. Free GBC emulator.' },
+    'en': { title: 'Play Super Mario Bros. Deluxe Online Free' },
     'pt-BR': { title: 'Jogue Super Mario Bros. Deluxe Online Gratis', desc: 'Jogue Super Mario Bros. Deluxe online. Emulador GBC gratuito.' },
     'es': { title: 'Jugar Super Mario Bros. Deluxe Online Gratis', desc: 'Juega Super Mario Bros. Deluxe online. Emulador GBC gratuito.' },
     'ja': { title: 'Super Mario Bros. Deluxeをオンラインで無料プレイ', desc: 'Super Mario Bros. Deluxeをブラウザでプレイします。無料のGBCエミュレーター。' },
@@ -1155,7 +1155,7 @@ export const gameTranslations = {
     'bn': { title: 'Super Mario Bros. Deluxe অনলাইনে বিনামূল্যে খেলুন', desc: 'Super Mario Bros. Deluxe অনলাইনে খেলুন। বিনামূল্যে GBC এমুলেটর।' },
   },
   'tetris-dx': {
-    'en': { title: 'Play Tetris DX Online Free', desc: 'Play Tetris DX online. Free GBC emulator.' },
+    'en': { title: 'Play Tetris DX Online Free' },
     'pt-BR': { title: 'Jogue Tetris DX Online Gratis', desc: 'Jogue Tetris DX online. Emulador GBC gratuito.' },
     'es': { title: 'Jugar Tetris DX Online Gratis', desc: 'Juega Tetris DX online. Emulador GBC gratuito.' },
     'ja': { title: 'Tetris DXをオンラインで無料プレイ', desc: 'Tetris DXをブラウザでプレイします。無料のGBCエミュレーター。' },
@@ -1188,7 +1188,7 @@ export const gameTranslations = {
     'bn': { title: 'Tetris DX অনলাইনে বিনামূল্যে খেলুন', desc: 'Tetris DX অনলাইনে খেলুন। বিনামূল্যে GBC এমুলেটর।' },
   },
   'wario-land-3': {
-    'en': { title: 'Play Wario Land 3 Online Free', desc: 'Play Wario Land 3 online. Free GBC emulator.' },
+    'en': { title: 'Play Wario Land 3 Online Free' },
     'pt-BR': { title: 'Jogue Wario Land 3 Online Gratis', desc: 'Jogue Wario Land 3 online. Emulador GBC gratuito.' },
     'es': { title: 'Jugar Wario Land 3 Online Gratis', desc: 'Juega Wario Land 3 online. Emulador GBC gratuito.' },
     'ja': { title: 'Wario Land 3をオンラインで無料プレイ', desc: 'Wario Land 3をブラウザでプレイします。無料のGBCエミュレーター。' },
@@ -1221,7 +1221,7 @@ export const gameTranslations = {
     'bn': { title: 'Wario Land 3 অনলাইনে বিনামূল্যে খেলুন', desc: 'Wario Land 3 অনলাইনে খেলুন। বিনামূল্যে GBC এমুলেটর।' },
   },
   'castlevania-legends': {
-    'en': { title: 'Play Castlevania Legends Online Free', desc: 'Play Castlevania Legends online. Free GB emulator.' },
+    'en': { title: 'Play Castlevania Legends Online Free' },
     'pt-BR': { title: 'Jogue Castlevania Legends Online Gratis', desc: 'Jogue Castlevania Legends online. Emulador GB gratuito.' },
     'es': { title: 'Jugar Castlevania Legends Online Gratis', desc: 'Juega Castlevania Legends online. Emulador GB gratuito.' },
     'ja': { title: 'Castlevania Legendsをオンラインで無料プレイ', desc: 'Castlevania Legendsをブラウザでプレイします。無料のGBエミュレーター。' },
@@ -1254,7 +1254,7 @@ export const gameTranslations = {
     'bn': { title: 'Castlevania Legends অনলাইনে বিনামূল্যে খেলুন', desc: 'Castlevania Legends অনলাইনে খেলুন। বিনামূল্যে GB এমুলেটর।' },
   },
   'contra-alien-wars': {
-    'en': { title: 'Play Contra: The Alien Wars Online Free', desc: 'Play Contra: The Alien Wars online. Free GB emulator.' },
+    'en': { title: 'Play Contra: The Alien Wars Online Free' },
     'pt-BR': { title: 'Jogue Contra: The Alien Wars Online Gratis', desc: 'Jogue Contra: The Alien Wars online. Emulador GB gratuito.' },
     'es': { title: 'Jugar Contra: The Alien Wars Online Gratis', desc: 'Juega Contra: The Alien Wars online. Emulador GB gratuito.' },
     'ja': { title: 'Contra: The Alien Warsをオンラインで無料プレイ', desc: 'Contra: The Alien Warsをブラウザでプレイします。無料のGBエミュレーター。' },
@@ -1287,7 +1287,7 @@ export const gameTranslations = {
     'bn': { title: 'Contra: The Alien Wars অনলাইনে বিনামূল্যে খেলুন', desc: 'Contra: The Alien Wars অনলাইনে খেলুন। বিনামূল্যে GB এমুলেটর।' },
   },
   'donkey-kong-gb': {
-    'en': { title: 'Play Donkey Kong Online Free', desc: 'Play Donkey Kong online. Free GB emulator.' },
+    'en': { title: 'Play Donkey Kong Online Free' },
     'pt-BR': { title: 'Jogue Donkey Kong Online Gratis', desc: 'Jogue Donkey Kong online. Emulador GB gratuito.' },
     'es': { title: 'Jugar Donkey Kong Online Gratis', desc: 'Juega Donkey Kong online. Emulador GB gratuito.' },
     'ja': { title: 'Donkey Kongをオンラインで無料プレイ', desc: 'Donkey Kongをブラウザでプレイします。無料のGBエミュレーター。' },
@@ -1320,7 +1320,7 @@ export const gameTranslations = {
     'bn': { title: 'Donkey Kong অনলাইনে বিনামূল্যে খেলুন', desc: 'Donkey Kong অনলাইনে খেলুন। বিনামূল্যে GB এমুলেটর।' },
   },
   'dr-mario': {
-    'en': { title: 'Play Dr. Mario Online Free', desc: 'Play Dr. Mario online. Free GB emulator.' },
+    'en': { title: 'Play Dr. Mario Online Free' },
     'pt-BR': { title: 'Jogue Dr. Mario Online Gratis', desc: 'Jogue Dr. Mario online. Emulador GB gratuito.' },
     'es': { title: 'Jugar Dr. Mario Online Gratis', desc: 'Juega Dr. Mario online. Emulador GB gratuito.' },
     'ja': { title: 'Dr. Marioをオンラインで無料プレイ', desc: 'Dr. Marioをブラウザでプレイします。無料のGBエミュレーター。' },
@@ -1353,7 +1353,7 @@ export const gameTranslations = {
     'bn': { title: 'Dr. Mario অনলাইনে বিনামূল্যে খেলুন', desc: 'Dr. Mario অনলাইনে খেলুন। বিনামূল্যে GB এমুলেটর।' },
   },
   'ducktales': {
-    'en': { title: 'Play DuckTales Online Free', desc: 'Play DuckTales online. Free GB emulator.' },
+    'en': { title: 'Play DuckTales Online Free' },
     'pt-BR': { title: 'Jogue DuckTales Online Gratis', desc: 'Jogue DuckTales online. Emulador GB gratuito.' },
     'es': { title: 'Jugar DuckTales Online Gratis', desc: 'Juega DuckTales online. Emulador GB gratuito.' },
     'ja': { title: 'DuckTalesをオンラインで無料プレイ', desc: 'DuckTalesをブラウザでプレイします。無料のGBエミュレーター。' },
@@ -1386,7 +1386,7 @@ export const gameTranslations = {
     'bn': { title: 'DuckTales অনলাইনে বিনামূল্যে খেলুন', desc: 'DuckTales অনলাইনে খেলুন। বিনামূল্যে GB এমুলেটর।' },
   },
   'final-fantasy-adventure': {
-    'en': { title: 'Play Final Fantasy Adventure Online Free', desc: 'Play Final Fantasy Adventure online. Free GB emulator.' },
+    'en': { title: 'Play Final Fantasy Adventure Online Free' },
     'pt-BR': { title: 'Jogue Final Fantasy Adventure Online Gratis', desc: 'Jogue Final Fantasy Adventure online. Emulador GB gratuito.' },
     'es': { title: 'Jugar Final Fantasy Adventure Online Gratis', desc: 'Juega Final Fantasy Adventure online. Emulador GB gratuito.' },
     'ja': { title: 'Final Fantasy Adventureをオンラインで無料プレイ', desc: 'Final Fantasy Adventureをブラウザでプレイします。無料のGBエミュレーター。' },
@@ -1419,7 +1419,7 @@ export const gameTranslations = {
     'bn': { title: 'Final Fantasy Adventure অনলাইনে বিনামূল্যে খেলুন', desc: 'Final Fantasy Adventure অনলাইনে খেলুন। বিনামূল্যে GB এমুলেটর।' },
   },
   'kirbys-dream-land-2': {
-    'en': { title: 'Play Kirby\'s Dream Land 2 Online Free', desc: 'Play Kirby\'s Dream Land 2 online. Free GB emulator.' },
+    'en': { title: 'Play Kirby\'s Dream Land 2 Online Free' },
     'pt-BR': { title: 'Jogue Kirby\'s Dream Land 2 Online Gratis', desc: 'Jogue Kirby\'s Dream Land 2 online. Emulador GB gratuito.' },
     'es': { title: 'Jugar Kirby\'s Dream Land 2 Online Gratis', desc: 'Juega Kirby\'s Dream Land 2 online. Emulador GB gratuito.' },
     'ja': { title: 'Kirby\'s Dream Land 2をオンラインで無料プレイ', desc: 'Kirby\'s Dream Land 2をブラウザでプレイします。無料のGBエミュレーター。' },
@@ -1452,7 +1452,7 @@ export const gameTranslations = {
     'bn': { title: 'Kirby\'s Dream Land 2 অনলাইনে বিনামূল্যে খেলুন', desc: 'Kirby\'s Dream Land 2 অনলাইনে খেলুন। বিনামূল্যে GB এমুলেটর।' },
   },
   'kirbys-pinball-land': {
-    'en': { title: 'Play Kirby\'s Pinball Land Online Free', desc: 'Play Kirby\'s Pinball Land online. Free GB emulator.' },
+    'en': { title: 'Play Kirby\'s Pinball Land Online Free' },
     'pt-BR': { title: 'Jogue Kirby\'s Pinball Land Online Gratis', desc: 'Jogue Kirby\'s Pinball Land online. Emulador GB gratuito.' },
     'es': { title: 'Jugar Kirby\'s Pinball Land Online Gratis', desc: 'Juega Kirby\'s Pinball Land online. Emulador GB gratuito.' },
     'ja': { title: 'Kirby\'s Pinball Landをオンラインで無料プレイ', desc: 'Kirby\'s Pinball Landをブラウザでプレイします。無料のGBエミュレーター。' },
@@ -1485,7 +1485,7 @@ export const gameTranslations = {
     'bn': { title: 'Kirby\'s Pinball Land অনলাইনে বিনামূল্যে খেলুন', desc: 'Kirby\'s Pinball Land অনলাইনে খেলুন। বিনামূল্যে GB এমুলেটর।' },
   },
   'street-fighter-ii-gb': {
-    'en': { title: 'Play Street Fighter II Online Free', desc: 'Play Street Fighter II online. Free GB emulator.' },
+    'en': { title: 'Play Street Fighter II Online Free' },
     'pt-BR': { title: 'Jogue Street Fighter II Online Gratis', desc: 'Jogue Street Fighter II online. Emulador GB gratuito.' },
     'es': { title: 'Jugar Street Fighter II Online Gratis', desc: 'Juega Street Fighter II online. Emulador GB gratuito.' },
     'ja': { title: 'Street Fighter IIをオンラインで無料プレイ', desc: 'Street Fighter IIをブラウザでプレイします。無料のGBエミュレーター。' },
@@ -1518,7 +1518,7 @@ export const gameTranslations = {
     'bn': { title: 'Street Fighter II অনলাইনে বিনামূল্যে খেলুন', desc: 'Street Fighter II অনলাইনে খেলুন। বিনামূল্যে GB এমুলেটর।' },
   },
   'super-mario-land': {
-    'en': { title: 'Play Super Mario Land Online Free', desc: 'Play Super Mario Land online. Free GB emulator.' },
+    'en': { title: 'Play Super Mario Land Online Free' },
     'pt-BR': { title: 'Jogue Super Mario Land Online Gratis', desc: 'Jogue Super Mario Land online. Emulador GB gratuito.' },
     'es': { title: 'Jugar Super Mario Land Online Gratis', desc: 'Juega Super Mario Land online. Emulador GB gratuito.' },
     'ja': { title: 'Super Mario Landをオンラインで無料プレイ', desc: 'Super Mario Landをブラウザでプレイします。無料のGBエミュレーター。' },
@@ -1551,7 +1551,7 @@ export const gameTranslations = {
     'bn': { title: 'Super Mario Land অনলাইনে বিনামূল্যে খেলুন', desc: 'Super Mario Land অনলাইনে খেলুন। বিনামূল্যে GB এমুলেটর।' },
   },
   'super-mario-land-2': {
-    'en': { title: 'Play Super Mario Land 2 Online Free', desc: 'Play Super Mario Land 2 online. Free GB emulator.' },
+    'en': { title: 'Play Super Mario Land 2 Online Free' },
     'pt-BR': { title: 'Jogue Super Mario Land 2 Online Gratis', desc: 'Jogue Super Mario Land 2 online. Emulador GB gratuito.' },
     'es': { title: 'Jugar Super Mario Land 2 Online Gratis', desc: 'Juega Super Mario Land 2 online. Emulador GB gratuito.' },
     'ja': { title: 'Super Mario Land 2をオンラインで無料プレイ', desc: 'Super Mario Land 2をブラウザでプレイします。無料のGBエミュレーター。' },
@@ -1584,7 +1584,7 @@ export const gameTranslations = {
     'bn': { title: 'Super Mario Land 2 অনলাইনে বিনামূল্যে খেলুন', desc: 'Super Mario Land 2 অনলাইনে খেলুন। বিনামূল্যে GB এমুলেটর।' },
   },
   'tetris-gb': {
-    'en': { title: 'Play Tetris Online Free', desc: 'Play Tetris online. Free GB emulator.' },
+    'en': { title: 'Play Tetris Online Free' },
     'pt-BR': { title: 'Jogue Tetris Online Gratis', desc: 'Jogue Tetris online. Emulador GB gratuito.' },
     'es': { title: 'Jugar Tetris Online Gratis', desc: 'Juega Tetris online. Emulador GB gratuito.' },
     'ja': { title: 'Tetrisをオンラインで無料プレイ', desc: 'Tetrisをブラウザでプレイします。無料のGBエミュレーター。' },
@@ -1617,7 +1617,7 @@ export const gameTranslations = {
     'bn': { title: 'Tetris অনলাইনে বিনামূল্যে খেলুন', desc: 'Tetris অনলাইনে খেলুন। বিনামূল্যে GB এমুলেটর।' },
   },
   'wario-land': {
-    'en': { title: 'Play Wario Land: Super Mario Land 3 Online Free', desc: 'Play Wario Land: Super Mario Land 3 online. Free GB emulator.' },
+    'en': { title: 'Play Wario Land: Super Mario Land 3 Online Free' },
     'pt-BR': { title: 'Jogue Wario Land: Super Mario Land 3 Online Gratis', desc: 'Jogue Wario Land: Super Mario Land 3 online. Emulador GB gratuito.' },
     'es': { title: 'Jugar Wario Land: Super Mario Land 3 Online Gratis', desc: 'Juega Wario Land: Super Mario Land 3 online. Emulador GB gratuito.' },
     'ja': { title: 'Wario Land: Super Mario Land 3をオンラインで無料プレイ', desc: 'Wario Land: Super Mario Land 3をブラウザでプレイします。無料のGBエミュレーター。' },
@@ -1650,7 +1650,7 @@ export const gameTranslations = {
     'bn': { title: 'Wario Land: Super Mario Land 3 অনলাইনে বিনামূল্যে খেলুন', desc: 'Wario Land: Super Mario Land 3 অনলাইনে খেলুন। বিনামূল্যে GB এমুলেটর।' },
   },
   'kirbys-dream-land': {
-    'en': { title: 'Play Kirby\'s Dream Land Online Free', desc: 'Play Kirby\'s Dream Land online. Free GB emulator.' },
+    'en': { title: 'Play Kirby\'s Dream Land Online Free' },
     'pt-BR': { title: 'Jogue Kirby\'s Dream Land Online Gratis', desc: 'Jogue Kirby\'s Dream Land online. Emulador GB gratuito.' },
     'es': { title: 'Jugar Kirby\'s Dream Land Online Gratis', desc: 'Juega Kirby\'s Dream Land online. Emulador GB gratuito.' },
     'ja': { title: 'Kirby\'s Dream Landをオンラインで無料プレイ', desc: 'Kirby\'s Dream Landをブラウザでプレイします。無料のGBエミュレーター。' },
@@ -1683,7 +1683,7 @@ export const gameTranslations = {
     'bn': { title: 'Kirby\'s Dream Land অনলাইনে বিনামূল্যে খেলুন', desc: 'Kirby\'s Dream Land অনলাইনে খেলুন। বিনামূল্যে GB এমুলেটর।' },
   },
   'mega-man-dr-wilys-revenge': {
-    'en': { title: 'Play Mega Man: Dr. Wily\'s Revenge Online Free', desc: 'Play Mega Man: Dr. Wily\'s Revenge online. Free GB emulator.' },
+    'en': { title: 'Play Mega Man: Dr. Wily\'s Revenge Online Free' },
     'pt-BR': { title: 'Jogue Mega Man: Dr. Wily\'s Revenge Online Gratis', desc: 'Jogue Mega Man: Dr. Wily\'s Revenge online. Emulador GB gratuito.' },
     'es': { title: 'Jugar Mega Man: Dr. Wily\'s Revenge Online Gratis', desc: 'Juega Mega Man: Dr. Wily\'s Revenge online. Emulador GB gratuito.' },
     'ja': { title: 'Mega Man: Dr. Wily\'s Revengeをオンラインで無料プレイ', desc: 'Mega Man: Dr. Wily\'s Revengeをブラウザでプレイします。無料のGBエミュレーター。' },

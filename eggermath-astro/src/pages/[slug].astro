@@ -19,9 +19,32 @@ const { game } = Astro.props;
 const tr = gameTranslations[game.slug]?.['en'] || {};
 const pageTitle = tr.title || `Play ${game.title} Online Free`;
 const pageDesc = tr.desc || game.desc;
-const relatedGames = games.filter(g => g.genre === game.genre && g.slug !== game.slug).slice(0, 4);
+
+// Score related games: series > system > genre
+function scoreRelated(a, b) {
+  let s = 0;
+  if (a.series && a.series === b.series) s += 5;
+  if (a.system === b.system) s += 3;
+  if (a.genre === b.genre) s += 2;
+  return s;
+}
+const relatedGames = games
+  .filter(g => g.slug !== game.slug)
+  .map(g => ({ g, score: scoreRelated(game, g) }))
+  .sort((a, b) => b.score - a.score)
+  .slice(0, 6)
+  .map(x => x.g);
+
 const guideLinks = gameGuideLinks[game.slug] || [];
 const hub = systemHubs[game.system] || systemHubs['GBA'];
+
+// Unified FAQ — used for both JSON-LD and visible HTML
+const faqs = [
+  { q: `How to play ${game.title} on iPhone?`, a: `Open this page on Safari, tap to start. Touch controls appear automatically. Save via Save button — works offline after first load.` },
+  { q: `Is ${game.title} free?`, a: `Yes, ${game.title} is free on EggerMath via browser mGBA emulator. No download, no signup.` },
+  { q: `Can I save progress?`, a: `Click Save (F5) and Load (F9). 10 slots via Slot button / F7. Stored in browser.` },
+  { q: `What are the controls?`, a: `D-Pad: WASD/Arrows, A: K, B: J${game.system === 'GBA' ? ', L: Q, R: E' : ''}, Start: Enter, Select: Right Shift. Mobile: touch controls.` },
+];
 
 // Pick 3 most relevant EN keywords for this game (no stuffing)
 function pickKeywordsEn(game) {
@@ -103,23 +126,11 @@ const jsonLd = {
     },
     {
       "@type": "FAQPage",
-      "mainEntity": [
-        { "@type": "Question", "name": `How to play ${game.title} on iPhone?`, "acceptedAnswer": { "@type": "Answer", "text": `Open ${SITE.url}/${game.slug}/ on Safari, tap to start. Use touch controls (D-pad, A/B${game.system === 'GBA' ? ', L/R' : ''}). Save with Save button — works offline after first load.` } },
-        { "@type": "Question", "name": `Is ${game.title} free to play?`, "acceptedAnswer": { "@type": "Answer", "text": `Yes, ${game.title} is free on EggerMath via browser mGBA emulator. No download, no signup.` } },
-        { "@type": "Question", "name": `Can I save ${game.title} progress?`, "acceptedAnswer": { "@type": "Answer", "text": `Yes — click Save (F5) and Load (F9). 10 slots (Slot button / F7). Saved in browser storage.` } },
-        { "@type": "Question", "name": `What are ${game.title} controls?`, "acceptedAnswer": { "@type": "Answer", "text": `D-Pad: WASD/Arrows, A: K, B: J${game.system === 'GBA' ? ', L: Q (GBA only), R: E (GBA only)' : ''}, Start: Enter, Select: Right Shift. On mobile use touch controls.` } }
-      ]
-    },
-    {
-      "@type": "HowTo",
-      "name": `How to Play ${game.title} Online`,
-      "totalTime": "PT1M",
-      "step": [
-        { "@type": "HowToStep", "name": "Open Game", "text": `Go to ${SITE.url}/${game.slug}/`, "url": `${SITE.url}/${game.slug}/` },
-        { "@type": "HowToStep", "name": "Start", "text": "Wait for loading, tap screen to enter fullscreen if prompted." },
-        { "@type": "HowToStep", "name": "Play", "text": "Use keyboard or touch controls to play." },
-        { "@type": "HowToStep", "name": "Save", "text": "Press Save (F5) to save, Load (F9) to continue later." }
-      ]
+      "mainEntity": faqs.map(f => ({
+        "@type": "Question",
+        "name": f.q,
+        "acceptedAnswer": { "@type": "Answer", "text": f.a }
+      }))
     }
   ]
 };
@@ -248,10 +259,19 @@ const jsonLd = {
 
   <section class="game-faq">
     <h3>FAQ — {game.title}</h3>
-    <details><summary>How to play {game.title} on iPhone?</summary><p>Open this page on Safari, tap to start. Touch controls appear automatically. Save via Save button — works offline after first load.</p></details>
-    <details><summary>Is {game.title} free?</summary><p>Yes, free on EggerMath via browser mGBA emulator. No download, no signup.</p></details>
-    <details><summary>Can I save progress?</summary><p>Click Save (F5) and Load (F9). 10 slots via Slot button / F7. Stored in browser.</p></details>
-    <details><summary>What are the controls?</summary><p>D-Pad: WASD/Arrows, A: K, B: J{game.system === 'GBA' ? ', L: Q, R: E' : ''}, Start: Enter, Select: Right Shift. Mobile: touch controls.</p></details>
+    {faqs.map(f => (
+      <details><summary>{f.q}</summary><p>{f.a}</p></details>
+    ))}
+  </section>
+
+  <section class="game-howto">
+    <h3>How to Play {game.title} Online</h3>
+    <ol class="howto-steps">
+      <li><strong>Open:</strong> Go to this page — the game loads automatically.</li>
+      <li><strong>Start:</strong> Wait a few seconds for the emulator to initialize.</li>
+      <li><strong>Play:</strong> Use keyboard (WASD/Arrows + K/J) or touch controls on mobile.</li>
+      <li><strong>Save:</strong> Press F5 to save, F9 to load. 10 slots available via F7.</li>
+    </ol>
   </section>
 
   {guideLinks.length > 0 && (
@@ -534,6 +554,24 @@ const jsonLd = {
     font-size: 0.9rem;
   }
   .guide-links li a:hover { text-decoration: underline; }
+  .game-howto {
+    max-width: 800px;
+    margin: 24px auto 0;
+    padding: 16px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+  }
+  .game-howto h3 { font-size: 1.1rem; margin-bottom: 8px; color: var(--text); }
+  .howto-steps {
+    padding-left: 20px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .howto-steps li { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
+  .howto-steps li strong { color: var(--accent); }
   @media (max-width: 600px) { .related-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (pointer: coarse) {
     .desktop-only { display: none !important; }
