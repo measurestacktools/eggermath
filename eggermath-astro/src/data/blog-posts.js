@@ -23,7 +23,11 @@ export const blogPosts = [
         "title": "How to Play GBA Games in Browser"
       }
     ],
-    "relatedGames": []
+    "relatedGames": [
+      {"slug":"pokemon-emerald","title":"Pokemon Emerald"},
+      {"slug":"zelda-minish-cap","title":"Zelda: Minish Cap"},
+      {"slug":"metroid-fusion","title":"Metroid Fusion"}
+    ]
   },
   {
     "slug": "mgba-vs-visualboyadvance",
@@ -42,7 +46,11 @@ export const blogPosts = [
         "title": "GBA Emulator With No Download"
       }
     ],
-    "relatedGames": []
+    "relatedGames": [
+      {"slug":"pokemon-emerald","title":"Pokemon Emerald"},
+      {"slug":"super-mario-advance","title":"Super Mario Advance"},
+      {"slug":"tetris","title":"Tetris"}
+    ]
   },
   {
     "slug": "play-zelda-online-free",
@@ -65,7 +73,11 @@ export const blogPosts = [
         "title": "How to Save Your GBA Progress"
       }
     ],
-    "relatedGames": []
+    "relatedGames": [
+      {"slug":"pokemon-emerald","title":"Pokemon Emerald"},
+      {"slug":"zelda-minish-cap","title":"Zelda: Minish Cap"},
+      {"slug":"castlevania-aria-of-sorrow","title":"Castlevania: Aria of Sorrow"}
+    ]
   },
   {
     "slug": "best-gba-games-for-kids",
@@ -88,7 +100,11 @@ export const blogPosts = [
         "title": "How to Play GBA Games in Your Browser (2026 Guide)"
       }
     ],
-    "relatedGames": []
+    "relatedGames": [
+      {"slug":"pokemon-emerald","title":"Pokemon Emerald"},
+      {"slug":"zelda-minish-cap","title":"Zelda: Minish Cap"},
+      {"slug":"metroid-fusion","title":"Metroid Fusion"}
+    ]
   },
   {
     "slug": "gba-emulator-chromebook",
@@ -111,7 +127,11 @@ export const blogPosts = [
         "title": "Best GBA Games to Play Online in 2026"
       }
     ],
-    "relatedGames": []
+    "relatedGames": [
+      {"slug":"pokemon-emerald","title":"Pokemon Emerald"},
+      {"slug":"zelda-minish-cap","title":"Zelda: Minish Cap"},
+      {"slug":"golden-sun","title":"Golden Sun"}
+    ]
   },
   {
     "slug": "gba-emulator-no-download",
@@ -134,7 +154,11 @@ export const blogPosts = [
         "title": "GBA Emulator Unblocked: Play at School or Work"
       }
     ],
-    "relatedGames": []
+    "relatedGames": [
+      {"slug":"pokemon-emerald","title":"Pokemon Emerald"},
+      {"slug":"zelda-minish-cap","title":"Zelda: Minish Cap"},
+      {"slug":"metroid-fusion","title":"Metroid Fusion"}
+    ]
   },
   {
     "slug": "gba-emulator-unblocked",
@@ -157,7 +181,10 @@ export const blogPosts = [
         "title": "Why Browser Emulation Is the Future of Retro Gaming"
       }
     ],
-    "relatedGames": []
+    "relatedGames": [
+      {"slug":"zelda-minish-cap","title":"Zelda: Minish Cap"},
+      {"slug":"zelda-a-link-to-the-past","title":"Zelda: A Link to the Past"}
+    ]
   },
   {
     "slug": "play-pokemon-emerald-online-free",
@@ -180,7 +207,11 @@ export const blogPosts = [
         "title": "How to Play GBA Games in Your Browser (2026 Guide)"
       }
     ],
-    "relatedGames": []
+    "relatedGames": [
+      {"slug":"pokemon-emerald","title":"Pokemon Emerald"},
+      {"slug":"pokemon-ruby","title":"Pokemon Ruby"},
+      {"slug":"pokemon-sapphire","title":"Pokemon Sapphire"}
+    ]
   },
   {
     "slug": "best-game-boy-color-games",
@@ -199,7 +230,11 @@ export const blogPosts = [
         "title": "Retro Gaming for Beginners: Start Playing Classic Games Today"
       }
     ],
-    "relatedGames": []
+    "relatedGames": [
+      {"slug":"pokemon-emerald","title":"Pokemon Emerald"},
+      {"slug":"golden-sun","title":"Golden Sun"},
+      {"slug":"castlevania-aria-of-sorrow","title":"Castlevania: Aria of Sorrow"}
+    ]
   },
   {
     "slug": "how-to-play-gba-games-browser",
@@ -218,7 +253,11 @@ export const blogPosts = [
         "title": "Why Browser Emulation Is the Future of Retro Gaming"
       }
     ],
-    "relatedGames": []
+    "relatedGames": [
+      {"slug":"pokemon-emerald","title":"Pokemon Emerald"},
+      {"slug":"zelda-minish-cap","title":"Zelda: Minish Cap"},
+      {"slug":"metroid-fusion","title":"Metroid Fusion"}
+    ]
   },
   {
     "slug": "pokemon-games-online",
@@ -245,7 +284,11 @@ export const blogPosts = [
         "title": "How to Play GBA Games in Your Browser (2026 Guide)"
       }
     ],
-    "relatedGames": []
+    "relatedGames": [
+      {"slug":"pokemon-emerald","title":"Pokemon Emerald"},
+      {"slug":"super-mario-advance","title":"Super Mario Advance"},
+      {"slug":"kirby-amazing-mirror","title":"Kirby: Amazing Mirror"}
+    ]
   },
   {
     "slug": "retro-gaming-beginners-guide",
@@ -268,7 +311,11 @@ export const blogPosts = [
         "title": "GBA vs GBC: Which Console Has Better Games?"
       }
     ],
-    "relatedGames": []
+    "relatedGames": [
+      {"slug":"pokemon-emerald","title":"Pokemon Emerald"},
+      {"slug":"zelda-minish-cap","title":"Zelda: Minish Cap"},
+      {"slug":"metroid-fusion","title":"Metroid Fusion"}
+    ]
   },
   {
     "slug": "top-10-gba-rpg-games",
@@ -291,7 +338,11 @@ export const blogPosts = [
         "title": "Play All Pokemon GBA Games Online Free"
       }
     ],
-    "relatedGames": []
+    "relatedGames": [
+      {"slug":"pokemon-emerald","title":"Pokemon Emerald"},
+      {"slug":"super-mario-advance","title":"Super Mario Advance"},
+      {"slug":"tetris-dx","title":"Tetris DX"}
+    ]
   },
   {
     "slug": "best-gba-games-2026",
