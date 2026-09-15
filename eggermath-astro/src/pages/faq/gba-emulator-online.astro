@@ -1,13 +1,97 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-const jsonLd = {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How to play GBA emulator online free?","acceptedAnswer":{"@type":"Answer","text":"Go to eggermath.com, click game, play instantly. No signup."}},{"@type":"Question","name":"Best GBA emulator online?","acceptedAnswer":{"@type":"Answer","text":"EggerMath mGBA WASM — 52+ games, saves, fullscreen."}}]};
+import { SITE } from '../../data/games.js';
+
+const faqs = [
+  {
+    q: 'How to play GBA emulator online free?',
+    a: 'Go to eggermath.com, pick a game from the library, and click to play. The GBA emulator runs directly in your browser using WebAssembly — no download, no signup, no installation. Works on Chrome, Safari, Firefox, and Edge.'
+  },
+  {
+    q: 'What is the best GBA emulator online?',
+    a: 'EggerMath uses mGBA WebAssembly, the most accurate GBA emulator compiled for the browser. It supports 52+ games including Pokemon Emerald, Zelda: Minish Cap, and Metroid Fusion. Save states, fast forward, and fullscreen are all built in.'
+  },
+  {
+    q: 'Can I save my game progress in the browser?',
+    a: 'Yes. Press F5 to save your current state, F9 to load it. You have 10 save slots (switch with F7 or the Slot button). Progress is stored in your browser\'s IndexedDB and persists between sessions.'
+  },
+  {
+    q: 'Does the GBA emulator work on iPhone and Android?',
+    a: 'Yes. Open any game page in Safari (iPhone) or Chrome (Android). Touch controls appear automatically — D-Pad, A/B buttons, Start/Select, and shoulder buttons (L/R for GBA games). Saves work on mobile too.'
+  },
+  {
+    q: 'What games are available to play online?',
+    a: 'EggerMath has 52+ games across GBA, GBC, and GB. Popular titles include Pokemon Emerald, FireRed, Crystal, Zelda: Minish Cap, Super Mario World, Metroid Fusion, Castlevania: Aria of Sorrow, and Golden Sun. See the full list on the homepage.'
+  },
+  {
+    q: 'Is it legal to play GBA games online?',
+    a: 'EggerMath provides the emulator technology. Users are responsible for ensuring they have the legal right to play any game. We respond to DMCA takedown requests promptly.'
+  },
+  {
+    q: 'Do I need to create an account?',
+    a: 'No. EggerMath is completely free with no registration required. Just visit the site, pick a game, and play.'
+  },
+  {
+    q: 'How do keyboard controls work?',
+    a: 'D-Pad: WASD or Arrow Keys. A button: K. B button: J. L shoulder: Q. R shoulder: E. Start: Enter. Select: Right Shift. Save: F5. Load: F9. Slot: F7. Double-click the canvas for fullscreen.'
+  }
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(f => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": { "@type": "Answer", "text": f.a }
+  }))
+};
 ---
-<BaseLayout title="GBA Emulator Online - Play Free No Download | EggerMath" description="GBA emulator online free - play Pokemon, Zelda, Mario in browser. No download, instant play." jsonLd={jsonLd}>
-<main class="main" style="max-width:800px;margin:0 auto;padding:24px">
-<h1>GBA Emulator Online</h1>
-<p>Play <a href="/">GBA online</a> free — 52 games. <a href="/best-gba-games">See best games</a>.</p>
-<h2>FAQ</h2>
-<details><summary>How to play online free?</summary><p>Open eggermath.com, click game.</p></details>
-<details><summary>Best online?</summary><p>EggerMath mGBA.</p></details>
+<BaseLayout title="GBA Emulator Online — Play Free No Download | EggerMath" description="GBA emulator online free — play Pokemon, Zelda, Mario in your browser. No download, 52+ games, save states, works on iPhone and PC." canonical={`${SITE.url}/faq/gba-emulator-online`} jsonLd={jsonLd}>
+<main style="max-width:800px;margin:0 auto;padding:24px">
+  <h1 style="font-size:2rem;margin-bottom:8px">GBA Emulator Online</h1>
+  <p style="color:#aaa;margin-bottom:24px">Play GBA games free in your browser — no download, no signup. 52+ games including <a href="/pokemon-emerald" style="color:#c4a35a">Pokemon Emerald</a>, <a href="/zelda-minish-cap" style="color:#c4a35a">Zelda: Minish Cap</a>, and <a href="/metroid-fusion" style="color:#c4a35a">Metroid Fusion</a>.</p>
+
+  <h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">How It Works</h2>
+  <p style="color:#ccc;margin-bottom:16px">EggerMath runs <a href="/" style="color:#c4a35a">mGBA</a> — the most accurate GBA emulator — compiled to WebAssembly. This means the emulator runs at near-native speed directly inside your browser tab. No plugins, no extensions, no Java. Just a webpage.</p>
+  <ol style="padding-left:20px;color:#ccc;margin-bottom:24px">
+    <li style="margin-bottom:8px">Browse the <a href="/" style="color:#c4a35a">game library</a> and pick a title</li>
+    <li style="margin-bottom:8px">Click to load — the emulator starts in 2-3 seconds</li>
+    <li style="margin-bottom:8px">Use keyboard or touch controls to play</li>
+    <li style="margin-bottom:8px">Press F5 to save, F9 to load — progress persists in your browser</li>
+  </ol>
+
+  <h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">Supported Systems</h2>
+  <div style="display:flex;gap:16px;margin-bottom:24px;flex-wrap:wrap;">
+    <a href="/?system=GBA" style="color:#c4a35a;padding:8px 16px;background:#111;border:1px solid #1e1e22;border-radius:8px;text-decoration:none;">GBA (30 games)</a>
+    <a href="/?system=GBC" style="color:#c4a35a;padding:8px 16px;background:#111;border:1px solid #1e1e22;border-radius:8px;text-decoration:none;">GBC (14 games)</a>
+    <a href="/?system=GB" style="color:#c4a35a;padding:8px 16px;background:#111;border:1px solid #1e1e22;border-radius:8px;text-decoration:none;">GB (8 games)</a>
+  </div>
+
+  <h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">Popular Games</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:24px;">
+    <a href="/pokemon-emerald" style="color:#c4a35a;padding:12px;background:#111;border:1px solid #1e1e22;border-radius:8px;text-decoration:none;">Pokemon Emerald</a>
+    <a href="/pokemon-firered" style="color:#c4a35a;padding:12px;background:#111;border:1px solid #1e1e22;border-radius:8px;text-decoration:none;">Pokemon FireRed</a>
+    <a href="/zelda-minish-cap" style="color:#c4a35a;padding:12px;background:#111;border:1px solid #1e1e22;border-radius:8px;text-decoration:none;">Zelda: Minish Cap</a>
+    <a href="/super-mario-world" style="color:#c4a35a;padding:12px;background:#111;border:1px solid #1e1e22;border-radius:8px;text-decoration:none;">Super Mario World</a>
+    <a href="/metroid-fusion" style="color:#c4a35a;padding:12px;background:#111;border:1px solid #1e1e22;border-radius:8px;text-decoration:none;">Metroid Fusion</a>
+    <a href="/castlevania-aria-of-sorrow" style="color:#c4a35a;padding:12px;background:#111;border:1px solid #1e1e22;border-radius:8px;text-decoration:none;">Castlevania: Aria of Sorrow</a>
+    <a href="/golden-sun" style="color:#c4a35a;padding:12px;background:#111;border:1px solid #1e1e22;border-radius:8px;text-decoration:none;">Golden Sun</a>
+    <a href="/pokemon-crystal" style="color:#c4a35a;padding:12px;background:#111;border:1px solid #1e1e22;border-radius:8px;text-decoration:none;">Pokemon Crystal</a>
+  </div>
+
+  <h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">Frequently Asked Questions</h2>
+  {faqs.map(f => (
+    <details style="margin-bottom:12px;padding:12px 16px;background:#111;border:1px solid #1e1e22;border-radius:8px;">
+      <summary style="cursor:pointer;color:#f0ebe0;font-weight:600;">{f.q}</summary>
+      <p style="color:#aaa;margin-top:8px;line-height:1.6;">{f.a}</p>
+    </details>
+  ))}
+
+  <div style="margin-top:32px;padding:20px;background:#111;border:1px solid #1e1e22;border-radius:12px">
+    <h2 style="font-size:1.1rem;margin-bottom:8px">Start Playing Now</h2>
+    <p style="color:#aaa;font-size:14px;margin-bottom:12px">No download. No signup. Just click and play.</p>
+    <a href="/" style="color:#c4a35a;text-decoration:none;font-weight:700">Browse All 52+ Games →</a>
+  </div>
 </main>
 </BaseLayout>
