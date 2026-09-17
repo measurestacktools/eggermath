@@ -38,9 +38,9 @@
 # Redirect old game.html?id= URLs (408 pages returning 404)
 /game.html* / 301
 
-# Redirect old /play/ and /unblocked/ URLs (184 pages + 5 redirect errors + 22 crawled-not-indexed)
-/play/* / 301
-/unblocked/* / 301
+# Redirect old /play/ and /unblocked/ URLs to matching game slugs (kills /play/* duplicate in index)
+/play/* /:splat 301
+/unblocked/* /:splat 301
 
 # Redirect old /developers/ path
 /developers/* / 301
