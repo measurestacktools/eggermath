@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE, games } from '../data/games.js';
+
+const list = games.filter(g => g.genre === 'Action');
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ItemList",
+      "name": "Best Action GBA Games to Play Online",
+      "description": "The best Game Boy Advance action games you can play free in your browser.",
+      "itemListElement": list.map((g, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "item": {
+          "@type": "VideoGame",
+          "name": g.title,
+          "url": `${SITE.url}/${g.slug}/`,
+          "genre": g.genre,
+          "gamePlatform": g.system || "Game Boy Advance"
+        }
+      }))
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "What is the best action game on GBA?", "acceptedAnswer": { "@type": "Answer", "text": "Castlevania: Aria of Sorrow for its Tactical Soul system, Metroid Fusion for atmosphere and pacing, Metroid: Zero Mission for refined remake design." } },
+        { "@type": "Question", "name": "Castlevania vs Metroid on GBA — which to play?", "acceptedAnswer": { "@type": "Answer", "text": "Play Aria of Sorrow for RPG-style ability collecting, Metroid Fusion for tense guided exploration. Both are essential — flip a coin." } },
+        { "@type": "Question", "name": "Are GBA action games hard?", "acceptedAnswer": { "@type": "Answer", "text": "Metroid Fusion's SA-X encounters and Aria of Sorrow's late bosses spike hard. Save states on EggerMath (F5) make them fair for newcomers." } },
+        { "@type": "Question", "name": "Can I play these action games free online?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every action game on this list runs free in your browser on EggerMath — no download, no signup, with save states." } }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": SITE.url },
+        { "@type": "ListItem", "position": 2, "name": "Best Action GBA Games", "item": `${SITE.url}/best-action-gba-games` }
+      ]
+    }
+  ]
+};
+---
+<BaseLayout title="Best Action GBA Games to Play Online (7) | EggerMath" description="Best action GBA games: Castlevania Aria of Sorrow, Metroid Fusion, Zero Mission. Play all 7 free in your browser." canonical={`${SITE.url}/best-action-gba-games`} jsonLd={jsonLd}>
+<main class="main" style="max-width:800px;margin:0 auto;padding:24px">
+<h1>Best Action GBA Games to Play Online (7)</h1>
+<p style="color:#aaa;margin-bottom:24px">Castlevania, Metroid, Contra, GTA — the GBA's hardest-hitting action lineup, all playable free in your browser on <a href="/" style="color:#c4a35a">EggerMath</a>. Click any title to play instantly with save states.</p>
+
+<h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">The Ranked List</h2>
+<ol style="padding-left:20px;color:#ccc;margin-bottom:24px">
+  {list.map((g) => (
+    <li style="margin-bottom:12px"><a href={`/${g.slug}/`} style="color:#c4a35a;text-decoration:none;font-weight:700">{g.title}</a> <span style="color:#888;font-size:13px">({g.system}, {g.year})</span><br /><span style="color:#aaa;font-size:14px">{g.desc}</span></li>
+  ))}
+</ol>
+
+<h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">FAQ</h2>
+<details style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><summary style="cursor:pointer;font-weight:600;color:#f0ebe0">What is the best action game on GBA?</summary><p style="color:#aaa;font-size:14px;margin-top:6px">Castlevania: Aria of Sorrow (souls), Metroid Fusion (atmosphere), Zero Mission (remake design).</p></details>
+<details style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><summary style="cursor:pointer;font-weight:600;color:#f0ebe0">Castlevania vs Metroid — which to play?</summary><p style="color:#aaa;font-size:14px;margin-top:6px">Aria of Sorrow for ability collecting, Fusion for tense exploration. Both essential.</p></details>
+<details style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><summary style="cursor:pointer;font-weight:600;color:#f0ebe0">Are GBA action games hard?</summary><p style="color:#aaa;font-size:14px;margin-top:6px">SA-X encounters and late Aria bosses spike hard — save states (F5) make them fair.</p></details>
+<details style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><summary style="cursor:pointer;font-weight:600;color:#f0ebe0">Can I play these free online?</summary><p style="color:#aaa;font-size:14px;margin-top:6px">Yes — every action game here runs free in your browser, no download or signup.</p></details>
+
+<h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">More Rankings</h2>
+<p style="color:#aaa;font-size:14px"><a href="/best-rpg-gba-games" style="color:#c4a35a;text-decoration:none">Best RPG GBA Games</a> · <a href="/best-platformer-gba-games" style="color:#c4a35a;text-decoration:none">Best Platformer GBA Games</a> · <a href="/best-gba-games" style="color:#c4a35a;text-decoration:none">Top 25 Overall</a></p>
+
+<div style="margin-top:32px;padding:20px;background:#111;border:1px solid #1e1e22;border-radius:12px">
+  <h2 style="font-size:1.1rem;margin-bottom:8px">Play All 7 Action Games Now — Free</h2>
+  <p style="color:#aaa;font-size:14px;margin-bottom:12px">No downloads. No signup. Save states included.</p>
+  <a href="/" style="color:#c4a35a;text-decoration:none;font-weight:700">Browse the Library →</a>
+</div>
+</main>
+</BaseLayout>

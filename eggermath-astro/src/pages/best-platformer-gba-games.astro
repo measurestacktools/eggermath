@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE, games } from '../data/games.js';
+
+const list = games.filter(g => g.genre === 'Platformer');
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ItemList",
+      "name": "Best Platformer GBA Games to Play Online",
+      "description": "The best Game Boy Advance platformers you can play free in your browser.",
+      "itemListElement": list.map((g, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "item": {
+          "@type": "VideoGame",
+          "name": g.title,
+          "url": `${SITE.url}/${g.slug}/`,
+          "genre": g.genre,
+          "gamePlatform": g.system || "Game Boy Advance"
+        }
+      }))
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "What is the best platformer on GBA?", "acceptedAnswer": { "@type": "Answer", "text": "Super Mario World for level design, Kirby: Nightmare in Dream Land for copy-ability fun, Wario Land 3 for puzzle-platforming depth." } },
+        { "@type": "Question", "name": "Mario vs Kirby vs Wario on GBA — which first?", "acceptedAnswer": { "@type": "Answer", "text": "Start with Super Mario World (tightest controls), then Kirby: Nightmare in Dream Land (creative powers), then Wario Land 3 (slow-burn puzzles)." } },
+        { "@type": "Question", "name": "What is the hardest GBA platformer?", "acceptedAnswer": { "@type": "Answer", "text": "Donkey Kong Country demands precise jumps and mine-cart timing. Crash Bandicoot: The Huge Adventure is a close second for late-game difficulty." } },
+        { "@type": "Question", "name": "Can I play these platformers free online?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every platformer on this list runs free in your browser on EggerMath — no download, no signup, keyboard or touch controls." } }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": SITE.url },
+        { "@type": "ListItem", "position": 2, "name": "Best Platformer GBA Games", "item": `${SITE.url}/best-platformer-gba-games` }
+      ]
+    }
+  ]
+};
+---
+<BaseLayout title="Best Platformer GBA Games Online (19) | EggerMath" description="Best platformer GBA games: Super Mario World, Kirby, Wario Land, Donkey Kong. Play all 19 free in your browser." canonical={`${SITE.url}/best-platformer-gba-games`} jsonLd={jsonLd}>
+<main class="main" style="max-width:800px;margin:0 auto;padding:24px">
+<h1>Best Platformer GBA Games to Play Online (19)</h1>
+<p style="color:#aaa;margin-bottom:24px">Nineteen platformers — Mario, Kirby, Wario, Donkey Kong, Crash — all playable free in your browser on <a href="/" style="color:#c4a35a">EggerMath</a>. Click any title to play instantly.</p>
+
+<h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">The Ranked List</h2>
+<ol style="padding-left:20px;color:#ccc;margin-bottom:24px">
+  {list.map((g) => (
+    <li style="margin-bottom:12px"><a href={`/${g.slug}/`} style="color:#c4a35a;text-decoration:none;font-weight:700">{g.title}</a> <span style="color:#888;font-size:13px">({g.system}, {g.year})</span><br /><span style="color:#aaa;font-size:14px">{g.desc}</span></li>
+  ))}
+</ol>
+
+<h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">FAQ</h2>
+<details style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><summary style="cursor:pointer;font-weight:600;color:#f0ebe0">What is the best platformer on GBA?</summary><p style="color:#aaa;font-size:14px;margin-top:6px">Super Mario World (level design), Kirby: Nightmare in Dream Land (powers), Wario Land 3 (puzzles).</p></details>
+<details style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><summary style="cursor:pointer;font-weight:600;color:#f0ebe0">Mario vs Kirby vs Wario — which first?</summary><p style="color:#aaa;font-size:14px;margin-top:6px">Mario World first (controls), Kirby second (creativity), Wario Land 3 third (puzzles).</p></details>
+<details style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><summary style="cursor:pointer;font-weight:600;color:#f0ebe0">What is the hardest GBA platformer?</summary><p style="color:#aaa;font-size:14px;margin-top:6px">Donkey Kong Country — precise jumps and mine-cart timing. Crash is a close second.</p></details>
+<details style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><summary style="cursor:pointer;font-weight:600;color:#f0ebe0">Can I play these free online?</summary><p style="color:#aaa;font-size:14px;margin-top:6px">Yes — every platformer here runs free in your browser, no download or signup.</p></details>
+
+<h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">More Rankings</h2>
+<p style="color:#aaa;font-size:14px"><a href="/best-rpg-gba-games" style="color:#c4a35a;text-decoration:none">Best RPG GBA Games</a> · <a href="/best-action-gba-games" style="color:#c4a35a;text-decoration:none">Best Action GBA Games</a> · <a href="/best-gba-games" style="color:#c4a35a;text-decoration:none">Top 25 Overall</a></p>
+
+<div style="margin-top:32px;padding:20px;background:#111;border:1px solid #1e1e22;border-radius:12px">
+  <h2 style="font-size:1.1rem;margin-bottom:8px">Play All 19 Platformers Now — Free</h2>
+  <p style="color:#aaa;font-size:14px;margin-bottom:12px">No downloads. No signup. Just click and play.</p>
+  <a href="/" style="color:#c4a35a;text-decoration:none;font-weight:700">Browse the Library →</a>
+</div>
+</main>
+</BaseLayout>

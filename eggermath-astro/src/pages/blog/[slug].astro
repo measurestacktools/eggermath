@@ -32,12 +32,15 @@ const jsonLd = {
 
   <Fragment set:html={post.body} />
 
+  <!-- Mid-article ad: stays EMPTY until age is verified. Filled by __loadAds() (side-rail-slot). -->
+  <div class="side-rail-slot" style="display:flex;justify-content:center;margin:2rem 0;min-height:0;"></div>
+
   {post.relatedGames.length > 0 && (
     <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-surface);border-radius:var(--radius-md);">
       <h3 style="margin:0 0 0.5rem">Related Games</h3>
       <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem;">
         {post.relatedGames.map(g => (
-          <a href={`/${g.slug}`} style="color:var(--accent-amber);">{g.name}</a>
+          <a href={`/${g.slug}`} style="color:var(--accent-amber);">{g.title || g.name}</a>
         ))}
       </div>
     </div>

@@ -8,6 +8,7 @@ import { gameTranslations, supportedLangs, langNames } from '../data/translation
 import { regionalKeywords } from '../data/keywords.js';
 import { gameGuideLinks, systemHubs } from '../data/game-links.js';
 import { getControlsText } from '../data/controls.js';
+import RatingWidget from '../components/RatingWidget.astro';
 
 export function getStaticPaths() {
   return games.map(game => ({
@@ -38,6 +39,9 @@ const relatedGames = games
 
 const guideLinks = gameGuideLinks[game.slug] || [];
 const hub = systemHubs[game.system] || systemHubs['GBA'];
+
+// Same-series siblings for prev/next-style series nav (keeps players in the franchise)
+const seriesSiblings = games.filter(g => g.slug !== game.slug && g.series && g.series === game.series);
 
 // Unified FAQ — used for both JSON-LD and visible HTML
 const faqs = [
@@ -247,7 +251,19 @@ const jsonLd = {
     <div class="eeat-byline">
       <span>Reviewed by <strong>EggerMath Team</strong> · mGBA WASM verified · <a href="/pages/about">About</a> · Updated {new Date().getFullYear()}</span>
     </div>
+    <RatingWidget slug={game.slug} title={game.title} />
   </section>
+
+  {seriesSiblings.length > 0 && (
+    <section class="series-nav">
+      <h3>More {game.series} Games</h3>
+      <div class="series-links">
+        {seriesSiblings.map(g => (
+          <a href={`/${g.slug}`}>{g.title}</a>
+        ))}
+      </div>
+    </section>
+  )}
 
   {relatedGames.length > 0 && (
     <section class="related-games">
@@ -546,6 +562,11 @@ const jsonLd = {
     border-radius: 10px;
   }
   .game-guides h3 { font-size: 1.1rem; margin-bottom: 8px; color: var(--text); }
+  .series-nav { max-width: 800px; margin: 24px auto 0; padding: 16px; background: rgba(196,163,90,0.05); border: 1px solid rgba(196,163,90,0.18); border-radius: 10px; }
+  .series-nav h3 { font-size: 1.1rem; margin-bottom: 8px; color: var(--text); }
+  .series-links { display: flex; flex-wrap: wrap; gap: 8px; }
+  .series-links a { color: var(--accent); text-decoration: none; font-size: 0.85rem; padding: 6px 12px; border: 1px solid rgba(196,163,90,0.3); border-radius: 999px; }
+  .series-links a:hover { background: rgba(196,163,90,0.12); }
   .guide-links {
     list-style: none;
     padding: 0;

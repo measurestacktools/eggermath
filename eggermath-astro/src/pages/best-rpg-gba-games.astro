@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE, games } from '../data/games.js';
+
+const list = games.filter(g => g.genre === 'RPG');
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ItemList",
+      "name": "Best RPG GBA Games to Play Online",
+      "description": "The best Game Boy Advance RPGs you can play free in your browser.",
+      "itemListElement": list.map((g, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "item": {
+          "@type": "VideoGame",
+          "name": g.title,
+          "url": `${SITE.url}/${g.slug}/`,
+          "genre": g.genre,
+          "gamePlatform": g.system || "Game Boy Advance"
+        }
+      }))
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "What is the best RPG on GBA?", "acceptedAnswer": { "@type": "Answer", "text": "Pokemon Emerald for monster collecting and post-game depth, Golden Sun for classic turn-based combat and puzzles, Mario & Luigi: Superstar Saga for action-RPG comedy." } },
+        { "@type": "Question", "name": "Which GBA RPG should beginners start with?", "acceptedAnswer": { "@type": "Answer", "text": "Pokemon FireRed or LeafGreen — clear progression, forgiving difficulty, and the Kanto region teaches RPG basics naturally." } },
+        { "@type": "Question", "name": "What is the longest GBA RPG?", "acceptedAnswer": { "@type": "Answer", "text": "Pokemon Emerald with the Battle Frontier can pass 100 hours. Golden Sun runs 25–30 hours, Fire Emblem: Sacred Stones around 25 hours per route." } },
+        { "@type": "Question", "name": "Can I play these GBA RPGs free online?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every RPG on this list runs free in your browser on EggerMath — no download, no signup, with save states for long quests." } }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": SITE.url },
+        { "@type": "ListItem", "position": 2, "name": "Best RPG GBA Games", "item": `${SITE.url}/best-rpg-gba-games` }
+      ]
+    }
+  ]
+};
+---
+<BaseLayout title="Best RPG GBA Games to Play Online (14) | EggerMath" description="Best RPG GBA games online: Pokemon Emerald, Golden Sun, Fire Emblem, Mario & Luigi. Play all 14 free in your browser." canonical={`${SITE.url}/best-rpg-gba-games`} jsonLd={jsonLd}>
+<main class="main" style="max-width:800px;margin:0 auto;padding:24px">
+<h1>Best RPG GBA Games to Play Online (14)</h1>
+<p style="color:#aaa;margin-bottom:24px">The Game Boy Advance was an RPG powerhouse — monster collectors, tactical epics, and action-RPGs, all playable free in your browser on <a href="/" style="color:#c4a35a">EggerMath</a>. Click any title to play instantly with save states (essential for 30+ hour quests).</p>
+
+<h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">The Ranked List</h2>
+<ol style="padding-left:20px;color:#ccc;margin-bottom:24px">
+  {list.map((g) => (
+    <li style="margin-bottom:12px"><a href={`/${g.slug}/`} style="color:#c4a35a;text-decoration:none;font-weight:700">{g.title}</a> <span style="color:#888;font-size:13px">({g.system}, {g.year})</span><br /><span style="color:#aaa;font-size:14px">{g.desc}</span></li>
+  ))}
+</ol>
+
+<h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">FAQ</h2>
+<details style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><summary style="cursor:pointer;font-weight:600;color:#f0ebe0">What is the best RPG on GBA?</summary><p style="color:#aaa;font-size:14px;margin-top:6px">Pokemon Emerald (collecting + post-game), Golden Sun (turn-based combat), Mario &amp; Luigi: Superstar Saga (action-RPG comedy).</p></details>
+<details style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><summary style="cursor:pointer;font-weight:600;color:#f0ebe0">Which GBA RPG should beginners start with?</summary><p style="color:#aaa;font-size:14px;margin-top:6px">Pokemon FireRed or LeafGreen — clear progression and forgiving difficulty.</p></details>
+<details style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><summary style="cursor:pointer;font-weight:600;color:#f0ebe0">What is the longest GBA RPG?</summary><p style="color:#aaa;font-size:14px;margin-top:6px">Pokemon Emerald with the Battle Frontier (100+ hours), then Golden Sun (25–30 hours).</p></details>
+<details style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><summary style="cursor:pointer;font-weight:600;color:#f0ebe0">Can I play these free online?</summary><p style="color:#aaa;font-size:14px;margin-top:6px">Yes — every RPG here runs free in your browser with save states, no download or signup.</p></details>
+
+<h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">More Rankings</h2>
+<p style="color:#aaa;font-size:14px"><a href="/best-platformer-gba-games" style="color:#c4a35a;text-decoration:none">Best Platformer GBA Games</a> · <a href="/best-action-gba-games" style="color:#c4a35a;text-decoration:none">Best Action GBA Games</a> · <a href="/best-gba-games" style="color:#c4a35a;text-decoration:none">Top 25 Overall</a></p>
+
+<div style="margin-top:32px;padding:20px;background:#111;border:1px solid #1e1e22;border-radius:12px">
+  <h2 style="font-size:1.1rem;margin-bottom:8px">Play All 14 RPGs Now — Free</h2>
+  <p style="color:#aaa;font-size:14px;margin-bottom:12px">No downloads. No signup. Save states included for long quests.</p>
+  <a href="/" style="color:#c4a35a;text-decoration:none;font-weight:700">Browse the Library →</a>
+</div>
+</main>
+</BaseLayout>

@@ -1,0 +1,56 @@
+---
+const { slug, title } = Astro.props;
+const key = `egger_rate_${slug}`;
+---
+<div class="rating-widget" data-rating-key={key}>
+  <span class="rating-label">Rate {title}:</span>
+  <div class="rating-stars" role="radiogroup" aria-label={`Rate ${title}`}>
+    {[1, 2, 3, 4, 5].map(n => (
+      <button type="button" class="rating-star" data-value={n} aria-label={`${n} star${n > 1 ? 's' : ''}`}>★</button>
+    ))}
+  </div>
+  <span class="rating-msg" aria-live="polite"></span>
+</div>
+<script>
+  document.querySelectorAll('.rating-widget').forEach(function (widget) {
+    var key = widget.getAttribute('data-rating-key');
+    var stars = widget.querySelectorAll('.rating-star');
+    var msg = widget.querySelector('.rating-msg');
+    function paint(v) {
+      stars.forEach(function (s) {
+        s.classList.toggle('on', parseInt(s.getAttribute('data-value'), 10) <= v);
+      });
+    }
+    var saved = 0;
+    try { saved = parseInt(localStorage.getItem(key) || '0', 10) || 0; } catch (e) {}
+    if (saved > 0) {
+      paint(saved);
+      msg.textContent = `You rated ${saved}/5`;
+    }
+    stars.forEach(function (s) {
+      s.addEventListener('click', function () {
+        var v = parseInt(s.getAttribute('data-value'), 10);
+        try { localStorage.setItem(key, String(v)); } catch (e) {}
+        paint(v);
+        msg.textContent = `Thanks! You rated ${v}/5`;
+      });
+      s.addEventListener('mouseenter', function () {
+        paint(parseInt(s.getAttribute('data-value'), 10));
+      });
+    });
+    widget.querySelector('.rating-stars').addEventListener('mouseleave', function () {
+      var cur = 0;
+      try { cur = parseInt(localStorage.getItem(key) || '0', 10) || 0; } catch (e) {}
+      paint(cur);
+    });
+  });
+</script>
+<style>
+  .rating-widget { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 12px 0 4px; }
+  .rating-label { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; }
+  .rating-stars { display: flex; gap: 2px; }
+  .rating-star { background: none; border: none; cursor: pointer; font-size: 1.35rem; line-height: 1; color: #3a3a3a; padding: 2px; transition: color 0.12s, transform 0.12s; }
+  .rating-star.on { color: #c4a35a; }
+  .rating-star:hover { transform: scale(1.15); }
+  .rating-msg { font-size: 0.8rem; color: var(--text-muted); }
+</style>

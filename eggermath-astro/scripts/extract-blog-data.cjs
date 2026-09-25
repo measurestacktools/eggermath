@@ -9,6 +9,11 @@ const files = fs.readdirSync(blogDir)
   .filter(f => f.endsWith('.astro') && f !== 'index.astro' && !f.startsWith('['))
   .sort();
 
+if (files.length === 0) {
+  console.error('ABORT: no source .astro files found — blog-posts.js is now the source of truth. Refusing to overwrite with empty data.');
+  process.exit(1);
+}
+
 const posts = [];
 
 for (const file of files) {

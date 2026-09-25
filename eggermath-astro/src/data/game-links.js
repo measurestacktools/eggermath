@@ -8,11 +8,13 @@ export const gameGuideLinks = {
   'pokemon-emerald': [
     { href: '/blog/play-pokemon-emerald-online-free', label: 'Play Pokemon Emerald Online Free' },
     { href: '/blog/pokemon-emerald-nuzlocke-guide', label: 'Pokemon Emerald Nuzlocke Guide' },
-    { href: '/blog/best-gba-games-2026', label: 'Best GBA Games 2026' },
+    { href: '/blog/play-pokemon-games-online-order', label: 'Every Pokemon Game in Order' },
+    { href: '/blog/gba-cheat-codes-action-replay-gameshark', label: 'GBA Cheat Codes Guide' },
   ],
   'pokemon-firered': [
     { href: '/blog/play-pokemon-emerald-online-free', label: 'Play Pokemon GBA Online' },
-    { href: '/blog/best-gba-games-2026', label: 'Best GBA Games 2026' },
+    { href: '/blog/play-pokemon-games-online-order', label: 'Every Pokemon Game in Order' },
+    { href: '/blog/gba-link-cable-trading-multiplayer-guide', label: 'Trading & Link Cable Guide' },
     { href: '/blog/pokemon-games-online', label: 'All Pokemon Games Online' },
   ],
   'pokemon-leafgreen': [
@@ -70,6 +72,7 @@ export const gameGuideLinks = {
   // ── Mario cluster ──
   'mario-kart-super-circuit': [
     { href: '/blog/best-gba-games-2026', label: 'Best GBA Games 2026' },
+    { href: '/blog/gba-link-cable-trading-multiplayer-guide', label: 'Link Cable & Multiplayer Guide' },
     { href: '/blog/how-to-play-gba-games-browser', label: 'How to Play GBA in Browser' },
   ],
   'super-mario-world': [
@@ -127,6 +130,7 @@ export const gameGuideLinks = {
   ],
   'kirby-amazing-mirror': [
     { href: '/blog/best-gba-games-2026', label: 'Best GBA Games 2026' },
+    { href: '/blog/gba-link-cable-trading-multiplayer-guide', label: 'Link Cable & Multiplayer Guide' },
   ],
   'kirbys-dream-land-2': [
     { href: '/blog/retro-gaming-beginners-guide', label: 'Retro Gaming for Beginners' },

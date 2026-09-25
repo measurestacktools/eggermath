@@ -192,6 +192,9 @@ totalUrls += faqUrls.length;
 // ============================================================
 const contentPages = [
   { path: '/best-gba-games', priority: '0.9', changefreq: 'monthly' },
+  { path: '/best-rpg-gba-games', priority: '0.9', changefreq: 'monthly' },
+  { path: '/best-platformer-gba-games', priority: '0.9', changefreq: 'monthly' },
+  { path: '/best-action-gba-games', priority: '0.9', changefreq: 'monthly' },
   { path: '/how-to-play-gba-on-ios', priority: '0.8', changefreq: 'monthly' },
   { path: '/how-to-play-gba-on-android', priority: '0.8', changefreq: 'monthly' },
   { path: '/gba-rom-formats-explained', priority: '0.7', changefreq: 'monthly' },
@@ -224,8 +227,23 @@ totalUrls += contentUrls.length;
 import { readdirSync, readFileSync as readFile } from 'fs';
 const blogDir = join(process.cwd(), 'src', 'pages', 'blog');
 const blogUrls = [];
+// blog-posts.js is the source of truth (source .astro files were removed)
 try {
-  const blogFiles = readdirSync(blogDir).filter(f => f.endsWith('.astro') && f !== 'index.astro');
+  const dataRaw = readFile(join(process.cwd(), 'src', 'data', 'blog-posts.js'), 'utf-8');
+  const slugs = [...dataRaw.matchAll(/^    "slug": "([^"]+)"/gm)].map(m => m[1]);
+  for (const slug of new Set(slugs)) {
+    if (slug.includes('/')) continue;
+    blogUrls.push(
+      urlEntry(`${SITE}/blog/${slug}`, {
+        priority: '0.7',
+        changefreq: 'monthly',
+        images: [OG_IMAGE],
+      })
+    );
+  }
+} catch {}
+try {
+  const blogFiles = readdirSync(blogDir).filter(f => f.endsWith('.astro') && f !== 'index.astro' && !f.startsWith('['));
   for (const file of blogFiles) {
     const slug = file.replace('.astro', '');
     const filePath = join(blogDir, file);
