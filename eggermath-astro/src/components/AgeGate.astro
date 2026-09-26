@@ -36,7 +36,10 @@
     <button id="age-confirm" style="background:#c4a35a;color:#0d0d0d;border:none;padding:12px 32px;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;width:100%;font-family:'DM Sans',sans-serif;">
       Confirm
     </button>
-    <p style="color:#555;font-size:0.7rem;margin:16px 0 0;">Everyone can access the site. Your age only controls which ads you see — nothing is shown until you confirm. We don't store your date of birth.</p>
+    <button id="age-skip" style="background:none;border:none;color:#888;font-size:0.8rem;margin-top:12px;cursor:pointer;text-decoration:underline;font-family:'DM Sans',sans-serif;">
+      Continue without confirming →
+    </button>
+    <p style="color:#555;font-size:0.7rem;margin:16px 0 0;">Everyone can access the site. Confirming personalizes ads; skipping shows only the safest family-friendly ads. We don't store your date of birth.</p>
   </div>
 </div>
 
@@ -100,6 +103,15 @@
     document.body.dataset.ageGroup = group;
     overlay.style.display = 'none';
     if (typeof window.__loadAds === 'function') window.__loadAds(group);
+  });
+
+  /* Skip path: unverified visitors are treated as minors, so they only
+     ever receive the certified minor-safe (adult-OFF) ad units. */
+  document.getElementById('age-skip').addEventListener('click', function() {
+    try { localStorage.setItem(KEY, 'minor'); } catch (e) {}
+    document.body.dataset.ageGroup = 'minor';
+    overlay.style.display = 'none';
+    if (typeof window.__loadAds === 'function') window.__loadAds('minor');
   });
 })();
 </script>
