@@ -160,6 +160,15 @@ const jsonLd = {
               <button class="filter-chip shell" data-system="GBC">GBC</button>
               <button class="filter-chip shell" data-system="GB">GB</button>
             </div>
+            <div class="catalog-sort">
+              <label for="catalog-sort" style="font-size:12px;color:var(--text-secondary);">Sort</label>
+              <select id="catalog-sort" class="catalog-sort-select" autocomplete="off">
+                <option value="featured">Featured</option>
+                <option value="az">A–Z</option>
+                <option value="newest">Newest</option>
+                <option value="oldest">Oldest</option>
+              </select>
+            </div>
           </div>
           <div class="hero-stats">
             <div>
@@ -185,6 +194,7 @@ const jsonLd = {
               img={game.img}
               mega={game.mega}
               system={game.system}
+              year={game.year}
             />
           ))}
         </div>
@@ -196,7 +206,7 @@ const jsonLd = {
         <p>A GBA emulator lets you play Game Boy Advance games directly in your web browser without downloading any software. Our emulator uses mGBA WebAssembly, the same engine used by professional emulation projects. It supports GBA, GBC, and GB games with save states, fast forward, and keyboard/touch controls.</p>
         <ol>
           <li>Click any game from the library, or drag-and-drop your own .gba ROM file</li>
-          <li>The game loads instantly in your browser — no installation required</li>
+          <li>The game starts right in your browser — usually within a few seconds, no installation required</li>
           <li>Use keyboard controls: Arrow keys = D-Pad, K = A button, J = B button, Enter = Start</li>
           <li>Save your progress anytime with F5, load with F9, switch slots with F7</li>
         </ol>
@@ -391,6 +401,32 @@ import '../scripts/emulator.js';
       searchQuery = e.target.value.toLowerCase().trim();
       filterGames();
     });
+
+    // Sort control: featured (default order) / A-Z / newest / oldest by year
+    const sortSelect = document.getElementById('catalog-sort');
+    if (sortSelect) {
+      const originalOrder = Array.from(gamesGrid.querySelectorAll('.game-pill'));
+      sortSelect.addEventListener('change', () => {
+        const mode = sortSelect.value;
+        const cards = Array.from(gamesGrid.querySelectorAll('.game-pill'));
+        if (mode === 'featured') {
+          originalOrder.forEach(c => gamesGrid.appendChild(c));
+        } else if (mode === 'az') {
+          cards.sort((a, b) => {
+            const ta = a.querySelector('.game-pill-title')?.textContent || '';
+            const tb = b.querySelector('.game-pill-title')?.textContent || '';
+            return ta.localeCompare(tb);
+          }).forEach(c => gamesGrid.appendChild(c));
+        } else if (mode === 'newest' || mode === 'oldest') {
+          cards.sort((a, b) => {
+            const ya = parseInt(a.dataset.year || '0', 10);
+            const yb = parseInt(b.dataset.year || '0', 10);
+            return mode === 'newest' ? yb - ya : ya - yb;
+          }).forEach(c => gamesGrid.appendChild(c));
+        }
+        filterGames();
+      });
+    }
   }
   
   // FAQ accordion

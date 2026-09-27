@@ -559,6 +559,25 @@ a.continue-game-card:hover .cgc-title {
   align-items: center;
 }
 
+.catalog-sort {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.catalog-sort-select {
+  padding: 8px 12px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  cursor: pointer;
+  outline: none;
+}
+
 .catalog-search-wrap {
   position: relative;
   flex: 1;

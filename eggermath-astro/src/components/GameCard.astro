@@ -6,11 +6,12 @@ interface Props {
   img: string;
   mega: string;
   system?: string;
+  year?: number;
 }
 
-const { title, genre, slug, img, mega, system = 'GBA' } = Astro.props;
+const { title, genre, slug, img, mega, system = 'GBA', year = 0 } = Astro.props;
 ---
-<div class="game-pill" data-mega={mega} data-slug={slug} data-genre={genre} data-system={system} style="animation: cartSeat 0.5s ease both;">
+<div class="game-pill" data-mega={mega} data-slug={slug} data-genre={genre} data-system={system} data-year={year} style="animation: cartSeat 0.5s ease both;">
   <a href={`/${slug}`} class="game-pill-link">
     <img class="game-pill-img" src={img} alt={`Play ${title} Online Free`} loading="lazy" onerror="this.style.display='none'">
     <div class="game-pill-overlay">

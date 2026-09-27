@@ -49,6 +49,7 @@ const faqs = [
   { q: `Is ${game.title} free?`, a: `Yes, ${game.title} is free on EggerMath via browser mGBA emulator. No download, no signup.` },
   { q: `Can I save progress?`, a: `Click Save (F5) and Load (F9). 10 slots via Slot button / F7. Stored in browser.` },
   { q: `What are the controls?`, a: `${getControlsText(game.system)}. Mobile: touch controls.` },
+  { q: `Can I back up my ${game.title} save?`, a: `Yes. Tap Export in the controls bar to download a .sav file, and Import to restore it. Note: clearing browser/site data erases saves stored in the browser, so export anything you care about.` },
 ];
 
 // Pick 3 most relevant EN keywords for this game (no stuffing)
@@ -222,6 +223,15 @@ const jsonLd = {
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
           <span>Fullscreen</span>
         </button>
+        <button id="btn-export-save" class="ctrl-btn" title="Export battery save (.sav) to your device">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Export</span>
+        </button>
+        <button id="btn-import-save" class="ctrl-btn" title="Import a .sav file from your device">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <span>Import</span>
+        </button>
+        <input type="file" id="import-save-input" accept=".sav,.sa1,.sgm" style="display:none" />
       </div>
     </div>
 

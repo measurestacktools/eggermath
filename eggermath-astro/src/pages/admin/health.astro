@@ -1,0 +1,132 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { games } from '../../data/games.js';
+import { gameGuideLinks } from '../../data/game-links.js';
+
+// ── Build-time audit ──
+const megaSeen = {};
+const dupMega = [];
+const rows = games.map(g => {
+  if (g.mega) {
+    if (megaSeen[g.mega]) dupMega.push(g.mega);
+    megaSeen[g.mega] = true;
+  }
+  const guides = (gameGuideLinks[g.slug] || []).length;
+  const issues = [];
+  if (!g.mega) issues.push('missing mega filename');
+  if (!g.img) issues.push('missing cover image');
+  if (!g.desc) issues.push('missing description');
+  else if (g.desc.length > 155) issues.push(`desc ${g.desc.length} chars (>155)`);
+  if (!g.keywords) issues.push('missing keywords');
+  if (!g.series) issues.push('missing series');
+  if (guides === 0) issues.push('no guide links');
+  return { slug: g.slug, title: g.title, system: g.system, mega: g.mega || '—', descLen: (g.desc || '').length, guides, ok: issues.length === 0, issues };
+});
+const okCount = rows.filter(r => r.ok).length;
+const expectedMega = games.map(g => ({ slug: g.slug, title: g.title, mega: g.mega }));
+---
+<BaseLayout title="Library Health | EggerMath" description="Internal game-library health monitor" noIndex={true}>
+<main style="max-width:1000px;margin:0 auto;padding:24px">
+  <h1 style="font-size:2rem;margin-bottom:8px">Library Health</h1>
+  <p style="color:#888;margin-bottom:32px">Internal monitor — build-time metadata audit plus a live MEGA library check. Not indexed.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-bottom:32px;">
+    <div style="padding:20px;background:#111;border:1px solid #1e1e22;border-radius:12px;text-align:center;">
+      <div style="font-size:2rem;color:#c4a35a;font-weight:700;">{okCount}/{games.length}</div>
+      <div style="color:#888;font-size:14px;">Games passing audit</div>
+    </div>
+    <div style="padding:20px;background:#111;border:1px solid #1e1e22;border-radius:12px;text-align:center;">
+      <div style="font-size:2rem;color:{dupMega.length ? '#e74c3c' : '#c4a35a'};font-weight:700;">{dupMega.length}</div>
+      <div style="color:#888;font-size:14px;">Duplicate ROM filenames</div>
+    </div>
+    <div style="padding:20px;background:#111;border:1px solid #1e1e22;border-radius:12px;text-align:center;">
+      <div style="font-size:2rem;color:#c4a35a;font-weight:700;" id="live-count">—</div>
+      <div style="color:#888;font-size:14px;">Files in live MEGA folder</div>
+    </div>
+  </div>
+
+  <h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">Live library check</h2>
+  <p style="color:#aaa;font-size:14px;margin-bottom:12px">Compares the 52 expected ROM filenames against the live MEGA folder. Catches renames like the Tetris/DuckTales class of failure.</p>
+  <button id="live-check-btn" style="background:#c4a35a;color:#0d0d0d;border:none;padding:10px 28px;border-radius:8px;font-weight:700;font-size:15px;cursor:pointer;margin-bottom:16px;">Check live library</button>
+  <div id="live-check-status" style="color:#aaa;font-size:14px;margin-bottom:12px;"></div>
+  <div id="live-check-results" style="margin-bottom:24px;"></div>
+
+  <h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">Emulator error codes</h2>
+  <ul style="color:#aaa;font-size:14px;padding-left:20px;margin-bottom:24px">
+    <li><strong style="color:#f0ebe0">E1</strong> — megajs script blocked (ad-blocker/VPN)</li>
+    <li><strong style="color:#f0ebe0">E2</strong> — MEGA folder listing timed out (25s desktop / 45s mobile)</li>
+    <li><strong style="color:#f0ebe0">E3</strong> — MEGA folder listing failed (network/CORS/rate-limit)</li>
+    <li><strong style="color:#f0ebe0">E4</strong> — folder loaded but this game's filename is missing (renamed?)</li>
+    <li><strong style="color:#f0ebe0">E5</strong> — ROM download from MEGA failed mid-transfer</li>
+  </ul>
+  <p style="color:#aaa;font-size:14px;margin-bottom:24px">On any game page, append <code style="color:#c4a35a">?debug=1</code> for a live capability overlay (WASM, SAB, IDBFS, load stage).</p>
+
+  <h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">Build-time audit ({games.length} games)</h2>
+  <div style="overflow-x:auto;margin-bottom:32px">
+  <table style="width:100%;border-collapse:collapse;font-size:13px;color:#ccc">
+    <thead><tr style="text-align:left;color:#888">
+      <th style="padding:8px;border-bottom:1px solid #222">Game</th>
+      <th style="padding:8px;border-bottom:1px solid #222">Sys</th>
+      <th style="padding:8px;border-bottom:1px solid #222">ROM file</th>
+      <th style="padding:8px;border-bottom:1px solid #222">Desc</th>
+      <th style="padding:8px;border-bottom:1px solid #222">Guides</th>
+      <th style="padding:8px;border-bottom:1px solid #222">Status</th>
+    </tr></thead>
+    <tbody>
+      {rows.map(r => (
+        <tr>
+          <td style="padding:8px;border-bottom:1px solid #1a1a1a"><a href={`/${r.slug}/`} style="color:#c4a35a;text-decoration:none">{r.title}</a></td>
+          <td style="padding:8px;border-bottom:1px solid #1a1a1a">{r.system}</td>
+          <td style="padding:8px;border-bottom:1px solid #1a1a1a;font-family:monospace;font-size:12px">{r.mega}</td>
+          <td style="padding:8px;border-bottom:1px solid #1a1a1a">{r.descLen}</td>
+          <td style="padding:8px;border-bottom:1px solid #1a1a1a">{r.guides}</td>
+          <td style="padding:8px;border-bottom:1px solid #1a1a1a">{r.ok ? '✅' : `❌ ${r.issues.join('; ')}`}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  </div>
+</main>
+
+<script src="https://unpkg.com/megajs@1/dist/main.browser-umd.js"></script>
+<script define:vars={{ expectedMega }}>
+  document.getElementById('live-check-btn').addEventListener('click', function() {
+    var statusEl = document.getElementById('live-check-status');
+    var resEl = document.getElementById('live-check-results');
+    var countEl = document.getElementById('live-count');
+    statusEl.textContent = 'Contacting MEGA...';
+    resEl.innerHTML = '';
+    if (!window.mega || !window.mega.File || !window.mega.File.fromURL) {
+      statusEl.textContent = 'megajs failed to load (blocked by ad-blocker/VPN?)';
+      return;
+    }
+    var done = false;
+    var timer = setTimeout(function() {
+      if (!done) { done = true; statusEl.textContent = 'Timed out after 45s.'; }
+    }, 45000);
+    // Same folder as src/scripts/emulator.js MEGA_FOLDER
+    window.mega.File.fromURL('https://mega.nz/folder/eWRFRTTC#hlIqNhqqS8y9OgTrGIWLcA').loadAttributes(function(err, folder) {
+      if (done) return;
+      done = true;
+      clearTimeout(timer);
+      if (err) { statusEl.textContent = 'Folder load failed: ' + (err.message || err); return; }
+      var live = {};
+      folder.children.forEach(function(f) { live[f.name] = true; });
+      countEl.textContent = Object.keys(live).length;
+      var missing = expectedMega.filter(function(g) { return !live[g.mega]; });
+      var extra = Object.keys(live).filter(function(name) { return !expectedMega.some(function(g) { return g.mega === name; }); });
+      statusEl.textContent = missing.length === 0
+        ? '✅ All ' + expectedMega.length + ' expected ROMs present.'
+        : '❌ ' + missing.length + ' expected ROM(s) MISSING from the live folder.';
+      var html = '';
+      missing.forEach(function(g) {
+        html += '<div style="padding:8px 12px;background:rgba(231,76,60,0.08);border:1px solid rgba(231,76,60,0.3);border-radius:8px;margin-bottom:8px;font-size:14px;color:#f0ebe0;">❌ <strong>' + g.title + '</strong> — expected file <code>' + g.mega + '</code> not found</div>';
+      });
+      if (extra.length) {
+        html += '<div style="padding:8px 12px;background:rgba(196,163,90,0.06);border:1px solid rgba(196,163,90,0.25);border-radius:8px;margin-bottom:8px;font-size:14px;color:#aaa;">Unlisted files in folder (not referenced by any game page): ' + extra.map(function(n){return '<code>'+n+'</code>';}).join(', ') + '</div>';
+      }
+      resEl.innerHTML = html;
+    });
+  });
+</script>
+</BaseLayout>

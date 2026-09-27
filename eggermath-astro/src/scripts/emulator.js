@@ -94,6 +94,7 @@ function ensureRetryButton() {
 }
 
 function showFatal(msg) {
+  window.__EMU_STAGE__ = window.__EMU_STAGE__ || 'fatal';
   setStatus(msg);
   if (statusText) statusText.style.display = 'block';
   var gl = getGameLoading();
@@ -130,8 +131,15 @@ function offerRetry(msg) {
     var box = document.createElement('div');
     box.id = 'emu-debug';
     box.style.cssText = 'position:fixed;top:8px;left:8px;right:8px;z-index:99999;background:#000;color:#0f0;font:12px monospace;padding:10px;border:1px solid #0f0;border-radius:8px;white-space:pre-wrap;word-break:break-all;max-height:50vh;overflow:auto;';
-    box.textContent = rows.map(function(r) { return r[0] + ': ' + r[1]; }).join('\n') + '\nIDB: testing...';
+    box.textContent = rows.map(function(r) { return r[0] + ': ' + r[1]; }).join('\n') + '\nIDB: testing...\nstage: boot';
     document.body.appendChild(box);
+    window.__EMU_DEBUG_BOX__ = box;
+    setInterval(function() {
+      try {
+        var t = box.textContent.replace(/\nstage: [^\n]*/, '\nstage: ' + (window.__EMU_STAGE__ || 'boot'));
+        box.textContent = t;
+      } catch (e) {}
+    }, 2000);
     try {
       var rq = indexedDB.open('__emu_probe', 1);
       var done = false;
@@ -793,6 +801,54 @@ function initGameButtons() {
     openSlotPicker(slotPickerMode || 'save');
   });
 
+  /* ── Save Export / Import (.sav battery saves) ── */
+  var btnExport = document.getElementById('btn-export-save');
+  if (btnExport) btnExport.addEventListener('click', function() {
+    if (!emulator || typeof emulator.getSave !== 'function') { setStatus('Load a game first'); setTimeout(function(){ setStatus(''); }, 1500); return; }
+    var data = null;
+    try { data = emulator.getSave(); } catch (e) { console.error('Export error:', e); }
+    if (!data || !data.length) { setStatus('No in-game save yet — save inside the game first, then export'); setTimeout(function(){ setStatus(''); }, 2500); return; }
+    try {
+      var bytes = (data instanceof Uint8Array) ? data : new Uint8Array(data);
+      var blob = new Blob([bytes], { type: 'application/octet-stream' });
+      var a = document.createElement('a');
+      var base = 'eggermath-save';
+      try {
+        if (typeof gamePageData !== 'undefined' && gamePageData && gamePageData.slug) base = gamePageData.slug;
+        else if (fileName && fileName.textContent) base = fileName.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      } catch (e) {}
+      a.href = URL.createObjectURL(blob);
+      a.download = base + '.sav';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function() { URL.revokeObjectURL(a.href); a.remove(); }, 4000);
+      setStatus('Save exported — keep the .sav file safe');
+      setTimeout(function(){ setStatus(''); }, 2500);
+    } catch (e) { console.error('Export error:', e); setStatus('Export failed'); setTimeout(function(){ setStatus(''); }, 1500); }
+  });
+
+  var importInput = document.getElementById('import-save-input');
+  var btnImport = document.getElementById('btn-import-save');
+  if (btnImport) btnImport.addEventListener('click', function() {
+    if (!emulator || typeof emulator.uploadSaveOrSaveState !== 'function') { setStatus('Load a game first'); setTimeout(function(){ setStatus(''); }, 1500); return; }
+    if (importInput) importInput.click();
+  });
+  if (importInput) importInput.addEventListener('change', function() {
+    if (!importInput.files.length) return;
+    if (!emulator) { setStatus('Load a game first'); return; }
+    var f = importInput.files[0];
+    setStatus('Importing save...');
+    try {
+      emulator.uploadSaveOrSaveState(f, function(err) {
+        if (err) { console.error('Import error:', err); setStatus('Import failed — wrong game or corrupt file'); }
+        else { try { syncSaves(); } catch (e) {}
+          setStatus('Save imported — reset the game to load it'); }
+        setTimeout(function(){ setStatus(''); }, 3000);
+      });
+    } catch (e) { console.error('Import error:', e); setStatus('Import failed'); setTimeout(function(){ setStatus(''); }, 1500); }
+    importInput.value = '';
+  });
+
   updateSlotDisplay();
 }
 initGameButtons();
@@ -1013,7 +1069,7 @@ function resumeGame(data) {
     return;
   }
   var megaFile = megaFiles[data.mega];
-  if (!megaFile) { setStatus('Game not found in library'); setTimeout(function() { setStatus(''); }, 3000); return; }
+  if (!megaFile) { setStatus('[E4] Game not found in library'); setTimeout(function() { setStatus(''); }, 3000); return; }
   setStatus('Loading ' + data.title + '...');
   setProgress(0);
   progressBar.classList.add('visible');
@@ -1060,17 +1116,19 @@ var MEGA_FOLDER = 'https://mega.nz/folder/eWRFRTTC#hlIqNhqqS8y9OgTrGIWLcA';
 var gamePageData = window.__GAME_PAGE__;
 
 function initMegaIntegration() {
+  window.__EMU_STAGE__ = 'mega-lib';
   if (!window.mega || !window.mega.File || !window.mega.File.fromURL) {
     megaFailed = true;
-    showFatal('Game library failed to load (a required script was blocked). Turn off VPN/ad-blocker for this site and tap Retry.');
+    showFatal('[E1] Game library failed to load (a required script was blocked). Turn off VPN/ad-blocker for this site and tap Retry.');
     return;
   }
+  window.__EMU_STAGE__ = 'mega-list';
   setStatus('Contacting game library...');
   var megaDone = false;
   var megaTimer = setTimeout(function() {
     if (megaDone || megaFiles) return;
     megaFailed = true;
-    showFatal('Contacting the game library timed out. Check your connection and tap Retry.');
+    showFatal('[E2] Contacting the game library timed out. Check your connection and tap Retry.');
   }, MEGA_TIMEOUT_MS);
   window.mega.File.fromURL(MEGA_FOLDER).loadAttributes(function(err, folder) {
     megaDone = true;
@@ -1079,15 +1137,21 @@ function initMegaIntegration() {
     if (err) {
       console.warn('MEGA folder load failed:', err);
       megaFailed = true;
-      showFatal('Could not reach the game library. Check your connection and tap Retry.');
+      showFatal('[E3] Could not reach the game library. Check your connection and tap Retry.');
       return;
     }
     megaFiles = {};
     folder.children.forEach(function(f) { megaFiles[f.name] = f; });
     console.log('MEGA folder loaded:', Object.keys(megaFiles).length, 'files');
+    window.__EMU_STAGE__ = 'mega-listed:' + Object.keys(megaFiles).length;
 
     // Handle game page auto-load
-    if (gamePageData && gamePageData.mega && megaFiles[gamePageData.mega]) {
+    if (gamePageData && gamePageData.mega) {
+      if (!megaFiles[gamePageData.mega]) {
+        console.warn('Game file missing from library:', gamePageData.mega);
+        showFatal('[E4] "' + gamePageData.title + '" is not in the game library right now. It may have been renamed — try a similar game below or tap Retry.');
+        return;
+      }
       if (gamePageData.system) document.body.dataset.system = gamePageData.system;
       setStatus('Loading ' + gamePageData.title + '...');
       setProgress(0);
@@ -1106,7 +1170,8 @@ function initMegaIntegration() {
         loadFile(file);
       }).catch(function(err) {
         console.error('Auto-load error:', err);
-        showFatal('Download failed. Tap Retry to try again.');
+        window.__EMU_STAGE__ = 'download-failed';
+        showFatal('[E5] Download failed. Tap Retry to try again.');
       });
       return;
     }
