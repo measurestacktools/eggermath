@@ -88,7 +88,7 @@ const expectedMega = games.map(g => ({ slug: g.slug, title: g.title, mega: g.meg
   </div>
 </main>
 
-<script src="https://unpkg.com/megajs@1/dist/main.browser-umd.js"></script>
+<script is:inline src="https://unpkg.com/megajs@1/dist/main.browser-umd.js"></script>
 <script define:vars={{ expectedMega }}>
   document.getElementById('live-check-btn').addEventListener('click', function() {
     var statusEl = document.getElementById('live-check-status');
