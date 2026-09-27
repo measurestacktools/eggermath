@@ -25,7 +25,7 @@ const jsonLd = {
     {
       "@type": "FAQPage",
       "mainEntity": [
-        { "@type": "Question", "name": "What is the best GBA game of all time?", "acceptedAnswer": { "@type": "Answer", "text": "Pokemon Emerald and Zelda: The Minish Cap top most lists. Emerald for depth and post-game, Minish Cap for charm and dungeon design." } },
+        { "@type": "Question", "name": "What is the best GBA game of all time?", "acceptedAnswer": { "@type": "Answer", "text": "Pokemon Emerald and Zelda: A Link to the Past top most lists. Emerald for depth and post-game, Link to the Past for dungeon design." } },
         { "@type": "Question", "name": "Can I play these GBA games free online?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every game on this list runs free in your browser on EggerMath — no download, no signup, with save states." } },
         { "@type": "Question", "name": "What is the best GBA RPG?", "acceptedAnswer": { "@type": "Answer", "text": "Golden Sun for classic turn-based combat, Pokemon Emerald for monster collecting, Mario & Luigi: Superstar Saga for action-RPG comedy." } },
         { "@type": "Question", "name": "What is the best GBA platformer?", "acceptedAnswer": { "@type": "Answer", "text": "Super Mario World (Super Mario Advance 2) and Kirby: Nightmare in Dream Land lead a stacked field including Wario Land and Donkey Kong Country." } }
@@ -47,7 +47,7 @@ for (const g of games) {
   byGenre[g.genre].push(g);
 }
 ---
-<BaseLayout title="Best GBA Games to Play Online (Top 25) | EggerMath" description="Best GBA games online: Pokemon Emerald, Zelda Minish Cap, Mario Kart, Metroid Fusion, Castlevania. Play all 25 free in your browser." canonical={`${SITE.url}/best-gba-games`} jsonLd={jsonLd}>
+<BaseLayout title="Best GBA Games to Play Online (Top 25) | EggerMath" description="Best GBA games online: Pokemon Emerald, Zelda Link to the Past, Mario Kart, Metroid Fusion, Castlevania. Play all 25 free in your browser." canonical={`${SITE.url}/best-gba-games`} jsonLd={jsonLd}>
 <main class="main" style="max-width:800px;margin:0 auto;padding:24px">
 <h1>Best GBA Games to Play Online (Top 25)</h1>
 <p style="color:#aaa;margin-bottom:24px">The definitive ranking of Game Boy Advance classics — every single one playable free in your browser on <a href="/" style="color:#c4a35a">EggerMath</a>. Click any title to play instantly with save states.</p>
@@ -75,7 +75,7 @@ for (const g of games) {
 ))}
 
 <h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">FAQ</h2>
-<details style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><summary style="cursor:pointer;font-weight:600;color:#f0ebe0">What is the best GBA game of all time?</summary><p style="color:#aaa;font-size:14px;margin-top:6px">Pokemon Emerald and Zelda: The Minish Cap top most lists — Emerald for depth, Minish Cap for charm.</p></details>
+<details style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><summary style="cursor:pointer;font-weight:600;color:#f0ebe0">What is the best GBA game of all time?</summary><p style="color:#aaa;font-size:14px;margin-top:6px">Pokemon Emerald and Zelda: A Link to the Past top most lists — Emerald for depth, Link to the Past for dungeons.</p></details>
 <details style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><summary style="cursor:pointer;font-weight:600;color:#f0ebe0">Can I play these free online?</summary><p style="color:#aaa;font-size:14px;margin-top:6px">Yes — every game here runs free in your browser with save states, no download or signup.</p></details>
 <details style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><summary style="cursor:pointer;font-weight:600;color:#f0ebe0">What is the best GBA RPG?</summary><p style="color:#aaa;font-size:14px;margin-top:6px">Golden Sun (classic turn-based), Pokemon Emerald (monster collecting), Mario &amp; Luigi: Superstar Saga (action-RPG comedy).</p></details>
 <details style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><summary style="cursor:pointer;font-weight:600;color:#f0ebe0">What is the best GBA platformer?</summary><p style="color:#aaa;font-size:14px;margin-top:6px">Super Mario World and Kirby: Nightmare in Dream Land, with Wario Land and Donkey Kong Country close behind.</p></details>

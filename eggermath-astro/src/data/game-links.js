@@ -59,11 +59,6 @@ export const gameGuideLinks = {
   ],
 
   // ── Zelda cluster ──
-  'zelda-minish-cap': [
-    { href: '/blog/play-zelda-online-free', label: 'Play Zelda Online Free' },
-    { href: '/blog/best-gba-games-2026', label: 'Best GBA Games 2026' },
-    { href: '/blog/how-to-play-gba-games-browser', label: 'How to Play GBA in Browser' },
-  ],
   'zelda-a-link-to-the-past': [
     { href: '/blog/play-zelda-online-free', label: 'Play Zelda Online Free' },
     { href: '/blog/best-gba-games-2026', label: 'Best GBA Games 2026' },
@@ -136,9 +131,6 @@ export const gameGuideLinks = {
     { href: '/blog/retro-gaming-beginners-guide', label: 'Retro Gaming for Beginners' },
   ],
   'kirbys-pinball-land': [
-    { href: '/blog/retro-gaming-beginners-guide', label: 'Retro Gaming for Beginners' },
-  ],
-  'kirbys-dream-land': [
     { href: '/blog/retro-gaming-beginners-guide', label: 'Retro Gaming for Beginners' },
   ],
 
@@ -257,10 +249,6 @@ export const gameGuideLinks = {
   ],
 
   // ── Mega Man ──
-  'mega-man-dr-wilys-revenge': [
-    { href: '/blog/retro-gaming-beginners-guide', label: 'Retro Gaming for Beginners' },
-    { href: '/blog/best-game-boy-color-games', label: 'Best GBC Games' },
-  ],
 };
 
 /**

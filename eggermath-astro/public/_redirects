@@ -1,3 +1,12 @@
+# Removed games (ROMs missing from library) → closest live game (Nov 2026 cleanup)
+# NOTE: remember to delete these if the games ever return
+/zelda-minish-cap /zelda-a-link-to-the-past 301
+/kirbys-dream-land /kirbys-dream-land-2 301
+/mega-man-dr-wilys-revenge /metroid-fusion 301
+/:lang/zelda-minish-cap /:lang/zelda-a-link-to-the-past 301
+/:lang/kirbys-dream-land /:lang/kirbys-dream-land-2 301
+/:lang/mega-man-dr-wilys-revenge /:lang/metroid-fusion 301
+
 # Redirect old/sitemap references
 /sitemap-index.xml /sitemap.xml 301
 /sitemap-0.xml /sitemap.xml 301

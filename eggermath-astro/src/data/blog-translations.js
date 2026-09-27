@@ -7,11 +7,11 @@ export const blogTranslations = {
       desc: 'Juega juegos de GBA gratis en tu navegador. Sin descargas ni instalación: abre la página, elige un juego y juega en segundos.',
       date: '2026-09-12',
       category: 'Guías',
-      body: `<p style="color:#ccc;margin-bottom:16px">¿Quieres jugar juegos de Game Boy Advance sin descargar nada? Con EggerMath juegas 52 clásicos gratis directamente en Chrome, Safari, Firefox o Edge. Sin archivos .exe, sin ROMs, sin cuentas. Así funciona.</p>
+      body: `<p style="color:#ccc;margin-bottom:16px">¿Quieres jugar juegos de Game Boy Advance sin descargar nada? Con EggerMath juegas 49 clásicos gratis directamente en Chrome, Safari, Firefox o Edge. Sin archivos .exe, sin ROMs, sin cuentas. Así funciona.</p>
 <h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">Paso 1: Abre el sitio</h2>
 <p style="color:#ccc;margin-bottom:16px">Visita <a href="/" style="color:#c4a35a">eggermath.com</a> en cualquier navegador moderno — funciona en Windows, Mac, Chromebook, iPhone y Android.</p>
 <h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">Paso 2: Elige un juego</h2>
-<p style="color:#ccc;margin-bottom:16px">Haz clic en cualquier cartucho de la biblioteca: Pokémon Esmeralda, Zelda Minish Cap, Mario Kart y 49 más. El juego carga en 5–15 segundos.</p>
+<p style="color:#ccc;margin-bottom:16px">Haz clic en cualquier cartucho de la biblioteca: Pokémon Esmeralda, Zelda: A Link to the Past, Mario Kart y otros 46. El juego carga en 5–15 segundos.</p>
 <h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">Paso 3: Juega con teclado o táctil</h2>
 <div style="background:#111;padding:16px;border-radius:8px;margin-bottom:24px;color:#ccc">
 <p style="margin:0 0 4px"><strong style="color:#c4a35a">Cruceta:</strong> flechas o WASD</p>
@@ -31,11 +31,11 @@ export const blogTranslations = {
       desc: 'Spiele GBA-Spiele gratis im Browser. Keine Downloads, keine Installation — Seite öffnen, Spiel wählen, in Sekunden losspielen.',
       date: '2026-09-12',
       category: 'Anleitungen',
-      body: `<p style="color:#ccc;margin-bottom:16px">Game-Boy-Advance-Spiele ohne Download spielen? Mit EggerMath spielst du 52 Klassiker gratis direkt in Chrome, Safari, Firefox oder Edge. Keine .exe-Dateien, keine ROMs, keine Konten. So geht's.</p>
+      body: `<p style="color:#ccc;margin-bottom:16px">Game-Boy-Advance-Spiele ohne Download spielen? Mit EggerMath spielst du 49 Klassiker gratis direkt in Chrome, Safari, Firefox oder Edge. Keine .exe-Dateien, keine ROMs, keine Konten. So geht's.</p>
 <h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">Schritt 1: Seite öffnen</h2>
 <p style="color:#ccc;margin-bottom:16px">Besuche <a href="/" style="color:#c4a35a">eggermath.com</a> in einem modernen Browser — läuft auf Windows, Mac, Chromebook, iPhone und Android.</p>
 <h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">Schritt 2: Spiel wählen</h2>
-<p style="color:#ccc;margin-bottom:16px">Klicke ein Modul in der Bibliothek an: Pokémon Smaragd, Zelda Minish Cap, Mario Kart und 49 weitere. Ladezeit: 5–15 Sekunden.</p>
+<p style="color:#ccc;margin-bottom:16px">Klicke ein Modul in der Bibliothek an: Pokémon Smaragd, Zelda: A Link to the Past, Mario Kart und 46 weitere. Ladezeit: 5–15 Sekunden.</p>
 <h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">Schritt 3: Mit Tastatur oder Touch spielen</h2>
 <div style="background:#111;padding:16px;border-radius:8px;margin-bottom:24px;color:#ccc">
 <p style="margin:0 0 4px"><strong style="color:#c4a35a">Steuerkreuz:</strong> Pfeiltasten oder WASD</p>
@@ -55,11 +55,11 @@ export const blogTranslations = {
       desc: 'Jouez aux jeux GBA gratuitement dans votre navigateur. Sans téléchargement ni installation — ouvrez la page et jouez en quelques secondes.',
       date: '2026-09-12',
       category: 'Guides',
-      body: `<p style="color:#ccc;margin-bottom:16px">Envie de jouer à la Game Boy Advance sans rien télécharger ? Avec EggerMath, 52 classiques tournent gratuitement dans Chrome, Safari, Firefox ou Edge. Aucun .exe, aucune ROM, aucun compte. Voici comment faire.</p>
+      body: `<p style="color:#ccc;margin-bottom:16px">Envie de jouer à la Game Boy Advance sans rien télécharger ? Avec EggerMath, 49 classiques tournent gratuitement dans Chrome, Safari, Firefox ou Edge. Aucun .exe, aucune ROM, aucun compte. Voici comment faire.</p>
 <h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">Étape 1 : Ouvrez le site</h2>
 <p style="color:#ccc;margin-bottom:16px">Visitez <a href="/" style="color:#c4a35a">eggermath.com</a> dans un navigateur moderne — Windows, Mac, Chromebook, iPhone et Android.</p>
 <h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">Étape 2 : Choisissez un jeu</h2>
-<p style="color:#ccc;margin-bottom:16px">Cliquez sur une cartouche : Pokémon Émeraude, Zelda Minish Cap, Mario Kart et 49 autres. Chargement en 5 à 15 secondes.</p>
+<p style="color:#ccc;margin-bottom:16px">Cliquez sur une cartouche : Pokémon Émeraude, Zelda: A Link to the Past, Mario Kart et 46 autres. Chargement en 5 à 15 secondes.</p>
 <h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">Étape 3 : Jouez au clavier ou au tactile</h2>
 <div style="background:#111;padding:16px;border-radius:8px;margin-bottom:24px;color:#ccc">
 <p style="margin:0 0 4px"><strong style="color:#c4a35a">Croix directionnelle :</strong> flèches ou WASD</p>
@@ -79,11 +79,11 @@ export const blogTranslations = {
       desc: 'Jogue GBA grátis no navegador. Sem downloads nem instalação — abra a página, escolha um jogo e jogue em segundos.',
       date: '2026-09-12',
       category: 'Guias',
-      body: `<p style="color:#ccc;margin-bottom:16px">Quer jogar Game Boy Advance sem baixar nada? No EggerMath, 52 clássicos rodam grátis no Chrome, Safari, Firefox ou Edge. Sem .exe, sem ROMs, sem conta. Veja como.</p>
+      body: `<p style="color:#ccc;margin-bottom:16px">Quer jogar Game Boy Advance sem baixar nada? No EggerMath, 49 clássicos rodam grátis no Chrome, Safari, Firefox ou Edge. Sem .exe, sem ROMs, sem conta. Veja como.</p>
 <h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">Passo 1: Abra o site</h2>
 <p style="color:#ccc;margin-bottom:16px">Visite <a href="/" style="color:#c4a35a">eggermath.com</a> em qualquer navegador moderno — Windows, Mac, Chromebook, iPhone e Android.</p>
 <h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">Passo 2: Escolha um jogo</h2>
-<p style="color:#ccc;margin-bottom:16px">Clique em qualquer cartucho: Pokémon Emerald, Zelda Minish Cap, Mario Kart e outros 49. Carrega em 5–15 segundos.</p>
+<p style="color:#ccc;margin-bottom:16px">Clique em qualquer cartucho: Pokémon Emerald, Zelda: A Link to the Past, Mario Kart e outros 46. Carrega em 5–15 segundos.</p>
 <h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">Passo 3: Jogue no teclado ou no toque</h2>
 <div style="background:#111;padding:16px;border-radius:8px;margin-bottom:24px;color:#ccc">
 <p style="margin:0 0 4px"><strong style="color:#c4a35a">Direcional:</strong> setas ou WASD</p>
