@@ -49,6 +49,12 @@ export const html5Games = [
     mobileSupport: true,
     year: 2020,
     developer: 'MadKidGames',
+    features: [
+      'Slow-mo stunt shots while flipping through the air',
+      'Hundreds of levels across cities, rooftops, and docks',
+      'One-tap aim — no aiming reticle needed',
+      'Unlockable suits, skins, and style upgrades',
+    ],
   },
   {
     slug: 'bowmasters',
@@ -66,6 +72,12 @@ export const html5Games = [
     mobileSupport: true,
     year: 2021,
     developer: 'MadKidGames',
+    features: [
+      'Drag-and-release archery duels with trajectory preview',
+      'Multiple unlockable fighters and wild weapons',
+      'Ragdoll hit physics on every knockout',
+      'Quick rematches — a full duel takes about a minute',
+    ],
   },
   {
     slug: 'crush-the-castle',
@@ -83,6 +95,12 @@ export const html5Games = [
     mobileSupport: true,
     year: 2021,
     developer: 'MadKidGames',
+    features: [
+      'Trebuchet aiming with separate angle and power control',
+      'Realistic castle-collapse physics — every stone matters',
+      'Multiple castles with escalating defenses',
+      'Light and heavy projectiles for different walls',
+    ],
   },
 ];
 
