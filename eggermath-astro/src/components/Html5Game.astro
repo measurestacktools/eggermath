@@ -79,8 +79,8 @@ if (!game || !game.embedUrl || !/^https:\/\//.test(game.embedUrl)) {
   });
 </script>
 <style>
-  .html5-wrap { max-width: 960px; margin: 0 auto; }
-  .html5-ratio { position: relative; overflow: hidden; height: 0; width: 100%; background: #000; border-radius: 12px; }
+  .html5-wrap { max-width: none; margin: 0; }
+  .html5-ratio { position: relative; overflow: hidden; height: 0; width: 100%; background: #000; border-radius: 16px; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 12px 48px rgba(0,0,0,0.55); }
   .html5-ratio iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
   .html5-loader { text-align: center; padding: 32px 0; color: var(--text-muted); }
   .html5-loader .spinner { width: 36px; height: 36px; margin: 0 auto 12px; border: 3px solid rgba(196,163,90,0.25); border-top-color: #c4a35a; border-radius: 50%; animation: html5spin 0.9s linear infinite; }
