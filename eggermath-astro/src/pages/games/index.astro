@@ -3,6 +3,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../data/games.js';
 import { html5Games, html5Categories } from '../../data/html5-games.js';
 
+const [featured, ...rest] = html5Games;
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -27,13 +29,42 @@ const jsonLd = {
 };
 ---
 <BaseLayout title="HTML5 Games Online Free — Action Shooters | EggerMath" description="Play free HTML5 action shooters online: Johnny Trigger, Bowmasters, castle sieges. No download, mobile-friendly." canonical={`${SITE.url}/games`} jsonLd={jsonLd}>
-<main class="main" style="max-width:960px;margin:0 auto;padding:24px">
-  <nav style="font-size:12px;margin-bottom:12px"><a href="/" style="color:#c4a35a;text-decoration:none">Home</a> <span>›</span> <span>HTML5 Games</span></nav>
-  <h1>HTML5 Games — Play Free Online</h1>
-  <p style="color:#aaa;margin-bottom:24px">Free browser shooters and action games, officially embedded and playable instantly on <a href="/" style="color:#c4a35a">EggerMath</a>. No download, no signup — separate from the <a href="/" style="color:#c4a35a">GBA/GBC/GB emulator library</a>.</p>
+<main class="main" style="max-width:1100px;margin:0 auto;padding:16px 24px 24px">
+  <nav style="font-size:12px;margin-bottom:10px"><a href="/" style="color:#c4a35a;text-decoration:none">Home</a> <span>›</span> <span>HTML5 Games</span></nav>
+  <h1 style="font-size:1.8rem;margin:0 0 6px">HTML5 Games — Play Free Online</h1>
+  <p style="color:#aaa;margin:0 0 20px;max-width:720px">Free browser shooters and action games, officially embedded and playable instantly. No download, no signup — separate from the <a href="/" style="color:#c4a35a">GBA/GBC/GB emulator library</a>. <span style="color:#888">🎯 {html5Games.length} shooters · 📱 mobile ready · ⚡ instant play</span></p>
 
-  <h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">Categories</h2>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:24px">
+  {featured && (
+    <a href={`/games/${featured.slug}/`} class="cat-spot">
+      <img src={featured.thumbnail} alt={`Play ${featured.title} online`} loading="eager" width="800" height="450" />
+      <div class="cat-spot-body">
+        <span class="cat-spot-flag">🔥 Featured shooter</span>
+        <span class="cat-spot-title">{featured.title}</span>
+        <span class="cat-spot-desc">{featured.description}</span>
+        <span class="cat-spot-play">▶ Play Now — Free</span>
+      </div>
+    </a>
+  )}
+
+  <div class="cat-grid">
+    {rest.map(g => (
+      <a href={`/games/${g.slug}/`} class="cat-card">
+        <span class="cat-thumb">
+          <img src={g.thumbnail} alt={`Play ${g.title} online`} loading="lazy" width="400" height="225" />
+          <span class="cat-play">▶</span>
+          <span class="cat-badge">📱 Mobile</span>
+        </span>
+        <span class="cat-card-body">
+          <span class="cat-card-title">{g.title}</span>
+          <span class="cat-card-desc">{g.description}</span>
+          <span class="cat-card-cta">Play free →</span>
+        </span>
+      </a>
+    ))}
+  </div>
+
+  <h2 style="font-size:1.3rem;margin:28px 0 12px;color:#c4a35a">Categories</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:8px">
     {html5Categories.map(c => (
       <a href={`/games/${c.slug}`} style="text-decoration:none;color:#f0ebe0;background:#111;border:1px solid #1e1e22;border-radius:12px;padding:20px;display:block">
         <div style="font-size:1.1rem;font-weight:700;color:#c4a35a;margin-bottom:6px">{c.title}</div>
@@ -41,15 +72,31 @@ const jsonLd = {
       </a>
     ))}
   </div>
-
-  <h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">All HTML5 Games</h2>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px">
-    {html5Games.map(g => (
-      <a href={`/games/${g.slug}/`} style="text-decoration:none;color:#f0ebe0;background:#111;border:1px solid #1e1e22;border-radius:12px;overflow:hidden;display:block">
-        <img src={g.thumbnail} alt={`Play ${g.title} online`} loading="lazy" width="400" height="225" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block" />
-        <div style="padding:12px"><div style="font-weight:700">{g.title}</div><div style="color:#aaa;font-size:13px;margin-top:4px">Action shooter · Mobile ready</div></div>
-      </a>
-    ))}
-  </div>
 </main>
 </BaseLayout>
+
+<style>
+  .cat-spot { display: grid; grid-template-columns: 1.4fr 1fr; text-decoration: none; background: #111; border: 1px solid rgba(196,163,90,0.25); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+  .cat-spot img { width: 100%; height: 100%; min-height: 260px; object-fit: cover; display: block; }
+  .cat-spot-body { padding: 24px; display: flex; flex-direction: column; gap: 10px; justify-content: center; }
+  .cat-spot-flag { color: #0d0d0d; background: #c4a35a; font-size: 0.75rem; font-weight: 800; padding: 4px 12px; border-radius: 999px; width: fit-content; }
+  .cat-spot-title { color: #f0ebe0; font-size: 1.5rem; font-weight: 800; }
+  .cat-spot-desc { color: #aaa; font-size: 0.9rem; line-height: 1.6; }
+  .cat-spot-play { color: #0d0d0d; background: #c4a35a; font-weight: 800; padding: 12px 24px; border-radius: 10px; width: fit-content; margin-top: 4px; }
+  .cat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+  .cat-card { text-decoration: none; background: #111; border: 1px solid #1e1e22; border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s; }
+  .cat-card:hover { transform: translateY(-3px); border-color: rgba(196,163,90,0.4); }
+  .cat-thumb { position: relative; display: block; }
+  .cat-thumb img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+  .cat-play { position: absolute; inset: 0; margin: auto; width: 56px; height: 56px; border-radius: 50%; background: rgba(13,13,13,0.72); color: #c4a35a; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.15s; }
+  .cat-card:hover .cat-play { opacity: 1; }
+  .cat-badge { position: absolute; left: 10px; bottom: 10px; background: rgba(13,13,13,0.8); color: #f0ebe0; font-size: 0.7rem; padding: 4px 10px; border-radius: 999px; }
+  .cat-card-body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; }
+  .cat-card-title { color: #f0ebe0; font-weight: 800; font-size: 1.05rem; }
+  .cat-card-desc { color: #aaa; font-size: 0.85rem; line-height: 1.55; }
+  .cat-card-cta { color: #c4a35a; font-size: 0.85rem; font-weight: 700; margin-top: 2px; }
+  @media (max-width: 760px) {
+    .cat-spot { grid-template-columns: 1fr; }
+    .cat-spot img { min-height: 0; aspect-ratio: 16/9; }
+  }
+</style>

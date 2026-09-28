@@ -5,6 +5,7 @@ import { getHtml5ByCategory, html5Categories } from '../../data/html5-games.js';
 
 const category = html5Categories.find(c => c.slug === 'action');
 const list = getHtml5ByCategory('action');
+const [featured, ...rest] = list;
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -40,18 +41,46 @@ const jsonLd = {
 };
 ---
 <BaseLayout title="HTML5 Action Shooters Online Free (3) | EggerMath" description="Best HTML5 action shooters: Johnny Trigger, Bowmasters, Crush the Castle. Play all 3 free in your browser." canonical={`${SITE.url}/games/action`} jsonLd={jsonLd}>
-<main class="main" style="max-width:960px;margin:0 auto;padding:24px">
-  <nav style="font-size:12px;margin-bottom:12px"><a href="/" style="color:#c4a35a;text-decoration:none">Home</a> <span>›</span> <a href="/games" style="color:#c4a35a;text-decoration:none">HTML5 Games</a> <span>›</span> <span>Action</span></nav>
-  <h1>HTML5 Action Shooters to Play Online (3)</h1>
-  <p style="color:#aaa;margin-bottom:24px">Stunt assassins, archery duels, and castle sieges — free HTML5 shooters that run instantly in your browser on <a href="/games" style="color:#c4a35a">EggerMath</a>. No download, no signup.</p>
+<main class="main" style="max-width:1100px;margin:0 auto;padding:16px 24px 24px">
+  <nav style="font-size:12px;margin-bottom:10px"><a href="/" style="color:#c4a35a;text-decoration:none">Home</a> <span>›</span> <a href="/games" style="color:#c4a35a;text-decoration:none">HTML5 Games</a> <span>›</span> <span>Action</span></nav>
+  <h1 style="font-size:1.8rem;margin:0 0 6px">HTML5 Action Shooters to Play Online ({list.length})</h1>
+  <p style="color:#aaa;margin:0 0 20px;max-width:720px">Stunt assassins, archery duels, and castle sieges — free HTML5 shooters that run instantly in your browser. No download, no signup. <span style="color:#888">🎯 {list.length} shooters · 📱 mobile ready · ⚡ instant play</span></p>
 
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:24px">
-    {list.map(g => (
-      <a href={`/games/${g.slug}/`} style="text-decoration:none;color:#f0ebe0;background:#111;border:1px solid #1e1e22;border-radius:12px;overflow:hidden;display:block">
-        <img src={g.thumbnail} alt={`Play ${g.title} online`} loading="lazy" width="400" height="225" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block" />
-        <div style="padding:12px"><div style="font-weight:700">{g.title}</div><div style="color:#aaa;font-size:13px;margin-top:4px">{g.description}</div></div>
+  {featured && (
+    <a href={`/games/${featured.slug}/`} class="cat-spot">
+      <img src={featured.thumbnail} alt={`Play ${featured.title} online`} loading="eager" width="800" height="450" />
+      <div class="cat-spot-body">
+        <span class="cat-spot-flag">🔥 Featured shooter</span>
+        <span class="cat-spot-title">{featured.title}</span>
+        <span class="cat-spot-desc">{featured.description}</span>
+        <span class="cat-spot-play">▶ Play Now — Free</span>
+      </div>
+    </a>
+  )}
+
+  <div class="cat-grid">
+    {rest.map(g => (
+      <a href={`/games/${g.slug}/`} class="cat-card">
+        <span class="cat-thumb">
+          <img src={g.thumbnail} alt={`Play ${g.title} online`} loading="lazy" width="400" height="225" />
+          <span class="cat-play">▶</span>
+          <span class="cat-badge">📱 Mobile</span>
+        </span>
+        <span class="cat-card-body">
+          <span class="cat-card-title">{g.title}</span>
+          <span class="cat-card-desc">{g.description}</span>
+          <span class="cat-card-cta">Play free →</span>
+        </span>
       </a>
     ))}
+  </div>
+
+  <h2 style="font-size:1.3rem;margin:28px 0 12px;color:#c4a35a">More Ways to Play</h2>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px">
+    <a href="/games" style="color:#c4a35a;text-decoration:none;font-size:0.85rem;padding:8px 16px;border:1px solid rgba(196,163,90,0.3);border-radius:999px;">🎮 All HTML5 Games</a>
+    <a href="/best-rpg-gba-games" style="color:#c4a35a;text-decoration:none;font-size:0.85rem;padding:8px 16px;border:1px solid rgba(196,163,90,0.3);border-radius:999px;">🐉 GBA RPGs</a>
+    <a href="/best-action-gba-games" style="color:#c4a35a;text-decoration:none;font-size:0.85rem;padding:8px 16px;border:1px solid rgba(196,163,90,0.3);border-radius:999px;">⚔️ GBA Action</a>
+    <a href="/" style="color:#c4a35a;text-decoration:none;font-size:0.85rem;padding:8px 16px;border:1px solid rgba(196,163,90,0.3);border-radius:999px;">🕹️ Emulator Library</a>
   </div>
 
   <h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">FAQ</h2>
@@ -61,3 +90,29 @@ const jsonLd = {
   <details style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><summary style="cursor:pointer;font-weight:600;color:#f0ebe0">How is this different from the emulator games?</summary><p style="color:#aaa;font-size:14px;margin-top:6px">These are native browser games. For Game Boy titles, visit the <a href="/" style="color:#c4a35a">emulator library</a>.</p></details>
 </main>
 </BaseLayout>
+
+<style>
+  .cat-spot { display: grid; grid-template-columns: 1.4fr 1fr; text-decoration: none; background: #111; border: 1px solid rgba(196,163,90,0.25); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+  .cat-spot img { width: 100%; height: 100%; min-height: 260px; object-fit: cover; display: block; }
+  .cat-spot-body { padding: 24px; display: flex; flex-direction: column; gap: 10px; justify-content: center; }
+  .cat-spot-flag { color: #0d0d0d; background: #c4a35a; font-size: 0.75rem; font-weight: 800; padding: 4px 12px; border-radius: 999px; width: fit-content; }
+  .cat-spot-title { color: #f0ebe0; font-size: 1.5rem; font-weight: 800; }
+  .cat-spot-desc { color: #aaa; font-size: 0.9rem; line-height: 1.6; }
+  .cat-spot-play { color: #0d0d0d; background: #c4a35a; font-weight: 800; padding: 12px 24px; border-radius: 10px; width: fit-content; margin-top: 4px; }
+  .cat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+  .cat-card { text-decoration: none; background: #111; border: 1px solid #1e1e22; border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s; }
+  .cat-card:hover { transform: translateY(-3px); border-color: rgba(196,163,90,0.4); }
+  .cat-thumb { position: relative; display: block; }
+  .cat-thumb img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+  .cat-play { position: absolute; inset: 0; margin: auto; width: 56px; height: 56px; border-radius: 50%; background: rgba(13,13,13,0.72); color: #c4a35a; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.15s; }
+  .cat-card:hover .cat-play { opacity: 1; }
+  .cat-badge { position: absolute; left: 10px; bottom: 10px; background: rgba(13,13,13,0.8); color: #f0ebe0; font-size: 0.7rem; padding: 4px 10px; border-radius: 999px; }
+  .cat-card-body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; }
+  .cat-card-title { color: #f0ebe0; font-weight: 800; font-size: 1.05rem; }
+  .cat-card-desc { color: #aaa; font-size: 0.85rem; line-height: 1.55; }
+  .cat-card-cta { color: #c4a35a; font-size: 0.85rem; font-weight: 700; margin-top: 2px; }
+  @media (max-width: 760px) {
+    .cat-spot { grid-template-columns: 1fr; }
+    .cat-spot img { min-height: 0; aspect-ratio: 16/9; }
+  }
+</style>
