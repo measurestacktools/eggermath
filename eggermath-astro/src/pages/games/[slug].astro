@@ -18,7 +18,6 @@ const pageTitle = `Play ${game.title} Online Free`;
 const pageDesc = game.description;
 const canonical = `${SITE.url}/games/${game.slug}`;
 const related = html5Games.filter(g => g.slug !== game.slug);
-const features = game.features || [];
 
 const faqsBySlug = {
   'johnny-trigger': [
@@ -89,143 +88,117 @@ const jsonLd = {
 };
 ---
 <BaseLayout title={`${pageTitle} | EggerMath`} description={pageDesc} canonical={canonical} jsonLd={jsonLd} ogImage={game.thumbnail}>
-  <main class="main html5-page">
-    <nav class="game-breadcrumb">
-      <a href="/">Home</a> <span class="bc-sep">›</span>
-      <a href="/games">HTML5 Games</a> <span class="bc-sep">›</span>
-      <a href="/games/action">Action</a> <span class="bc-sep">›</span>
-      <span class="bc-current">{game.title}</span>
+  <main class="main" style="max-width:1200px;margin:0 auto;padding:16px 24px 24px">
+    <nav style="font-size:12px;margin-bottom:10px">
+      <a href="/" style="color:#c4a35a;text-decoration:none">Home</a> <span>›</span>
+      <a href="/games" style="color:#c4a35a;text-decoration:none">HTML5 Games</a> <span>›</span>
+      <a href="/games/action" style="color:#c4a35a;text-decoration:none">Action</a> <span>›</span>
+      <span>{game.title}</span>
     </nav>
 
     <div class="html5-stage">
       <div class="html5-player-col">
         <Html5Game game={game} aspect="16-9" />
         <div class="html5-titlebar">
-          <img src={game.thumbnail} alt={`${game.title} icon`} width="56" height="56" class="html5-titlebar-thumb" loading="lazy" />
-          <div class="html5-titlebar-meta">
+          <img src={game.thumbnail} alt={game.title} width="56" height="56" loading="lazy" />
+          <div class="html5-titlebar-text">
             <h1>{pageTitle}</h1>
-            <div class="html5-byline">by {game.developer || provider.name} · Action shooter · {game.mobileSupport ? 'Mobile + desktop' : 'Desktop'}</div>
+            <p class="html5-dev">by {game.developer || provider.name} · Action shooter{game.mobileSupport ? ' · Mobile ready' : ''}</p>
           </div>
           <div class="html5-titlebar-rate">
             <RatingWidget slug={`html5-${game.slug}`} title={game.title} />
           </div>
         </div>
         <div class="html5-chips">
-          <a href="/games">HTML5 Games</a>
-          <a href="/games/action">Action Shooters</a>
-          {game.mobileSupport && <a href="/games/action">Mobile Ready</a>}
+          <a href="/games/action">🎯 Action Shooters</a>
+          <a href="/games">🎮 All HTML5 Games</a>
+          <a href="/">🕹️ GBA Emulator</a>
         </div>
       </div>
       <aside class="html5-rail" aria-label="More games and ads">
         <div class="side-rail-slot" style="display:flex;justify-content:center;margin-bottom:16px;min-height:0;"></div>
-        <h3>More Shooters</h3>
+        <h2>More Shooters</h2>
         <div class="html5-rail-tiles">
           {related.map(g => (
-            <a href={`/games/${g.slug}/`} class="html5-rail-tile">
-              <img src={g.thumbnail} alt={`Play ${g.title} online`} loading="lazy" width="200" height="113" />
+            <a href={`/games/${g.slug}/`}>
+              <img src={g.thumbnail} alt={`Play ${g.title} online`} loading="lazy" width="300" height="169" />
               <span>{g.title}</span>
             </a>
           ))}
-          <a href="/games/action" class="html5-rail-tile html5-rail-all">View all →</a>
         </div>
       </aside>
     </div>
 
-    <section class="html5-about">
-      <h2>About {game.title}</h2>
-      <p>{pageDesc} {game.title} runs as an officially embedded HTML5 game provided by {provider.name} — it loads instantly in Chrome, Edge, Firefox, and Safari with no download and no signup.</p>
-      {features.length > 0 && (
-        <ul class="html5-features">
-          {features.map(f => (<li>{f}</li>))}
-        </ul>
-      )}
-    </section>
-
-    <section class="html5-section">
-      <h2>Controls</h2>
-      <p>{game.controls}</p>
-      <p class="muted">Tip: use the Fullscreen button above the game for big-screen play. Mouse and touch work everywhere; keyboard support varies by title.</p>
-    </section>
-
-    <section class="html5-section">
-      <h2>Mobile & Browser Info</h2>
-      <p>Plays in any modern mobile or desktop browser. On phones, rotate to landscape for the largest play area. Progress and unlocks are stored by the game provider in your browser — clearing site data may reset them.</p>
-    </section>
-
-    {related.length > 0 && (
-      <section class="html5-section">
-        <h2>More Action Shooters</h2>
-        <div class="html5-grid">
-          {related.map(g => (
-            <a href={`/games/${g.slug}/`} class="html5-card">
-              <img src={g.thumbnail} alt={`Play ${g.title} online`} loading="lazy" width="400" height="225" />
-              <div class="html5-card-body"><strong>{g.title}</strong><span>{g.description}</span></div>
-            </a>
-          ))}
-        </div>
+    <div class="html5-body">
+      <section>
+        <h2>About {game.title}</h2>
+        <p>{pageDesc} {game.title} runs as an officially embedded HTML5 game provided by {provider.name} — it loads instantly in Chrome, Edge, Firefox, and Safari with no download and no signup.</p>
+        {game.features && game.features.length > 0 && (
+          <ul class="html5-features">
+            {game.features.map(f => (<li>{f}</li>))}
+          </ul>
+        )}
       </section>
-    )}
 
-    <section class="html5-section">
-      <h2>FAQ — {game.title}</h2>
-      {faqs.map(f => (
-        <details><summary>{f.q}</summary><p>{f.a}</p></details>
-      ))}
-    </section>
+      <section>
+        <h2>Controls</h2>
+        <p>{game.controls}</p>
+        <p class="html5-note">Tip: use the Fullscreen button above the game for big-screen play. Keyboard and gamepad support varies by title — mouse/touch works everywhere.</p>
+      </section>
 
-    <div class="html5-cta">
-      <h2>More Free HTML5 Games</h2>
-      <p>Shooters and action games that run instantly in your browser.</p>
-      <a href="/games/action">Browse Action Games →</a>
+      <section>
+        <h2>Mobile & Browser Info</h2>
+        <p>Plays in any modern mobile or desktop browser. On phones, rotate to landscape for the largest play area. Progress and unlocks are stored by the game provider in your browser — clearing site data may reset them.</p>
+      </section>
+
+      <section>
+        <h2>FAQ — {game.title}</h2>
+        {faqs.map(f => (
+          <details><summary>{f.q}</summary><p>{f.a}</p></details>
+        ))}
+      </section>
+
+      <div class="html5-cta">
+        <h2>More Free HTML5 Games</h2>
+        <p>Shooters and action games that run instantly in your browser.</p>
+        <a href="/games/action">Browse Action Games →</a>
+      </div>
     </div>
   </main>
 </BaseLayout>
 
 <style>
-  .html5-page { max-width: 1280px; margin: 0 auto; padding: 16px 20px 24px; }
-  .game-breadcrumb { display: flex; align-items: center; gap: 6px; padding: 4px 0 12px; font-size: 12px; }
-  .game-breadcrumb a { color: #c4a35a; text-decoration: none; }
-  .bc-sep { color: #555; }
-  .bc-current { color: #888; }
   .html5-stage { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 20px; align-items: start; }
   .html5-titlebar { display: flex; align-items: center; gap: 12px; background: #111; border: 1px solid #1e1e22; border-radius: 12px; padding: 12px 16px; margin-top: 12px; }
-  .html5-titlebar-thumb { width: 56px; height: 56px; border-radius: 10px; object-fit: cover; flex-shrink: 0; }
-  .html5-titlebar-meta { flex: 1; min-width: 0; }
-  .html5-titlebar-meta h1 { font-size: 1.25rem; margin: 0 0 2px; }
-  .html5-byline { font-size: 0.8rem; color: #888; }
-  .html5-titlebar-rate { flex-shrink: 0; }
-  .html5-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .html5-titlebar img { width: 56px; height: 56px; border-radius: 10px; object-fit: cover; flex-shrink: 0; }
+  .html5-titlebar-text { flex: 1; min-width: 0; }
+  .html5-titlebar-text h1 { font-size: 1.25rem; margin: 0 0 2px; }
+  .html5-dev { color: #888; font-size: 0.8rem; margin: 0; }
+  .html5-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
   .html5-chips a { color: #c4a35a; text-decoration: none; font-size: 0.8rem; padding: 6px 12px; border: 1px solid rgba(196,163,90,0.3); border-radius: 999px; }
   .html5-chips a:hover { background: rgba(196,163,90,0.12); }
-  .html5-rail h3 { font-size: 1rem; margin: 0 0 10px; color: #f0ebe0; }
-  .html5-rail-tiles { display: flex; flex-direction: column; gap: 10px; }
-  .html5-rail-tile { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #f0ebe0; background: #111; border: 1px solid #1e1e22; border-radius: 10px; overflow: hidden; font-size: 0.85rem; font-weight: 600; }
-  .html5-rail-tile img { width: 96px; height: 54px; object-fit: cover; flex-shrink: 0; }
-  .html5-rail-tile span { padding: 6px 8px 6px 0; }
-  .html5-rail-all { justify-content: center; padding: 10px; color: #c4a35a; }
-  .html5-about, .html5-section { max-width: 800px; margin-top: 28px; }
-  .html5-about h2, .html5-section h2 { font-size: 1.3rem; margin-bottom: 8px; color: #c4a35a; }
-  .html5-about p, .html5-section p { color: #ccc; line-height: 1.7; }
-  .html5-section .muted { color: #888; font-size: 0.85rem; margin-top: 8px; }
-  .html5-features { padding-left: 20px; color: #ccc; margin: 12px 0 0; display: grid; gap: 6px; }
-  .html5-features li::marker { color: #c4a35a; }
-  .html5-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
-  .html5-card { text-decoration: none; color: #f0ebe0; background: #111; border: 1px solid #1e1e22; border-radius: 12px; overflow: hidden; display: block; }
-  .html5-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
-  .html5-card-body { padding: 12px; }
-  .html5-card-body strong { display: block; margin-bottom: 4px; }
-  .html5-card-body span { color: #aaa; font-size: 13px; }
-  .html5-section details { padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
-  .html5-section summary { cursor: pointer; font-weight: 600; color: #f0ebe0; }
-  .html5-section p { color: #aaa; font-size: 14px; margin-top: 6px; }
-  .html5-cta { margin-top: 32px; padding: 20px; background: #111; border: 1px solid #1e1e22; border-radius: 12px; max-width: 800px; }
+  .html5-rail h2 { font-size: 1rem; margin: 0 0 10px; color: #f0ebe0; }
+  .html5-rail-tiles { display: flex; flex-direction: column; gap: 12px; }
+  .html5-rail-tiles a { display: flex; gap: 10px; align-items: center; text-decoration: none; color: #f0ebe0; background: #111; border: 1px solid #1e1e22; border-radius: 10px; overflow: hidden; }
+  .html5-rail-tiles img { width: 120px; height: 68px; object-fit: cover; flex-shrink: 0; }
+  .html5-rail-tiles span { font-size: 0.85rem; font-weight: 600; padding-right: 8px; }
+  .html5-body { max-width: 800px; margin-top: 8px; }
+  .html5-body section { margin-top: 24px; }
+  .html5-body h2 { font-size: 1.3rem; margin-bottom: 8px; color: #c4a35a; }
+  .html5-body p { color: #ccc; line-height: 1.7; }
+  .html5-note { color: #888 !important; font-size: 0.85rem !important; margin-top: 8px !important; }
+  .html5-features { padding-left: 20px; color: #ccc; margin: 12px 0 0; display: flex; flex-direction: column; gap: 6px; }
+  .html5-body details { padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .html5-body summary { cursor: pointer; font-weight: 600; color: #f0ebe0; }
+  .html5-body details p { color: #aaa; font-size: 14px; margin-top: 6px; }
+  .html5-cta { margin-top: 32px; padding: 20px; background: #111; border: 1px solid #1e1e22; border-radius: 12px; }
   .html5-cta h2 { font-size: 1.1rem; margin-bottom: 8px; }
   .html5-cta p { color: #aaa; font-size: 14px; margin-bottom: 12px; }
   .html5-cta a { color: #c4a35a; text-decoration: none; font-weight: 700; }
   @media (max-width: 900px) {
     .html5-stage { grid-template-columns: 1fr; }
-    .html5-rail-tiles { flex-direction: row; overflow-x: auto; padding-bottom: 4px; }
-    .html5-rail-tile { min-width: 220px; }
-    .html5-titlebar-meta h1 { font-size: 1.05rem; }
+    .html5-rail-tiles { flex-direction: row; flex-wrap: wrap; }
+    .html5-rail-tiles a { flex: 1 1 200px; }
+    .html5-titlebar-text h1 { font-size: 1.05rem; }
   }
 </style>
