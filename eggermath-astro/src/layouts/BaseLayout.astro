@@ -102,12 +102,22 @@ const {
   <Nav />
   <!-- Ad slot: stays EMPTY until age is verified. Filled by __loadAds() below (adults only). -->
   <div id="adsterra-native-banner" style="display:flex;justify-content:center;padding:0.5rem 0;background:#0d0d0d;"></div>
+  <style>
+    /* While the native unit is paused the slot stays empty — collapse it so no blank strip shows. */
+    #adsterra-native-banner:empty { display: none !important; }
+  </style>
   <slot />
   <Footer />
   <AgeGate />
   <script is:inline>
     /* Gated ads: nothing loads until the visitor verifies age. Minors never get ads. */
     (function() {
+      /* NATIVE BANNER PAUSED 2026-09-28: the unit served dating/gambling-style
+         creatives despite the adult-OFF certification. Re-enable ONLY after the
+         Adsterra dashboard category filters are cleaned (block Dating, Adult,
+         Gambling, Crypto, Sweepstakes) — then delete the PAUSED block below and
+         restore the native fill. Side-rail sky units keep running meanwhile. */
+      var NATIVE_PAUSED = true;
       var NATIVE_SRC = 'https://pl31257570.profitableratecpmnetwork.com/7e33cb22bade6e598d8f356726523edd/invoke.js';
       var NATIVE_CONTAINER = 'container-7e33cb22bade6e598d8f356726523edd';
       var SKY_KEY = '3a5a174484bb6e8fd178f3765fd2a88e';
@@ -118,16 +128,18 @@ const {
         if (group !== 'adult' && group !== 'minor') return;
         if (window.__adsLoaded) return;
         window.__adsLoaded = true;
-        var top = document.getElementById('adsterra-native-banner');
-        if (top && !top.dataset.filled) {
-          top.dataset.filled = '1';
-          var c = document.createElement('div');
-          c.id = NATIVE_CONTAINER;
-          top.appendChild(c);
-          var s = document.createElement('script');
-          s.async = true;
-          s.src = NATIVE_SRC;
-          document.body.appendChild(s);
+        if (!NATIVE_PAUSED) {
+          var top = document.getElementById('adsterra-native-banner');
+          if (top && !top.dataset.filled) {
+            top.dataset.filled = '1';
+            var c = document.createElement('div');
+            c.id = NATIVE_CONTAINER;
+            top.appendChild(c);
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = NATIVE_SRC;
+            document.body.appendChild(s);
+          }
         }
         var rails = document.querySelectorAll('.side-rail-slot');
         for (var i = 0; i < rails.length; i++) {
