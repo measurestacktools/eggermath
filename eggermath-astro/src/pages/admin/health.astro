@@ -2,8 +2,9 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { games } from '../../data/games.js';
 import { gameGuideLinks } from '../../data/game-links.js';
+import { html5Games, html5Providers } from '../../data/html5-games.js';
 
-// ── Build-time audit ──
+// ── Build-time audit (emulator library) ──
 const megaSeen = {};
 const dupMega = [];
 const rows = games.map(g => {
@@ -24,6 +25,24 @@ const rows = games.map(g => {
 });
 const okCount = rows.filter(r => r.ok).length;
 const expectedMega = games.map(g => ({ slug: g.slug, title: g.title, mega: g.mega }));
+
+// ── Build-time audit (HTML5 library — config checks only, never downloads games) ──
+const html5Seen = {};
+const html5Dupes = [];
+const html5Rows = html5Games.map(g => {
+  if (html5Seen[g.slug]) html5Dupes.push(g.slug);
+  html5Seen[g.slug] = true;
+  const issues = [];
+  if (!html5Providers[g.provider]) issues.push('unknown provider');
+  if (!g.embedUrl || !/^https:\/\/www\.madkidgames\.com\/full\/[a-z0-9-]+$/.test(g.embedUrl)) issues.push('bad embed URL (must be official madkidgames /full/ URL)');
+  if (!g.thumbnail) issues.push('missing thumbnail');
+  if (!g.description) issues.push('missing description');
+  else if (g.description.length > 155) issues.push(`desc ${g.description.length} chars (>155)`);
+  if (!g.controls) issues.push('missing controls');
+  if (!g.category) issues.push('missing category');
+  return { slug: g.slug, title: g.title, provider: g.provider, gameId: g.providerSlug, category: g.category, thumb: !!g.thumbnail, desc: (g.description || '').length, ok: issues.length === 0, issues };
+});
+const html5Ok = html5Rows.filter(r => r.ok).length;
 ---
 <BaseLayout title="Library Health | EggerMath" description="Internal game-library health monitor" noIndex={true}>
 <main style="max-width:1000px;margin:0 auto;padding:24px">
@@ -80,6 +99,36 @@ const expectedMega = games.map(g => ({ slug: g.slug, title: g.title, mega: g.meg
           <td style="padding:8px;border-bottom:1px solid #1a1a1a;font-family:monospace;font-size:12px">{r.mega}</td>
           <td style="padding:8px;border-bottom:1px solid #1a1a1a">{r.descLen}</td>
           <td style="padding:8px;border-bottom:1px solid #1a1a1a">{r.guides}</td>
+          <td style="padding:8px;border-bottom:1px solid #1a1a1a">{r.ok ? '✅' : `❌ ${r.issues.join('; ')}`}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  </div>
+</main>
+
+  <h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">HTML5 library ({html5Ok}/{html5Rows.length} passing)</h2>
+  {html5Dupes.length > 0 && <p style="color:#e74c3c;font-size:14px">Duplicate slugs: {html5Dupes.join(', ')}</p>}
+  <div style="overflow-x:auto;margin-bottom:32px">
+  <table style="width:100%;border-collapse:collapse;font-size:13px;color:#ccc">
+    <thead><tr style="text-align:left;color:#888">
+      <th style="padding:8px;border-bottom:1px solid #222">Game</th>
+      <th style="padding:8px;border-bottom:1px solid #222">Provider</th>
+      <th style="padding:8px;border-bottom:1px solid #222">Game ID</th>
+      <th style="padding:8px;border-bottom:1px solid #222">Category</th>
+      <th style="padding:8px;border-bottom:1px solid #222">Thumb</th>
+      <th style="padding:8px;border-bottom:1px solid #222">Desc</th>
+      <th style="padding:8px;border-bottom:1px solid #222">Status</th>
+    </tr></thead>
+    <tbody>
+      {html5Rows.map(r => (
+        <tr>
+          <td style="padding:8px;border-bottom:1px solid #1a1a1a"><a href={`/games/${r.slug}/`} style="color:#c4a35a;text-decoration:none">{r.title}</a></td>
+          <td style="padding:8px;border-bottom:1px solid #1a1a1a">{r.provider}</td>
+          <td style="padding:8px;border-bottom:1px solid #1a1a1a;font-family:monospace;font-size:12px">{r.gameId}</td>
+          <td style="padding:8px;border-bottom:1px solid #1a1a1a">{r.category}</td>
+          <td style="padding:8px;border-bottom:1px solid #1a1a1a">{r.thumb ? '✅' : '❌'}</td>
+          <td style="padding:8px;border-bottom:1px solid #1a1a1a">{r.desc}</td>
           <td style="padding:8px;border-bottom:1px solid #1a1a1a">{r.ok ? '✅' : `❌ ${r.issues.join('; ')}`}</td>
         </tr>
       ))}

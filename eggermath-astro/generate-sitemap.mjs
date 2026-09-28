@@ -295,6 +295,30 @@ if (blogLocUrls.length > 0) {
 }
 
 // ============================================================
+// 5d. HTML5 GAMES (Embed.Games / Playgama) — EN only
+// ============================================================
+import { readFileSync as readHtml5 } from 'fs';
+let html5Urls = [];
+try {
+  const html5Raw = readHtml5(join(process.cwd(), 'src', 'data', 'html5-games.js'), 'utf-8');
+  const html5Slugs = [...html5Raw.matchAll(/slug:\s*'([^']+)'/g)].map(m => m[1])
+    .filter(s => !['action', 'arcade', 'racing', 'puzzle', 'sports'].includes(s));
+  const html5Thumbs = [...html5Raw.matchAll(/thumbnail:\s*'([^']+)'/g)].map(m => m[1]);
+  html5Urls.push(urlEntry(`${SITE}/games`, { priority: '0.8', changefreq: 'weekly', images: [OG_IMAGE] }));
+  html5Urls.push(urlEntry(`${SITE}/games/action`, { priority: '0.8', changefreq: 'monthly', images: [OG_IMAGE] }));
+  html5Slugs.forEach((slug, i) => {
+    html5Urls.push(urlEntry(`${SITE}/games/${slug}`, {
+      priority: '0.7', changefreq: 'monthly', images: html5Thumbs[i] ? [html5Thumbs[i]] : [OG_IMAGE],
+    }));
+  });
+} catch (e) { console.log('html5 sitemap skipped:', e.message); }
+if (html5Urls.length > 0) {
+  writeFileSync(join(DIST, 'sitemap-html5.xml'), sitemapXml(html5Urls));
+  allSitemaps.push({ loc: `${SITE}/sitemap-html5.xml`, lastmod: TODAY });
+  totalUrls += html5Urls.length;
+}
+
+// ============================================================
 // 6. SITEMAP INDEX
 // ============================================================
 writeFileSync(join(DIST, 'sitemap.xml'), sitemapIndex(allSitemaps));

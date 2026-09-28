@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/games.js';
+import { getHtml5ByCategory, html5Categories } from '../../data/html5-games.js';
+
+const category = html5Categories.find(c => c.slug === 'action');
+const list = getHtml5ByCategory('action');
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ItemList",
+      "name": "Best HTML5 Action Shooters to Play Online",
+      "description": category.description,
+      "itemListElement": list.map((g, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "item": { "@type": "VideoGame", "name": g.title, "url": `${SITE.url}/games/${g.slug}/`, "genre": "Action", "applicationCategory": "Game" }
+      }))
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "What are the best free HTML5 shooters?", "acceptedAnswer": { "@type": "Answer", "text": "Johnny Trigger for stunt shooting, Bowmasters for archery duels, and Crush the Castle for physics sieges — all free in your browser." } },
+        { "@type": "Question", "name": "Do HTML5 shooters work on mobile?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every game here supports touch controls in mobile Chrome and Safari. Rotate to landscape for the biggest play area." } },
+        { "@type": "Question", "name": "Do I need to download anything?", "acceptedAnswer": { "@type": "Answer", "text": "No. All HTML5 games run instantly in your browser — no download, no signup, no plugins." } },
+        { "@type": "Question", "name": "Are these different from the GBA emulator games?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. These are native browser games provided by Embed.Games. For retro Game Boy titles, visit the emulator library on the homepage." } }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": SITE.url },
+        { "@type": "ListItem", "position": 2, "name": "HTML5 Games", "item": `${SITE.url}/games` },
+        { "@type": "ListItem", "position": 3, "name": "Action", "item": `${SITE.url}/games/action` }
+      ]
+    }
+  ]
+};
+---
+<BaseLayout title="HTML5 Action Shooters Online Free (3) | EggerMath" description="Best HTML5 action shooters: Johnny Trigger, Bowmasters, Crush the Castle. Play all 3 free in your browser." canonical={`${SITE.url}/games/action`} jsonLd={jsonLd}>
+<main class="main" style="max-width:960px;margin:0 auto;padding:24px">
+  <nav style="font-size:12px;margin-bottom:12px"><a href="/" style="color:#c4a35a;text-decoration:none">Home</a> <span>›</span> <a href="/games" style="color:#c4a35a;text-decoration:none">HTML5 Games</a> <span>›</span> <span>Action</span></nav>
+  <h1>HTML5 Action Shooters to Play Online (3)</h1>
+  <p style="color:#aaa;margin-bottom:24px">Stunt assassins, archery duels, and castle sieges — free HTML5 shooters that run instantly in your browser on <a href="/games" style="color:#c4a35a">EggerMath</a>. No download, no signup.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:24px">
+    {list.map(g => (
+      <a href={`/games/${g.slug}/`} style="text-decoration:none;color:#f0ebe0;background:#111;border:1px solid #1e1e22;border-radius:12px;overflow:hidden;display:block">
+        <img src={g.thumbnail} alt={`Play ${g.title} online`} loading="lazy" width="400" height="225" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block" />
+        <div style="padding:12px"><div style="font-weight:700">{g.title}</div><div style="color:#aaa;font-size:13px;margin-top:4px">{g.description}</div></div>
+      </a>
+    ))}
+  </div>
+
+  <h2 style="font-size:1.3rem;margin:24px 0 12px;color:#c4a35a">FAQ</h2>
+  <details style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><summary style="cursor:pointer;font-weight:600;color:#f0ebe0">What are the best free HTML5 shooters?</summary><p style="color:#aaa;font-size:14px;margin-top:6px">Johnny Trigger (stunts), Bowmasters (archery), Crush the Castle (sieges).</p></details>
+  <details style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><summary style="cursor:pointer;font-weight:600;color:#f0ebe0">Do they work on mobile?</summary><p style="color:#aaa;font-size:14px;margin-top:6px">Yes — touch controls in mobile Chrome and Safari, landscape recommended.</p></details>
+  <details style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><summary style="cursor:pointer;font-weight:600;color:#f0ebe0">Do I need to download anything?</summary><p style="color:#aaa;font-size:14px;margin-top:6px">No — everything runs instantly in your browser.</p></details>
+  <details style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><summary style="cursor:pointer;font-weight:600;color:#f0ebe0">How is this different from the emulator games?</summary><p style="color:#aaa;font-size:14px;margin-top:6px">These are native browser games. For Game Boy titles, visit the <a href="/" style="color:#c4a35a">emulator library</a>.</p></details>
+</main>
+</BaseLayout>

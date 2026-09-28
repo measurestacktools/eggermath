@@ -10,6 +10,7 @@ import GuideSteps from '../components/GuideSteps.astro';
 import GameCard from '../components/GameCard.astro';
 import { games, SITE } from '../data/games.js';
 import { blogPosts } from '../data/blog-posts.js';
+import { html5Games } from '../data/html5-games.js';
 
 const latestPosts = blogPosts.slice(0, 3);
 
@@ -313,6 +314,23 @@ const jsonLd = {
     <EmulatorContainer />
     <TouchControls />
     <ControlsHelp />
+
+    <section class="content-section" style="margin-top:48px;">
+      <h2>HTML5 Games — No Emulator Needed</h2>
+      <p style="color:var(--text-secondary);font-size:0.9rem;">Free browser shooters that run instantly — separate from the Game Boy emulator library above.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin-top:1.5rem;">
+        {html5Games.map(g => (
+          <a href={`/games/${g.slug}/`} style="text-decoration:none;background:var(--bg-surface);border-radius:var(--radius-md);display:block;overflow:hidden;">
+            <img src={g.thumbnail} alt={`Play ${g.title} online`} loading="lazy" width="400" height="225" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block" />
+            <div style="padding:1rem;">
+              <h3 style="margin:0 0 0.5rem;font-size:1.1rem;color:var(--text-primary);">{g.title}</h3>
+              <p style="margin:0;color:var(--text-secondary);font-size:0.9rem;">{g.description}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+      <p style="margin-top:1rem;"><a href="/games" style="color:var(--accent-amber);text-decoration:none;font-weight:700;">Browse all HTML5 games →</a></p>
+    </section>
 
     <section class="content-section" style="margin-top:48px;">
       <h2>Latest Blog Posts</h2>
