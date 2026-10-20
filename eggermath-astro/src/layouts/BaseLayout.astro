@@ -2,7 +2,6 @@
 import { SITE } from '../data/games.js';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import AgeGate from '../components/AgeGate.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -50,12 +49,6 @@ const {
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#1a1a1a">
-  <script is:inline>
-    /* HALAL-PAUSE master flag. Must run synchronously, before AgeGate.astro's
-       inline script (bundled <script> is deferred and would be too late).
-       true = zero third-party ads anywhere. See ADS_PAUSED_ALL note below. */
-    window.__ADS_PAUSED__ = true;
-  </script>
   <meta name="keywords" content="gba emulator, play gba online, gba games, gameboy advance emulator, pokemon gba, free gba emulator, browser emulator, retro gaming" />
   {hreflangHtml ? (
     <Fragment set:html={hreflangHtml} />
@@ -106,79 +99,7 @@ const {
 </head>
 <body>
   <Nav />
-  <!-- Ad slot: stays EMPTY until age is verified. Filled by __loadAds() below (adults only). -->
-  <div id="adsterra-native-banner" style="display:flex;justify-content:center;padding:0.5rem 0;background:#0d0d0d;"></div>
-  <style>
-    /* While the native unit is paused the slot stays empty — collapse it so no blank strip shows. */
-    #adsterra-native-banner:empty { display: none !important; }
-  </style>
   <slot />
   <Footer />
-  <AgeGate />
-  <script is:inline>
-    /* Gated ads: nothing loads until the visitor verifies age. Minors never get ads. */
-    (function() {
-      /* ALL ADS PAUSED 2026-10: Adsterra served sexual/dating creatives despite
-         adult-OFF certification — incompatible with a halal site. Re-enable ONLY
-         after the Adsterra dashboard category filters are cleaned (block Dating,
-         Adult, Gambling, Crypto, Sweepstakes): set ADS_PAUSED_ALL=false below
-         AND unhide the age gate in AgeGate.astro (search HALAL-PAUSE). */
-      var ADS_PAUSED_ALL = true;
-      window.__ADS_PAUSED__ = ADS_PAUSED_ALL;
-      /* NATIVE BANNER PAUSED 2026-09-28: the unit served dating/gambling-style
-         creatives despite the adult-OFF certification. Re-enable ONLY after the
-         Adsterra dashboard category filters are cleaned (block Dating, Adult,
-         Gambling, Crypto, Sweepstakes) — then delete the PAUSED block below and
-         restore the native fill. NOTE: ADS_PAUSED_ALL above now pauses the
-         rails too, so re-enabling means flipping BOTH flags. */
-      var NATIVE_PAUSED = true;
-      var NATIVE_SRC = 'https://pl31257570.profitableratecpmnetwork.com/7e33cb22bade6e598d8f356726523edd/invoke.js';
-      var NATIVE_CONTAINER = 'container-7e33cb22bade6e598d8f356726523edd';
-      var SKY_KEY = '3a5a174484bb6e8fd178f3765fd2a88e';
-      var SKY_SRC = 'https://www.highrevenueformat.com/3a5a174484bb6e8fd178f3765fd2a88e/invoke.js';
-      /* Both units are certified adult-OFF in Adsterra (locked), so they are
-         minor-safe. Only the visitor's verification state gates loading. */
-      window.__loadAds = function(group) {
-        if (ADS_PAUSED_ALL) return;
-        if (group !== 'adult' && group !== 'minor') return;
-        if (window.__adsLoaded) return;
-        window.__adsLoaded = true;
-        if (!NATIVE_PAUSED) {
-          var top = document.getElementById('adsterra-native-banner');
-          if (top && !top.dataset.filled) {
-            top.dataset.filled = '1';
-            var c = document.createElement('div');
-            c.id = NATIVE_CONTAINER;
-            top.appendChild(c);
-            var s = document.createElement('script');
-            s.async = true;
-            s.src = NATIVE_SRC;
-            document.body.appendChild(s);
-          }
-        }
-        var rails = document.querySelectorAll('.side-rail-slot');
-        for (var i = 0; i < rails.length; i++) {
-          (function(r) {
-            if (r.dataset.filled) return;
-            r.dataset.filled = '1';
-            var at = document.createElement('script');
-            at.text = "atOptions = { 'key' : '" + SKY_KEY + "', 'format' : 'iframe', 'height' : 600, 'width' : 160, 'params' : {} };";
-            r.appendChild(at);
-            var s2 = document.createElement('script');
-            s2.async = true;
-            s2.src = SKY_SRC;
-            r.appendChild(s2);
-          })(rails[i]);
-        }
-      };
-      try {
-        var v = localStorage.getItem('egger_age_v2');
-        if (v === 'adult' || v === 'minor') {
-          document.body.dataset.ageGroup = v;
-          window.__loadAds(v);
-        }
-      } catch (e) {}
-    })();
-  </script>
 </body>
 </html>

@@ -1404,8 +1404,7 @@ body.game-page .site-nav { display: none !important; }
 body.game-fullscreen .site-nav,
 body.game-fullscreen .game-topbar,
 body.game-fullscreen .game-controls-bar,
-body.game-fullscreen .keyboard-hints,
-body.game-fullscreen #adsterra-native-banner {
+body.game-fullscreen .keyboard-hints {
   display: none !important;
 }
 body.game-fullscreen .site-footer,
@@ -2103,41 +2102,7 @@ body.game-fullscreen .touch-controls .tc-center-btn.pressed {
   color: var(--text-secondary);
 }
 
-/* ── Side Rail Ads (homepage, desktop only) ── */
-.side-rail {
-  display: none;
-}
-/* While all ad units are paused the slots stay empty — collapse them so no
-   blank bordered boxes show. Applies everywhere .side-rail-slot is used. */
-.side-rail-slot:empty {
-  display: none !important;
-  min-height: 0 !important;
-  border: none !important;
-  background: none !important;
-}
-@media (min-width: 1350px) {
-  .side-rail {
-    display: block;
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 160px;
-    z-index: 40;
-  }
-  .side-rail-left { left: max(8px, calc((100vw - 1240px) / 2 - 176px)); }
-  .side-rail-right { right: max(8px, calc((100vw - 1240px) / 2 - 176px)); }
-  .side-rail-inner {
-    width: 160px;
-    min-height: 600px;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.05);
-    border-radius: 10px;
-    overflow: hidden;
-  }
-}
-body.game-fullscreen .side-rail {
-  display: none !important;
-}
+
 
 /* ── Reduced Motion ── */
 @media (prefers-reduced-motion: reduce) {
