@@ -7,6 +7,12 @@
 /:lang/kirbys-dream-land /:lang/kirbys-dream-land-2 301
 /:lang/mega-man-dr-wilys-revenge /:lang/metroid-fusion 301
 
+# Removed HTML5 embedded games (provider injects its own unverifiable ads)
+/games / 301
+/games/action /best-action-gba-games 301
+/games/* /best-action-gba-games 301
+/sitemap-html5.xml /sitemap.xml 301
+
 # Redirect old/sitemap references
 /sitemap-index.xml /sitemap.xml 301
 /sitemap-0.xml /sitemap.xml 301
