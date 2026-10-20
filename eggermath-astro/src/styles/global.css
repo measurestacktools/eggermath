@@ -2107,6 +2107,14 @@ body.game-fullscreen .touch-controls .tc-center-btn.pressed {
 .side-rail {
   display: none;
 }
+/* While all ad units are paused the slots stay empty — collapse them so no
+   blank bordered boxes show. Applies everywhere .side-rail-slot is used. */
+.side-rail-slot:empty {
+  display: none !important;
+  min-height: 0 !important;
+  border: none !important;
+  background: none !important;
+}
 @media (min-width: 1350px) {
   .side-rail {
     display: block;

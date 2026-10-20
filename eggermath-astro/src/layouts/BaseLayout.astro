@@ -50,6 +50,12 @@ const {
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#1a1a1a">
+  <script is:inline>
+    /* HALAL-PAUSE master flag. Must run synchronously, before AgeGate.astro's
+       inline script (bundled <script> is deferred and would be too late).
+       true = zero third-party ads anywhere. See ADS_PAUSED_ALL note below. */
+    window.__ADS_PAUSED__ = true;
+  </script>
   <meta name="keywords" content="gba emulator, play gba online, gba games, gameboy advance emulator, pokemon gba, free gba emulator, browser emulator, retro gaming" />
   {hreflangHtml ? (
     <Fragment set:html={hreflangHtml} />
@@ -112,11 +118,19 @@ const {
   <script is:inline>
     /* Gated ads: nothing loads until the visitor verifies age. Minors never get ads. */
     (function() {
+      /* ALL ADS PAUSED 2026-10: Adsterra served sexual/dating creatives despite
+         adult-OFF certification — incompatible with a halal site. Re-enable ONLY
+         after the Adsterra dashboard category filters are cleaned (block Dating,
+         Adult, Gambling, Crypto, Sweepstakes): set ADS_PAUSED_ALL=false below
+         AND unhide the age gate in AgeGate.astro (search HALAL-PAUSE). */
+      var ADS_PAUSED_ALL = true;
+      window.__ADS_PAUSED__ = ADS_PAUSED_ALL;
       /* NATIVE BANNER PAUSED 2026-09-28: the unit served dating/gambling-style
          creatives despite the adult-OFF certification. Re-enable ONLY after the
          Adsterra dashboard category filters are cleaned (block Dating, Adult,
          Gambling, Crypto, Sweepstakes) — then delete the PAUSED block below and
-         restore the native fill. Side-rail sky units keep running meanwhile. */
+         restore the native fill. NOTE: ADS_PAUSED_ALL above now pauses the
+         rails too, so re-enabling means flipping BOTH flags. */
       var NATIVE_PAUSED = true;
       var NATIVE_SRC = 'https://pl31257570.profitableratecpmnetwork.com/7e33cb22bade6e598d8f356726523edd/invoke.js';
       var NATIVE_CONTAINER = 'container-7e33cb22bade6e598d8f356726523edd';
@@ -125,6 +139,7 @@ const {
       /* Both units are certified adult-OFF in Adsterra (locked), so they are
          minor-safe. Only the visitor's verification state gates loading. */
       window.__loadAds = function(group) {
+        if (ADS_PAUSED_ALL) return;
         if (group !== 'adult' && group !== 'minor') return;
         if (window.__adsLoaded) return;
         window.__adsLoaded = true;

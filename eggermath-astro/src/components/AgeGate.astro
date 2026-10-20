@@ -49,6 +49,11 @@
   var overlay = document.getElementById('age-gate-overlay');
   if (!overlay) return;
 
+  /* HALAL-PAUSE: all ad units are paused (see ADS_PAUSED_ALL in BaseLayout),
+     so the gate serves no purpose and its "family-friendly ads" promise would
+     be false. Hide it entirely. To restore the gate, delete this block. */
+  if (window.__ADS_PAUSED__) { overlay.style.display = 'none'; return; }
+
   /* Already verified earlier: hide gate, ads are handled by the BaseLayout loader */
   try {
     var v = localStorage.getItem(KEY);
