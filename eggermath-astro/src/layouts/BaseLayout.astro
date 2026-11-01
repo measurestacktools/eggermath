@@ -2,6 +2,7 @@
 import { SITE } from '../data/games.js';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import AdBanner from '../components/AdBanner.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -12,6 +13,7 @@ interface Props {
   jsonLd?: object;
   noIndex?: boolean;
   hreflangHtml?: string;
+  showAds?: boolean;
 }
 
 const {
@@ -22,6 +24,7 @@ const {
   jsonLd,
   noIndex = false,
   hreflangHtml,
+  showAds = true,
 } = Astro.props;
 ---
 <!DOCTYPE html>
@@ -99,6 +102,7 @@ const {
 </head>
 <body>
   <Nav />
+  {showAds && <AdBanner />}
   <slot />
   <Footer />
 </body>

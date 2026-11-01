@@ -1,0 +1,83 @@
+---
+/**
+ * AdBanner — 300x250 banner slot, rendered on every page between the nav and content.
+ *
+ * HALAL RULES (hard-coded, not optional):
+ *  1. GATED: nothing loads and nothing renders unless ADSTERRA_KEY is set below.
+ *     Empty key = absolutely zero third-party code ships.
+ *  2. LABELED: the slot carries a visible "Advertisement" tag.
+ *  3. COLLAPSIBLE: no creative = slot collapses (CSS :empty rule) — never a blank strip.
+ *  4. BANNER ONLY: this is a static in-page display banner. Never wire in popunders,
+ *     Social Bar, push notifications, or redirecting units (they caused the 2026
+ *     Adsterra takedowns).
+ *  5. ADULT-OFF UNIT ONLY: key below belongs to the Banner 300x250 unit created with
+ *     "Adult ads" unchecked (unit 32034564, site eggermath.com). Do not swap in the
+ *     old 160x600 key (3a5a1744...), which was created with adult ads ON.
+ *
+ * Gambling/betting creatives cannot be filtered from the publisher dashboard; that
+ * requires a support request to Adsterra for site ID 6029745.
+ */
+// Adsterra Banner 300x250 (unit 32034564).
+const ADSTERRA_KEY = '357eebba00e6c57c77ccb035f56b0fe2';
+
+const LIVE = !!ADSTERRA_KEY;
+---
+
+{LIVE && (
+  <aside class="ad-banner" aria-label="Advertisement" id="ad-banner">
+    <span class="ad-banner__label">Advertisement</span>
+    <div class="ad-banner__unit">
+      <script is:inline define:vars={{ ADSTERRA_KEY }}>
+  window.atOptions = {
+    key: ADSTERRA_KEY,
+    format: 'iframe',
+    height: 250,
+    width: 300,
+    params: {},
+  };
+      </script>
+      <script
+        is:inline
+        src={`https://bauval.org/22/${ADSTERRA_KEY}`}
+      ></script>
+    </div>
+  </aside>
+)}
+<script>
+  // Hide the whole slot if the network returns no creative (empty iframe body),
+  // so the page never keeps a blank 300x250 strip.
+  const slot = document.getElementById('ad-banner');
+  if (slot) {
+    const frame = slot.querySelector('.ad-banner__unit iframe');
+    if (!frame) slot.style.display = 'none';
+  }
+</script>
+
+<style>
+  .ad-banner:empty {
+    display: none !important;
+  }
+  .ad-banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 0.5rem 0 0.75rem;
+    background: var(--bg-surface, #111);
+    border-bottom: 1px solid var(--border, #1e1e22);
+  }
+  .ad-banner__label {
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-secondary, #888);
+    user-select: none;
+  }
+  .ad-banner__unit {
+    width: 300px;
+    height: 250px;
+    max-width: 100%;
+    overflow: hidden;
+    text-align: center;
+  }
+</style>
