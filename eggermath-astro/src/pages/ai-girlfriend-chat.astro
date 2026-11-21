@@ -1,0 +1,299 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/games.js';
+
+const CHAT_URL = 'https://perchance.org/unlimited-ai-character-chat';
+const MEMORY_URL = 'https://perchance.org/unlimited-ai-character-chat?char=ai-adventure';
+const PLAY_URL = 'https://perchance.org/unlimited-ai-character-chat?char=story-writer';
+
+const faq = [
+  {
+    q: 'Is the AI girlfriend chat really free?',
+    a: 'Yes. The chat is free with no sign-up, no email, no credits and no message limit. You can talk as long as you like without paying anything.',
+  },
+  {
+    q: 'Do I need an account to chat?',
+    a: 'No account is needed to start. Open the page and send a message. An optional account only exists if you want cloud backup for your chats and memories.',
+  },
+  {
+    q: 'Does the AI remember previous conversations?',
+    a: 'Yes. Each character keeps a memory of your story, so it can recall your name, events and preferences. Memory is stored on your device by default, or in your own cloud backup if you enable it.',
+  },
+  {
+    q: 'Can I create my own character?',
+    a: 'Yes. You can describe a character in your own words, generate one, or import a character card. That character is then saved for you and nobody else.',
+  },
+  {
+    q: 'Is explicit content allowed?',
+    a: 'No. Adult content is turned off permanently and is not available in text or images. Adventure, romance without explicit content, mystery and drama are all supported.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      name: 'AI Girlfriend Chat - Free, Unlimited, No Sign-Up | EggerMath',
+      url: `${SITE.url}/ai-girlfriend-chat`,
+      description:
+        'Free AI girlfriend chat and AI character chat with long-term memory. Unlimited messages, no sign-up, no credits. A free c.ai alternative.',
+      isPartOf: { '@type': 'WebSite', name: SITE.name, url: SITE.url },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faq.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a },
+      })),
+    },
+    {
+      '@type': 'SoftwareApplication',
+      name: 'Unlimited AI Character Chat',
+      url: CHAT_URL,
+      applicationCategory: 'EntertainmentApplication',
+      operatingSystem: 'Web',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="AI Girlfriend Chat - Free, Unlimited, No Sign-Up | EggerMath"
+  description="Chat with an AI girlfriend or any AI character for free. Unlimited messages, long-term memory, no sign-up and no credits. A free c.ai alternative."
+  canonical={`${SITE.url}/ai-girlfriend-chat`}
+  jsonLd={jsonLd}
+>
+  <main class="agc">
+    <section class="agc-hero">
+      <p class="agc-kicker">Free AI chat - no sign-up</p>
+      <h1>AI Girlfriend Chat With a Memory That Lasts</h1>
+      <p class="agc-lede">
+        Talk to an AI girlfriend, a friend, a rival or a character you invented yourself.
+        Messages are unlimited, there are no credits, and the character remembers the story
+        you are building together.
+      </p>
+      <div class="agc-cta">
+        <a class="agc-btn" href={CHAT_URL} target="_blank" rel="noopener">Start chatting free</a>
+        <a class="agc-btn agc-btn--ghost" href="#how">How it works</a>
+      </div>
+      <ul class="agc-badges">
+        <li>No sign-up</li>
+        <li>No message limit</li>
+        <li>Long-term memory</li>
+        <li>Works on mobile</li>
+      </ul>
+    </section>
+
+    <section class="agc-section">
+      <h2>What makes this different</h2>
+      <div class="agc-grid">
+        <article class="agc-card">
+          <h3>It remembers you</h3>
+          <p>
+            Most free chat sites forget everything when you close the tab. Each character here
+            keeps a memory of names, promises and events, so you can continue the same story
+            days later.
+          </p>
+        </article>
+        <article class="agc-card">
+          <h3>No credits, no paywall</h3>
+          <p>
+            There is no daily limit and no credit counter. Chat as long as you want without
+            being asked to subscribe. An optional cloud backup exists for people who want to
+            move their chats between devices.
+          </p>
+        </article>
+        <article class="agc-card">
+          <h3>Your characters, your rules</h3>
+          <p>
+            Create a character from a short description or import a character card. Everything
+            you write stays attached to your own account, and two characters with the same name
+            never mix their chats or memories.
+          </p>
+        </article>
+        <article class="agc-card">
+          <h3>Safe by default</h3>
+          <p>
+            Adult content is blocked permanently. Romance, adventure, mystery and drama are all
+            available, but explicit material is not part of the product.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="agc-section" id="how">
+      <h2>How to start in three steps</h2>
+      <ol class="agc-steps">
+        <li>
+          <strong>Open the chat.</strong> No download, no form, no email. The default character
+          is ready to talk straight away.
+        </li>
+        <li>
+          <strong>Pick a character or write your own.</strong> Describe the personality, the way
+          they speak and the situation you want to start in.
+        </li>
+        <li>
+          <strong>Keep going later.</strong> Come back on the same device and the conversation
+          is still there, with the character remembering what happened.
+        </li>
+      </ol>
+      <p class="agc-inline-cta">
+        Ready? <a href={CHAT_URL} target="_blank" rel="noopener">Open the free AI character chat</a>
+        and send the first message.
+      </p>
+    </section>
+
+    <section class="agc-section">
+      <h2>AI girlfriend chat compared to c.ai</h2>
+      <div class="agc-table-wrap">
+        <table class="agc-table">
+          <thead>
+            <tr><th>Feature</th><th>This chat</th><th>c.ai</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Sign-up required</td><td>No</td><td>Yes</td></tr>
+            <tr><td>Message limit</td><td>Unlimited</td><td>Free tier limits</td></tr>
+            <tr><td>Character memory</td><td>Built in, per character</td><td>Limited on free tier</td></tr>
+            <tr><td>Create your own character</td><td>Yes, free</td><td>Yes</td></tr>
+            <tr><td>Cost</td><td>Free</td><td>Paid tiers</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="agc-note">
+        Comparison is based on the public free tiers at the time of writing. Features change, so
+        check the official sites for current details.
+      </p>
+    </section>
+
+    <section class="agc-section">
+      <h2>Popular ways people use it</h2>
+      <ul class="agc-links">
+        <li><a href={MEMORY_URL} target="_blank" rel="noopener">An adventure that remembers your choices</a></li>
+        <li><a href={PLAY_URL} target="_blank" rel="noopener">A story partner for long-form writing</a></li>
+        <li><a href={CHAT_URL} target="_blank" rel="noopener">A calm companion chat after a long day</a></li>
+      </ul>
+    </section>
+
+    <section class="agc-section">
+      <h2>Questions people ask</h2>
+      <div class="agc-faq">
+        {faq.map((item) => (
+          <details>
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="agc-final">
+      <h2>Start your story</h2>
+      <p>Free, unlimited and private by default. Nothing to install.</p>
+      <a class="agc-btn" href={CHAT_URL} target="_blank" rel="noopener">Chat with an AI character now</a>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .agc {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 48px 20px 72px;
+    color: var(--text-primary, #e8e8ee);
+  }
+  .agc-hero { max-width: 760px; }
+  .agc-kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+    color: var(--accent-amber, #f0b35b);
+    margin-bottom: 12px;
+  }
+  .agc h1 {
+    font-size: clamp(1.9rem, 4vw, 2.8rem);
+    line-height: 1.15;
+    margin: 0 0 16px;
+  }
+  .agc-lede {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: var(--text-secondary, #b9b9c6);
+    margin: 0 0 24px;
+  }
+  .agc-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+  .agc-btn {
+    display: inline-block;
+    background: var(--accent-amber, #f0b35b);
+    color: #16161c;
+    font-weight: 600;
+    padding: 12px 22px;
+    border-radius: 999px;
+    text-decoration: none;
+  }
+  .agc-btn--ghost {
+    background: transparent;
+    color: var(--text-primary, #e8e8ee);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+  }
+  .agc-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .agc-badges li {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .agc-section { margin-top: 56px; }
+  .agc h2 { font-size: 1.5rem; margin: 0 0 18px; }
+  .agc h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  .agc p, .agc li { line-height: 1.65; }
+  .agc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  .agc-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 14px;
+    padding: 20px;
+  }
+  .agc-card p { margin: 0; color: var(--text-secondary, #b9b9c6); }
+  .agc-steps { padding-left: 20px; }
+  .agc-steps li { margin-bottom: 12px; }
+  .agc-inline-cta a, .agc-links a { color: var(--accent-amber, #f0b35b); }
+  .agc-links { padding-left: 20px; }
+  .agc-links li { margin-bottom: 8px; }
+  .agc-table-wrap { overflow-x: auto; }
+  .agc-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+  .agc-table th, .agc-table td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .agc-note { font-size: 0.85rem; color: var(--text-secondary, #b9b9c6); }
+  .agc-faq details {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px 0;
+  }
+  .agc-faq summary { cursor: pointer; font-weight: 600; }
+  .agc-faq p { color: var(--text-secondary, #b9b9c6); }
+  .agc-final {
+    margin-top: 64px;
+    padding: 32px;
+    border-radius: 18px;
+    background: rgba(240, 179, 91, 0.08);
+    border: 1px solid rgba(240, 179, 91, 0.25);
+    text-align: center;
+  }
+</style>
