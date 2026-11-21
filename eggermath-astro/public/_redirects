@@ -1,11 +1,86 @@
+﻿# Retired language prefixes with no pages (legacy sitemaps) -> flows to English equivalent
+# Generated block: keeps old links from 404ing
+/cs/* /:splat 301
+/cs/ / 301
+/sv/* /:splat 301
+/sv/ / 301
+/no/* /:splat 301
+/no/ / 301
+/fi/* /:splat 301
+/fi/ / 301
+/hu/* /:splat 301
+/hu/ / 301
+/ro/* /:splat 301
+/ro/ / 301
+/el/* /:splat 301
+/el/ / 301
+/he/* /:splat 301
+/he/ / 301
+/bg/* /:splat 301
+/bg/ / 301
+/hr/* /:splat 301
+/hr/ / 301
+/sk/* /:splat 301
+/sk/ / 301
+/sl/* /:splat 301
+/sl/ / 301
+/lt/* /:splat 301
+/lt/ / 301
+/lv/* /:splat 301
+/lv/ / 301
+/et/* /:splat 301
+/et/ / 301
+/ms/* /:splat 301
+/ms/ / 301
+/fa/* /:splat 301
+/fa/ / 301
+/ur/* /:splat 301
+/ur/ / 301
+/ta/* /:splat 301
+/ta/ / 301
+/te/* /:splat 301
+/te/ / 301
+/fil/* /:splat 301
+/fil/ / 301
+/sr/* /:splat 301
+/sr/ / 301
+/az/* /:splat 301
+/az/ / 301
+/kk/* /:splat 301
+/kk/ / 301
+/sw/* /:splat 301
+/sw/ / 301
+/ne/* /:splat 301
+/ne/ / 301
+
 # Retired language prefixes (bn/da) -> same page in English (fixes 659 legacy 404s)
 /bn/* /:splat 301
 /da/* /:splat 301
 
+# Retired per-language sitemaps -> main index (avoid 404s after crawl-budget trim)
+/sitemap-games-pt-BR.xml /sitemap.xml 301
+/sitemap-games-es.xml /sitemap.xml 301
+/sitemap-games-ja.xml /sitemap.xml 301
+/sitemap-games-de.xml /sitemap.xml 301
+/sitemap-games-fr.xml /sitemap.xml 301
+/sitemap-games-ru.xml /sitemap.xml 301
+/sitemap-games-ko.xml /sitemap.xml 301
+/sitemap-games-it.xml /sitemap.xml 301
+/sitemap-games-id.xml /sitemap.xml 301
+/sitemap-games-ar.xml /sitemap.xml 301
+/sitemap-games-zh-CN.xml /sitemap.xml 301
+/sitemap-games-zh-TW.xml /sitemap.xml 301
+/sitemap-games-hi.xml /sitemap.xml 301
+/sitemap-games-th.xml /sitemap.xml 301
+/sitemap-games-vi.xml /sitemap.xml 301
+/sitemap-games-tr.xml /sitemap.xml 301
+/sitemap-games-pl.xml /sitemap.xml 301
+/sitemap-games-nl.xml /sitemap.xml 301
+
 # Social/bio short link -> live AI chat generator (not for indexing; 302 keeps it out of the index)
 /chat https://perchance.org/unlimited-ai-character-chat 302
 
-# Removed games (ROMs missing from library) → closest live game (Nov 2026 cleanup)
+# Removed games (ROMs missing from library) â†’ closest live game (Nov 2026 cleanup)
 # NOTE: remember to delete these if the games ever return
 /zelda-minish-cap /zelda-a-link-to-the-past 301
 /kirbys-dream-land /kirbys-dream-land-2 301

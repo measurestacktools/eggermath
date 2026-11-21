@@ -6,7 +6,15 @@ const TODAY = new Date().toISOString().split('T')[0];
 const DIST = join(process.cwd(), 'dist');
 const OG_IMAGE = `${SITE}/og-image.svg`;
 
-const LANGS = ['pt-BR', 'es', 'ja', 'de', 'fr', 'ru', 'ko', 'it', 'id', 'ar', 'zh-CN', 'zh-TW', 'hi', 'th', 'vi', 'tr', 'pl', 'nl'];
+// Live translated languages. de/fr are omitted because /de/* and /fr/* 301 to the
+// homepage (see public/_redirects) - listing redirecting URLs caused 496 GSC errors.
+const LANGS = ['pt-BR', 'es', 'ja', 'ru', 'ko', 'it', 'id', 'ar', 'zh-CN', 'zh-TW', 'hi', 'th', 'vi', 'tr', 'pl', 'nl'];
+
+// Languages that get their own child sitemap. GSC shows English pages earn almost all
+// impressions while ~1,000 translated URLs sit in "Discovered - currently not indexed",
+// so translations stay live and stay in hreflang, but are left out of the sitemap index.
+// Add a code back here if GSC ever shows impressions for that language.
+const SITEMAP_LANGS = [];
 
 function readGames() {
   const raw = readFileSync(join(process.cwd(), 'src', 'data', 'games.js'), 'utf8');
@@ -97,7 +105,7 @@ const homeUrls = [
     hreflangs: homeHreflangs,
   }),
 ];
-for (const lang of LANGS) {
+for (const lang of SITEMAP_LANGS) {
   homeUrls.push(
     urlEntry(`${SITE}/${lang}`, {
       priority: '0.8',
@@ -131,7 +139,7 @@ totalUrls += enGameUrls.length;
 // ============================================================
 // 3. TRANSLATED GAME PAGES — one sitemap per language
 // ============================================================
-for (const lang of LANGS) {
+for (const lang of SITEMAP_LANGS) {
   const langUrls = games.map((g) => {
     const hreflangs = buildHreflangs(g.slug);
     const images = g.img ? [g.img] : [];
@@ -309,5 +317,10 @@ writeFileSync(join(DIST, 'sitemap.xml'), sitemapIndex(allSitemaps));
 // Clean up old auto-generated sitemaps from @astrojs/sitemap
 try { unlinkSync(join(DIST, 'sitemap-index.xml')); } catch {}
 try { unlinkSync(join(DIST, 'sitemap-0.xml')); } catch {}
+
+// Remove stale per-language sitemaps left over from earlier builds
+for (const lang of ['pt-BR', 'es', 'ja', 'de', 'fr', 'ru', 'ko', 'it', 'id', 'ar', 'zh-CN', 'zh-TW', 'hi', 'th', 'vi', 'tr', 'pl', 'nl']) {
+  try { unlinkSync(join(DIST, `sitemap-games-${lang}.xml`)); } catch {}
+}
 
 console.log(`Sitemap generated: ${allSitemaps.length} child sitemaps, ${totalUrls} total URLs`);
