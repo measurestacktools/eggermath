@@ -1,0 +1,1521 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>Character Forge — List-Based Character Generator</title>
+<meta
+  name="description"
+  content="A self-contained, list-based character generator. No iframe, no server, no AI — every word comes from lists you control."
+/>
+<!--
+  ══════════════════════════════════════════════════════════════════════════
+  CHARACTER FORGE — standalone, single-file, zero-dependency.
+  ══════════════════════════════════════════════════════════════════════════
+
+  WHAT THIS IS
+  A reimplementation of the part of Perchance that matters for a character
+  generator: named lists, inline alternation `{a|b|c}`, weighted options
+  `{common^4|rare}`, and nested references `[firstName]`. Everything runs in
+  the browser. There is no iframe, no network request, no model, no account.
+
+  HOW TO USE
+  1. Save this file, open it in a browser. It works from disk or any host.
+  2. Scroll to the block marked "PASTE YOUR PERCHANCE LISTS HERE".
+  3. Paste your lists (see the conversion notes there), save, reload.
+
+  Perchance syntax              →  This file
+  ---------------------------------------------------------------------
+  firstName = {Aria|Bram}       →  firstName: L('Aria|Bram')
+  backstory = {[firstName] …}   →  backstory: ['[firstName] …']
+  $output = …                   →  the TEMPLATE object near the bottom
+  ---------------------------------------------------------------------
+
+  Nothing here sends data anywhere. The optional "seed" field only seeds the
+  random number generator, so the same seed gives the same character.
+  ══════════════════════════════════════════════════════════════════════════
+-->
+<style>
+  /* ────────────────────────────────────────────────────────────────────
+     Design tokens — mirrors the EggerMath palette so the page can sit next
+     to the main site without looking imported.
+     ──────────────────────────────────────────────────────────────────── */
+  :root {
+    --bg-core: #090a0f;
+    --bg-surface: #11131b;
+    --bg-elevated: #181a24;
+    --border: rgba(255, 255, 255, 0.08);
+    --border-strong: rgba(255, 255, 255, 0.14);
+    --text: #f8fafc;
+    --text-dim: #94a3b8;
+    --text-faint: #64748b;
+    --amber: #f59e0b;
+    --amber-soft: rgba(245, 158, 11, 0.12);
+    --amber-line: rgba(245, 158, 11, 0.45);
+    --emerald: #10b981;
+    --rose: #f43f5e;
+    --rose-soft: rgba(244, 63, 94, 0.1);
+    --radius: 12px;
+    --radius-sm: 8px;
+    --shadow: 0 18px 48px -24px rgba(0, 0, 0, 0.9);
+    --font: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-display: 'Space Grotesk', var(--font);
+    --mono: 'JetBrains Mono', ui-monospace, 'Cascadia Mono', monospace;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(900px 420px at 50% -120px, rgba(245, 158, 11, 0.09), transparent 70%),
+      var(--bg-core);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .shell {
+    width: min(920px, 100% - 32px);
+    margin: 0 auto;
+    padding: 48px 0 72px;
+  }
+
+  /* ── Masthead ─────────────────────────────────────────────────────── */
+  .masthead {
+    margin-bottom: 26px;
+  }
+
+  .kicker {
+    margin: 0 0 8px;
+    color: var(--amber);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .masthead h1 {
+    margin: 0 0 10px;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 2.7rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .lede {
+    max-width: 62ch;
+    margin: 0;
+    color: var(--text-dim);
+    font-size: 0.95rem;
+  }
+
+  /* ── Panels ───────────────────────────────────────────────────────── */
+  .panel {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg-surface);
+    box-shadow: var(--shadow);
+  }
+
+  .controls {
+    padding: 18px;
+    margin-bottom: 14px;
+  }
+
+  .field-label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-dim);
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+
+  .field-label span {
+    color: var(--text-faint);
+    font-weight: 400;
+  }
+
+  .row {
+    display: flex;
+    gap: 10px;
+  }
+
+  .row > input {
+    flex: 1;
+    min-width: 0;
+  }
+
+  input[type='text'] {
+    min-height: 46px;
+    padding: 10px 14px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    background: var(--bg-core);
+    color: var(--text);
+    font: inherit;
+    font-size: 0.92rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  input[type='text']::placeholder {
+    color: var(--text-faint);
+  }
+
+  input[type='text']:hover {
+    border-color: rgba(255, 255, 255, 0.22);
+  }
+
+  input[type='text']:focus-visible {
+    outline: none;
+    border-color: var(--amber);
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+  }
+
+  .hint {
+    margin: 10px 0 0;
+    color: var(--text-faint);
+    font-size: 0.76rem;
+  }
+
+  /* ── Buttons ──────────────────────────────────────────────────────── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 46px;
+    padding: 10px 20px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    background: var(--bg-elevated);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+
+  .btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+    border-color: rgba(255, 255, 255, 0.28);
+    background: #1e2130;
+  }
+
+  .btn:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  .btn:focus-visible {
+    outline: 2px solid var(--amber);
+    outline-offset: 2px;
+  }
+
+  .btn--primary {
+    border-color: var(--amber);
+    background: var(--amber);
+    color: #17120a;
+    box-shadow: 0 10px 26px -14px rgba(245, 158, 11, 0.9);
+  }
+
+  .btn--primary:hover:not(:disabled) {
+    background: #ffad1f;
+    border-color: #ffad1f;
+  }
+
+  .btn:disabled {
+    cursor: progress;
+    opacity: 0.65;
+    transform: none;
+  }
+
+  .btn--ghost {
+    background: transparent;
+  }
+
+  /* ── Warning banner ───────────────────────────────────────────────── */
+  .warning {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 14px;
+    padding: 14px 16px;
+    border: 1px solid rgba(244, 63, 94, 0.4);
+    border-radius: var(--radius-sm);
+    background: var(--rose-soft);
+    color: #ffd9e0;
+    font-size: 0.86rem;
+    animation: drop-in 0.22s ease both;
+  }
+
+  .warning[hidden] {
+    display: none;
+  }
+
+  .warning strong {
+    display: block;
+    margin-bottom: 2px;
+    color: #fff;
+    font-size: 0.82rem;
+  }
+
+  .warning code {
+    padding: 1px 5px;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.35);
+    font-family: var(--mono);
+    font-size: 0.8rem;
+  }
+
+  /* ── Stage / result ───────────────────────────────────────────────── */
+  .stage {
+    position: relative;
+    min-height: 220px;
+  }
+
+  .empty,
+  .progress {
+    display: grid;
+    place-items: center;
+    gap: 12px;
+    min-height: 220px;
+    padding: 32px 20px;
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--radius);
+    color: var(--text-faint);
+    text-align: center;
+    font-size: 0.88rem;
+  }
+
+  .empty[hidden],
+  .progress[hidden],
+  .result[hidden] {
+    display: none;
+  }
+
+  .spinner {
+    width: 26px;
+    height: 26px;
+    border: 2px solid rgba(245, 158, 11, 0.2);
+    border-top-color: var(--amber);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  /* ── Character card ───────────────────────────────────────────────── */
+  .card {
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: linear-gradient(180deg, var(--bg-surface), #0f1118);
+    box-shadow: var(--shadow);
+    animation: rise-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .card-head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 22px;
+    border-bottom: 1px solid var(--border);
+    background:
+      radial-gradient(520px 160px at 0% 0%, rgba(245, 158, 11, 0.12), transparent 70%);
+  }
+
+  .card-name {
+    margin: 0 0 4px;
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3.4vw, 1.85rem);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  .card-meta {
+    margin: 0;
+    color: var(--text-dim);
+    font-size: 0.82rem;
+  }
+
+  .badge {
+    padding: 6px 12px;
+    border: 1px solid var(--amber-line);
+    border-radius: 999px;
+    background: var(--amber-soft);
+    color: var(--amber);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .card-body {
+    display: grid;
+    gap: 22px;
+    padding: 22px;
+  }
+
+  .block-title {
+    margin: 0 0 10px;
+    color: var(--text-faint);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  /* Traits */
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .chip {
+    padding: 5px 11px;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    background: var(--bg-elevated);
+    color: var(--text);
+    font-size: 0.78rem;
+    animation: rise-in 0.3s ease both;
+  }
+
+  /* Stats */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin: 0;
+  }
+
+  .stat {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg-core);
+  }
+
+  .stat-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 7px;
+  }
+
+  .stat-name {
+    color: var(--text-dim);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .stat-value {
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+
+  .stat-bar {
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.07);
+    overflow: hidden;
+  }
+
+  .stat-fill {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, rgba(245, 158, 11, 0.55), var(--amber));
+    transform-origin: left center;
+    animation: grow 0.5s ease both;
+  }
+
+  .stat--high .stat-fill {
+    background: linear-gradient(90deg, rgba(16, 185, 129, 0.55), var(--emerald));
+  }
+
+  /* Backstory */
+  .backstory {
+    margin: 0;
+    color: var(--text-dim);
+    font-size: 0.92rem;
+    line-height: 1.75;
+  }
+
+  .backstory::first-letter {
+    color: var(--text);
+    font-family: var(--font-display);
+    font-size: 1.1em;
+  }
+
+  .card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 16px 22px;
+    border-top: 1px solid var(--border);
+    background: rgba(9, 10, 15, 0.5);
+  }
+
+  /* Provenance */
+  .provenance {
+    margin-top: 16px;
+    padding: 16px 18px;
+    color: var(--text-faint);
+    font-size: 0.78rem;
+  }
+
+  .provenance[hidden] {
+    display: none;
+  }
+
+  .provenance summary {
+    color: var(--text-dim);
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .provenance p {
+    margin: 10px 0 0;
+  }
+
+  .provenance code {
+    display: block;
+    margin-top: 6px;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg-core);
+    color: var(--text-dim);
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    overflow-wrap: anywhere;
+  }
+
+  /* Docs */
+  .docs {
+    margin-top: 28px;
+    padding: 22px;
+    font-size: 0.86rem;
+    color: var(--text-dim);
+  }
+
+  .docs h2 {
+    margin: 0 0 10px;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    color: var(--text);
+  }
+
+  .docs p {
+    margin: 0 0 12px;
+  }
+
+  .docs pre {
+    margin: 0 0 14px;
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg-core);
+    color: #cbd5e1;
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    line-height: 1.7;
+    overflow-x: auto;
+  }
+
+  .docs pre .c {
+    color: var(--text-faint);
+  }
+
+  .docs pre .k {
+    color: var(--amber);
+  }
+
+  .docs pre .s {
+    color: #7dd3fc;
+  }
+
+  .docs ul {
+    margin: 0 0 12px;
+    padding-left: 20px;
+  }
+
+  .docs li {
+    margin-bottom: 6px;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* ── Motion ───────────────────────────────────────────────────────── */
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes rise-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes drop-in {
+    from {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes grow {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+
+  /* ── Small screens ────────────────────────────────────────────────── */
+  @media (max-width: 640px) {
+    .shell {
+      padding-top: 28px;
+    }
+
+    .row {
+      flex-direction: column;
+    }
+
+    .row .btn {
+      width: 100%;
+    }
+
+    .card-head,
+    .card-body,
+    .card-actions {
+      padding: 16px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="shell">
+    <header class="masthead">
+      <p class="kicker">List-based · no iframe · no AI</p>
+      <h1>Character Forge</h1>
+      <p class="lede">
+        A character generator that assembles profiles from lists you write. Every name, trait and
+        backstory line already exists in this file — nothing is generated by a model, nothing leaves
+        the browser, and the same seed always returns the same character.
+      </p>
+    </header>
+
+    <form class="panel controls" id="form" novalidate>
+      <label class="field-label" for="seed">
+        Optional theme or seed <span>— leave blank for a random character</span>
+      </label>
+      <div class="row">
+        <input
+          id="seed"
+          type="text"
+          maxlength="120"
+          autocomplete="off"
+          spellcheck="false"
+          placeholder="e.g. lighthouse keeper, desert cartographer"
+        />
+        <button class="btn btn--primary" id="generate" type="submit">Generate character</button>
+      </div>
+      <p class="hint">
+        A seed only steers the random rolls, so the same words always produce the same character.
+      </p>
+    </form>
+
+    <div class="warning" id="warning" role="alert" hidden>
+      <span aria-hidden="true">⚠</span>
+      <span>
+        <strong>That seed can’t be used.</strong>
+        <span id="warning-text"></span>
+      </span>
+    </div>
+
+    <section class="stage" id="stage" aria-live="polite" aria-busy="false">
+      <div class="empty" id="empty">
+        Press <strong>Generate character</strong> to roll a profile.
+      </div>
+
+      <div class="progress" id="progress" hidden>
+        <span class="spinner" aria-hidden="true"></span>
+        <span id="progress-text">Rolling lists…</span>
+      </div>
+
+      <article class="result" id="result" hidden aria-labelledby="r-name">
+        <div class="card">
+          <header class="card-head">
+            <div>
+              <h2 class="card-name" id="r-name" tabindex="-1">—</h2>
+              <p class="card-meta" id="r-meta">—</p>
+            </div>
+            <span class="badge" id="r-class">—</span>
+          </header>
+
+          <div class="card-body">
+            <section>
+              <h3 class="block-title">Traits</h3>
+              <ul class="chips" id="r-traits"></ul>
+            </section>
+
+            <section>
+              <h3 class="block-title">Attributes</h3>
+              <dl class="stats" id="r-stats"></dl>
+            </section>
+
+            <section>
+              <h3 class="block-title">Backstory</h3>
+              <p class="backstory" id="r-backstory"></p>
+            </section>
+          </div>
+
+          <footer class="card-actions">
+            <button class="btn btn--ghost" id="reroll" type="button">Reroll</button>
+            <button class="btn" id="copy" type="button">Copy as text</button>
+            <span class="hint" id="copy-status" role="status" aria-live="polite"></span>
+          </footer>
+        </div>
+      </article>
+    </section>
+
+    <details class="panel provenance" id="provenance" hidden>
+      <summary>What was used for this character</summary>
+      <p id="prov-lists">—</p>
+      <p id="prov-prompt">—</p>
+      <code id="prov-final">—</code>
+    </details>
+
+    <section class="panel docs">
+      <h2>Pasting your Perchance lists</h2>
+      <p>
+        Perchance generators are lists plus a template. Two constructs carry almost all of the
+        work, and both are supported here:
+      </p>
+      <pre><span class="c">// Perchance</span>
+firstName = {Aria|Bram|Cleo|Dara}
+className = {Scholar|Ranger|Healer}
+backstory = {[firstName] grew up in [hometown], where the [season] fair never ended.|…}
+
+<span class="c">// This file (same data, JavaScript arrays)</span>
+<span class="k">const</span> LISTS = {
+  firstName: L(<span class="s">'Aria|Bram|Cleo|Dara'</span>),
+  className: L(<span class="s">'Scholar|Ranger|Healer'</span>),
+  backstory: [
+    <span class="s">'[firstName] grew up in [hometown], where the [season] fair never ended.'</span>,
+  ],
+};</pre>
+      <ul>
+        <li><code>{a|b|c}</code> picks one option at random. Put it in a string and it expands.</li>
+        <li><code>[listName]</code> pulls a random entry from another list, then expands that too.</li>
+        <li><code>{common^4|rare}</code> weights an option; <code>^4</code> makes it four times as likely.</li>
+        <li><code>L('…')</code> is a helper that turns a pasted <code>{a|b}</code> body into an array.</li>
+      </ul>
+      <p>
+        Keep the braces out of <code>L()</code> — pass the inside. Unknown references are skipped and
+        logged to the console, so a typo never produces a half-empty card silently.
+      </p>
+    </section>
+  </div>
+
+  <noscript>
+    <p style="padding: 24px; text-align: center">
+      This generator runs entirely in your browser, so JavaScript needs to be enabled.
+    </p>
+  </noscript>
+
+  <script>
+    'use strict';
+
+    /* ══════════════════════════════════════════════════════════════════
+       1. PASTE YOUR PERCHANCE LISTS HERE
+       ══════════════════════════════════════════════════════════════════
+
+       Replace the sample content below with your own. Two shapes work:
+
+         firstName: L('Aria|Bram|Cleo')      → an inline {a|b|c} list
+         backstory: ['[firstName] …', '…']   → an array of templates
+
+       Anything inside [square brackets] is treated as a reference to
+       another key in this same object. Keep the keys in this object;
+       rename them freely, then update TEMPLATE below.
+
+       A few notes so the output stays kind:
+       • Write traits as neutral strengths ("patient", "quick-witted"),
+         not insults or physical judgements.
+       • Backstories should read like a paragraph of fiction, not a
+         diagnosis. No real people, no real places required.
+       • The blocklist in section 2 is a safety net for user input, not a
+         substitute for reading what you paste in here.
+    */
+
+    /** Turn a Perchance-style `a|b|c` body into a clean array. */
+    const L = (raw) =>
+      String(raw)
+        .replace(/^[{\[]|[}\]]$/g, '')
+        .split('|')
+        .map((part) => part.trim())
+        .filter(Boolean);
+
+    const LISTS = {
+      /* ── Identity ─────────────────────────────────────────────────── */
+      firstName: L(
+        'Aria|Bram|Cleo|Dara|Emil|Farah|Gwen|Hugo|Imani|Jonas|Kira|Lior|Mira|Nadia|Omar|Pia|Quinn|Rafe|Sela|Tomas|Uma|Viktor|Wren|Yara|Zane'
+      ),
+      surname: L(
+        'Ashdown|Bellweather|Cortez|Dunmore|Ellery|Fairholt|Garrow|Hollis|Ingram|Jarrah|Kestrel|Lowry|Marlowe|Nakamura|Okafor|Pemberton|Quill|Rasmussen|Sato|Thorne|Underhill|Vance|Whitlock|Yildiz|Zimmer'
+      ),
+      species: L('human|human|human|halfling|dwarf|elf|gnome|orc|tiefling|dragonborn'),
+      age: L('nineteen|twenty-two|twenty-six|thirty|forty-one|fifty-three|sixty-seven'),
+
+      /* ── Role ─────────────────────────────────────────────────────── */
+      className: L(
+        'Archivist|Artificer|Botanist|Cartographer|Healer|Historian|Navigator|Ranger|Scribe|Tinker'
+      ),
+      specialty: L(
+        'old maps|broken clocks|medicinal herbs|tide tables|faded manuscripts|star charts|lock mechanisms|roof repairs|river currents|beekeeping'
+      ),
+      hometown: L(
+        'a harbour town built on stilts|a mountain village above the cloud line|a market city with too many bridges|a farming valley that floods every spring|a coastal lighthouse settlement|a caravan stop on the salt road|a forest town that smells of pine tar|a river port with one working crane'
+      ),
+
+      /* ── Personality ──────────────────────────────────────────────── */
+      trait: L(
+        'patient|quick-witted|quietly stubborn|endlessly curious|generous with time|slow to judge|careful with words|fond of terrible puns|unshakeably punctual|easily distracted by details|calm under pressure|loyal to a fault|honest to the point of awkwardness|practical|sentimental about objects|good at listening|bad at goodbyes|always slightly early'
+      ),
+      habit: L(
+        'keeps a notebook of overheard sentences|counts stairs without meaning to|repairs things before being asked|hums while thinking|names every tool|walks the long way home|carries spare string everywhere|reads the last page first'
+      ),
+      fear: L(
+        'being late|deep water|loud rooms|forgetting a promise|being the reason a plan fails|empty libraries|open heights|saying the wrong thing at the wrong time'
+      ),
+
+      /* ── Backstory templates ───────────────────────────────────────
+         These are full sentences with references. Keep them wholesome:
+         no violence, no romance, no peril beyond mild inconvenience.
+         ─────────────────────────────────────────────────────────────── */
+      backstory: [
+        '[firstName] grew up in [hometown], apprenticed early to a [className] who insisted on doing things properly. The habit stuck. Most mornings begin with [habit], and most evenings end with a list for tomorrow.',
+        'Nobody in [hometown] expected [firstName] to become a [className]. It happened because of a broken [object] and a stubborn refusal to throw it away. These days [firstName] is the person neighbours call when something needs [specialty] and a steady pair of hands.',
+        '[firstName] spent [age] years learning [specialty] in [hometown] before deciding that the maps were wrong about at least three things. Correcting them has taken longer than expected, partly because of [habit] and partly because the tea in the next town is very good.',
+        'A [className] by trade and a collector of small useful facts by temperament, [firstName] keeps a workshop that smells of [smell]. The [object] on the shelf is not decorative; it is the reason [firstName] is never late, and the reason nobody borrows anything without asking twice.',
+        '[firstName] arrived in [hometown] with one bag, a set of [object]s and a plan that lasted approximately four days. The replacement plan involved [specialty], a great deal of walking, and learning to appreciate [smell] first thing in the morning.',
+      ],
+
+      /* ── Small flavour lists used by the templates ─────────────────── */
+      object: L('brass compass|cracked lantern|wooden ruler|tide almanac|hand plane|seed tin|inkwell|pocket watch'),
+      smell: L('sawdust and lamp oil|cold stone and paper|rosemary and wet wool|pine resin|chalk dust|bread and iron'),
+    };
+
+    /* ══════════════════════════════════════════════════════════════════
+       2. ETHICAL SAFEGUARDS
+       ══════════════════════════════════════════════════════════════════
+
+       Two layers, because one is never enough:
+
+       a) INPUT FILTER — before anything runs, the optional seed text is
+          checked against BLOCKLIST. A hit stops generation and shows a
+          banner. Matching is whole-word and case-insensitive.
+
+       b) OUTPUT SUFFIX — every prompt handed to the generation logic is
+          followed by ETHICS_SUFFIX, the same guardrail phrase image
+          models use. Here it is also displayed in the provenance panel,
+          so you can see exactly what was applied.
+
+       c) OUTPUT CHECK — because your pasted lists could accidentally
+          contain a blocked term, the finished character is scanned too.
+          A hit discards it and rolls again (up to five times).
+
+       Edit BLOCKLIST freely. Keep entries lowercase, one concept each.
+       Add phrases as separate entries ("drink driving"), not sentences.
+    */
+
+    const BLOCKLIST = [
+      // Sexual / NSFW
+      'sex', 'sexy', 'sexual', 'porn', 'porno', 'nude', 'naked', 'nsfw', 'hentai',
+      'erotic', 'fetish', 'lingerie', 'strip', 'stripper', 'brothel', 'prostitute',
+      'rape', 'molest', 'incest', 'pedo', 'loli', 'onlyfans', 'camgirl',
+      // Sexual slang
+      'horny', 'thirst trap', 'sexting', 'dick pic', 'nudes', 'orgasm', 'penis',
+      'vagina', 'boobs', 'tits', 'anal', 'blowjob', 'handjob', 'cum',
+      // Gore / graphic violence
+      'gore', 'gory', 'dismember', 'decapitate', 'behead', 'mutilate', 'torture',
+      'snuff', 'massacre', 'gutting', 'flayed', 'dismemberment',
+      // Self-harm / suicide
+      'suicide', 'self harm', 'self-harm', 'cutting', 'kill myself', 'end my life',
+      'anorexia', 'bulimia', 'pro ana', 'pro mia',
+      // Drugs / alcohol / gambling
+      'cocaine', 'heroin', 'meth', 'methamphetamine', 'fentanyl', 'ecstasy',
+      'mdma', 'weed', 'marijuana', 'cannabis', 'vape', 'vaping', 'drunk',
+      'vodka', 'whiskey', 'beer', 'casino', 'betting', 'poker', 'slot machine',
+      // Hate / harassment
+      'nigger', 'nigga', 'faggot', 'retard', 'tranny', 'chink', 'kike', 'spic',
+      'wetback', 'cunt', 'whore', 'slut', 'bimbo',
+      // Occult practice (kept out by policy; harmless words like "magic" are allowed)
+      'summon demon', 'blood sacrifice', 'satanic ritual', 'ouija', 'seance',
+      'necromancy', 'hex someone', 'curse someone',
+      // Weapons used as instructions
+      'how to make a bomb', 'pipe bomb', 'molotov', 'ghost gun', '3d printed gun',
+    ];
+
+    const ETHICS_SUFFIX =
+      ', family-friendly, appropriate for all ages, rated G, wholesome --no nsfw, no gore';
+
+    /** Lowercase, strip punctuation, collapse whitespace. */
+    function normalise(text) {
+      return String(text)
+        .toLowerCase()
+        .normalize('NFKD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, ' ')
+        .trim();
+    }
+
+    /**
+     * Returns the first blocked term found, or null.
+     * Whole-word matching, so "class" does not match "ass" and
+     * "Scunthorpe" problems are avoided.
+     */
+    function findBlockedTerm(text) {
+      const haystack = ` ${normalise(text)} `;
+      for (const term of BLOCKLIST) {
+        const needle = ` ${normalise(term)} `;
+        if (haystack.includes(needle)) return term;
+      }
+      return null;
+    }
+
+    /** The exact string handed to the generation logic. */
+    function applyEthics(prompt) {
+      const clean = String(prompt || '').trim();
+      return `${clean}${ETHICS_SUFFIX}`;
+    }
+
+    /* ══════════════════════════════════════════════════════════════════
+       3. PERCHANCE-STYLE LIST ENGINE
+       ══════════════════════════════════════════════════════════════════
+
+       Supports:
+         {a|b|c}          pick one
+         {common^4|rare}  weighted pick
+         [listName]       pull from LISTS, then expand the result
+         nesting          [list] may itself contain {…} and [ … ]
+
+       Guards:
+         • depth limit, so a self-referencing list cannot hang the tab
+         • cycle detection per call stack, with a console warning
+         • unknown reference → console warning + empty string
+    */
+
+    const MAX_DEPTH = 12;
+
+    /** Deterministic RNG (mulberry32). */
+    function makeRng(seed) {
+      let a = seed >>> 0;
+      return function rng() {
+        a = (a + 0x6d2b79f5) >>> 0;
+        let t = a;
+        t = Math.imul(t ^ (t >>> 15), t | 1);
+        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+    }
+
+    /** Small, stable string hash (FNV-1a). */
+    function hashString(text) {
+      let h = 0x811c9dc5;
+      for (let i = 0; i < text.length; i++) {
+        h ^= text.charCodeAt(i);
+        h = Math.imul(h, 0x01000193);
+      }
+      return h >>> 0;
+    }
+
+    const warned = new Set();
+    function warnOnce(message) {
+      if (warned.has(message)) return;
+      warned.add(message);
+      console.warn(`[Character Forge] ${message}`);
+    }
+
+    /**
+     * Expand one template string.
+     * @param {string} template
+     * @param {object} lists
+     * @param {() => number} rng
+     * @param {number} depth
+     * @param {Set<string>} stack names currently being expanded
+     */
+    function expand(template, lists, rng, depth = 0, stack = new Set()) {
+      if (depth > MAX_DEPTH) {
+        warnOnce(`Maximum nesting depth (${MAX_DEPTH}) reached. Check for a list that references itself.`);
+        return '';
+      }
+
+      let out = '';
+      let i = 0;
+
+      while (i < template.length) {
+        const ch = template[i];
+
+        // ── [reference] ─────────────────────────────────────────────
+        if (ch === '[') {
+          const end = findClosing(template, i, '[', ']');
+          if (end === -1) {
+            out += ch;
+            i++;
+            continue;
+          }
+          const name = template.slice(i + 1, end).trim();
+          out += resolveReference(name, lists, rng, depth, stack);
+          i = end + 1;
+          continue;
+        }
+
+        // ── {alternation} ───────────────────────────────────────────
+        if (ch === '{') {
+          const end = findClosing(template, i, '{', '}');
+          if (end === -1) {
+            out += ch;
+            i++;
+            continue;
+          }
+          const body = template.slice(i + 1, end);
+          out += pickAlternation(body, lists, rng, depth, stack);
+          i = end + 1;
+          continue;
+        }
+
+        out += ch;
+        i++;
+      }
+
+      return out;
+    }
+
+    /** Find the matching close bracket, counting nesting of the same pair. */
+    function findClosing(text, start, open, close) {
+      let depth = 0;
+      for (let i = start; i < text.length; i++) {
+        if (text[i] === open) depth++;
+        else if (text[i] === close) {
+          depth--;
+          if (depth === 0) return i;
+        }
+      }
+      return -1;
+    }
+
+    function resolveReference(name, lists, rng, depth, stack) {
+      if (!Object.prototype.hasOwnProperty.call(lists, name)) {
+        warnOnce(`Unknown list reference: [${name}]`);
+        return '';
+      }
+      if (stack.has(name)) {
+        warnOnce(`Circular reference detected at [${name}].`);
+        return '';
+      }
+
+      const value = lists[name];
+      const nextStack = new Set(stack).add(name);
+
+      if (Array.isArray(value)) {
+        if (!value.length) return '';
+        const pick = value[Math.floor(rng() * value.length)];
+        return expand(String(pick), lists, rng, depth + 1, nextStack);
+      }
+
+      if (typeof value === 'string') {
+        return expand(value, lists, rng, depth + 1, nextStack);
+      }
+
+      warnOnce(`List [${name}] must be an array or a string.`);
+      return '';
+    }
+
+    /** Split `a^3|b` style options at top-level pipes, then weight them. */
+    function pickAlternation(body, lists, rng, depth, stack) {
+      const options = splitTopLevel(body, '|').map(parseWeighted);
+      if (!options.length) return '';
+
+      const total = options.reduce((sum, option) => sum + option.weight, 0);
+      let roll = rng() * total;
+
+      for (const option of options) {
+        roll -= option.weight;
+        if (roll <= 0) {
+          return expand(option.text, lists, rng, depth + 1, stack);
+        }
+      }
+
+      return expand(options[options.length - 1].text, lists, rng, depth + 1, stack);
+    }
+
+    /** `common^4` → { text: 'common', weight: 4 } */
+    function parseWeighted(part) {
+      const match = /^(.*)\^(\d+(?:\.\d+)?)$/.exec(part);
+      if (!match) return { text: part, weight: 1 };
+      return { text: match[1], weight: Math.max(0.0001, Number(match[2])) };
+    }
+
+    /** Split on a delimiter, ignoring delimiters inside [], {} or (). */
+    function splitTopLevel(text, delimiter) {
+      const parts = [];
+      let depth = 0;
+      let current = '';
+
+      for (const ch of text) {
+        if (ch === '[' || ch === '{' || ch === '(') depth++;
+        else if (ch === ']' || ch === '}' || ch === ')') depth--;
+
+        if (ch === delimiter && depth === 0) {
+          parts.push(current);
+          current = '';
+        } else {
+          current += ch;
+        }
+      }
+      parts.push(current);
+      return parts;
+    }
+
+    /* ══════════════════════════════════════════════════════════════════
+       4. CHARACTER ASSEMBLY
+       ══════════════════════════════════════════════════════════════════ */
+
+    const STAT_NAMES = ['Might', 'Wits', 'Grace', 'Heart', 'Craft', 'Luck'];
+
+    /** Each class favours one stat; the rest are rolled. */
+    const CLASS_FOCUS = {
+      Archivist: 'Wits',
+      Artificer: 'Craft',
+      Botanist: 'Heart',
+      Cartographer: 'Wits',
+      Healer: 'Heart',
+      Historian: 'Wits',
+      Navigator: 'Grace',
+      Ranger: 'Grace',
+      Scribe: 'Wits',
+      Tinker: 'Craft',
+    };
+
+    const TEMPLATE = {
+      name: '{[firstName] [surname]}',
+      meta: 'Level {1^2|1^2|2|2|3|3|4|5} · [species] · [age]',
+      backstory: '[backstory]',
+    };
+
+    function buildProfile(seedText, rng) {
+      const className = expand('[className]', LISTS, rng);
+      const name = cleanSpaces(expand(TEMPLATE.name, LISTS, rng));
+      const meta = cleanSpaces(expand(TEMPLATE.meta, LISTS, rng));
+      const backstory = cleanSpaces(expand(TEMPLATE.backstory, LISTS, rng));
+
+      const traits = uniquePicks('trait', 3, rng);
+      const focus = CLASS_FOCUS[className] || STAT_NAMES[Math.floor(rng() * STAT_NAMES.length)];
+
+      const stats = {};
+      for (const stat of STAT_NAMES) {
+        const base = 7 + Math.floor(rng() * 9); // 7–15
+        stats[stat] = stat === focus ? Math.min(18, base + 3) : base;
+      }
+
+      return {
+        name,
+        className,
+        meta,
+        traits,
+        stats,
+        focus,
+        backstory,
+        seedText,
+        listCount: Object.keys(LISTS).length,
+      };
+    }
+
+    /** Pick n distinct entries from a list, expanded. */
+    function uniquePicks(listName, n, rng) {
+      const pool = Array.isArray(LISTS[listName]) ? [...LISTS[listName]] : [];
+      const out = [];
+
+      for (let i = 0; i < n && pool.length; i++) {
+        const index = Math.floor(rng() * pool.length);
+        const [entry] = pool.splice(index, 1);
+        out.push(cleanSpaces(expand(String(entry), LISTS, rng)));
+      }
+      return out;
+    }
+
+    function cleanSpaces(text) {
+      return String(text).replace(/\s+/g, ' ').trim();
+    }
+
+    /** Every visible string, for the output-side safety scan. */
+    function visibleText(profile) {
+      return [profile.name, profile.className, profile.meta, profile.backstory, ...profile.traits].join(' ');
+    }
+
+    /**
+     * Generate with the input and output checks applied.
+     * Throws { code: 'blocked-input' | 'blocked-output' } on failure.
+     */
+    function generate(seedText, nonce = 0) {
+      const blockedInput = findBlockedTerm(seedText);
+      if (blockedInput) {
+        const error = new Error('blocked seed');
+        error.code = 'blocked-input';
+        error.term = blockedInput;
+        throw error;
+      }
+
+      const finalPrompt = applyEthics(seedText);
+      const baseSeed = seedText.trim()
+        ? hashString(`${finalPrompt}#${nonce}`)
+        : (Date.now() ^ Math.floor(Math.random() * 0xffffffff)) >>> 0;
+
+      for (let attempt = 0; attempt < 6; attempt++) {
+        const rng = makeRng((baseSeed + attempt * 0x9e3779b9) >>> 0);
+        const profile = buildProfile(seedText, rng);
+        const blockedOutput = findBlockedTerm(visibleText(profile));
+
+        if (!blockedOutput) {
+          profile.attempts = attempt + 1;
+          profile.finalPrompt = finalPrompt;
+          profile.nonce = nonce;
+          return profile;
+        }
+      }
+
+      // Curated lists should never reach this. If they do, the safest
+      // response is to say so rather than render something questionable.
+      const error = new Error('blocked output');
+      error.code = 'blocked-output';
+      throw error;
+    }
+
+    /* ══════════════════════════════════════════════════════════════════
+       5. RENDERING
+       ══════════════════════════════════════════════════════════════════
+
+       All list text is written with textContent, never innerHTML, so a
+       pasted list entry containing `<` is displayed rather than parsed.
+    */
+
+    const els = {
+      form: document.getElementById('form'),
+      seed: document.getElementById('seed'),
+      generate: document.getElementById('generate'),
+      warning: document.getElementById('warning'),
+      warningText: document.getElementById('warning-text'),
+      stage: document.getElementById('stage'),
+      empty: document.getElementById('empty'),
+      progress: document.getElementById('progress'),
+      progressText: document.getElementById('progress-text'),
+      result: document.getElementById('result'),
+      name: document.getElementById('r-name'),
+      meta: document.getElementById('r-meta'),
+      klass: document.getElementById('r-class'),
+      traits: document.getElementById('r-traits'),
+      stats: document.getElementById('r-stats'),
+      backstory: document.getElementById('r-backstory'),
+      reroll: document.getElementById('reroll'),
+      copy: document.getElementById('copy'),
+      copyStatus: document.getElementById('copy-status'),
+      provenance: document.getElementById('provenance'),
+      provLists: document.getElementById('prov-lists'),
+      provPrompt: document.getElementById('prov-prompt'),
+      provFinal: document.getElementById('prov-final'),
+    };
+
+    let current = null;
+    let busy = false;
+    let nonce = 0;
+
+    function render(profile, { focus = true } = {}) {
+      current = profile;
+
+      els.name.textContent = profile.name;
+      els.meta.textContent = profile.meta;
+      els.klass.textContent = profile.className;
+
+      els.traits.textContent = '';
+      profile.traits.forEach((trait, index) => {
+        const li = document.createElement('li');
+        li.className = 'chip';
+        li.textContent = trait;
+        li.style.animationDelay = `${index * 45}ms`;
+        els.traits.appendChild(li);
+      });
+
+      els.stats.textContent = '';
+      for (const [stat, value] of Object.entries(profile.stats)) {
+        const wrapper = document.createElement('div');
+        wrapper.className = `stat${stat === profile.focus ? ' stat--high' : ''}`;
+
+        const top = document.createElement('div');
+        top.className = 'stat-top';
+
+        const name = document.createElement('dt');
+        name.className = 'stat-name';
+        name.textContent = stat;
+
+        const number = document.createElement('dd');
+        number.className = 'stat-value';
+        number.textContent = String(value);
+
+        top.append(name, number);
+
+        const bar = document.createElement('div');
+        bar.className = 'stat-bar';
+        const fill = document.createElement('span');
+        fill.className = 'stat-fill';
+        fill.style.width = `${Math.round((value / 18) * 100)}%`;
+        bar.appendChild(fill);
+
+        wrapper.append(top, bar);
+        els.stats.appendChild(wrapper);
+      }
+
+      els.backstory.textContent = profile.backstory;
+
+      els.provLists.textContent = `${profile.listCount} lists loaded · ${profile.traits.length} traits · ${Object.keys(profile.stats).length} attributes · ${profile.attempts} roll${profile.attempts === 1 ? '' : 's'}.`;
+      els.provPrompt.textContent = profile.seedText.trim()
+        ? `Seed provided: “${profile.seedText.trim()}”. This seeded the random rolls; it was not sent anywhere.`
+        : 'No seed provided, so the rolls were seeded from the clock.';
+      els.provFinal.textContent = profile.finalPrompt;
+      els.provenance.hidden = false;
+
+      els.result.hidden = false;
+      els.empty.hidden = true;
+
+      if (focus) {
+        // Move focus to the heading so screen readers land on the result.
+        els.name.focus({ preventScroll: false });
+        els.name.scrollIntoView({
+          block: 'nearest',
+          behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+        });
+      }
+    }
+
+    function prefersReducedMotion() {
+      return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    }
+
+    function showWarning(message) {
+      els.warningText.textContent = message;
+      els.warning.hidden = false;
+      els.seed.focus();
+    }
+
+    function hideWarning() {
+      els.warning.hidden = true;
+      els.warningText.textContent = '';
+    }
+
+    function setBusy(value) {
+      busy = value;
+      els.stage.setAttribute('aria-busy', value ? 'true' : 'false');
+      els.generate.disabled = value;
+      els.reroll.disabled = value;
+      els.progress.hidden = !value;
+      if (value) {
+        els.empty.hidden = true;
+        els.progressText.textContent = 'Rolling lists…';
+      }
+    }
+
+    /** Minimum visible loading time so the spinner never flickers. */
+    function withLoading(work) {
+      const started = performance.now();
+      return new Promise((resolve, reject) => {
+        setTimeout(
+          () => {
+            try {
+              const result = work();
+              const elapsed = performance.now() - started;
+              setTimeout(() => resolve(result), Math.max(0, 420 - elapsed));
+            } catch (error) {
+              reject(error);
+            }
+          },
+          prefersReducedMotion() ? 0 : 120
+        );
+      });
+    }
+
+    async function runGeneration(seedText, { focus = true, nextNonce = 0 } = {}) {
+      if (busy) return;
+      hideWarning();
+      setBusy(true);
+
+      try {
+        const profile = await withLoading(() => generate(seedText, nextNonce));
+        nonce = nextNonce;
+        render(profile, { focus });
+      } catch (error) {
+        if (error.code === 'blocked-input') {
+          showWarning(
+            `The word “${error.term}” is on the blocklist, so nothing was generated. Try describing a place, a job or a mood instead.`
+          );
+        } else if (error.code === 'blocked-output') {
+          showWarning(
+            'A list entry tripped the safety check, so no character was shown. Check the lists for a blocked term.'
+          );
+        } else {
+          console.error(error);
+          showWarning('Something went wrong while building the character. Please try again.');
+        }
+      } finally {
+        setBusy(false);
+      }
+    }
+
+    function toPlainText(profile) {
+      const statLines = Object.entries(profile.stats)
+        .map(([stat, value]) => `${stat}: ${value}`)
+        .join('\n');
+
+      return [
+        profile.name,
+        `${profile.className} · ${profile.meta}`,
+        '',
+        'Traits',
+        profile.traits.map((trait) => `• ${trait}`).join('\n'),
+        '',
+        'Attributes',
+        statLines,
+        '',
+        'Backstory',
+        profile.backstory,
+      ].join('\n');
+    }
+
+    async function copyProfile() {
+      if (!current) return;
+      const text = toPlainText(current);
+
+      try {
+        await navigator.clipboard.writeText(text);
+        els.copyStatus.textContent = 'Copied.';
+      } catch {
+        // Clipboard API needs a secure context; fall back to selection.
+        const area = document.createElement('textarea');
+        area.value = text;
+        area.setAttribute('readonly', '');
+        area.style.position = 'fixed';
+        area.style.opacity = '0';
+        document.body.appendChild(area);
+        area.select();
+        const ok = document.execCommand('copy');
+        area.remove();
+        els.copyStatus.textContent = ok ? 'Copied.' : 'Copy failed — select the text manually.';
+      }
+
+      setTimeout(() => {
+        els.copyStatus.textContent = '';
+      }, 2500);
+    }
+
+    /* ══════════════════════════════════════════════════════════════════
+       6. WIRING
+       ══════════════════════════════════════════════════════════════════ */
+
+    els.form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      runGeneration(els.seed.value, { nextNonce: 0 });
+    });
+
+    // Live feedback: clear the banner as soon as the seed is edited.
+    els.seed.addEventListener('input', () => {
+      if (!els.warning.hidden) hideWarning();
+    });
+
+    els.reroll.addEventListener('click', () => {
+      // Reroll keeps the seed but advances the nonce, so the theme stays
+      // and the character changes. Pressing Generate again resets it,
+      // which is what makes a seed reproducible.
+      runGeneration(els.seed.value, { nextNonce: nonce + 1 });
+    });
+
+    els.copy.addEventListener('click', copyProfile);
+
+    // Ctrl/Cmd+Enter submits from anywhere in the page.
+    document.addEventListener('keydown', (event) => {
+      if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') {
+        event.preventDefault();
+        runGeneration(els.seed.value, { nextNonce: 0 });
+      }
+    });
+
+    /* Optional: warn in the console if a template references a missing
+       list, so a typo is caught before a reader finds it. */
+    (function validateLists() {
+      const probe = ['[backstory]', TEMPLATE.name, TEMPLATE.meta].join(' ');
+      expand(probe, LISTS, () => 0.5);
+    })();
+
+    // First render, so the page is never an empty promise. No focus jump.
+    runGeneration('', { focus: false });
+  </script>
+</body>
+</html>

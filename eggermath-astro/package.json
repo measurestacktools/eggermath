@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build && node generate-sitemap.mjs && node scripts/submit-indexnow.mjs",
-    "preview": "astro preview"
+    "build:local": "astro build && node generate-sitemap.mjs",
+    "preview": "astro preview",
+    "test": "node --test \"tests/**/*.test.mjs\"",
+    "test:e2e": "playwright test --config ../playwright.config.js"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
