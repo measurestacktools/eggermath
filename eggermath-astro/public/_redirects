@@ -1,3 +1,7 @@
+# Retired language prefixes (bn/da) -> same page in English (fixes 659 legacy 404s)
+/bn/* /:splat 301
+/da/* /:splat 301
+
 # Social/bio short link -> live AI chat generator (not for indexing; 302 keeps it out of the index)
 /chat https://perchance.org/unlimited-ai-character-chat 302
 
