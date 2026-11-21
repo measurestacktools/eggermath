@@ -202,6 +202,8 @@ const contentPages = [
   { path: '/gba-emulator-pc', priority: '0.8', changefreq: 'monthly' },
   { path: '/gbc-games', priority: '0.8', changefreq: 'monthly' },
   { path: '/game-boy-games', priority: '0.8', changefreq: 'monthly' },
+  { path: '/sudoku', priority: '0.8', changefreq: 'monthly' },
+  { path: '/character-play', priority: '0.7', changefreq: 'monthly' },
   { path: '/ai-girlfriend-chat', priority: '0.9', changefreq: 'weekly' },
   { path: '/c-ai-alternative', priority: '0.8', changefreq: 'monthly' },
   { path: '/ai-chat-with-memory', priority: '0.8', changefreq: 'monthly' },
