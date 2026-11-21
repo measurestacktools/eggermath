@@ -205,6 +205,7 @@ const contentPages = [
   { path: '/sudoku', priority: '0.8', changefreq: 'monthly' },
   { path: '/character-play', priority: '0.7', changefreq: 'monthly' },
   { path: '/ai-girlfriend-chat', priority: '0.9', changefreq: 'weekly' },
+  { path: '/free-ai-tools', priority: '0.9', changefreq: 'weekly' },
   { path: '/c-ai-alternative', priority: '0.8', changefreq: 'monthly' },
   { path: '/ai-chat-with-memory', priority: '0.8', changefreq: 'monthly' },
   { path: '/ai-character-chat-no-sign-up', priority: '0.8', changefreq: 'monthly' },

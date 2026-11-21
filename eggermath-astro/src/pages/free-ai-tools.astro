@@ -1,0 +1,279 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/games.js';
+
+const CHAT_URL = 'https://perchance.org/unlimited-ai-character-chat';
+const charUrl = (name) => `${CHAT_URL}?char=${name}`;
+
+const aiPages = [
+  {
+    href: '/ai-girlfriend-chat',
+    title: 'AI Girlfriend Chat',
+    desc: 'Talk to an AI girlfriend or any character you invent. Unlimited messages and a memory that lasts.',
+  },
+  {
+    href: '/ai-chat-with-memory',
+    title: 'AI Chat With Memory',
+    desc: 'How characters remember your name, your story and what already happened, without an account.',
+  },
+  {
+    href: '/c-ai-alternative',
+    title: 'Free c.ai Alternative',
+    desc: 'A side-by-side look at Character.AI limits, queues and memory, and what a free alternative does differently.',
+  },
+  {
+    href: '/ai-character-chat-no-sign-up',
+    title: 'AI Character Chat With No Sign-Up',
+    desc: 'No email, no password, no verification. Open the page and send a message.',
+  },
+];
+
+const characters = [
+  { slug: 'ai-adventure', title: 'AI Adventure', desc: 'A branching adventure that remembers the choices you already made.' },
+  { slug: 'story-writer', title: 'AI Story Writer', desc: 'A writing partner for long-form scenes, chapters and dialogue.' },
+  { slug: 'coding-assistant', title: 'Coding Assistant', desc: 'Ask programming questions and work through a bug step by step.' },
+  { slug: 'world-war-simulator', title: 'World War Simulator', desc: 'Run a fictional war room and negotiate with rival powers.' },
+  { slug: 'psychologist', title: 'AI Psychologist', desc: 'A calm listener for talking through a difficult day.' },
+  { slug: 'therapist', title: 'AI Therapist', desc: 'Reflective conversation, without judgement and without a waitlist.' },
+];
+
+const tools = [
+  { href: '/', title: 'GBA Emulator', desc: 'Play 52 classic handheld games in the browser. No download, no install.' },
+  { href: '/sudoku', title: 'Sudoku', desc: 'A free sudoku board with difficulty levels, playable on phone and desktop.' },
+  { href: '/best-gba-games', title: 'Best GBA Games', desc: 'A ranked list of the handheld games worth playing first.' },
+  { href: '/gbc-games', title: 'GBC Games', desc: 'Game Boy Color titles that run in the same browser emulator.' },
+];
+
+const faq = [
+  {
+    q: 'Are all of these really free?',
+    a: 'Yes. Every tool on this page is free to use. The AI chat has an optional paid plan for cloud backup, but chatting and memory work without paying anything.',
+  },
+  {
+    q: 'Do any of them need an account?',
+    a: 'No. The games run in the browser, the AI chat opens without a form, and sudoku needs nothing at all. An account is only useful if you want AI chats synced to a second device.',
+  },
+  {
+    q: 'Do they work on a phone?',
+    a: 'Yes. Everything here runs in a mobile browser, so there is nothing to download from an app store.',
+  },
+  {
+    q: 'Is any of this connected to Character.AI or the game publishers?',
+    a: 'No. This page is independent and not affiliated with Character.AI or any game company. The emulator runs game files you already own.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'CollectionPage',
+      name: 'Free AI Tools and Browser Games - No Sign-Up | EggerMath',
+      url: `${SITE.url}/free-ai-tools`,
+      description:
+        'A curated list of free browser tools: AI character chat with memory, AI girlfriend chat, sudoku and a GBA emulator. No sign-up and no install.',
+      isPartOf: { '@type': 'WebSite', name: SITE.name, url: SITE.url },
+      breadcrumb: {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+          { '@type': 'ListItem', position: 2, name: 'Free AI Tools', item: `${SITE.url}/free-ai-tools` },
+        ],
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faq.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a },
+      })),
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Free AI Tools and Browser Games - No Sign-Up | EggerMath"
+  description="Free browser tools with no sign-up: AI character chat with memory, AI girlfriend chat, sudoku and a GBA emulator. Nothing to install."
+  canonical={`${SITE.url}/free-ai-tools`}
+  jsonLd={jsonLd}
+>
+  <main class="fat">
+    <nav class="fat-crumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a> <span aria-hidden="true">/</span> <span>Free AI Tools</span>
+    </nav>
+
+    <section class="fat-hero">
+      <p class="fat-kicker">Everything on one page</p>
+      <h1>Free AI Tools and Browser Games With No Sign-Up</h1>
+      <p class="fat-lede">
+        A short list of things that actually work in a browser tab: an AI character chat with
+        real memory, a handful of AI characters built for specific jobs, a sudoku board and a
+        Game Boy Advance emulator. Nothing needs an install, an email or a subscription.
+      </p>
+      <div class="fat-cta">
+        <a class="fat-btn" href={CHAT_URL}>Open the AI chat</a>
+        <a class="fat-btn fat-btn--ghost" href="#tools">Browse the games</a>
+      </div>
+      <ul class="fat-badges">
+        <li>No sign-up</li>
+        <li>No install</li>
+        <li>Works on mobile</li>
+        <li>Free</li>
+      </ul>
+    </section>
+
+    <section class="fat-section" id="ai">
+      <h2>AI chat tools</h2>
+      <p class="fat-intro">
+        The chat is the main tool here. It has unlimited messages, a separate memory for every
+        character, and no account requirement. These pages explain each angle in detail.
+      </p>
+      <div class="fat-grid">
+        {aiPages.map((p) => (
+          <a class="fat-card fat-card--link" href={p.href}>
+            <h3>{p.title}</h3>
+            <p>{p.desc}</p>
+            <span class="fat-more">Read the guide</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="fat-section" id="characters">
+      <h2>AI characters you can open directly</h2>
+      <p class="fat-intro">
+        Each link starts the chat with a different character. Your conversations and memories
+        stay separate for each one.
+      </p>
+      <div class="fat-grid">
+        {characters.map((c) => (
+          <a class="fat-card fat-card--link" href={charUrl(c.slug)}>
+            <h3>{c.title}</h3>
+            <p>{c.desc}</p>
+            <span class="fat-more">Start chatting</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="fat-section" id="tools">
+      <h2>Games and other tools</h2>
+      <div class="fat-grid">
+        {tools.map((t) => (
+          <a class="fat-card fat-card--link" href={t.href}>
+            <h3>{t.title}</h3>
+            <p>{t.desc}</p>
+            <span class="fat-more">Open</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="fat-section">
+      <h2>How to choose</h2>
+      <ul class="fat-list">
+        <li><strong>You want to talk to a character.</strong> Start with the <a href="/ai-girlfriend-chat">AI girlfriend chat</a> or open a <a href={CHAT_URL}>blank character chat</a>.</li>
+        <li><strong>You care about continuity.</strong> Read <a href="/ai-chat-with-memory">how memory works</a> before you invest a long story.</li>
+        <li><strong>You are leaving Character.AI.</strong> The <a href="/c-ai-alternative">c.ai alternative guide</a> compares limits and queues.</li>
+        <li><strong>You do not want to register.</strong> The <a href="/ai-character-chat-no-sign-up">no sign-up page</a> covers exactly what is and is not asked for.</li>
+        <li><strong>You want a game instead.</strong> The <a href="/">GBA emulator</a> and <a href="/sudoku">sudoku</a> both run locally in the tab.</li>
+      </ul>
+    </section>
+
+    <section class="fat-section">
+      <h2>Common questions</h2>
+      <div class="fat-faq">
+        {faq.map((item) => (
+          <details>
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="fat-final">
+      <h2>Pick one and start</h2>
+      <p>Nothing here asks for an email address before it works.</p>
+      <a class="fat-btn" href={CHAT_URL}>Chat with an AI character</a>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .fat {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 40px 20px 72px;
+    color: var(--text-primary, #e8e8ee);
+  }
+  .fat-crumbs { font-size: 0.82rem; color: var(--text-secondary, #b9b9c6); margin-bottom: 18px; }
+  .fat-crumbs a { color: var(--accent-amber, #f0b35b); text-decoration: none; }
+  .fat-crumbs span { margin: 0 6px; }
+  .fat-hero { max-width: 780px; }
+  .fat-kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+    color: var(--accent-amber, #f0b35b);
+    margin-bottom: 12px;
+  }
+  .fat h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); line-height: 1.15; margin: 0 0 16px; }
+  .fat-lede { font-size: 1.05rem; line-height: 1.65; color: var(--text-secondary, #b9b9c6); margin: 0 0 24px; }
+  .fat-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+  .fat-btn {
+    display: inline-block;
+    background: var(--accent-amber, #f0b35b);
+    color: #16161c;
+    font-weight: 600;
+    padding: 12px 22px;
+    border-radius: 999px;
+    text-decoration: none;
+  }
+  .fat-btn--ghost {
+    background: transparent;
+    color: var(--text-primary, #e8e8ee);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+  }
+  .fat-badges { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0; }
+  .fat-badges li {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .fat-section { margin-top: 56px; }
+  .fat h2 { font-size: 1.5rem; margin: 0 0 14px; }
+  .fat h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  .fat p, .fat li { line-height: 1.65; }
+  .fat-intro { color: var(--text-secondary, #b9b9c6); max-width: 720px; margin: 0 0 18px; }
+  .fat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+  .fat-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 14px;
+    padding: 20px;
+    display: block;
+  }
+  .fat-card p { margin: 0 0 10px; color: var(--text-secondary, #b9b9c6); }
+  .fat-card--link { text-decoration: none; color: inherit; transition: border-color 0.2s, transform 0.2s; }
+  .fat-card--link:hover { border-color: rgba(240, 179, 91, 0.5); transform: translateY(-2px); }
+  .fat-more { font-size: 0.85rem; color: var(--accent-amber, #f0b35b); font-weight: 600; }
+  .fat-list { padding-left: 20px; }
+  .fat-list li { margin-bottom: 10px; }
+  .fat-list a { color: var(--accent-amber, #f0b35b); }
+  .fat-faq details { border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: 12px 0; }
+  .fat-faq summary { cursor: pointer; font-weight: 600; }
+  .fat-faq p { color: var(--text-secondary, #b9b9c6); }
+  .fat-final {
+    margin-top: 64px;
+    padding: 32px;
+    border-radius: 18px;
+    background: rgba(240, 179, 91, 0.08);
+    border: 1px solid rgba(240, 179, 91, 0.25);
+    text-align: center;
+  }
+</style>
