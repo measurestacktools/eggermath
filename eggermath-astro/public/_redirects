@@ -1,3 +1,6 @@
+# Social/bio short link -> live AI chat generator (not for indexing; 302 keeps it out of the index)
+/chat https://perchance.org/unlimited-ai-character-chat 302
+
 # Removed games (ROMs missing from library) → closest live game (Nov 2026 cleanup)
 # NOTE: remember to delete these if the games ever return
 /zelda-minish-cap /zelda-a-link-to-the-past 301
