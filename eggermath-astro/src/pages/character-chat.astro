@@ -1,0 +1,1208 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/games.js';
+
+const CHAT_URL = 'https://perchance.org/eggermath-chat';
+
+const characters = [
+  {
+    name: 'Chloe',
+    tag: 'Warm, steady, and genuinely glad you came back.',
+    img: 'https://user.uploads.dev/file/f97d49e4231d6b90d83a37f12ca95c52.jpeg',
+  },
+  {
+    name: 'Ike',
+    tag: 'First year of college, with your loudest friend.',
+    img: 'https://user.uploads.dev/file/2e64ef311738b4c42467c7880f28cb7a.webp',
+  },
+  {
+    name: 'Yvette',
+    tag: 'A mage hunter from the underworld. Cold. Precise.',
+    img: 'https://user.uploads.dev/file/762a5acb5bd91cb591eff195d50d3771.webp',
+  },
+  {
+    name: 'Kazushi',
+    tag: 'Arena CEO who takes pity on a hybrid fighter.',
+    img: 'https://user.uploads.dev/file/3b8360b50793972993d87796c5935ef1.jpeg',
+  },
+  {
+    name: 'Ganyu',
+    tag: 'General Secretary. Reliable to a fault.',
+    img: 'https://user.uploads.dev/file/ea04c7348bf83c2edad821f4aea1b56c.webp',
+  },
+  {
+    name: 'Li Jung',
+    tag: 'Palace servant. Just crashed into the emperor.',
+    img: 'https://user.uploads.dev/file/418e0b213fa126839cf946d672738de5.webp',
+  },
+];
+
+const faq = [
+  {
+    q: 'Is the character chat free?',
+    a: 'Yes. The chat is completely free, with no sign-up, no email and no payment. It is funded by advertising on the chat page itself.',
+  },
+  {
+    q: 'Do I need an account?',
+    a: 'No account is needed. Open the chat and start talking. Your characters, conversations and the memory feature are stored in your own browser on your device.',
+  },
+  {
+    q: 'Do the characters remember our conversation?',
+    a: 'Yes. Each character keeps a local memory of your story, so it can recall names, events and preferences later. Memory stays on your device until you clear your browser data or delete it in the app.',
+  },
+  {
+    q: 'Is explicit content allowed?',
+    a: 'No. Explicit sexual content is blocked in both text and images. Adventure, conflict, mystery and non-explicit romance are all fine. Read the full terms for details.',
+  },
+  {
+    q: 'Can I create my own character?',
+    a: 'Yes. Inside the chat you can create a character from your own description, generate one, or import a character card. Everything stays on your device.',
+  },
+  {
+    q: 'Does it work on a phone?',
+    a: 'Yes. The chat is designed to work on phones, tablets and desktop browsers without installing anything.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      name: 'Character Chat — Talk to Fictional AI Characters | EggerMath',
+      url: `${SITE.url}/character-chat`,
+      description:
+        'Free character chat with fictional AI characters. No account, no download. Your chats and character memory stay in your browser.',
+      isPartOf: { '@type': 'WebSite', name: SITE.name, url: SITE.url },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faq.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a },
+      })),
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Character Chat — Free AI Character Roleplay | EggerMath"
+  description="Chat free with fictional AI characters: assistants, rivals, hunters and emperors. No sign-up, no download. Your conversations and character memory stay on your device."
+  canonical={`${SITE.url}/character-chat`}
+  jsonLd={jsonLd}
+>
+  <main class="cc">
+    <!-- ── Hero ─────────────────────────────────────────────────────── -->
+    <section class="cc-hero">
+      <div class="cc-hero-glow" aria-hidden="true"></div>
+
+      <div class="cc-hero-inner">
+        <div class="cc-hero-copy">
+          <p class="cc-kicker">
+            <span class="cc-live" aria-hidden="true"></span>
+            Character chat · free
+          </p>
+
+          <h1 class="cc-title">
+            Characters that<br />
+            <span class="cc-title-accent">remember your story</span>
+          </h1>
+
+          <p class="cc-lede">
+            Roleplay with fictional AI characters who keep the thread — your name, the
+            promises, the place you stopped. No account, no download, nothing stored on a
+            server you don't control.
+          </p>
+
+          <div class="cc-cta-row">
+            <a class="cc-cta" href={CHAT_URL} target="_blank" rel="noopener">
+              Start chatting
+              <span class="cc-cta-arrow" aria-hidden="true">→</span>
+            </a>
+            <a class="cc-cta cc-cta--ghost" href="#cast">Meet the cast</a>
+          </div>
+
+          <ul class="cc-badges">
+            <li>Free forever</li>
+            <li>No sign-up</li>
+            <li>No download</li>
+            <li>Mobile ready</li>
+          </ul>
+        </div>
+
+        <!-- App preview (decorative) -->
+        <div class="cc-hero-visual">
+          <div class="cc-app" aria-hidden="true">
+            <div class="cc-app-bar">
+              <span class="cc-app-dot cc-app-dot--r"></span>
+              <span class="cc-app-dot cc-app-dot--y"></span>
+              <span class="cc-app-dot cc-app-dot--g"></span>
+              <span class="cc-app-url">eggermath · character chat</span>
+            </div>
+
+            <div class="cc-app-head">
+              <img
+                class="cc-app-avatar"
+                src={characters[0].img}
+                alt=""
+                width="44"
+                height="44"
+                loading="eager"
+              />
+              <span class="cc-app-meta">
+                <strong>Chloe</strong>
+                <span class="cc-app-status"><i></i>online · memory active</span>
+              </span>
+              <span class="cc-app-menu">···</span>
+            </div>
+
+            <div class="cc-app-body">
+              <p class="cc-msg cc-msg--them">
+                You're back. I kept the light on — and I remembered exactly where we stopped.
+              </p>
+              <p class="cc-msg cc-msg--me">Sorry. Long day.</p>
+              <p class="cc-msg cc-msg--them">
+                Then sit down. I'll pick it up from the part where the storm hits the harbour.
+              </p>
+              <span class="cc-typing"><i></i><i></i><i></i></span>
+            </div>
+
+            <div class="cc-app-input">
+              <span>Message Chloe…</span>
+              <span class="cc-app-send">↑</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Stats strip ──────────────────────────────────────────────── -->
+    <section class="cc-strip" aria-label="At a glance">
+      <div class="cc-strip-item">
+        <strong>6</strong>
+        <span>starter characters</span>
+      </div>
+      <div class="cc-strip-item">
+        <strong>Unlimited</strong>
+        <span>messages, no credits</span>
+      </div>
+      <div class="cc-strip-item">
+        <strong>Local</strong>
+        <span>storage on your device</span>
+      </div>
+      <div class="cc-strip-item">
+        <strong>0</strong>
+        <span>accounts required</span>
+      </div>
+    </section>
+
+    <!-- ── Cast ─────────────────────────────────────────────────────── -->
+    <section class="cc-section" id="cast" aria-labelledby="cc-cast-title">
+      <div class="cc-section-head">
+        <p class="cc-eyebrow">The cast</p>
+        <h2 id="cc-cast-title">Pick someone to talk to</h2>
+        <p>
+          Each character has their own voice, backstory and opening scene. Start with one of
+          these, or build someone new once you're inside.
+        </p>
+      </div>
+
+      <div class="cc-cast">
+        {characters.map((c) => (
+          <a class="cc-char" href={CHAT_URL} target="_blank" rel="noopener">
+            <span class="cc-char-media">
+              <img
+                class="cc-char-img"
+                src={c.img}
+                alt={`${c.name}, a fictional AI character`}
+                width="320"
+                height="400"
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="cc-char-shade" aria-hidden="true"></span>
+              <span class="cc-char-open" aria-hidden="true">Chat →</span>
+            </span>
+            <span class="cc-char-info">
+              <span class="cc-char-name">{c.name}</span>
+              <span class="cc-char-tag">{c.tag}</span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- ── Features ─────────────────────────────────────────────────── -->
+    <section class="cc-section" aria-labelledby="cc-features-title">
+      <div class="cc-section-head">
+        <p class="cc-eyebrow">Why it holds up</p>
+        <h2 id="cc-features-title">Built to feel continuous, not disposable</h2>
+      </div>
+
+      <div class="cc-features">
+        <article class="cc-feature">
+          <span class="cc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path d="M12 3a4 4 0 0 0-4 4v1a4 4 0 0 0 0 8v1a4 4 0 0 0 8 0v-1a4 4 0 0 0 0-8V7a4 4 0 0 0-4-4Z" />
+              <path d="M12 7v10" />
+            </svg>
+          </span>
+          <h3>Memory that actually lasts</h3>
+          <p>
+            Names, promises and small details carry across sessions, so you never restart the
+            same conversation from zero.
+          </p>
+        </article>
+
+        <article class="cc-feature">
+          <span class="cc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <rect x="4" y="10" width="16" height="10" rx="2.5" />
+              <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+            </svg>
+          </span>
+          <h3>Private by default</h3>
+          <p>
+            Characters and messages live in your browser, not in an account. Clear your data and
+            they are gone for good.
+          </p>
+        </article>
+
+        <article class="cc-feature">
+          <span class="cc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path d="M12 3 5 6v5.5c0 4.2 2.9 7.9 7 9.5 4.1-1.6 7-5.3 7-9.5V6l-7-3Z" />
+              <path d="m9 12 2 2 4-4" />
+            </svg>
+          </span>
+          <h3>Filtered for safety</h3>
+          <p>
+            Explicit sexual content is blocked in text and images. Adventure, conflict, mystery
+            and non-explicit romance are all welcome.
+          </p>
+        </article>
+
+        <article class="cc-feature">
+          <span class="cc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path d="M4 20h4L20 8a2.8 2.8 0 0 0-4-4L4 16v4Z" />
+              <path d="m14 6 4 4" />
+            </svg>
+          </span>
+          <h3>Write your own</h3>
+          <p>
+            Describe a rival, a detective, a queen — the app builds the face, the voice and the
+            opening scene around them.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ── How it works ─────────────────────────────────────────────── -->
+    <section class="cc-section cc-how" id="how-it-works" aria-labelledby="cc-how-title">
+      <div class="cc-section-head">
+        <p class="cc-eyebrow">Three steps</p>
+        <h2 id="cc-how-title">From here to your first scene</h2>
+      </div>
+
+      <ol class="cc-steps">
+        <li>
+          <span class="cc-step-num">01</span>
+          <h3>Open the chat</h3>
+          <p>It opens in a new tab, so this page stays here whenever you want to come back.</p>
+        </li>
+        <li>
+          <span class="cc-step-num">02</span>
+          <h3>Choose a character</h3>
+          <p>Pick a starter, or describe your own and let the app build them.</p>
+        </li>
+        <li>
+          <span class="cc-step-num">03</span>
+          <h3>Write the first line</h3>
+          <p>Send it and the scene continues. Progress saves automatically as you go.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ── Safety ───────────────────────────────────────────────────── -->
+    <section class="cc-section cc-safety" aria-labelledby="cc-safety-title">
+      <div class="cc-safety-inner">
+        <div>
+          <p class="cc-eyebrow cc-eyebrow--warn">Before you start</p>
+          <h2 id="cc-safety-title">Fiction, and clearly labelled as fiction</h2>
+          <p>
+            Every character is a fictional AI model, not a real person. Emotional and romantic
+            scenes are simulated for entertainment and creative writing. The app is designed to
+            be absorbing — keep it from crowding out sleep, meals, school, work and the people
+            around you.
+          </p>
+        </div>
+        <ul class="cc-safety-links">
+          <li><a href="/pages/terms">Terms of service</a></li>
+          <li><a href="/pages/privacy">Privacy policy</a></li>
+          <li><a href="/pages/contact">Report a problem</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ── FAQ ──────────────────────────────────────────────────────── -->
+    <section class="cc-section" aria-labelledby="cc-faq-title">
+      <div class="cc-section-head">
+        <p class="cc-eyebrow">Questions</p>
+        <h2 id="cc-faq-title">The short answers</h2>
+      </div>
+
+      <div class="cc-faq">
+        {faq.map((item) => (
+          <details class="cc-faq-item">
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- ── Final CTA ────────────────────────────────────────────────── -->
+    <section class="cc-final">
+      <div class="cc-final-glow" aria-hidden="true"></div>
+      <h2>Someone is waiting for your next line</h2>
+      <p>No account, no download. Pick a character and start the scene.</p>
+      <a class="cc-cta" href={CHAT_URL} target="_blank" rel="noopener">
+        Start chatting
+        <span class="cc-cta-arrow" aria-hidden="true">→</span>
+      </a>
+      <p class="cc-final-note">Opens in a new tab · free · works on mobile</p>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .cc {
+    background: var(--bg-core);
+    color: var(--text-primary);
+  }
+
+  /* ── Hero ─────────────────────────────────────────────────────────── */
+  .cc-hero {
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border-subtle);
+    background:
+      radial-gradient(70% 100% at 85% 0%, rgba(245, 158, 11, 0.14), transparent 60%),
+      radial-gradient(60% 90% at 5% 20%, rgba(99, 102, 241, 0.16), transparent 62%),
+      linear-gradient(180deg, #0b0d14 0%, #090a0f 100%);
+  }
+
+  .cc-hero-glow {
+    position: absolute;
+    inset: -30% 40% 40% -20%;
+    background: radial-gradient(closest-side, rgba(99, 102, 241, 0.16), transparent);
+    filter: blur(20px);
+    pointer-events: none;
+  }
+
+  .cc-hero-inner {
+    position: relative;
+    display: grid;
+    gap: 44px;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 72px 24px 76px;
+    align-items: center;
+  }
+
+  .cc-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 12px 5px 10px;
+    border: 1px solid rgba(245, 158, 11, 0.32);
+    border-radius: var(--radius-full);
+    background: rgba(245, 158, 11, 0.08);
+    color: #fbbf24;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .cc-live {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-emerald);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18);
+  }
+
+  .cc-title {
+    margin-top: 20px;
+    font-family: var(--font-display);
+    font-size: clamp(2.1rem, 5.4vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.06;
+    letter-spacing: -0.025em;
+  }
+
+  .cc-title-accent {
+    background: linear-gradient(96deg, #fbbf24 0%, #f59e0b 45%, #f97316 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .cc-lede {
+    max-width: 520px;
+    margin-top: 20px;
+    color: var(--text-secondary);
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+
+  .cc-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 30px;
+  }
+
+  .cc-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 50px;
+    padding: 0 26px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-full);
+    background: linear-gradient(180deg, #fbbf24, #f59e0b);
+    color: #1a1206;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    box-shadow: 0 10px 28px -10px rgba(245, 158, 11, 0.7);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .cc-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 34px -12px rgba(245, 158, 11, 0.85);
+  }
+
+  .cc-cta-arrow {
+    font-size: 1.05rem;
+    transition: transform 0.15s ease;
+  }
+
+  .cc-cta:hover .cc-cta-arrow {
+    transform: translateX(3px);
+  }
+
+  .cc-cta--ghost {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: var(--border-subtle);
+    color: var(--text-primary);
+    box-shadow: none;
+    font-weight: 600;
+  }
+
+  .cc-cta--ghost:hover {
+    background: rgba(255, 255, 255, 0.07);
+    box-shadow: none;
+  }
+
+  .cc-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin: 26px 0 0;
+    padding: 0;
+    list-style: none;
+    color: var(--text-tertiary);
+    font-size: 0.76rem;
+    font-weight: 600;
+  }
+
+  .cc-badges li {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .cc-badges li::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent-emerald);
+  }
+
+  /* ── App preview ──────────────────────────────────────────────────── */
+  .cc-hero-visual {
+    position: relative;
+  }
+
+  .cc-hero-visual::before {
+    content: '';
+    position: absolute;
+    inset: 8% -6% -8% 6%;
+    border-radius: 32px;
+    background: radial-gradient(closest-side, rgba(245, 158, 11, 0.22), transparent);
+    filter: blur(24px);
+    pointer-events: none;
+  }
+
+  .cc-app {
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(180deg, #151824 0%, #10121a 100%);
+    box-shadow: var(--shadow-lg), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+  }
+
+  .cc-app-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border-subtle);
+    background: rgba(0, 0, 0, 0.25);
+  }
+
+  .cc-app-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    opacity: 0.7;
+  }
+
+  .cc-app-dot--r { background: #ff5f57; }
+  .cc-app-dot--y { background: #febc2e; }
+  .cc-app-dot--g { background: #28c840; }
+
+  .cc-app-url {
+    margin-left: 10px;
+    color: var(--text-tertiary);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+  }
+
+  .cc-app-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .cc-app-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+
+  .cc-app-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .cc-app-meta strong {
+    font-size: 0.86rem;
+    font-weight: 700;
+  }
+
+  .cc-app-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--text-tertiary);
+    font-size: 0.66rem;
+  }
+
+  .cc-app-status i {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent-emerald);
+  }
+
+  .cc-app-menu {
+    margin-left: auto;
+    color: var(--text-tertiary);
+    letter-spacing: 1px;
+  }
+
+  .cc-app-body {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    padding: 16px 14px 18px;
+    background:
+      radial-gradient(80% 60% at 50% 0%, rgba(99, 102, 241, 0.08), transparent 70%),
+      transparent;
+  }
+
+  .cc-msg {
+    max-width: 84%;
+    margin: 0;
+    padding: 10px 13px;
+    border-radius: 14px;
+    font-size: 0.8rem;
+    line-height: 1.55;
+  }
+
+  .cc-msg--them {
+    align-self: flex-start;
+    border: 1px solid var(--border-subtle);
+    border-bottom-left-radius: 5px;
+    background: #1b1f2c;
+    color: #dbe2ef;
+  }
+
+  .cc-msg--me {
+    align-self: flex-end;
+    border-bottom-right-radius: 5px;
+    background: linear-gradient(180deg, #f5b03a, #e79a12);
+    color: #1a1206;
+    font-weight: 600;
+  }
+
+  .cc-typing {
+    display: inline-flex;
+    align-self: flex-start;
+    gap: 4px;
+    padding: 10px 14px;
+    border: 1px solid var(--border-subtle);
+    border-radius: 14px;
+    border-bottom-left-radius: 5px;
+    background: #1b1f2c;
+  }
+
+  .cc-typing i {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--text-tertiary);
+    animation: cc-bounce 1.3s infinite ease-in-out;
+  }
+
+  .cc-typing i:nth-child(2) { animation-delay: 0.16s; }
+  .cc-typing i:nth-child(3) { animation-delay: 0.32s; }
+
+  @keyframes cc-bounce {
+    0%, 70%, 100% { opacity: 0.35; transform: translateY(0); }
+    35% { opacity: 1; transform: translateY(-3px); }
+  }
+
+  .cc-app-input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-top: 1px solid var(--border-subtle);
+    background: rgba(0, 0, 0, 0.2);
+    color: var(--text-tertiary);
+    font-size: 0.76rem;
+  }
+
+  .cc-app-send {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    margin-left: auto;
+    border-radius: 50%;
+    background: var(--accent-amber);
+    color: #1a1206;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cc-typing i { animation: none; }
+    .cc-cta:hover { transform: none; }
+  }
+
+  /* ── Stats strip ──────────────────────────────────────────────────── */
+  .cc-strip {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-bottom: 1px solid var(--border-subtle);
+    background: rgba(255, 255, 255, 0.015);
+  }
+
+  .cc-strip-item {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 20px 24px;
+    border-right: 1px solid var(--border-subtle);
+  }
+
+  .cc-strip-item strong {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    color: var(--accent-amber);
+    letter-spacing: -0.01em;
+  }
+
+  .cc-strip-item span {
+    color: var(--text-tertiary);
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── Section shell ────────────────────────────────────────────────── */
+  .cc-section {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 72px 24px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .cc-eyebrow {
+    margin-bottom: 10px;
+    color: var(--accent-amber);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .cc-eyebrow--warn {
+    color: #fbbf24;
+  }
+
+  .cc-section-head {
+    max-width: 620px;
+    margin-bottom: 32px;
+  }
+
+  .cc-section-head h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.45rem, 3vw, 2rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .cc-section-head p {
+    margin-top: 12px;
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    line-height: 1.65;
+  }
+
+  /* ── Cast grid ────────────────────────────────────────────────────── */
+  .cc-cast {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+  }
+
+  .cc-char {
+    display: block;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--bg-surface);
+    text-decoration: none;
+    overflow: hidden;
+    transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .cc-char:hover {
+    transform: translateY(-3px);
+    border-color: rgba(245, 158, 11, 0.45);
+    box-shadow: 0 18px 36px -18px rgba(0, 0, 0, 0.9);
+  }
+
+  .cc-char-media {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: #1a1d28;
+  }
+
+  .cc-char-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 22%;
+    transition: transform 0.45s ease;
+  }
+
+  .cc-char:hover .cc-char-img {
+    transform: scale(1.04);
+  }
+
+  .cc-char-shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 45%, rgba(9, 10, 15, 0.85) 100%);
+  }
+
+  .cc-char-open {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    padding: 5px 11px;
+    border: 1px solid rgba(245, 158, 11, 0.5);
+    border-radius: var(--radius-full);
+    background: rgba(9, 10, 15, 0.72);
+    backdrop-filter: blur(6px);
+    color: #fbbf24;
+    font-size: 0.68rem;
+    font-weight: 700;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+  }
+
+  .cc-char:hover .cc-char-open,
+  .cc-char:focus-visible .cc-char-open {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .cc-char-info {
+    display: block;
+    padding: 12px 14px 15px;
+  }
+
+  .cc-char-name {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .cc-char-tag {
+    display: block;
+    margin-top: 4px;
+    color: var(--text-tertiary);
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+
+  /* ── Features ─────────────────────────────────────────────────────── */
+  .cc-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+  }
+
+  .cc-feature {
+    padding: 22px;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    background: linear-gradient(180deg, rgba(24, 26, 36, 0.9), rgba(17, 19, 27, 0.9));
+    transition: border-color 0.18s ease;
+  }
+
+  .cc-feature:hover {
+    border-color: rgba(99, 102, 241, 0.4);
+  }
+
+  .cc-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgba(245, 158, 11, 0.28);
+    border-radius: 10px;
+    background: rgba(245, 158, 11, 0.08);
+    color: var(--accent-amber);
+  }
+
+  .cc-icon svg {
+    width: 19px;
+    height: 19px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .cc-feature h3 {
+    margin: 14px 0 7px;
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+
+  .cc-feature p {
+    color: var(--text-secondary);
+    font-size: 0.84rem;
+    line-height: 1.65;
+  }
+
+  /* ── Steps ────────────────────────────────────────────────────────── */
+  .cc-how {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.015), transparent);
+  }
+
+  .cc-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .cc-steps li {
+    position: relative;
+    padding: 24px 22px;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--bg-surface);
+  }
+
+  .cc-step-num {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--accent-amber);
+  }
+
+  .cc-steps h3 {
+    margin: 12px 0 7px;
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+
+  .cc-steps p {
+    color: var(--text-secondary);
+    font-size: 0.84rem;
+    line-height: 1.65;
+  }
+
+  /* ── Safety ───────────────────────────────────────────────────────── */
+  .cc-safety-inner {
+    display: grid;
+    gap: 22px;
+    padding: 26px;
+    border: 1px solid rgba(245, 158, 11, 0.28);
+    border-radius: var(--radius-lg);
+    background:
+      radial-gradient(80% 120% at 0% 0%, rgba(245, 158, 11, 0.09), transparent 65%),
+      var(--bg-surface);
+  }
+
+  .cc-safety h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 2.6vw, 1.5rem);
+    letter-spacing: -0.02em;
+  }
+
+  .cc-safety p {
+    max-width: 620px;
+    margin-top: 10px;
+    color: var(--text-secondary);
+    font-size: 0.87rem;
+    line-height: 1.7;
+  }
+
+  .cc-safety-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    align-content: start;
+  }
+
+  .cc-safety-links a {
+    display: inline-flex;
+    padding: 8px 14px;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-secondary);
+    font-size: 0.76rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .cc-safety-links a:hover {
+    color: var(--accent-amber);
+    border-color: rgba(245, 158, 11, 0.45);
+  }
+
+  /* ── FAQ ──────────────────────────────────────────────────────────── */
+  .cc-faq {
+    display: grid;
+    gap: 8px;
+    max-width: 780px;
+  }
+
+  .cc-faq-item {
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    background: var(--bg-surface);
+    padding: 0 16px;
+    transition: border-color 0.15s ease;
+  }
+
+  .cc-faq-item[open] {
+    border-color: rgba(245, 158, 11, 0.3);
+  }
+
+  .cc-faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 15px 0;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .cc-faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .cc-faq-item summary::after {
+    content: '+';
+    flex: none;
+    color: var(--accent-amber);
+    font-size: 1.05rem;
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  .cc-faq-item[open] summary::after {
+    content: '–';
+  }
+
+  .cc-faq-item p {
+    padding: 0 0 16px;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    line-height: 1.7;
+  }
+
+  /* ── Final CTA ────────────────────────────────────────────────────── */
+  .cc-final {
+    position: relative;
+    overflow: hidden;
+    padding: 88px 24px 96px;
+    text-align: center;
+  }
+
+  .cc-final-glow {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(50% 80% at 50% 100%, rgba(245, 158, 11, 0.16), transparent 70%),
+      radial-gradient(40% 60% at 50% 0%, rgba(99, 102, 241, 0.12), transparent 70%);
+    pointer-events: none;
+  }
+
+  .cc-final h2 {
+    position: relative;
+    margin: 0 auto;
+    max-width: 620px;
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3.6vw, 2.4rem);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+  }
+
+  .cc-final > p {
+    position: relative;
+    margin: 12px 0 26px;
+    color: var(--text-secondary);
+    font-size: 0.94rem;
+  }
+
+  .cc-final .cc-cta {
+    position: relative;
+  }
+
+  .cc-final-note {
+    position: relative;
+    margin-top: 16px;
+    color: var(--text-tertiary);
+    font-size: 0.74rem;
+  }
+
+  /* ── Responsive ───────────────────────────────────────────────────── */
+  @media (min-width: 640px) {
+    .cc-strip {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .cc-strip-item {
+      align-items: center;
+      text-align: center;
+    }
+
+    .cc-strip-item:last-child {
+      border-right: none;
+    }
+  }
+
+  @media (min-width: 900px) {
+    .cc-hero-inner {
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: 56px;
+      padding: 88px 24px 92px;
+    }
+
+    .cc-safety-inner {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      padding: 30px 32px;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .cc-hero-inner {
+      padding: 48px 18px 56px;
+      gap: 36px;
+    }
+
+    .cc-section {
+      padding: 52px 18px;
+    }
+
+    .cc-cta-row {
+      gap: 8px;
+    }
+
+    .cc-cta {
+      width: 100%;
+    }
+
+    .cc-cast {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .cc-char-name {
+      font-size: 0.9rem;
+    }
+
+    .cc-char-tag {
+      display: none;
+    }
+
+    .cc-final {
+      padding: 64px 18px 72px;
+    }
+  }
+</style>

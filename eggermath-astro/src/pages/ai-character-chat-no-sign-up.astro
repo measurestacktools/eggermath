@@ -1,0 +1,286 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/games.js';
+
+const CHAT_URL = 'https://perchance.org/unlimited-ai-character-chat';
+const MEMORY_URL = `${SITE.url}/ai-chat-with-memory`;
+const CAI_URL = `${SITE.url}/c-ai-alternative`;
+const GF_URL = `${SITE.url}/ai-girlfriend-chat`;
+
+const faq = [
+  {
+    q: 'Can I chat with an AI character without signing up?',
+    a: 'Yes. Open the page and type. There is no email field, no password, no phone number and no verification step before your first message.',
+  },
+  {
+    q: 'Why do most AI chat sites require an account?',
+    a: 'Usually to attach a subscription, to enforce a message quota, or to collect an email for marketing. None of those are required to generate a reply, which is why a chat without an account is technically straightforward.',
+  },
+  {
+    q: 'If there is no account, where are my chats saved?',
+    a: 'On your own device, in the browser. That means they are private by default. If you want to move chats to another device you own, you can optionally create an account for cloud backup.',
+  },
+  {
+    q: 'Is there a guest limit or a trial?',
+    a: 'No. It is not a trial and there is no guest quota. Messages are unlimited for as long as you want to keep chatting.',
+  },
+  {
+    q: 'Can I use it on my phone without an app?',
+    a: 'Yes. It runs in the mobile browser, so nothing needs to be installed from an app store and nothing needs to be updated.',
+  },
+  {
+    q: 'Does no sign-up mean no rules?',
+    a: 'No. Explicit adult content is blocked permanently. Everything else - adventure, romance without explicit content, mystery, drama - is fine.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      name: 'AI Character Chat No Sign Up - Start in One Click | EggerMath',
+      url: `${SITE.url}/ai-character-chat-no-sign-up`,
+      description:
+        'Chat with an AI character without an account, email or verification. Unlimited messages, memory per character, works in the browser on phone and desktop.',
+      isPartOf: { '@type': 'WebSite', name: SITE.name, url: SITE.url },
+      breadcrumb: {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+          { '@type': 'ListItem', position: 2, name: 'AI Character Chat No Sign-Up', item: `${SITE.url}/ai-character-chat-no-sign-up` },
+        ],
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faq.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a },
+      })),
+    },
+    {
+      '@type': 'SoftwareApplication',
+      name: 'Unlimited AI Character Chat',
+      url: CHAT_URL,
+      applicationCategory: 'EntertainmentApplication',
+      operatingSystem: 'Web',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="AI Character Chat No Sign Up - Start in One Click | EggerMath"
+  description="Chat with an AI character without an account, email or verification. Unlimited messages, memory per character, works in your browser on phone and desktop."
+  canonical={`${SITE.url}/ai-character-chat-no-sign-up`}
+  jsonLd={jsonLd}
+>
+  <main class="acn">
+    <nav class="acn-crumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a> <span aria-hidden="true">/</span> <span>AI Character Chat No Sign-Up</span>
+    </nav>
+
+    <section class="acn-hero">
+      <p class="acn-kicker">No account needed</p>
+      <h1>AI Character Chat With No Sign-Up, No Email, No Verification</h1>
+      <p class="acn-lede">
+        Most free chat sites ask for an email before they will show you a single reply. This one
+        opens straight into a conversation. No form, no password, no confirmation link, no
+        message cap waiting behind the sign-up wall.
+      </p>
+      <div class="acn-cta">
+        <a class="acn-btn" href={CHAT_URL}>Start chatting now</a>
+        <a class="acn-btn acn-btn--ghost" href="#why">Why no account</a>
+      </div>
+      <ul class="acn-badges">
+        <li>No email</li>
+        <li>No password</li>
+        <li>No limit</li>
+        <li>Phone and desktop</li>
+      </ul>
+    </section>
+
+    <section class="acn-section">
+      <h2>What happens when you open it</h2>
+      <ol class="acn-steps">
+        <li><strong>The page loads.</strong> A character is already there, ready to talk.</li>
+        <li><strong>You type a message.</strong> No gate appears between you and the reply.</li>
+        <li><strong>You keep going.</strong> There is no point where a counter tells you to subscribe or come back tomorrow.</li>
+      </ol>
+      <p class="acn-inline-cta">
+        That is the entire onboarding. <a href={CHAT_URL}>Open the chat</a> and see for yourself.
+      </p>
+    </section>
+
+    <section class="acn-section" id="why">
+      <h2>Why an account is usually required, and why it is not here</h2>
+      <p>
+        An account is a business tool, not a technical requirement. Sites use it to attach a
+        subscription, to enforce a free-tier quota, to collect an email list, or to identify you
+        for moderation. A character chat can run without any of that, and this one does.
+      </p>
+      <div class="acn-grid">
+        <article class="acn-card">
+          <h3>No sales gate</h3>
+          <p>There is no paywall between you and the next reply, so there is nothing to sign in for.</p>
+        </article>
+        <article class="acn-card">
+          <h3>No quota to track</h3>
+          <p>Unlimited messages mean no counter, and no counter means no reason to link a session to an identity.</p>
+        </article>
+        <article class="acn-card">
+          <h3>Private by default</h3>
+          <p>Chats stay in your browser on your device. Nothing leaves it unless you opt into cloud backup.</p>
+        </article>
+        <article class="acn-card">
+          <h3>Optional, not mandatory</h3>
+          <p>An account exists only for people who want their chats on a second device. You never need one to chat.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="acn-section">
+      <h2>No sign-up compared</h2>
+      <div class="acn-table-wrap">
+        <table class="acn-table">
+          <thead>
+            <tr><th>Step before first message</th><th>This chat</th><th>Typical free chat site</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Email address</td><td>Not asked</td><td>Required</td></tr>
+            <tr><td>Password</td><td>Not asked</td><td>Required</td></tr>
+            <tr><td>Email verification</td><td>None</td><td>Usually</td></tr>
+            <tr><td>App install</td><td>None</td><td>Sometimes</td></tr>
+            <tr><td>Message limit</td><td>Unlimited</td><td>Free tier caps</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="acn-note">
+        If you do want an account later, it is there for cloud backup only - see
+        <a href={GF_URL}>the AI girlfriend chat page</a> for how memory and backup fit together.
+      </p>
+    </section>
+
+    <section class="acn-section">
+      <h2>What you can do without an account</h2>
+      <ul class="acn-list">
+        <li>Talk to a built-in character or write your own from a short description.</li>
+        <li>Import a character card you already saved elsewhere.</li>
+        <li>Keep a separate memory for each character, so stories never mix.</li>
+        <li>Continue the same conversation later on the same device.</li>
+        <li>Chat on a phone, a tablet or a desktop browser.</li>
+      </ul>
+    </section>
+
+    <section class="acn-section">
+      <h2>Related pages</h2>
+      <ul class="acn-links">
+        <li><a href={MEMORY_URL}>AI chat with long-term memory</a></li>
+        <li><a href={CAI_URL}>Free c.ai alternative</a></li>
+        <li><a href={GF_URL}>AI girlfriend chat</a></li>
+      </ul>
+    </section>
+
+    <section class="acn-section">
+      <h2>Questions about signing up</h2>
+      <div class="acn-faq">
+        {faq.map((item) => (
+          <details>
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="acn-final">
+      <h2>No form. No email. No limit.</h2>
+      <p>Open the chat and send the first message.</p>
+      <a class="acn-btn" href={CHAT_URL}>Chat without signing up</a>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .acn {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 40px 20px 72px;
+    color: var(--text-primary, #e8e8ee);
+  }
+  .acn-crumbs { font-size: 0.82rem; color: var(--text-secondary, #b9b9c6); margin-bottom: 18px; }
+  .acn-crumbs a { color: var(--accent-amber, #f0b35b); text-decoration: none; }
+  .acn-crumbs span { margin: 0 6px; }
+  .acn-hero { max-width: 760px; }
+  .acn-kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+    color: var(--accent-amber, #f0b35b);
+    margin-bottom: 12px;
+  }
+  .acn h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); line-height: 1.15; margin: 0 0 16px; }
+  .acn-lede { font-size: 1.05rem; line-height: 1.65; color: var(--text-secondary, #b9b9c6); margin: 0 0 24px; }
+  .acn-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+  .acn-btn {
+    display: inline-block;
+    background: var(--accent-amber, #f0b35b);
+    color: #16161c;
+    font-weight: 600;
+    padding: 12px 22px;
+    border-radius: 999px;
+    text-decoration: none;
+  }
+  .acn-btn--ghost {
+    background: transparent;
+    color: var(--text-primary, #e8e8ee);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+  }
+  .acn-badges { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0; }
+  .acn-badges li {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .acn-section { margin-top: 56px; }
+  .acn h2 { font-size: 1.5rem; margin: 0 0 18px; }
+  .acn h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  .acn p, .acn li { line-height: 1.65; }
+  .acn-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .acn-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 14px;
+    padding: 20px;
+  }
+  .acn-card p { margin: 0; color: var(--text-secondary, #b9b9c6); }
+  .acn-steps { padding-left: 20px; }
+  .acn-steps li { margin-bottom: 12px; }
+  .acn-inline-cta a, .acn-links a, .acn-note a { color: var(--accent-amber, #f0b35b); }
+  .acn-links, .acn-list { padding-left: 20px; }
+  .acn-links li, .acn-list li { margin-bottom: 8px; }
+  .acn-table-wrap { overflow-x: auto; }
+  .acn-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+  .acn-table th, .acn-table td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .acn-note { font-size: 0.85rem; color: var(--text-secondary, #b9b9c6); }
+  .acn-faq details { border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: 12px 0; }
+  .acn-faq summary { cursor: pointer; font-weight: 600; }
+  .acn-faq p { color: var(--text-secondary, #b9b9c6); }
+  .acn-final {
+    margin-top: 64px;
+    padding: 32px;
+    border-radius: 18px;
+    background: rgba(240, 179, 91, 0.08);
+    border: 1px solid rgba(240, 179, 91, 0.25);
+    text-align: center;
+  }
+</style>

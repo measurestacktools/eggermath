@@ -1,0 +1,306 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/games.js';
+
+const CHAT_URL = 'https://perchance.org/unlimited-ai-character-chat';
+const NO_SIGNUP_URL = `${SITE.url}/ai-character-chat-no-sign-up`;
+const CAI_URL = `${SITE.url}/c-ai-alternative`;
+const GF_URL = `${SITE.url}/ai-girlfriend-chat`;
+
+const faq = [
+  {
+    q: 'How long does the AI remember a conversation?',
+    a: 'A character keeps its memory until you delete it. On the same device you can close the tab, come back days later and continue the same story. With an optional cloud backup the memory can also move to a second device you own.',
+  },
+  {
+    q: 'Where is the memory stored?',
+    a: 'By default it stays in your browser on your own device. Nothing is uploaded unless you choose to enable the optional cloud backup, which uses your own account.',
+  },
+  {
+    q: 'Do two characters with the same name share a memory?',
+    a: 'No. Every character has its own identity, so two characters called the same thing keep separate chats and separate memories. Nothing bleeds between them.',
+  },
+  {
+    q: 'Is the memory unlimited?',
+    a: 'The character keeps a running memory rather than a fixed number of recent messages, and older details are summarised instead of dropped. You are not cut off after a certain number of turns.',
+  },
+  {
+    q: 'Can I clear a memory without deleting the character?',
+    a: 'Yes. You can reset a character\'s memory and keep the character itself, which is useful when you want a fresh story with the same personality.',
+  },
+  {
+    q: 'Does it cost anything?',
+    a: 'The chat and the memory are free. There is an optional paid plan for cloud backup across devices, but nothing about normal chatting requires it.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      name: 'AI Chat With Memory - Characters That Remember You | EggerMath',
+      url: `${SITE.url}/ai-chat-with-memory`,
+      description:
+        'Free AI chat with long-term memory. Characters remember your name, your story and what already happened, without an account or a message limit.',
+      isPartOf: { '@type': 'WebSite', name: SITE.name, url: SITE.url },
+      breadcrumb: {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+          { '@type': 'ListItem', position: 2, name: 'AI Chat With Memory', item: `${SITE.url}/ai-chat-with-memory` },
+        ],
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faq.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a },
+      })),
+    },
+    {
+      '@type': 'SoftwareApplication',
+      name: 'Unlimited AI Character Chat',
+      url: CHAT_URL,
+      applicationCategory: 'EntertainmentApplication',
+      operatingSystem: 'Web',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="AI Chat With Memory - Characters That Remember You | EggerMath"
+  description="Free AI chat with long-term memory. Characters remember your name, your story and past events. No sign-up, no message limit, memory stored on your device."
+  canonical={`${SITE.url}/ai-chat-with-memory`}
+  jsonLd={jsonLd}
+>
+  <main class="acm">
+    <nav class="acm-crumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a> <span aria-hidden="true">/</span> <span>AI Chat With Memory</span>
+    </nav>
+
+    <section class="acm-hero">
+      <p class="acm-kicker">Long-term memory</p>
+      <h1>AI Chat With a Memory That Survives the Tab Closing</h1>
+      <p class="acm-lede">
+        The most common complaint about free character chat is that the AI forgets everything
+        the moment you leave. This chat keeps a memory per character, so the story you build
+        today still exists tomorrow.
+      </p>
+      <div class="acm-cta">
+        <a class="acm-btn" href={CHAT_URL}>Try a chat with memory</a>
+        <a class="acm-btn acm-btn--ghost" href="#how">How memory works</a>
+      </div>
+      <ul class="acm-badges">
+        <li>Remembers names</li>
+        <li>Remembers events</li>
+        <li>Private by default</li>
+        <li>Free</li>
+      </ul>
+    </section>
+
+    <section class="acm-section">
+      <h2>What a character actually remembers</h2>
+      <div class="acm-grid">
+        <article class="acm-card">
+          <h3>Who you are</h3>
+          <p>
+            Your name, how you like to be addressed and the details you have shared about
+            yourself. You do not have to reintroduce yourself every session.
+          </p>
+        </article>
+        <article class="acm-card">
+          <h3>What already happened</h3>
+          <p>
+            Promises, arguments, places you visited and decisions you made. If you agreed to meet
+            somewhere, the character remembers the arrangement.
+          </p>
+        </article>
+        <article class="acm-card">
+          <h3>How the relationship changed</h3>
+          <p>
+            A stranger who became a friend stays a friend. Tone and familiarity carry forward
+            instead of resetting to the opening greeting.
+          </p>
+        </article>
+        <article class="acm-card">
+          <h3>The rules of the world</h3>
+          <p>
+            Setting details, magic systems, factions and anything else you established stay
+            consistent, which matters most in long adventure or world-building chats.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="acm-section" id="how">
+      <h2>How the memory works</h2>
+      <ol class="acm-steps">
+        <li>
+          <strong>Chat normally.</strong> Nothing special to enable. The character starts taking
+          notes from the first message.
+        </li>
+        <li>
+          <strong>Memory is summarised, not dumped.</strong> Older parts of the story are
+          condensed so the character keeps the important facts without slowing the reply down.
+        </li>
+        <li>
+          <strong>It stays per character.</strong> Each character has a separate memory, even if
+          two characters share a name. Nothing leaks between stories.
+        </li>
+        <li>
+          <strong>It stays on your device by default.</strong> Nothing is uploaded unless you
+          choose the optional cloud backup.
+        </li>
+      </ol>
+      <p class="acm-inline-cta">
+        <a href={CHAT_URL}>Open the chat</a> and tell the character your name. Close the tab,
+        come back, and check whether it still knows.
+      </p>
+    </section>
+
+    <section class="acm-section">
+      <h2>Memory compared</h2>
+      <div class="acm-table-wrap">
+        <table class="acm-table">
+          <thead>
+            <tr><th>Behaviour</th><th>This chat</th><th>Typical free chat</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Remembers after closing the tab</td><td>Yes</td><td>Often no</td></tr>
+            <tr><td>Separate memory per character</td><td>Yes</td><td>Sometimes</td></tr>
+            <tr><td>Memory stored on your device</td><td>Yes, by default</td><td>Usually on their server</td></tr>
+            <tr><td>Account needed for memory</td><td>No</td><td>Usually yes</td></tr>
+            <tr><td>Cost</td><td>Free</td><td>Free tier limits</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="acm-note">
+        Memory alone is not the whole product. Unlimited messages and no sign-up matter just as
+        much, which is what the <a href={NO_SIGNUP_URL}>no sign-up chat</a> page covers.
+      </p>
+    </section>
+
+    <section class="acm-section">
+      <h2>Best uses for a chat that remembers</h2>
+      <ul class="acm-list">
+        <li><strong>Long adventures.</strong> A journey with consequences needs continuity, not a reset every evening.</li>
+        <li><strong>Slow-burn romance.</strong> A relationship that develops over weeks only works if the other person remembers the weeks.</li>
+        <li><strong>World building.</strong> Keep factions, names and rules consistent while you draft a setting.</li>
+        <li><strong>Companionship.</strong> Small daily check-ins feel real when the character recalls what you said yesterday.</li>
+      </ul>
+    </section>
+
+    <section class="acm-section">
+      <h2>Related pages</h2>
+      <ul class="acm-links">
+        <li><a href={GF_URL}>AI girlfriend chat with memory</a></li>
+        <li><a href={CAI_URL}>Free c.ai alternative</a></li>
+        <li><a href={NO_SIGNUP_URL}>AI character chat with no sign-up</a></li>
+      </ul>
+    </section>
+
+    <section class="acm-section">
+      <h2>Questions about memory</h2>
+      <div class="acm-faq">
+        {faq.map((item) => (
+          <details>
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="acm-final">
+      <h2>Start a story worth remembering</h2>
+      <p>Free, unlimited, and private by default.</p>
+      <a class="acm-btn" href={CHAT_URL}>Chat with an AI that remembers</a>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .acm {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 40px 20px 72px;
+    color: var(--text-primary, #e8e8ee);
+  }
+  .acm-crumbs { font-size: 0.82rem; color: var(--text-secondary, #b9b9c6); margin-bottom: 18px; }
+  .acm-crumbs a { color: var(--accent-amber, #f0b35b); text-decoration: none; }
+  .acm-crumbs span { margin: 0 6px; }
+  .acm-hero { max-width: 760px; }
+  .acm-kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+    color: var(--accent-amber, #f0b35b);
+    margin-bottom: 12px;
+  }
+  .acm h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); line-height: 1.15; margin: 0 0 16px; }
+  .acm-lede { font-size: 1.05rem; line-height: 1.65; color: var(--text-secondary, #b9b9c6); margin: 0 0 24px; }
+  .acm-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+  .acm-btn {
+    display: inline-block;
+    background: var(--accent-amber, #f0b35b);
+    color: #16161c;
+    font-weight: 600;
+    padding: 12px 22px;
+    border-radius: 999px;
+    text-decoration: none;
+  }
+  .acm-btn--ghost {
+    background: transparent;
+    color: var(--text-primary, #e8e8ee);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+  }
+  .acm-badges { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0; }
+  .acm-badges li {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .acm-section { margin-top: 56px; }
+  .acm h2 { font-size: 1.5rem; margin: 0 0 18px; }
+  .acm h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  .acm p, .acm li { line-height: 1.65; }
+  .acm-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .acm-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 14px;
+    padding: 20px;
+  }
+  .acm-card p { margin: 0; color: var(--text-secondary, #b9b9c6); }
+  .acm-steps { padding-left: 20px; }
+  .acm-steps li { margin-bottom: 12px; }
+  .acm-inline-cta a, .acm-links a, .acm-note a { color: var(--accent-amber, #f0b35b); }
+  .acm-links, .acm-list { padding-left: 20px; }
+  .acm-links li, .acm-list li { margin-bottom: 8px; }
+  .acm-table-wrap { overflow-x: auto; }
+  .acm-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+  .acm-table th, .acm-table td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .acm-note { font-size: 0.85rem; color: var(--text-secondary, #b9b9c6); }
+  .acm-faq details { border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: 12px 0; }
+  .acm-faq summary { cursor: pointer; font-weight: 600; }
+  .acm-faq p { color: var(--text-secondary, #b9b9c6); }
+  .acm-final {
+    margin-top: 64px;
+    padding: 32px;
+    border-radius: 18px;
+    background: rgba(240, 179, 91, 0.08);
+    border: 1px solid rgba(240, 179, 91, 0.25);
+    text-align: center;
+  }
+</style>

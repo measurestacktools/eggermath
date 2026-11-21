@@ -1,0 +1,583 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/games.js';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      name: 'Sudoku — EggerMath',
+      url: `${SITE.url}/sudoku`,
+      applicationCategory: 'GameApplication',
+      operatingSystem: 'Any modern browser',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      description:
+        'Free sudoku with easy, medium and hard puzzles. No sign-up, no downloads, works on phones and desktops.',
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'Is this sudoku free?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Yes. The puzzles, hints and timer are free and there is no sign-up.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Does the sudoku work offline?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'The puzzle logic runs in your browser, but the page itself needs a connection the first time it loads. Once loaded, a puzzle keeps working if the connection drops.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Where is my progress stored?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Your current puzzle is saved in your own browser using localStorage. It is not sent to our servers and you can clear it by starting a new puzzle or clearing site data.',
+          },
+        },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Sudoku Online — Free Easy, Medium & Hard Puzzles | EggerMath"
+  description="Play free sudoku online with easy, medium and hard puzzles. Three hints per game, a timer, keyboard support and no sign-up. Works on Android and desktop."
+  canonical={`${SITE.url}/sudoku`}
+  jsonLd={jsonLd}
+>
+  <main class="sk-page">
+    <header class="sk-hero">
+      <p class="sk-kicker">Puzzle break</p>
+      <h1>Sudoku</h1>
+      <p class="sk-lede">
+        A quiet, ad-supported puzzle break. Three difficulties, three hints, no account and no
+        time pressure beyond your own clock. Your progress stays in this browser.
+      </p>
+      <p class="sk-crosslink">
+        Prefer a story? <a href="/character-play">Try the hand-written character stories</a>.
+      </p>
+    </header>
+
+    <section class="sk-shell" aria-label="Sudoku game">
+      <div class="sk-toolbar">
+        <label class="sk-difficulty">
+          <span>Difficulty</span>
+          <select id="sk-difficulty" name="difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </label>
+        <dl class="sk-stats">
+          <div><dt>Time</dt><dd id="sk-time">00:00</dd></div>
+          <div><dt>Mistakes</dt><dd id="sk-mistakes">0</dd></div>
+          <div><dt>Hints left</dt><dd id="sk-hints">3</dd></div>
+        </dl>
+      </div>
+
+      <div class="sk-board-wrap">
+        <div id="sk-board" class="sk-board" role="grid" aria-label="Sudoku board, 9 rows by 9 columns"></div>
+        <div id="sk-win" class="sk-win" role="status" tabindex="-1" hidden>
+          <div class="sk-win-card">
+            <p class="sk-win-kicker">Solved</p>
+            <h2>Well played</h2>
+            <p>
+              Time <strong id="sk-win-time">00:00</strong> · Mistakes
+              <strong id="sk-win-mistakes">0</strong>
+            </p>
+            <div class="sk-win-actions">
+              <button type="button" id="sk-win-again" class="sk-btn sk-btn--primary">New puzzle</button>
+              <a class="sk-btn" href="/character-play">Try a story</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="sk-pad" class="sk-pad" aria-label="Number pad">
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => (
+          <button type="button" data-digit={n} aria-label={`Enter ${n}`}>{n}</button>
+        ))}
+      </div>
+
+      <div class="sk-actions">
+        <button type="button" id="sk-notes" class="sk-btn" aria-pressed="false">Notes: off</button>
+        <button type="button" id="sk-erase" class="sk-btn">Erase</button>
+        <button type="button" id="sk-hint" class="sk-btn">Hint</button>
+        <button type="button" id="sk-new" class="sk-btn">New puzzle</button>
+      </div>
+
+      <p id="sk-status" class="sk-status" role="status" aria-live="polite">
+        Loading puzzle…
+      </p>
+
+      <p class="sk-keys">
+        Keyboard: arrows to move, <kbd>1</kbd>–<kbd>9</kbd> to fill, <kbd>Backspace</kbd> to erase,
+        <kbd>N</kbd> for notes.
+      </p>
+    </section>
+
+    <section class="sk-info">
+      <h2>How to play</h2>
+      <p>
+        Fill every empty cell so that each row, each column and each of the nine 3×3 boxes contains
+        the digits 1 to 9 exactly once. A puzzle generated here always has exactly one solution, so
+        you never have to guess between two valid answers.
+      </p>
+      <ul>
+        <li><strong>Notes</strong> lets you pencil in candidates without committing to a number.</li>
+        <li><strong>Hints</strong> reveals one cell. You get three per puzzle — there is no paid top-up.</li>
+        <li><strong>Mistakes</strong> are counted for information only; they never block you.</li>
+      </ul>
+
+      <h2>A note on ads</h2>
+      <p>
+        This page is supported by display advertising. We do not use pop-ups, pop-unders, redirects
+        or push-notification prompts, and we do not gate the puzzle behind an ad. If you see
+        something inappropriate, please <a href="/pages/contact">tell us</a>.
+      </p>
+
+      <h2>Other things to play</h2>
+      <p>
+        Read a short branching story with a character from
+        <a href="/character-play">Character Stories</a>, or go back to the
+        <a href="/">GBA emulator</a>.
+      </p>
+    </section>
+  </main>
+
+  <script>
+    import '../scripts/sudoku.js';
+  </script>
+</BaseLayout>
+
+<style>
+  .sk-page {
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 28px 16px 64px;
+  }
+
+  .sk-hero {
+    text-align: center;
+    margin-bottom: 22px;
+  }
+
+  .sk-kicker {
+    display: inline-block;
+    margin-bottom: 8px;
+    padding: 4px 12px;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-full);
+    background: var(--bg-surface);
+    color: var(--accent-amber);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .sk-hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 8vw, 3.2rem);
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+
+  .sk-lede {
+    max-width: 56ch;
+    margin: 12px auto 0;
+    color: var(--text-secondary);
+    font-size: 0.98rem;
+  }
+
+  .sk-crosslink {
+    margin-top: 10px;
+    font-size: 0.86rem;
+    color: var(--text-tertiary);
+  }
+
+  .sk-crosslink a,
+  .sk-info a {
+    color: var(--accent-amber);
+  }
+
+  .sk-shell {
+    padding: 16px;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    background: var(--bg-glass-card);
+    box-shadow: var(--shadow-md);
+  }
+
+  .sk-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+
+  .sk-difficulty {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+  }
+
+  .sk-difficulty select {
+    padding: 8px 10px;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    font: inherit;
+    font-size: 0.86rem;
+  }
+
+  .sk-stats {
+    display: flex;
+    gap: 16px;
+    margin: 0;
+  }
+
+  .sk-stats div {
+    text-align: center;
+  }
+
+  .sk-stats dt {
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+  }
+
+  .sk-stats dd {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: var(--text-primary);
+  }
+
+  .sk-board-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .sk-board {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    width: 100%;
+    aspect-ratio: 1;
+    border: 2px solid var(--border-subtle);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--bg-surface);
+    touch-action: manipulation;
+  }
+
+  /* Cells are created by src/scripts/sudoku.js at runtime, so Astro's scoped
+     attribute is never added to them. :global() keeps these rules page-local
+     (all descendants of the scoped .sk-board) while still matching JS nodes. */
+  .sk-board :global(.sk-cell) {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    background: transparent;
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 4.4vw, 1.5rem);
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.12s ease;
+  }
+
+  .sk-board :global(.sk-cell:nth-child(9n)) {
+    border-right: 0;
+  }
+
+  .sk-board :global(.sk-cell:nth-child(n + 73)) {
+    border-bottom: 0;
+  }
+
+  .sk-board :global(.sk-cell.br) {
+    border-right: 2px solid rgba(255, 255, 255, 0.28);
+  }
+
+  .sk-board :global(.sk-cell.bb) {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.28);
+  }
+
+  .sk-board :global(.sk-cell.is-given) {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .sk-board :global(.sk-cell.is-peer) {
+    background: rgba(99, 102, 241, 0.08);
+  }
+
+  .sk-board :global(.sk-cell.is-same) {
+    background: rgba(245, 158, 11, 0.12);
+  }
+
+  .sk-board :global(.sk-cell.is-selected) {
+    background: rgba(245, 158, 11, 0.22);
+    box-shadow: inset 0 0 0 2px var(--accent-amber);
+    z-index: 1;
+  }
+
+  .sk-board :global(.sk-cell.is-wrong) {
+    color: var(--accent-rose);
+  }
+
+  .sk-board :global(.sk-cell.is-hinted) {
+    color: var(--accent-emerald);
+  }
+
+  .sk-board :global(.sk-cell:focus-visible) {
+    /* Focus always moves with selection on this board, so match the selection
+       colour instead of introducing a second highlight colour. */
+    outline: 2px solid var(--accent-amber);
+    outline-offset: -2px;
+    z-index: 2;
+  }
+
+  .sk-board :global(.sk-value) {
+    pointer-events: none;
+  }
+
+  .sk-board :global(.sk-notes) {
+    position: absolute;
+    inset: 2px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    pointer-events: none;
+  }
+
+  .sk-board :global(.sk-note) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-sans);
+    font-size: clamp(0.4rem, 1.5vw, 0.55rem);
+    color: var(--text-tertiary);
+    visibility: hidden;
+  }
+
+  .sk-board :global(.sk-note.on) {
+    visibility: visible;
+  }
+
+  .sk-pad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    max-width: 520px;
+    margin: 14px auto 0;
+  }
+
+  .sk-pad button {
+    min-height: 48px;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    background: var(--bg-surface-elevated);
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .sk-pad button:hover:not(:disabled) {
+    border-color: var(--border-focus);
+    color: var(--accent-amber);
+  }
+
+  .sk-pad button.is-done {
+    opacity: 0.35;
+  }
+
+  .sk-pad button:disabled {
+    cursor: default;
+    opacity: 0.5;
+  }
+
+  .sk-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 12px;
+  }
+
+  .sk-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 8px 14px;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-full);
+    background: var(--bg-surface);
+    color: var(--text-secondary);
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .sk-btn:hover:not(:disabled) {
+    color: var(--text-primary);
+    border-color: var(--border-focus);
+  }
+
+  .sk-btn:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+
+  .sk-btn--primary {
+    background: var(--accent-amber);
+    border-color: var(--accent-amber);
+    color: var(--text-inverse);
+  }
+
+  .sk-status {
+    margin-top: 12px;
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    min-height: 1.2em;
+  }
+
+  .sk-keys {
+    margin-top: 8px;
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--text-tertiary);
+  }
+
+  .sk-keys kbd {
+    padding: 1px 5px;
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    background: var(--bg-surface);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+  }
+
+  .sk-win {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    border-radius: 12px;
+    background: rgba(9, 10, 15, 0.82);
+    backdrop-filter: blur(6px);
+  }
+
+  .sk-win[hidden] {
+    display: none;
+  }
+
+  .sk-win-card {
+    width: 100%;
+    max-width: 300px;
+    padding: 22px 18px;
+    text-align: center;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--bg-surface-elevated);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .sk-win-kicker {
+    font-size: 0.66rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent-emerald);
+  }
+
+  .sk-win-card h2 {
+    margin: 4px 0 8px;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+  }
+
+  .sk-win-card p {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+  }
+
+  .sk-win-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 16px;
+  }
+
+  .sk-info {
+    margin-top: 36px;
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+  }
+
+  .sk-info h2 {
+    margin: 22px 0 8px;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    color: var(--text-primary);
+  }
+
+  .sk-info p {
+    margin-bottom: 8px;
+  }
+
+  .sk-info ul {
+    margin: 0 0 8px 18px;
+    display: grid;
+    gap: 6px;
+  }
+
+  @media (min-width: 640px) {
+    .sk-page {
+      padding-inline: 24px;
+    }
+
+    .sk-pad {
+      grid-template-columns: repeat(9, 1fr);
+    }
+
+    .sk-pad button {
+      min-height: 52px;
+    }
+  }
+</style>

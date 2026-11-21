@@ -204,6 +204,8 @@ const contentPages = [
   { path: '/game-boy-games', priority: '0.8', changefreq: 'monthly' },
   { path: '/ai-girlfriend-chat', priority: '0.9', changefreq: 'weekly' },
   { path: '/c-ai-alternative', priority: '0.8', changefreq: 'monthly' },
+  { path: '/ai-chat-with-memory', priority: '0.8', changefreq: 'monthly' },
+  { path: '/ai-character-chat-no-sign-up', priority: '0.8', changefreq: 'monthly' },
   { path: '/is-emulator-legal', priority: '0.6', changefreq: 'yearly' },
   { path: '/pages/about', priority: '0.4', changefreq: 'yearly' },
   { path: '/pages/contact', priority: '0.4', changefreq: 'yearly' },
