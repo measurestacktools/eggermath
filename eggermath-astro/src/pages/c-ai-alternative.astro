@@ -1,0 +1,302 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/games.js';
+
+const CHAT_URL = 'https://perchance.org/unlimited-ai-character-chat';
+const GF_URL = `${SITE.url}/ai-girlfriend-chat`;
+
+const faq = [
+  {
+    q: 'What is the best free c.ai alternative?',
+    a: 'For unlimited free messaging with no account, an AI character chat that stores memory on your own device is the simplest option. This site links to one that needs no sign-up, has no message cap, and keeps a memory per character.',
+  },
+  {
+    q: 'Do I need to create an account to chat?',
+    a: 'No. You can open the chat and send a message immediately. An account is optional and only used if you want cloud backup so your chats can move between devices.',
+  },
+  {
+    q: 'How is the memory different from c.ai?',
+    a: 'Each character keeps its own memory. Two characters with the same name never share chats or memories, so separate stories stay separate. Memory survives closing the tab on the same device.',
+  },
+  {
+    q: 'Is it really unlimited, or is there a hidden cap?',
+    a: 'There is no message counter, no credit system and no daily ceiling. You are only limited by how fast you can type.',
+  },
+  {
+    q: 'Can I import characters I already made?',
+    a: 'Yes. You can paste a character description or import a character card, then edit the personality and greeting inside the chat.',
+  },
+  {
+    q: 'Is adult content allowed?',
+    a: 'No. Explicit content is blocked permanently. Adventure, romance without explicit content, mystery and drama all work normally.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      name: 'Free c.ai Alternative - Unlimited AI Character Chat | EggerMath',
+      url: `${SITE.url}/c-ai-alternative`,
+      description:
+        'Looking for a free Character.AI alternative? Compare limits, memory and sign-up, and start an unlimited AI character chat with no account.',
+      isPartOf: { '@type': 'WebSite', name: SITE.name, url: SITE.url },
+      breadcrumb: {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+          { '@type': 'ListItem', position: 2, name: 'Free c.ai Alternative', item: `${SITE.url}/c-ai-alternative` },
+        ],
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faq.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a },
+      })),
+    },
+    {
+      '@type': 'SoftwareApplication',
+      name: 'Unlimited AI Character Chat',
+      url: CHAT_URL,
+      applicationCategory: 'EntertainmentApplication',
+      operatingSystem: 'Web',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Free c.ai Alternative - Unlimited AI Character Chat | EggerMath"
+  description="Free alternative to Character.AI: unlimited messages, no sign-up, per-character memory. Compare limits and start chatting in seconds."
+  canonical={`${SITE.url}/c-ai-alternative`}
+  jsonLd={jsonLd}
+>
+  <main class="cal">
+    <nav class="cal-crumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a> <span aria-hidden="true">/</span> <span>Free c.ai Alternative</span>
+    </nav>
+
+    <section class="cal-hero">
+      <p class="cal-kicker">Character.AI alternative</p>
+      <h1>A Free c.ai Alternative With No Message Cap</h1>
+      <p class="cal-lede">
+        Character.AI made AI roleplay mainstream, then added queues, filters and paid tiers.
+        If you just want to talk to a character without an account or a counter in the corner,
+        this is the shortest route to that.
+      </p>
+      <div class="cal-cta">
+        <a class="cal-btn" href={CHAT_URL}>Open the free chat</a>
+        <a class="cal-btn cal-btn--ghost" href="#compare">See the comparison</a>
+      </div>
+      <ul class="cal-badges">
+        <li>No account</li>
+        <li>No credits</li>
+        <li>Memory per character</li>
+        <li>Mobile ready</li>
+      </ul>
+    </section>
+
+    <section class="cal-section">
+      <h2>Why people leave c.ai</h2>
+      <div class="cal-grid">
+        <article class="cal-card">
+          <h3>Waiting in a queue</h3>
+          <p>
+            Free users are often placed behind a wait timer at peak hours. The whole point of
+            chatting is spontaneity, so a queue breaks the experience.
+          </p>
+        </article>
+        <article class="cal-card">
+          <h3>Hitting a message limit</h3>
+          <p>
+            The free tier caps how much you can send in a session. Long roleplay gets cut in
+            the middle of a scene, exactly when the story is getting good.
+          </p>
+        </article>
+        <article class="cal-card">
+          <h3>Losing the story</h3>
+          <p>
+            Memory is the first thing a free tier trims. Characters forget names, promises and
+            earlier events, so every session restarts from zero.
+          </p>
+        </article>
+        <article class="cal-card">
+          <h3>Needing an account</h3>
+          <p>
+            Email, verification, profile setup, then a subscription prompt. Many people want to
+            try a character chat before handing over an identity.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="cal-section" id="compare">
+      <h2>c.ai vs this alternative</h2>
+      <div class="cal-table-wrap">
+        <table class="cal-table">
+          <thead>
+            <tr><th>What matters</th><th>This chat</th><th>Character.AI free tier</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Account needed</td><td>No</td><td>Yes</td></tr>
+            <tr><td>Message limit</td><td>None</td><td>Session limits</td></tr>
+            <tr><td>Queue at busy times</td><td>No queue</td><td>Often</td></tr>
+            <tr><td>Memory</td><td>Per character, kept on device</td><td>Reduced on free tier</td></tr>
+            <tr><td>Create your own character</td><td>Free</td><td>Free</td></tr>
+            <tr><td>Cost</td><td>Free</td><td>Free tier plus paid plans</td></tr>
+            <tr><td>Explicit content</td><td>Blocked</td><td>Blocked</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="cal-note">
+        Free tiers change without notice. The comparison reflects publicly visible behaviour at
+        the time of writing; check the official sites for current terms.
+      </p>
+    </section>
+
+    <section class="cal-section">
+      <h2>How to move over in two minutes</h2>
+      <ol class="cal-steps">
+        <li><strong>Open the chat.</strong> Nothing to install and no form to fill in.</li>
+        <li>
+          <strong>Recreate one character.</strong> Paste the same description you used before,
+          or import a character card. Keep the greeting short so the personality shows through.
+        </li>
+        <li>
+          <strong>Continue the scene.</strong> Start where you left off. From that point the
+          character remembers your name, the setting and what has already happened.
+        </li>
+      </ol>
+      <p class="cal-inline-cta">
+        <a href={CHAT_URL}>Start the free AI character chat</a> and test it with your own character.
+      </p>
+    </section>
+
+    <section class="cal-section">
+      <h2>What this alternative is not</h2>
+      <ul class="cal-list">
+        <li>It is not a character marketplace with millions of public bots.</li>
+        <li>It is not a voice-call app, and it does not generate video.</li>
+        <li>It does not allow explicit adult content.</li>
+        <li>It is not affiliated with Character.AI or its parent company.</li>
+      </ul>
+      <p>
+        Being clear about the limits matters, because the fastest way to be disappointed by any
+        alternative is to expect it to be an exact clone.
+      </p>
+    </section>
+
+    <section class="cal-section">
+      <h2>Related guides</h2>
+      <ul class="cal-links">
+        <li><a href={GF_URL}>AI girlfriend chat with memory</a></li>
+        <li><a href={CHAT_URL}>Unlimited AI character chat</a></li>
+        <li><a href="/best-gba-games">Best GBA games to play while you wait</a></li>
+      </ul>
+    </section>
+
+    <section class="cal-section">
+      <h2>Questions about switching</h2>
+      <div class="cal-faq">
+        {faq.map((item) => (
+          <details>
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="cal-final">
+      <h2>Try it without signing up</h2>
+      <p>No account, no queue, no counter. Just a character and a first message.</p>
+      <a class="cal-btn" href={CHAT_URL}>Chat now - it is free</a>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .cal {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 40px 20px 72px;
+    color: var(--text-primary, #e8e8ee);
+  }
+  .cal-crumbs { font-size: 0.82rem; color: var(--text-secondary, #b9b9c6); margin-bottom: 18px; }
+  .cal-crumbs a { color: var(--accent-amber, #f0b35b); text-decoration: none; }
+  .cal-crumbs span { margin: 0 6px; }
+  .cal-hero { max-width: 760px; }
+  .cal-kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+    color: var(--accent-amber, #f0b35b);
+    margin-bottom: 12px;
+  }
+  .cal h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); line-height: 1.15; margin: 0 0 16px; }
+  .cal-lede { font-size: 1.05rem; line-height: 1.65; color: var(--text-secondary, #b9b9c6); margin: 0 0 24px; }
+  .cal-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+  .cal-btn {
+    display: inline-block;
+    background: var(--accent-amber, #f0b35b);
+    color: #16161c;
+    font-weight: 600;
+    padding: 12px 22px;
+    border-radius: 999px;
+    text-decoration: none;
+  }
+  .cal-btn--ghost {
+    background: transparent;
+    color: var(--text-primary, #e8e8ee);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+  }
+  .cal-badges { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0; }
+  .cal-badges li {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .cal-section { margin-top: 56px; }
+  .cal h2 { font-size: 1.5rem; margin: 0 0 18px; }
+  .cal h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  .cal p, .cal li { line-height: 1.65; }
+  .cal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .cal-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 14px;
+    padding: 20px;
+  }
+  .cal-card p { margin: 0; color: var(--text-secondary, #b9b9c6); }
+  .cal-steps { padding-left: 20px; }
+  .cal-steps li { margin-bottom: 12px; }
+  .cal-inline-cta a, .cal-links a { color: var(--accent-amber, #f0b35b); }
+  .cal-links, .cal-list { padding-left: 20px; }
+  .cal-links li, .cal-list li { margin-bottom: 8px; }
+  .cal-table-wrap { overflow-x: auto; }
+  .cal-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+  .cal-table th, .cal-table td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .cal-note { font-size: 0.85rem; color: var(--text-secondary, #b9b9c6); }
+  .cal-faq details { border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: 12px 0; }
+  .cal-faq summary { cursor: pointer; font-weight: 600; }
+  .cal-faq p { color: var(--text-secondary, #b9b9c6); }
+  .cal-final {
+    margin-top: 64px;
+    padding: 32px;
+    border-radius: 18px;
+    background: rgba(240, 179, 91, 0.08);
+    border: 1px solid rgba(240, 179, 91, 0.25);
+    text-align: center;
+  }
+</style>
