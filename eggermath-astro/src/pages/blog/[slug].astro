@@ -13,13 +13,31 @@ export function getStaticPaths() {
 const { post } = Astro.props;
 
 const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": post.title,
-  "description": post.desc,
-  "datePublished": post.date,
-  "author": { "@type": "Organization", "name": "EggerMath" },
-  "publisher": { "@type": "Organization", "name": "EggerMath", "url": SITE.url }
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BlogPosting',
+      headline: post.title,
+      description: post.desc,
+      datePublished: post.date,
+      dateModified: post.date,
+      author: { '@type': 'Organization', name: 'EggerMath' },
+      publisher: { '@type': 'Organization', name: 'EggerMath', url: SITE.url },
+      mainEntityOfPage: `${SITE.url}/blog/${post.slug}`,
+    },
+    ...(post.faq?.length
+      ? [
+          {
+            '@type': 'FAQPage',
+            mainEntity: post.faq.map((f) => ({
+              '@type': 'Question',
+              name: f.q,
+              acceptedAnswer: { '@type': 'Answer', text: f.a },
+            })),
+          },
+        ]
+      : []),
+  ],
 };
 ---
 <BaseLayout title={`${post.title} | EggerMath Blog`} description={post.desc} canonical={`${SITE.url}/blog/${post.slug}`} jsonLd={jsonLd}>

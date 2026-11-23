@@ -767,5 +767,190 @@ export const blogPosts = [
         "name": "Golden Sun"
       }
     ]
+  },
+  {
+    "slug": "why-character-ai-forgets-your-roleplay",
+    "title": "Why Character.AI Forgets Your Roleplay (And What Actually Fixes It)",
+    "desc": "Characters forget names, promises and whole scenes because of how context windows work. Here is the mechanism, the symptoms, and the fixes that hold.",
+    "date": "2026-11-23",
+    "category": "Guides",
+    "body": "<h2 style=\"font-size:1.3rem;margin:28px 0 10px;color:#f0ebe0\">The short answer</h2><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">A roleplay model does not have a memory in the human sense. Each reply is generated from a bundle of text: the character definition, a system prompt, and as much of the recent conversation as fits inside a fixed window. When the conversation grows past that window, the oldest material is dropped. The character keeps its personality but loses facts.</p><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">That is why the first things to vanish are names, promises and earlier scenes, while the speech style survives. Style lives in the character definition, which stays in the window. Events live in the chat history, which does not.</p><h2 style=\"font-size:1.3rem;margin:28px 0 10px;color:#f0ebe0\">What a context window actually is</h2><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">Think of a desk. Every message you send and every reply the character gives is a sheet of paper placed on the desk. The desk holds a fixed number of sheets. When it is full, an older sheet falls off the back to make room. The model can only read what is currently on the desk.</p><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">Paid tiers usually buy a bigger desk. They do not buy a filing cabinet. A long campaign still outgrows any context window eventually, which is why platforms that promise \"memory\" are usually selling a larger window plus a summary of older events, not perfect recall.</p><h2 style=\"font-size:1.3rem;margin:28px 0 10px;color:#f0ebe0\">The symptoms, in order</h2><ul style=\"color:#bbb;line-height:1.8;margin:0 0 16px;padding-left:22px\"><li>Around message 20 to 40 on a small window, the character stops using a nickname you gave it.</li><li>Later, it forgets a promise made in the first scene, or contradicts a fact it established itself.</li><li>At the end, it greets you as a stranger, or asks a question you answered an hour ago.</li></ul><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">None of that means the model is bad. It means the window filled up. A character that was consistent for thirty messages was consistent because those thirty messages fit.</p><h2 style=\"font-size:1.3rem;margin:28px 0 10px;color:#f0ebe0\">The three fixes, ranked</h2><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\"><strong>1. Keep the story in the character, not only in the chat.</strong> Put the important facts into the character description itself: names, relationships, the current situation, three things that already happened. The definition is re-sent with every reply, so it survives window pressure far better than chat history does.</p><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\"><strong>2. Store memory per character on your own device.</strong> A local-memory chat keeps a saved record for each character, so reopening a thread continues the same story instead of starting a new one. It does not make the model omniscient, but it stops the story from being deleted when you close the tab.</p><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\"><strong>3. Summarise deliberately every few scenes.</strong> Write two sentences at the end of a session: who you are, where you are, what just changed. Paste them into the next scene as a recap. It costs ten seconds and buys dozens of messages of continuity.</p><h2 style=\"font-size:1.3rem;margin:28px 0 10px;color:#f0ebe0\">What memory does not fix</h2><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">Consistency is not the same as intelligence. A long window will not make a character care about your plot; a good character definition will. If the character feels flat after twenty messages, the problem is usually that the definition described a look instead of a want and a fear.</p><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">It also does not port across platforms. Conversation history is not exportable from most roleplay apps, so the only truly portable asset is the character description. Treat that paragraph as the thing you own.</p><div style=\"margin:28px 0;padding:18px 20px;background:#141414;border:1px solid #262626;border-radius:12px\"><p style=\"color:#ddd;margin:0 0 10px\"><strong>Try it without an account:</strong> describe a character in one message and start the scene.</p><a href=\"https://perchance.org/unlimited-ai-character-chat\" style=\"color:#c4a35a;font-weight:700;text-decoration:none\">Open the free character chat &rarr;</a></div><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">More on the mechanics: <a href=\"/ai-chat-with-memory\" style=\"color:#c4a35a;text-decoration:none\">how character memory works</a>, and the <a href=\"/ai-roleplay-character-alternatives\" style=\"color:#c4a35a;text-decoration:none\">roleplay platform comparison</a> for which tools store what.</p>",
+    "relatedGames": [],
+    "relatedPosts": [
+      {
+        "slug": "unlimited-messages-roleplay-platforms-compared",
+        "title": "Unlimited messages: what every roleplay platform actually caps"
+      },
+      {
+        "slug": "how-to-write-a-roleplay-character",
+        "title": "How to write a roleplay character that survives 100 messages"
+      }
+    ],
+    "faq": [
+      {
+        "q": "Why does the AI forget my name in roleplay?",
+        "a": "Your name was in an older message that fell out of the context window. The character definition stays in every request, so anything written there survives, while details that only appeared in chat history eventually drop out."
+      },
+      {
+        "q": "Does a paid subscription fix AI roleplay memory?",
+        "a": "It usually expands the context window, which delays forgetting. It does not create perfect recall, and long campaigns still lose older details. Local per-character storage is the more durable fix."
+      },
+      {
+        "q": "Can I stop a character from forgetting?",
+        "a": "You can slow it down: put key facts in the character description, recap at the start of a scene, and use a tool that stores memory per character on your device."
+      },
+      {
+        "q": "Is forgetting a bug?",
+        "a": "No. It is a consequence of how context windows work. Every platform that generates replies from a limited window has the same behaviour; the difference is how big the window is and whether the story is saved elsewhere."
+      }
+    ]
+  },
+  {
+    "slug": "unlimited-messages-roleplay-platforms-compared",
+    "title": "Unlimited Messages: What Every Roleplay Platform Actually Caps",
+    "desc": "Free roleplay tiers rarely say \"limited\" in the same way. Queues, coins, daily allowances and context windows compared, so you know what stops a scene.",
+    "date": "2026-11-23",
+    "category": "Comparison",
+    "body": "<h2 style=\"font-size:1.3rem;margin:28px 0 10px;color:#f0ebe0\">\"Unlimited\" is a word with four meanings</h2><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">Every roleplay platform advertises freedom and every free tier imposes a limit. The limits are just shaped differently: a queue, a coin balance, a daily allowance, or a context window that quietly truncates the scene. Knowing which shape you are dealing with tells you more than any marketing page.</p><h2 style=\"font-size:1.3rem;margin:28px 0 10px;color:#f0ebe0\">The four limit shapes</h2><ul style=\"color:#bbb;line-height:1.8;margin:0 0 16px;padding-left:22px\"><li><strong>Queues.</strong> Replies are slow at peak times, so the conversation stops without an error message. The limit is time, not volume.</li><li><strong>Coins and credits.</strong> Each message or regeneration costs currency. The scene ends when the balance does, usually mid-tension.</li><li><strong>Daily allowances.</strong> A fixed number of messages resets each day. Long sessions are impossible; short sessions are fine.</li><li><strong>Context windows.</strong> Messages are unlimited but older ones are dropped. The character forgets rather than refuses.</li></ul><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">The last one is the most deceptive, because nothing visible breaks. You keep sending messages and the interface never complains; the story simply starts contradicting itself.</p><h2 style=\"font-size:1.3rem;margin:28px 0 10px;color:#f0ebe0\">Why platforms choose each shape</h2><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">Queues protect GPU capacity without charging anyone. Coins create a revenue gradient that does not look like a paywall. Daily allowances convert play into a habit loop. Context limits are the cheapest possible memory policy, which is why so many free tiers land there.</p><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">None of that is malicious. It is the economics of serving a large model to a lot of people for free. But it matters when you are choosing a place to run a long campaign.</p><h2 style=\"font-size:1.3rem;margin:28px 0 10px;color:#f0ebe0\">What to check before you commit</h2><ul style=\"color:#bbb;line-height:1.8;margin:0 0 16px;padding-left:22px\"><li>Does the free tier stop me mid-scene, or does it slow me down?</li><li>Is the limit per message, per day, or per conversation?</li><li>Does memory survive closing the tab, and does it survive switching devices?</li><li>Is my story exportable, or does it live only inside the product?</li></ul><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">The fourth question is the one people forget. A story you cannot export is a story you lose the day the platform changes its pricing.</p><h2 style=\"font-size:1.3rem;margin:28px 0 10px;color:#f0ebe0\">The no-cap option, honestly priced</h2><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">A chat with no message counter and per-character memory kept on your device removes the first three limit shapes and softens the fourth. You give up the public catalogues and native apps that large platforms provide. For long roleplay, that is usually a good trade; for browsing characters you did not create, it is not.</p><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\"><a href=\"/ai-roleplay-character-play\" style=\"color:#c4a35a;text-decoration:none\">AI roleplay character play</a> explains which of the four limits matters most for scene quality, and the <a href=\"/ai-roleplay-character-alternatives\" style=\"color:#c4a35a;text-decoration:none\">alternatives comparison</a> lists each platform by limit shape.</p><div style=\"margin:28px 0;padding:18px 20px;background:#141414;border:1px solid #262626;border-radius:12px\"><p style=\"color:#ddd;margin:0 0 10px\"><strong>Try it without an account:</strong> describe a character in one message and start the scene.</p><a href=\"https://perchance.org/unlimited-ai-character-chat\" style=\"color:#c4a35a;font-weight:700;text-decoration:none\">Open the free character chat &rarr;</a></div>",
+    "relatedGames": [],
+    "relatedPosts": [
+      {
+        "slug": "why-character-ai-forgets-your-roleplay",
+        "title": "Why Character.AI forgets your roleplay"
+      },
+      {
+        "slug": "sfw-roleplay-how-to-keep-a-story-pg",
+        "title": "SFW roleplay: keeping a story PG without flattening it"
+      }
+    ],
+    "faq": [
+      {
+        "q": "Which roleplay platform has no message limit?",
+        "a": "Most large platforms limit free use through queues, coins, daily allowances or context windows. A browser chat with no message counter is the direct alternative; the trade is a smaller catalogue."
+      },
+      {
+        "q": "Is a queue worse than a message cap?",
+        "a": "A queue interrupts timing; a cap interrupts volume. For slow, scene-based roleplay a queue is often more damaging, because the reply arrives after the moment has passed."
+      },
+      {
+        "q": "Do daily allowances reset at local midnight?",
+        "a": "It varies by platform and region. Check the in-app counter, which is the only reliable source, and assume the reset time can change."
+      },
+      {
+        "q": "What is a coin-based roleplay app really charging for?",
+        "a": "Usually per message or per regeneration. The visible price is the coin pack; the real cost is the number of messages a scene needs, which is why long roleplay is expensive on coin systems."
+      }
+    ]
+  },
+  {
+    "slug": "sfw-roleplay-how-to-keep-a-story-pg",
+    "title": "SFW Roleplay: Keeping a Story PG Without Flattening It",
+    "desc": "A PG policy changes the default, not the drama. Nine techniques for tension, romance and conflict in a family-friendly AI roleplay.",
+    "date": "2026-11-23",
+    "category": "Guides",
+    "body": "<h2 style=\"font-size:1.3rem;margin:28px 0 10px;color:#f0ebe0\">The misconception</h2><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">People assume a family-friendly roleplay has to be boring. What actually happens is that the easy lever disappears, so the other levers get used properly. Tension is not a content rating; it is a gap between what a character wants and what they can have.</p><h2 style=\"font-size:1.3rem;margin:28px 0 10px;color:#f0ebe0\">Nine techniques that work in any rating</h2><ul style=\"color:#bbb;line-height:1.8;margin:0 0 16px;padding-left:22px\"><li><strong>Stakes, not shock.</strong> A lost letter is as dramatic as a wound if the character needed it.</li><li><strong>Interrupted confessions.</strong> The almost-said line carries more charge than the said one.</li><li><strong>Rivalry with rules.</strong> Two characters who cannot afford to lose face will generate conflict for hours.</li><li><strong>Secrets with consequences.</strong> Give each character one thing they are hiding from the other.</li><li><strong>Time pressure.</strong> A door closing at dusk changes every exchange before it.</li><li><strong>Off-screen history.</strong> Shared past events the characters reference but never fully explain.</li><li><strong>Physical comedy.</strong> A spilled potion, a wrong door, a horse with opinions.</li><li><strong>Moral cost.</strong> A good choice that hurts someone kind.</li><li><strong>Restraint as characterisation.</strong> What a character refuses to say tells you who they are.</li></ul><h2 style=\"font-size:1.3rem;margin:28px 0 10px;color:#f0ebe0\">Writing romance inside a PG frame</h2><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">Restraint is the genre, not the compromise. Longing, hesitation, missed timing and loyalty read as romantic without any explicit content, and they survive a shared device. The trick is to let the relationship change behaviour: who they protect, what they risk, how they speak when tired.</p><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">A useful test: if a scene only works because of explicit material, it is a scene without a want. Give the characters a reason to be in the room and the scene will hold at any rating.</p><h2 style=\"font-size:1.3rem;margin:28px 0 10px;color:#f0ebe0\">Why the policy has to be fixed, not toggleable</h2><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">A per-character content setting is a promise a character can break. A platform-level policy is a guarantee. On a shared laptop, or with a younger player in the house, the difference matters more than any feature list.</p><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">This is the one place where a smaller platform can beat a larger one outright. The big mature catalogues are not carelessly designed; they are simply optimised for a different audience.</p><h2 style=\"font-size:1.3rem;margin:28px 0 10px;color:#f0ebe0\">Where SFW roleplay fits</h2><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">Adventure, mystery, fantasy politics, found family, rivalry, training arcs and slow romance all work. The audience includes writers, tabletop players between sessions, younger players and anyone who does not want a mature feed on their screen. That is a large audience, and it is poorly served by tools built for the other one.</p><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">Start with <a href=\"/ai-roleplay-character-play\" style=\"color:#c4a35a;text-decoration:none\">the roleplay character play guide</a>, or compare <a href=\"/ai-roleplay-character-alternatives\" style=\"color:#c4a35a;text-decoration:none\">roleplay platforms by content policy</a>.</p><div style=\"margin:28px 0;padding:18px 20px;background:#141414;border:1px solid #262626;border-radius:12px\"><p style=\"color:#ddd;margin:0 0 10px\"><strong>Try it without an account:</strong> describe a character in one message and start the scene.</p><a href=\"https://perchance.org/unlimited-ai-character-chat\" style=\"color:#c4a35a;font-weight:700;text-decoration:none\">Open the free character chat &rarr;</a></div>",
+    "relatedGames": [],
+    "relatedPosts": [
+      {
+        "slug": "how-to-write-a-roleplay-character",
+        "title": "How to write a roleplay character that survives 100 messages"
+      },
+      {
+        "slug": "anime-roleplay-characters-that-stay-in-character",
+        "title": "Anime roleplay characters that stay in character"
+      }
+    ],
+    "faq": [
+      {
+        "q": "Can AI roleplay be family-friendly and still interesting?",
+        "a": "Yes. Tension comes from wants, secrets and stakes rather than explicit content. Restraint is a craft technique, and many writers find it produces stronger scenes."
+      },
+      {
+        "q": "Is a PG roleplay chat safe for teenagers?",
+        "a": "A fixed platform policy that blocks explicit content for every character is the reliable answer. A per-character toggle is not, because content can still appear."
+      },
+      {
+        "q": "Can romance work in an SFW roleplay?",
+        "a": "Yes. Slow-burn romance depends on hesitation, loyalty and timing, all of which work without explicit scenes."
+      },
+      {
+        "q": "Why do some platforms allow mature content?",
+        "a": "Because that is the audience they chose. It is a product decision, not a quality difference. If you need a PG default, choose a platform whose policy is fixed."
+      }
+    ]
+  },
+  {
+    "slug": "how-to-write-a-roleplay-character",
+    "title": "How to Write a Roleplay Character That Survives 100 Messages",
+    "desc": "Most character descriptions describe a costume. A character that lasts needs a want, a secret, a speech habit and a place to stand. Here is the template.",
+    "date": "2026-11-23",
+    "category": "Guides",
+    "body": "<h2 style=\"font-size:1.3rem;margin:28px 0 10px;color:#f0ebe0\">Why most characters go flat</h2><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">A description like \"tall, silver hair, black cloak, mysterious\" produces a portrait, not a person. After ten messages the model has used every adjective and has nothing left to react with. The character becomes agreeable, because agreeable is the safest default when a prompt contains no motive.</p><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">A durable character is built from four parts, and none of them are appearance.</p><h2 style=\"font-size:1.3rem;margin:28px 0 10px;color:#f0ebe0\">The four-part template</h2><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\"><strong>1. A want.</strong> Something concrete they are trying to get in this scene. Not \"power\" but \"the key to the east gate before the guard changes\". A want gives every reply a direction.</p><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\"><strong>2. A secret.</strong> One thing they would rather you did not learn. It creates subtext: they answer questions about it carefully, change the subject, or over-explain.</p><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\"><strong>3. A speech habit.</strong> Short sentences. Formal address. A repeated phrase when annoyed. Small signals are easier for a model to keep consistent than a paragraph of backstory.</p><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\"><strong>4. A place to stand.</strong> Where the scene opens and why both of you are there. Setting removes half the work of the first reply.</p><h2 style=\"font-size:1.3rem;margin:28px 0 10px;color:#f0ebe0\">A template you can paste</h2><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\"><em>\"Maren, a river smuggler in her thirties. Wants: to get a sealed crate past the toll bridge before dawn. Secret: the crate is not hers and she does not know what is inside. Speaks in short, flat sentences and calls everyone 'friend' when she is nervous. Scene: the toll house, rain, one guard awake.\"</em></p><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">That is under sixty words. It will outperform a page of physical description, because every sentence gives the model something to do.</p><h2 style=\"font-size:1.3rem;margin:28px 0 10px;color:#f0ebe0\">Appearance, used sparingly</h2><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">One or two visual details are worth keeping, especially if you also use the description as an image prompt. Choose details that imply behaviour: ink-stained fingers, a coat that does not fit, a scar they touch when lying.</p><h2 style=\"font-size:1.3rem;margin:28px 0 10px;color:#f0ebe0\">Editing after the first scene</h2><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">Do not perfect the character before playing. Play ten messages, notice what feels wrong, then add one line. The usual additions are a boundary (\"will not ask for help\"), a relationship (\"owes the guard a favour\") and a fear (\"hates deep water\").</p><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">Each addition should change a decision the character might make. If it does not, it is decoration.</p><h2 style=\"font-size:1.3rem;margin:28px 0 10px;color:#f0ebe0\">Keeping it consistent</h2><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">Put the four parts into the character definition rather than only into the chat, because the definition is re-sent with every reply. Then recap the current situation at the start of a session. Between the two, the character can hold a long story without drifting.</p><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">The same paragraph works everywhere: <a href=\"/ai-character-generator\" style=\"color:#c4a35a;text-decoration:none\">character generator</a>, <a href=\"/fantasy-character-maker\" style=\"color:#c4a35a;text-decoration:none\">fantasy character maker</a>, or the <a href=\"/ai-roleplay-character-play\" style=\"color:#c4a35a;text-decoration:none\">roleplay play guide</a>.</p><div style=\"margin:28px 0;padding:18px 20px;background:#141414;border:1px solid #262626;border-radius:12px\"><p style=\"color:#ddd;margin:0 0 10px\"><strong>Try it without an account:</strong> describe a character in one message and start the scene.</p><a href=\"https://perchance.org/unlimited-ai-character-chat\" style=\"color:#c4a35a;font-weight:700;text-decoration:none\">Open the free character chat &rarr;</a></div>",
+    "relatedGames": [],
+    "relatedPosts": [
+      {
+        "slug": "anime-roleplay-characters-that-stay-in-character",
+        "title": "Anime roleplay characters that stay in character"
+      },
+      {
+        "slug": "why-character-ai-forgets-your-roleplay",
+        "title": "Why Character.AI forgets your roleplay"
+      }
+    ],
+    "faq": [
+      {
+        "q": "How long should an AI roleplay character description be?",
+        "a": "Around fifty to one hundred words is enough when it contains a want, a secret, a speech habit and a setting. Longer descriptions help only if they add decisions, not adjectives."
+      },
+      {
+        "q": "Should I describe the character appearance?",
+        "a": "One or two behaviour-implying details help, especially for image prompts. Pages of appearance do not improve dialogue."
+      },
+      {
+        "q": "Can I change a character after starting?",
+        "a": "Yes. Add one line at a time after a scene, based on what felt wrong. Characters improve through small, decision-changing edits."
+      },
+      {
+        "q": "Why does my character always agree with me?",
+        "a": "Usually because the description contains no want or boundary. Agreement is the model default when the prompt gives it nothing to push against."
+      }
+    ]
+  },
+  {
+    "slug": "anime-roleplay-characters-that-stay-in-character",
+    "title": "Anime Roleplay Characters That Stay in Character",
+    "desc": "Anime archetypes are easy to start and hard to sustain. How to write a tsundere, rival or mentor that does not dissolve into a generic assistant.",
+    "date": "2026-11-23",
+    "category": "Guides",
+    "body": "<h2 style=\"font-size:1.3rem;margin:28px 0 10px;color:#f0ebe0\">The archetype trap</h2><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">Anime characters are the easiest to prompt and the fastest to flatten. \"Tsundere with pink hair\" gives the model a costume and a mood, and after a dozen exchanges the mood becomes the whole personality. The character stops having reasons and starts having catchphrases.</p><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">The fix is the same as for any character: archetypes are a starting posture, not a personality. You need the want, the secret and the speech habit underneath the trope.</p><h2 style=\"font-size:1.3rem;margin:28px 0 10px;color:#f0ebe0\">What each archetype actually needs</h2><ul style=\"color:#bbb;line-height:1.8;margin:0 0 16px;padding-left:22px\"><li><strong>Tsundere:</strong> needs a reason for the defence. Fear of being seen as needy, a family rule, a past embarrassment. Without a reason, the hostility becomes noise.</li><li><strong>Rival:</strong> needs a shared goal and a rule they will not break. Rivalry without stakes is bickering.</li><li><strong>Mentor:</strong> needs a limit. What can they not teach, and why? Otherwise the mentor becomes an answer machine.</li><li><strong>Genki:</strong> needs one quiet subject. Cheerfulness reads as shallow unless something silences them.</li><li><strong>Kuudere:</strong> needs a tell. A small physical habit that betrays feeling is worth more than paragraphs of backstory.</li></ul><h2 style=\"font-size:1.3rem;margin:28px 0 10px;color:#f0ebe0\">Speech style is the strongest lever</h2><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">Anime dialogue is stylised, and a model can hold style better than it can hold lore. Give it a rule: no contractions, always uses a nickname, ends questions with a challenge, never says the other person's name. One rule maintained across fifty messages reads as characterisation.</p><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">Avoid catchphrases as the primary signal. They repeat and quickly feel hollow; a grammatical habit scales better.</p><h2 style=\"font-size:1.3rem;margin:28px 0 10px;color:#f0ebe0\">Scene structure for anime pacing</h2><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">Anime pacing alternates ordinary life, escalation and breather. A roleplay that only escalates exhausts itself. Deliberately write a quiet scene: a walk home, a failed cooking attempt, a shared silence on a train. Those scenes give the character room to reveal the secret without a plot forcing it.</p><h2 style=\"font-size:1.3rem;margin:28px 0 10px;color:#f0ebe0\">Using a visual tool and a chat together</h2><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">Generate the portrait in an image tool, then paste the same description into a chat. The two outputs come from the same paragraph, so the look and the voice agree. Keep the character description as the master copy and treat both tools as renderers.</p><p style=\"color:#bbb;line-height:1.75;margin:0 0 14px\">Start with the <a href=\"/ai-character-generator\" style=\"color:#c4a35a;text-decoration:none\">free AI character generator</a>, or see how anime and fantasy tools differ on the <a href=\"/fantasy-character-maker\" style=\"color:#c4a35a;text-decoration:none\">fantasy character maker hub</a>.</p><div style=\"margin:28px 0;padding:18px 20px;background:#141414;border:1px solid #262626;border-radius:12px\"><p style=\"color:#ddd;margin:0 0 10px\"><strong>Try it without an account:</strong> describe a character in one message and start the scene.</p><a href=\"https://perchance.org/unlimited-ai-character-chat\" style=\"color:#c4a35a;font-weight:700;text-decoration:none\">Open the free character chat &rarr;</a></div>",
+    "relatedGames": [],
+    "relatedPosts": [
+      {
+        "slug": "how-to-write-a-roleplay-character",
+        "title": "How to write a roleplay character that survives 100 messages"
+      },
+      {
+        "slug": "sfw-roleplay-how-to-keep-a-story-pg",
+        "title": "SFW roleplay: keeping a story PG without flattening it"
+      }
+    ],
+    "faq": [
+      {
+        "q": "How do I make an anime roleplay character?",
+        "a": "Describe the archetype, then add a want, a secret and a speech rule underneath it, plus where the scene starts. The archetype sets the posture; the want and secret keep it from flattening."
+      },
+      {
+        "q": "Why does my anime character become generic?",
+        "a": "Usually the description relies on appearance and mood without a motive. Add a concrete want and one boundary the character will not cross."
+      },
+      {
+        "q": "Can I generate the character art and then chat with it?",
+        "a": "Yes. Generate the portrait in an art tool, then paste the same description into a character chat so the voice matches the image."
+      },
+      {
+        "q": "What anime characters work best for long roleplay?",
+        "a": "Rivals, mentors and slow-burn romances with a shared goal. They generate ongoing decisions rather than a single mood."
+      }
+    ]
   }
 ];
