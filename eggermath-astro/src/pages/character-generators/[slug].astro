@@ -1,0 +1,168 @@
+---
+import GeneratorLayout from '../../layouts/GeneratorLayout.astro';
+import { SITE } from '../../data/games.js';
+import { CHAT_URL, fantasyCompetitors } from '../../data/fantasy-competitors.js';
+
+export function getStaticPaths() {
+  return fantasyCompetitors.map((tool, i) => ({
+    params: { slug: tool.slug },
+    props: {
+      tool,
+      others: [1, 2, 3].map((n) => fantasyCompetitors[(i + n) % fantasyCompetitors.length]),
+    },
+  }));
+}
+
+const { tool, others } = Astro.props;
+const PAGE_URL = `${SITE.url}/character-generators/${tool.slug}`;
+const TITLE = `${tool.name} Review: ${tool.tagline} | EggerMath`;
+const DESC = `${tool.name} for fantasy characters: what it generates, the free tier, where it stops, and the best fit. ${tool.bestFor}`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      name: TITLE,
+      url: PAGE_URL,
+      description: DESC,
+      dateModified: '2026-11-23',
+      isPartOf: { '@type': 'WebSite', name: SITE.name, url: SITE.url },
+      breadcrumb: {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+          { '@type': 'ListItem', position: 2, name: 'Character Generators', item: `${SITE.url}/character-generators` },
+          { '@type': 'ListItem', position: 3, name: tool.name, item: PAGE_URL },
+        ],
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: tool.faq.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a },
+      })),
+    },
+    {
+      '@type': 'SoftwareApplication',
+      name: tool.name,
+      url: tool.url,
+      applicationCategory: 'DesignApplication',
+      operatingSystem: 'Web',
+    },
+  ],
+};
+---
+
+<GeneratorLayout
+  title={TITLE}
+  description={DESC}
+  canonical={PAGE_URL}
+  jsonLd={jsonLd}
+  crumbs={[
+    { name: 'Home', href: '/' },
+    { name: 'Character Generators', href: '/character-generators' },
+    { name: tool.name },
+  ]}
+>
+  <section class="gen-hero">
+    <p class="gen-kicker">{tool.category}</p>
+    <h1>{tool.name} Review for Fantasy Characters</h1>
+    <p class="gen-lede">{tool.intro[0]}</p>
+    <div class="gen-cta">
+      <a class="gen-btn" href={CHAT_URL}>Chat with your character instead</a>
+      <a class="gen-btn gen-btn--ghost" href={tool.url} rel="nofollow noopener" target="_blank">
+        Visit {tool.domain}
+      </a>
+    </div>
+  </section>
+
+  <p class="gen-byline">
+    Reviewed by the EggerMath editorial team on 23 November 2026 from {tool.name}'s public product
+    pages. {tool.name} is a third-party product; prices and features can change. This page is
+    independent and is not sponsored.
+  </p>
+
+  <section class="gen-section">
+    <h2>{tool.name} at a glance</h2>
+    <ul class="gen-facts">
+      {tool.facts.map(([label, value]) => (
+        <li><b>{label}</b>{value}</li>
+      ))}
+      <li><b>Pricing</b>{tool.pricing}</li>
+      <li><b>Best for</b>{tool.bestFor}</li>
+      <li><b>Skip it if</b>{tool.notFor}</li>
+    </ul>
+  </section>
+
+  <section class="gen-section">
+    <h2>What {tool.name} does</h2>
+    {tool.intro.slice(1).map((p) => <p>{p}</p>)}
+    <div class="gen-grid" style="margin-top:20px">
+      {tool.strengths.map(([title, text]) => (
+        <article class="gen-card">
+          <h3>{title}</h3>
+          <p>{text}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="gen-section">
+    <h2>Where {tool.name} stops</h2>
+    <ul class="gen-list">
+      {tool.limits.map(([title, text]) => (
+        <li><strong>{title}.</strong> {text}</li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="gen-section">
+    <h2>How to use {tool.name}</h2>
+    <ol class="gen-steps">
+      {tool.steps.map((s) => <li>{s}</li>)}
+    </ol>
+  </section>
+
+  <section class="gen-section">
+    <h2>Verdict</h2>
+    <p>{tool.verdict}</p>
+    <p class="gen-inline-cta">
+      If the character needs to speak, <a href={CHAT_URL}>create it in the character chat</a>
+      instead and keep the same description.
+    </p>
+  </section>
+
+  <section class="gen-section">
+    <h2>{tool.name} alternatives</h2>
+    <ul class="gen-links">
+      {others.map((o) => (
+        <li>
+          <a href={`/character-generators/${o.slug}`}>{o.name}</a> — {o.tagline}
+        </li>
+      ))}
+      <li><a href={`/character-generators/alternatives/${tool.slug}`}>Full {tool.name} alternatives comparison</a></li>
+      <li><a href="/fantasy-character-maker">Fantasy character maker hub</a></li>
+    </ul>
+  </section>
+
+  <section class="gen-section">
+    <h2>{tool.name} questions</h2>
+    <div class="gen-faq">
+      {tool.faq.map((item) => (
+        <details>
+          <summary>{item.q}</summary>
+          <p>{item.a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <section class="gen-final">
+    <h2>Create the character where it can answer</h2>
+    <p>The same description works in the chat. No account, no credits, per-character memory.</p>
+    <a class="gen-btn" href={CHAT_URL}>Open the free character chat</a>
+  </section>
+</GeneratorLayout>

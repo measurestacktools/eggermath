@@ -1,0 +1,133 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Crumb {
+  name: string;
+  href?: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  jsonLd?: object;
+  crumbs: Crumb[];
+  showAds?: boolean;
+}
+
+const { title, description, canonical, jsonLd, crumbs, showAds } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} canonical={canonical} jsonLd={jsonLd} showAds={showAds}>
+  <main class="gen">
+    <nav class="gen-crumbs" aria-label="Breadcrumb">
+      {crumbs.map((c, i) => (
+        <>
+          {i > 0 && <span aria-hidden="true">/</span>}
+          {c.href ? <a href={c.href}>{c.name}</a> : <span>{c.name}</span>}
+        </>
+      ))}
+    </nav>
+    <slot />
+  </main>
+</BaseLayout>
+
+<style>
+  .gen {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 40px 20px 72px;
+    color: var(--text-primary, #e8e8ee);
+  }
+  .gen-crumbs { font-size: 0.82rem; color: var(--text-secondary, #b9b9c6); margin-bottom: 18px; }
+  .gen-crumbs a { color: var(--accent-amber, #f0b35b); text-decoration: none; }
+  .gen-crumbs span { margin: 0 6px; }
+  .gen :global(.gen-hero) { max-width: 780px; }
+  .gen :global(.gen-kicker) {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+    color: var(--accent-amber, #f0b35b);
+    margin-bottom: 12px;
+  }
+  .gen :global(h1) { font-size: clamp(1.9rem, 4vw, 2.8rem); line-height: 1.15; margin: 0 0 16px; }
+  .gen :global(h2) { font-size: 1.5rem; margin: 0 0 18px; }
+  .gen :global(h3) { font-size: 1.05rem; margin: 0 0 8px; }
+  .gen :global(.gen-lede) { font-size: 1.05rem; line-height: 1.65; color: var(--text-secondary, #b9b9c6); margin: 0 0 24px; }
+  .gen :global(.gen-cta) { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+  .gen :global(.gen-btn) {
+    display: inline-block;
+    background: var(--accent-amber, #f0b35b);
+    color: #16161c;
+    font-weight: 600;
+    padding: 12px 22px;
+    border-radius: 999px;
+    text-decoration: none;
+  }
+  .gen :global(.gen-btn--ghost) {
+    background: transparent;
+    color: var(--text-primary, #e8e8ee);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+  }
+  .gen :global(.gen-badges) { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0; }
+  .gen :global(.gen-badges li) {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .gen :global(.gen-section) { margin-top: 56px; }
+  .gen :global(p), .gen :global(li) { line-height: 1.65; }
+  .gen :global(.gen-grid) { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .gen :global(.gen-card) {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 14px;
+    padding: 20px;
+  }
+  .gen :global(.gen-card p) { margin: 0; color: var(--text-secondary, #b9b9c6); }
+  .gen :global(.gen-steps) { padding-left: 20px; }
+  .gen :global(.gen-steps li) { margin-bottom: 12px; }
+  .gen :global(.gen-inline-cta a), .gen :global(.gen-links a) { color: var(--accent-amber, #f0b35b); }
+  .gen :global(.gen-links), .gen :global(.gen-list) { padding-left: 20px; }
+  .gen :global(.gen-links li), .gen :global(.gen-list li) { margin-bottom: 8px; }
+  .gen :global(.gen-table-wrap) { overflow-x: auto; }
+  .gen :global(.gen-table) { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+  .gen :global(.gen-table th), .gen :global(.gen-table td) {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    vertical-align: top;
+  }
+  .gen :global(.gen-table a) { color: var(--accent-amber, #f0b35b); }
+  .gen :global(.gen-note) { font-size: 0.85rem; color: var(--text-secondary, #b9b9c6); }
+  .gen :global(.gen-faq details) { border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: 12px 0; }
+  .gen :global(.gen-faq summary) { cursor: pointer; font-weight: 600; }
+  .gen :global(.gen-faq p) { color: var(--text-secondary, #b9b9c6); }
+  .gen :global(.gen-final) {
+    margin-top: 64px;
+    padding: 32px;
+    border-radius: 18px;
+    background: rgba(240, 179, 91, 0.08);
+    border: 1px solid rgba(240, 179, 91, 0.25);
+    text-align: center;
+  }
+  .gen :global(.gen-facts) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .gen :global(.gen-facts li) {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 0.9rem;
+  }
+  .gen :global(.gen-facts b) { display: block; color: var(--accent-amber, #f0b35b); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .gen :global(.gen-byline) { font-size: 0.82rem; color: var(--text-secondary, #b9b9c6); margin: 0 0 20px; }
+</style>

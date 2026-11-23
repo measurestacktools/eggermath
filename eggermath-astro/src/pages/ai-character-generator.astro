@@ -1,0 +1,198 @@
+---
+import GeneratorLayout from '../layouts/GeneratorLayout.astro';
+import { SITE } from '../data/games.js';
+import { CHAT_URL, aiGeneratorFaq } from '../data/fantasy-competitors.js';
+
+const PAGE_URL = `${SITE.url}/ai-character-generator`;
+
+const steps = [
+  { name: 'Open the character chat', text: 'No account, no download and no form. The chat opens in the browser.' },
+  { name: 'Describe the character', text: 'Write the name, look, personality and setting in one message. Anime, fantasy, sci-fi or original characters all work the same way.' },
+  { name: 'Start the scene', text: 'The generator builds the character card, writes a greeting and opens a thread with that character.' },
+  { name: 'Keep the memory', text: 'Each character keeps its own chat and memory on your device, so the next session continues instead of restarting.' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      name: 'Free AI Character Generator - Anime, Fantasy and Original Characters | EggerMath',
+      url: PAGE_URL,
+      description:
+        'Create an AI character from a description: anime, fantasy or original. Get a personality, a greeting and a chat with per-character memory. No sign-up.',
+      isPartOf: { '@type': 'WebSite', name: SITE.name, url: SITE.url },
+      breadcrumb: {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+          { '@type': 'ListItem', position: 2, name: 'AI Character Generator', item: PAGE_URL },
+        ],
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: aiGeneratorFaq.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a },
+      })),
+    },
+    {
+      '@type': 'HowTo',
+      name: 'How to create an AI character for free',
+      step: steps.map((s, i) => ({
+        '@type': 'HowToStep',
+        position: i + 1,
+        name: s.name,
+        text: s.text,
+      })),
+    },
+    {
+      '@type': 'SoftwareApplication',
+      name: 'Unlimited AI Character Chat',
+      url: CHAT_URL,
+      applicationCategory: 'EntertainmentApplication',
+      operatingSystem: 'Web',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+  ],
+};
+---
+
+<GeneratorLayout
+  title="Free AI Character Generator - Anime, Fantasy and Original Characters | EggerMath"
+  description="Create an AI character from a description: anime, fantasy or original. Get a personality, a greeting and a chat with per-character memory. No sign-up."
+  canonical={PAGE_URL}
+  jsonLd={jsonLd}
+  crumbs={[{ name: 'Home', href: '/' }, { name: 'AI Character Generator' }]}
+>
+  <section class="gen-hero">
+    <p class="gen-kicker">AI character generator</p>
+    <h1>Free AI Character Generator for Anime, Fantasy and Original Characters</h1>
+    <p class="gen-lede">
+      Describe who you want to meet and the generator creates the character: a name, a
+      personality, a greeting and an open chat. No account, no image prompt, no message counter.
+      It works for anime characters, fantasy characters and completely original ideas.
+    </p>
+    <div class="gen-cta">
+      <a class="gen-btn" href={CHAT_URL}>Create a character now</a>
+      <a class="gen-btn gen-btn--ghost" href="/fantasy-character-maker">Compare fantasy makers</a>
+    </div>
+    <ul class="gen-badges">
+      <li>Anime</li>
+      <li>Fantasy</li>
+      <li>Original characters</li>
+      <li>Free chat</li>
+    </ul>
+  </section>
+
+  <p class="gen-byline" style="margin-top:20px">
+    By the EggerMath editorial team, November 2026. The chat runs on a third-party character-chat
+    generator that we link to and review. <a href="/pages/about">About EggerMath</a>.
+  </p>
+
+  <section class="gen-section">
+    <h2>How do you create an AI character for free?</h2>
+    <p>
+      Open the chat and describe the character in one message: who they are, how they look, how
+      they speak and where the scene begins. The generator turns that description into a character
+      card, writes an opening line and starts the conversation. No account, payment or download is
+      involved.
+    </p>
+  </section>
+
+  <section class="gen-section">
+    <h2>Create a character in four steps</h2>
+    <ol class="gen-steps">
+      {steps.map((s) => (
+        <li><strong>{s.name}.</strong> {s.text}</li>
+      ))}
+    </ol>
+    <p class="gen-inline-cta">
+      <a href={CHAT_URL}>Open the character chat</a> and try it with one sentence.
+    </p>
+  </section>
+
+  <section class="gen-section">
+    <h2>What kind of character can you make?</h2>
+    <div class="gen-grid">
+      <article class="gen-card">
+        <h3>Anime characters</h3>
+        <p>
+          Ask for an anime character and describe the archetype, the look and the tone. The card
+          keeps the speech style and the setting, so the character does not drift after a few
+          replies.
+        </p>
+      </article>
+      <article class="gen-card">
+        <h3>Fantasy characters</h3>
+        <p>
+          Knights, mages, rogues, fae or a whole party. Fantasy works best with a clear want and a
+          clear secret, which is also what makes the first scene interesting.
+        </p>
+      </article>
+      <article class="gen-card">
+        <h3>Original characters</h3>
+        <p>
+          Any genre and any premise. A character does not need an existing franchise to work; it
+          needs a point of view and a reason to talk to you.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="gen-section">
+    <h2>Character generator vs character chat</h2>
+    <p>
+      An image generator returns a portrait. A character generator returns a persona: the text
+      that makes the character behave consistently. The chat is where that persona is used. Keeping
+      creation and conversation in the same tool is why the character remembers your name and the
+      last scene instead of starting over.
+    </p>
+    <div class="gen-table-wrap">
+      <table class="gen-table">
+        <thead>
+          <tr><th>What you need</th><th>Right tool</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>A portrait or token</td><td><a href="/character-generators">Art generator</a></td></tr>
+          <tr><td>A personality and a first line</td><td><a href={CHAT_URL}>Character chat</a></td></tr>
+          <tr><td>A long story with continuity</td><td><a href={CHAT_URL}>Character chat with memory</a></td></tr>
+          <tr><td>Both art and dialogue</td><td>Art tool first, then <a href={CHAT_URL}>chat</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="gen-section">
+    <h2>Related guides</h2>
+    <ul class="gen-links">
+      <li><a href="/fantasy-character-maker">Fantasy character maker comparison</a></li>
+      <li><a href="/character-generators">All character generator reviews</a></li>
+      <li><a href="/ai-character-chat-no-sign-up">AI character chat with no sign-up</a></li>
+      <li><a href="/ai-chat-with-memory">How long-term character memory works</a></li>
+      <li><a href="/c-ai-alternative">Free c.ai alternative</a></li>
+      <li><a href="/ai-roleplay-character-play">AI roleplay character play</a></li>
+      <li><a href="/ai-roleplay-character-alternatives">Roleplay platforms compared</a></li>
+    </ul>
+  </section>
+
+  <section class="gen-section">
+    <h2>AI character generator questions</h2>
+    <div class="gen-faq">
+      {aiGeneratorFaq.map((item) => (
+        <details>
+          <summary>{item.q}</summary>
+          <p>{item.a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <section class="gen-final">
+    <h2>Describe a character and start talking</h2>
+    <p>One message is enough. No sign-up, no credits, no image prompt required.</p>
+    <a class="gen-btn" href={CHAT_URL}>Create your character</a>
+  </section>
+</GeneratorLayout>

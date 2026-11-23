@@ -1,0 +1,338 @@
+---
+import GeneratorLayout from '../layouts/GeneratorLayout.astro';
+import { SITE } from '../data/games.js';
+import { CHAT_URL, chatRow, playFaq, roleplayCompetitors } from '../data/roleplay-competitors.js';
+
+const PAGE_URL = `${SITE.url}/ai-roleplay-character-play`;
+const TITLE = 'AI Roleplay Character Play - Free, Unlimited, No Sign-Up | EggerMath';
+const DESC =
+  'AI roleplay character play without an account or message cap. Describe a character, start the scene, and keep the same story with per-character memory on your device.';
+
+const steps = [
+  {
+    name: 'Describe the character in one message',
+    text: 'Name, role, how they speak and what they want. One paragraph is enough; anime, fantasy and original characters all work the same way.',
+  },
+  {
+    name: 'Open the scene',
+    text: 'The character card is built, an opening line is written and the thread starts. No account, no form and no credit counter.',
+  },
+  {
+    name: 'Play, then come back later',
+    text: 'Each character keeps its own memory on your device, so closing the tab pauses the story instead of ending it.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      name: TITLE,
+      url: PAGE_URL,
+      description: DESC,
+      dateModified: '2026-11-23',
+      isPartOf: { '@type': 'WebSite', name: SITE.name, url: SITE.url },
+      breadcrumb: {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+          { '@type': 'ListItem', position: 2, name: 'AI Roleplay Character Play', item: PAGE_URL },
+        ],
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: playFaq.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a },
+      })),
+    },
+    {
+      '@type': 'HowTo',
+      name: 'How to start AI roleplay character play',
+      step: steps.map((s, i) => ({
+        '@type': 'HowToStep',
+        position: i + 1,
+        name: s.name,
+        text: s.text,
+      })),
+    },
+    {
+      '@type': 'SoftwareApplication',
+      name: 'Unlimited AI Character Chat',
+      url: CHAT_URL,
+      applicationCategory: 'EntertainmentApplication',
+      operatingSystem: 'Web',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+  ],
+};
+---
+
+<GeneratorLayout
+  title={TITLE}
+  description={DESC}
+  canonical={PAGE_URL}
+  jsonLd={jsonLd}
+  crumbs={[{ name: 'Home', href: '/' }, { name: 'AI Roleplay Character Play' }]}
+>
+  <section class="gen-hero">
+    <p class="gen-kicker">AI roleplay character play</p>
+    <h1>AI Roleplay Character Play: Start a Scene and Keep It</h1>
+    <p class="gen-lede" style="font-size:1.12rem;color:var(--text-primary,#e8e8ee)">
+      AI roleplay character play means talking to a character as if it were a person in a scene:
+      it speaks in character, reacts to your choices, and the story continues from message to
+      message. It needs three things to feel real: a character with a clear voice, no message cap,
+      and memory that holds earlier scenes. Most platforms drop one of the three.
+    </p>
+    <div class="gen-cta">
+      <a class="gen-btn" href={CHAT_URL}>Start playing free</a>
+      <a class="gen-btn gen-btn--ghost" href="/ai-roleplay-character-alternatives">
+        Compare the platforms
+      </a>
+    </div>
+    <ul class="gen-badges">
+      <li>No account</li>
+      <li>No message cap</li>
+      <li>Memory per character</li>
+      <li>PG by policy</li>
+    </ul>
+  </section>
+
+  <p class="gen-byline" style="margin-top:20px">
+    Written by the EggerMath editorial team, 23 November 2026. The chat is a third-party
+    Perchance project we link to and review; platform limits below come from public pages and
+    change often. <a href="/pages/about">How we work</a>.
+  </p>
+
+  <section class="gen-section">
+    <h2>What is AI roleplay character play?</h2>
+    <p>
+      Roleplay character play is a conversation with a character, not a conversation with a
+      chatbot about a character. You write an action or a line, the character answers as
+      themselves, and the scene moves forward. The player is a participant, not a spectator.
+    </p>
+    <p>
+      That distinction matters when you compare tools. A character <em>generator</em> produces a
+      portrait or a sheet. Character <em>play</em> needs an active loop: input, response, memory,
+      next input. A tool can be excellent at the first and have no second at all.
+    </p>
+    <div class="gen-grid" style="margin-top:20px">
+      <article class="gen-card">
+        <h3>The character</h3>
+        <p>
+          A voice, a want and a flaw. Three sentences beat a page of description, because the
+          model uses the wants and flaws more than the eye colour.
+        </p>
+      </article>
+      <article class="gen-card">
+        <h3>The loop</h3>
+        <p>
+          No counter, no queue, no coin between you and the next reply. Interruption is what
+          kills a scene; a limit you notice is a limit that broke it.
+        </p>
+      </article>
+      <article class="gen-card">
+        <h3>The memory</h3>
+        <p>
+          The character should remember your name and last week's promise. Per-character memory
+          is what turns a chat into a campaign.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="gen-section">
+    <h2>Why most roleplay platforms break the scene</h2>
+    <p>
+      The big platforms are built as products with accounts, economies and moderation queues.
+      Each of those choices costs the player something at the table.
+    </p>
+    <div class="gen-table-wrap">
+      <table class="gen-table">
+        <thead>
+          <tr>
+            <th>Friction</th>
+            <th>What it does to a scene</th>
+            <th>Fixed by</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Account wall</td>
+            <td>You cannot try a character before handing over an identity.</td>
+            <td>No sign-up, browser-only chat</td>
+          </tr>
+          <tr>
+            <td>Message cap</td>
+            <td>The scene stops mid-tension when the counter runs out.</td>
+            <td>No cap, no credits</td>
+          </tr>
+          <tr>
+            <td>Short memory</td>
+            <td>The character forgets names, promises and earlier events.</td>
+            <td>Per-character memory kept on your device</td>
+          </tr>
+          <tr>
+            <td>Mature catalogue</td>
+            <td>A shared laptop is a risk, and younger players are excluded.</td>
+            <td>A fixed PG policy that overrides character instructions</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="gen-note">
+      A cap you never notice is fine. The problem is the cap that arrives at the worst moment,
+      which is how free tiers are usually designed.
+    </p>
+  </section>
+
+  <section class="gen-section">
+    <h2>How to start roleplay character play in three steps</h2>
+    <ol class="gen-steps">
+      {steps.map((s) => (
+        <li><strong>{s.name}.</strong> {s.text}</li>
+      ))}
+    </ol>
+    <p class="gen-inline-cta">
+      <a href={CHAT_URL}>Open the character chat</a> and start with one sentence.
+    </p>
+  </section>
+
+  <section class="gen-section">
+    <h2>How to write a character that survives a long story</h2>
+    <p>
+      The most common mistake is describing a look instead of a person. A character with a
+      clear want and a clear secret will still be interesting fifty messages later; a character
+      with only a costume will not.
+    </p>
+    <ul class="gen-list">
+      <li><strong>One want.</strong> What are they trying to get from this scene? Make it concrete.</li>
+      <li><strong>One secret.</strong> Something they would rather you did not learn yet.</li>
+      <li><strong>One speech habit.</strong> Short sentences, formal address, a repeated phrase. Small signals keep the voice stable.</li>
+      <li><strong>A starting place.</strong> Where are you, and why are you both there? The setting does half the writing.</li>
+    </ul>
+    <p>
+      This paragraph is portable. Use it as an image prompt for a portrait, as a character card
+      for a chat, or as the first paragraph of a story. The description is the asset; the tool
+      is replaceable.
+    </p>
+  </section>
+
+  <section class="gen-section">
+    <h2>Keeping a character across sessions</h2>
+    <p>
+      Continuity is the difference between a chat and a story. When memory is stored per
+      character on your own device, the character keeps its identity and history after the tab
+      closes. Two characters with the same name never share a memory, so a second campaign does
+      not contaminate the first.
+    </p>
+    <p>
+      Cloud-synced platforms offer the same idea across devices, usually with an account and a
+      subscription. Local memory trades cross-device convenience for privacy and no sign-up.
+      Pick the trade you want before you start, because moving a long story later is painful.
+    </p>
+  </section>
+
+  <section class="gen-section">
+    <h2>SFW roleplay is a design choice, not a limitation</h2>
+    <p>
+      A fixed PG policy changes what the catalogue contains and who can use the device. Adventure,
+      mystery, fantasy politics, rivalry, friendship and non-explicit romance all work with the
+      same scene mechanics. What changes is the default: a shared laptop stays safe, and a younger
+      player can use the same tool.
+    </p>
+    <p>
+      The trade-off is honest. Platforms built around mature content have larger catalogues and
+      looser rules. If that is what you want, those platforms exist; this page is for the other
+      search intent.
+    </p>
+  </section>
+
+  <section class="gen-section">
+    <h2>Roleplay platforms compared</h2>
+    <div class="gen-table-wrap">
+      <table class="gen-table">
+        <thead>
+          <tr>
+            <th>Platform</th>
+            <th>Account</th>
+            <th>Free message cap</th>
+            <th>Memory</th>
+            <th>Policy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href={CHAT_URL}>EggerMath character chat</a></td>
+            <td>{chatRow.signup}</td>
+            <td><strong>{chatRow.cap}</strong></td>
+            <td>{chatRow.memory}</td>
+            <td>{chatRow.policy}</td>
+          </tr>
+          {roleplayCompetitors.map((tool) => (
+            <tr>
+              <td>
+                <a href={`/roleplay-alternatives/${tool.slug}`}>{tool.name}</a>
+              </td>
+              <td>{tool.signup}</td>
+              <td>{tool.cap}</td>
+              <td>{tool.memory}</td>
+              <td>{tool.policy}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="gen-note">
+      Summaries of publicly visible behaviour in November 2026, not a quote. Policies, caps and
+      prices change: confirm on each official site before relying on them.
+    </p>
+    <p class="gen-inline-cta">
+      <a href="/ai-roleplay-character-alternatives">Read the full comparison and per-platform alternatives</a>.
+    </p>
+  </section>
+
+  <section class="gen-section">
+    <h2>What roleplay character play is not</h2>
+    <ul class="gen-list">
+      <li>It is not a character marketplace: you bring the character, or generate one in a sentence.</li>
+      <li>It is not voice or video: this is written play.</li>
+      <li>It is not a replacement for a tabletop group. It is a scene partner between sessions.</li>
+      <li>It does not include explicit content on this chat, by design.</li>
+    </ul>
+  </section>
+
+  <section class="gen-section">
+    <h2>Related pages</h2>
+    <ul class="gen-links">
+      <li><a href="/ai-roleplay-character-alternatives">AI roleplay character alternatives compared</a></li>
+      <li><a href="/ai-girlfriend-chat">AI girlfriend chat with memory</a></li>
+      <li><a href="/c-ai-alternative">Free c.ai alternative</a></li>
+      <li><a href="/ai-character-chat-no-sign-up">AI character chat with no sign-up</a></li>
+      <li><a href="/ai-chat-with-memory">How character memory works</a></li>
+      <li><a href="/ai-character-generator">AI character generator</a></li>
+      <li><a href="/fantasy-character-maker">Fantasy character maker comparison</a></li>
+    </ul>
+  </section>
+
+  <section class="gen-section">
+    <h2>AI roleplay character play questions</h2>
+    <div class="gen-faq">
+      {playFaq.map((item) => (
+        <details>
+          <summary>{item.q}</summary>
+          <p>{item.a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <section class="gen-final">
+    <h2>Start the scene</h2>
+    <p>No account, no message counter, no queue. Describe a character and play.</p>
+    <a class="gen-btn" href={CHAT_URL}>Begin roleplay character play</a>
+  </section>
+</GeneratorLayout>

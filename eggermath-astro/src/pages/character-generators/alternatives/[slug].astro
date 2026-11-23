@@ -1,0 +1,218 @@
+---
+import GeneratorLayout from '../../../layouts/GeneratorLayout.astro';
+import { SITE } from '../../../data/games.js';
+import { CHAT_URL, fantasyCompetitors } from '../../../data/fantasy-competitors.js';
+
+export function getStaticPaths() {
+  return fantasyCompetitors.map((tool, i) => ({
+    params: { slug: tool.slug },
+    props: {
+      tool,
+      alternatives: [1, 2, 3, 4].map((n) => fantasyCompetitors[(i + n) % fantasyCompetitors.length]),
+    },
+  }));
+}
+
+const { tool, alternatives } = Astro.props;
+const PAGE_URL = `${SITE.url}/character-generators/alternatives/${tool.slug}`;
+const TITLE = `Best ${tool.name} Alternatives for Fantasy Characters (2026) | EggerMath`;
+const DESC = `Four honest ${tool.name} alternatives: art generators, tabletop tools and a text-first character chat. Compared by output, free tier and whether you can talk to the character.`;
+
+const faq = [
+  {
+    q: `What is the best free alternative to ${tool.name}?`,
+    a: `For art, ${alternatives[0].name} and ${alternatives[1].name} are the closest free starting points. For a character that speaks, the free character chat linked on this page goes further: it creates a personality and a greeting and keeps a memory per character with no account.`,
+  },
+  {
+    q: `Is there a ${tool.name} alternative with chat?`,
+    a: `${tool.name} does not include in-character chat. The text-first character chat on this site does: you paste the same description, get a character card, and continue the scene with memory kept on your device.`,
+  },
+  {
+    q: `Can I create a fantasy character without an account?`,
+    a: `Yes for text-first creation: the character chat opens without sign-up. Most art tools need an account once you want to save or download a result, so check the free tier before starting.`,
+  },
+  {
+    q: `Which ${tool.name} alternative is best for D&D?`,
+    a: `For portraits and tokens, CharGen is the most tabletop-specific option. For roleplaying the NPC between sessions, a character chat is the better fit, because the sheet is not the same thing as the voice.`,
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      name: TITLE,
+      url: PAGE_URL,
+      description: DESC,
+      dateModified: '2026-11-23',
+      isPartOf: { '@type': 'WebSite', name: SITE.name, url: SITE.url },
+      breadcrumb: {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+          { '@type': 'ListItem', position: 2, name: 'Character Generators', item: `${SITE.url}/character-generators` },
+          { '@type': 'ListItem', position: 3, name: tool.name, item: `${SITE.url}/character-generators/${tool.slug}` },
+          { '@type': 'ListItem', position: 4, name: 'Alternatives', item: PAGE_URL },
+        ],
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faq.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a },
+      })),
+    },
+    {
+      '@type': 'ItemList',
+      name: `${tool.name} alternatives`,
+      itemListElement: alternatives.map((alt, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: alt.name,
+        url: `${SITE.url}/character-generators/${alt.slug}`,
+      })),
+    },
+    {
+      '@type': 'SoftwareApplication',
+      name: 'Unlimited AI Character Chat',
+      url: CHAT_URL,
+      applicationCategory: 'EntertainmentApplication',
+      operatingSystem: 'Web',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+  ],
+};
+---
+
+<GeneratorLayout
+  title={TITLE}
+  description={DESC}
+  canonical={PAGE_URL}
+  jsonLd={jsonLd}
+  crumbs={[
+    { name: 'Home', href: '/' },
+    { name: 'Character Generators', href: '/character-generators' },
+    { name: tool.name, href: `/character-generators/${tool.slug}` },
+    { name: 'Alternatives' },
+  ]}
+>
+  <section class="gen-hero">
+    <p class="gen-kicker">{tool.name} alternatives</p>
+    <h1>Best {tool.name} Alternatives for Fantasy Characters</h1>
+    <p class="gen-lede">
+      The right {tool.name} alternative depends on the next step. If you need art, the tools below
+      are the closest fit. If you need the character to speak, no art generator will do it, and a
+      text-first character chat is the shorter route.
+    </p>
+    <div class="gen-cta">
+      <a class="gen-btn" href={CHAT_URL}>Try the free character chat</a>
+      <a class="gen-btn gen-btn--ghost" href={`/character-generators/${tool.slug}`}>
+        Read the {tool.name} review
+      </a>
+    </div>
+  </section>
+
+  <p class="gen-byline">
+    Compared by the EggerMath editorial team, 23 November 2026. Features and free tiers come from
+    each product's public pages and can change. Not sponsored.
+  </p>
+
+  <section class="gen-section">
+    <h2>{tool.name} alternatives compared</h2>
+    <div class="gen-table-wrap">
+      <table class="gen-table">
+        <thead>
+          <tr>
+            <th>Alternative</th>
+            <th>Type</th>
+            <th>Chat?</th>
+            <th>Free tier</th>
+            <th>Best for</th>
+          </tr>
+        </thead>
+        <tbody>
+          {alternatives.map((alt) => (
+            <tr>
+              <td><a href={`/character-generators/${alt.slug}`}>{alt.name}</a></td>
+              <td>{alt.category}</td>
+              <td>No</td>
+              <td>{alt.pricing}</td>
+              <td>{alt.bestFor}</td>
+            </tr>
+          ))}
+          <tr>
+            <td><a href={CHAT_URL}>EggerMath character chat</a></td>
+            <td>Text-first character chat</td>
+            <td><strong>Yes</strong></td>
+            <td>Free, no message cap</td>
+            <td>Characters that need a voice and a memory</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="gen-section">
+    <h2>Why people look for a {tool.name} alternative</h2>
+    <p>
+      {tool.name} is good at what it is built for: {tool.tagline.toLowerCase()}. The usual reasons
+      to look elsewhere are the limits it lists itself. {tool.limits.map(([t]) => t).join(', ')}.
+      None of those are faults; they are the shape of the product.
+    </p>
+    <p>
+      The fix depends on what you wanted from it. If you wanted more visual control, one of the art
+      tools above is a straight swap. If you wanted a character to talk to, the swap is a different
+      category of product.
+    </p>
+  </section>
+
+  <section class="gen-section">
+    <h2>The alternatives in detail</h2>
+    <div class="gen-grid">
+      {alternatives.map((alt) => (
+        <article class="gen-card">
+          <h3><a href={`/character-generators/${alt.slug}`} style="color:var(--accent-amber,#f0b35b)">{alt.name}</a></h3>
+          <p><strong>{alt.category}.</strong> {alt.tagline}</p>
+          <p style="margin-top:8px;font-size:0.9rem"><em>Best for:</em> {alt.bestFor}</p>
+          <p style="margin-top:8px;font-size:0.9rem"><em>Skip if:</em> {alt.notFor}</p>
+        </article>
+      ))}
+      <article class="gen-card">
+        <h3><a href={CHAT_URL} style="color:var(--accent-amber,#f0b35b)">EggerMath character chat</a></h3>
+        <p><strong>Text-first character chat.</strong> Describe any fantasy character in a message and get a personality, a greeting and a conversation that keeps its memory.</p>
+        <p style="margin-top:8px;font-size:0.9rem"><em>Best for:</em> roleplay, story scenes and characters that have to remember.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="gen-section">
+    <h2>Questions about switching from {tool.name}</h2>
+    <div class="gen-faq">
+      {faq.map((item) => (
+        <details>
+          <summary>{item.q}</summary>
+          <p>{item.a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <section class="gen-section">
+    <h2>Related pages</h2>
+    <ul class="gen-links">
+      <li><a href={`/character-generators/${tool.slug}`}>{tool.name} review</a></li>
+      <li><a href="/character-generators">All character generator reviews</a></li>
+      <li><a href="/fantasy-character-maker">Fantasy character maker hub</a></li>
+      <li><a href="/ai-character-generator">Free AI character generator</a></li>
+    </ul>
+  </section>
+
+  <section class="gen-final">
+    <h2>Start where the character can answer</h2>
+    <p>Paste the description you already wrote. No account, no credits, no image prompt.</p>
+    <a class="gen-btn" href={CHAT_URL}>Open the free character chat</a>
+  </section>
+</GeneratorLayout>

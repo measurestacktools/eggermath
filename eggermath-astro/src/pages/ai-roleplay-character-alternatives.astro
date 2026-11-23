@@ -1,0 +1,259 @@
+---
+import GeneratorLayout from '../layouts/GeneratorLayout.astro';
+import { SITE } from '../data/games.js';
+import { CHAT_URL, chatRow, roleplayCompetitors } from '../data/roleplay-competitors.js';
+
+const PAGE_URL = `${SITE.url}/ai-roleplay-character-alternatives`;
+const TITLE = 'AI Roleplay Character Alternatives Compared (2026) | EggerMath';
+const DESC =
+  'Six AI roleplay platforms compared on account walls, free message caps, memory and content policy. Find the alternative that fits how you actually play.';
+
+const faq = [
+  {
+    q: 'What is the best AI roleplay character alternative?',
+    a: 'It depends on what is blocking you. If it is the account wall, queues or disappearing memory, a no-sign-up chat with per-character memory fixes all three. If you want a large public catalogue, Character.AI still has the widest one.',
+  },
+  {
+    q: 'Which roleplay platform has no message limit?',
+    a: 'Character.AI, Janitor AI, Chub AI, SpicyChat, Talkie and Poly AI all limit free use in some way: queues, coin economies, daily allowances or daily message caps. The chat linked here has no message counter.',
+  },
+  {
+    q: 'Which roleplay platform is safe for a shared device?',
+    a: 'Platforms with a fixed PG policy and explicit content blocked for every character. Janitor AI, Chub AI and SpicyChat allow mature content, so their catalogues are not a safe default.',
+  },
+  {
+    q: 'Can I play roleplay characters without signing up?',
+    a: 'Not on the six platforms listed here: all require an account. A browser chat with no registration is the exception, and it stores the character locally instead of in an account.',
+  },
+  {
+    q: 'Do paid roleplay subscriptions fix memory?',
+    a: 'They expand the context window, which helps within a session. Long campaigns still lose older details eventually, so check how memory is stored before paying for a year.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      name: TITLE,
+      url: PAGE_URL,
+      description: DESC,
+      dateModified: '2026-11-23',
+      isPartOf: { '@type': 'WebSite', name: SITE.name, url: SITE.url },
+      breadcrumb: {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+          { '@type': 'ListItem', position: 2, name: 'AI Roleplay Character Alternatives', item: PAGE_URL },
+        ],
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faq.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a },
+      })),
+    },
+    {
+      '@type': 'ItemList',
+      name: 'AI roleplay character alternatives',
+      itemListElement: roleplayCompetitors.map((tool, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: tool.name,
+        url: `${SITE.url}/roleplay-alternatives/${tool.slug}`,
+      })),
+    },
+    {
+      '@type': 'SoftwareApplication',
+      name: 'Unlimited AI Character Chat',
+      url: CHAT_URL,
+      applicationCategory: 'EntertainmentApplication',
+      operatingSystem: 'Web',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+  ],
+};
+---
+
+<GeneratorLayout
+  title={TITLE}
+  description={DESC}
+  canonical={PAGE_URL}
+  jsonLd={jsonLd}
+  crumbs={[
+    { name: 'Home', href: '/' },
+    { name: 'AI Roleplay Character Play', href: '/ai-roleplay-character-play' },
+    { name: 'Alternatives' },
+  ]}
+>
+  <section class="gen-hero">
+    <p class="gen-kicker">Roleplay alternatives</p>
+    <h1>AI Roleplay Character Alternatives, Compared Honestly</h1>
+    <p class="gen-lede">
+      Six platforms dominate AI roleplay, and each one asks for something: an account, a
+      subscription, a queue, a coin, or a content policy you have to live with. This page
+      compares what each one actually costs a player in the middle of a scene.
+    </p>
+    <div class="gen-cta">
+      <a class="gen-btn" href={CHAT_URL}>Play without an account</a>
+      <a class="gen-btn gen-btn--ghost" href="/ai-roleplay-character-play">
+        What roleplay character play is
+      </a>
+    </div>
+  </section>
+
+  <p class="gen-byline" style="margin-top:20px">
+    Compiled by the EggerMath editorial team from each platform's public pages in November 2026.
+    Limits, policies and prices change without notice. Not sponsored, no affiliate links.
+  </p>
+
+  <section class="gen-section">
+    <h2>The comparison table</h2>
+    <div class="gen-table-wrap">
+      <table class="gen-table">
+        <thead>
+          <tr>
+            <th>Platform</th>
+            <th>Account</th>
+            <th>Free cap</th>
+            <th>Memory</th>
+            <th>Policy</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href={CHAT_URL}>EggerMath character chat</a></td>
+            <td>{chatRow.signup}</td>
+            <td><strong>{chatRow.cap}</strong></td>
+            <td>{chatRow.memory}</td>
+            <td>{chatRow.policy}</td>
+            <td>{chatRow.pricing}</td>
+          </tr>
+          {roleplayCompetitors.map((tool) => (
+            <tr>
+              <td><a href={`/roleplay-alternatives/${tool.slug}`}>{tool.name}</a></td>
+              <td>{tool.signup}</td>
+              <td>{tool.cap}</td>
+              <td>{tool.memory}</td>
+              <td>{tool.policy}</td>
+              <td>{tool.pricing}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="gen-note">
+      "Free cap" describes how free use is limited, not a number. Exact allowances change
+      frequently, so treat the table as a map of friction, then verify on the site.
+    </p>
+  </section>
+
+  <section class="gen-section">
+    <h2>Pick by what is blocking you</h2>
+    <div class="gen-grid">
+      <article class="gen-card">
+        <h3>Blocked by the account wall</h3>
+        <p>
+          Every platform in the table requires registration. If that is the objection, the
+          no-sign-up chat is the only direct answer: open it, describe the character, play.
+        </p>
+      </article>
+      <article class="gen-card">
+        <h3>Blocked by limits</h3>
+        <p>
+          Queues, coins and daily allowances all interrupt a scene. A chat with no message
+          counter removes the interruption; you keep the trade of a smaller public catalogue.
+        </p>
+      </article>
+      <article class="gen-card">
+        <h3>Blocked by forgetting</h3>
+        <p>
+          If the character keeps losing names and promises, the problem is memory, not writing.
+          Per-character memory stored locally keeps a campaign intact between sessions.
+        </p>
+      </article>
+      <article class="gen-card">
+        <h3>Blocked by policy</h3>
+        <p>
+          Mature catalogues are not safe on a shared device. A fixed PG policy is the only
+          reliable answer, because it applies to every character rather than to a setting.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="gen-section">
+    <h2>Each platform in detail</h2>
+    <div class="gen-grid">
+      {roleplayCompetitors.map((tool) => (
+        <article class="gen-card">
+          <h3>
+            <a href={`/roleplay-alternatives/${tool.slug}`} style="color:var(--accent-amber,#f0b35b)">
+              {tool.name}
+            </a>
+          </h3>
+          <p><strong>{tool.platform}.</strong> {tool.tagline}</p>
+          <p style="margin-top:8px;font-size:0.9rem"><em>Best for:</em> {tool.bestFor}</p>
+          <p style="margin-top:8px;font-size:0.9rem"><em>Skip if:</em> {tool.notFor}</p>
+        </article>
+      ))}
+      <article class="gen-card">
+        <h3>
+          <a href={CHAT_URL} style="color:var(--accent-amber,#f0b35b)">EggerMath character chat</a>
+        </h3>
+        <p><strong>Web.</strong> {chatRow.tagline}</p>
+        <p style="margin-top:8px;font-size:0.9rem"><em>Best for:</em> SFW campaigns, long scenes and playing without an account.</p>
+        <p style="margin-top:8px;font-size:0.9rem"><em>Skip if:</em> you need a public character marketplace or voice chat.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="gen-section">
+    <h2>How we compare</h2>
+    <p>
+      We separate the product's design from its marketing. "Unlimited" usually means unlimited
+      browsing, not unlimited messages. "Memory" usually means a context window, not a saved
+      transcript. A platform can be excellent and still fail a specific search intent, which is
+      why each entry names who should stay as well as who should switch.
+    </p>
+    <p class="gen-note">
+      No platform paid for placement. Where a claim could not be verified from a public page, the
+      table says it depends on the plan instead of inventing a number.
+    </p>
+  </section>
+
+  <section class="gen-section">
+    <h2>Related pages</h2>
+    <ul class="gen-links">
+      <li><a href="/ai-roleplay-character-play">AI roleplay character play: how it works</a></li>
+      <li><a href="/c-ai-alternative">Free c.ai alternative</a></li>
+      <li><a href="/ai-girlfriend-chat">AI girlfriend chat with memory</a></li>
+      <li><a href="/ai-character-chat-no-sign-up">AI character chat with no sign-up</a></li>
+      <li><a href="/ai-chat-with-memory">AI chat with long-term memory</a></li>
+      <li><a href="/ai-character-generator">AI character generator</a></li>
+    </ul>
+  </section>
+
+  <section class="gen-section">
+    <h2>Questions about switching platforms</h2>
+    <div class="gen-faq">
+      {faq.map((item) => (
+        <details>
+          <summary>{item.q}</summary>
+          <p>{item.a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <section class="gen-final">
+    <h2>Try the no-account route first</h2>
+    <p>One message to describe the character, then the scene starts. No credits involved.</p>
+    <a class="gen-btn" href={CHAT_URL}>Open the free character chat</a>
+  </section>
+</GeneratorLayout>

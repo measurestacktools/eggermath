@@ -1,0 +1,98 @@
+---
+import GeneratorLayout from '../../layouts/GeneratorLayout.astro';
+import { SITE } from '../../data/games.js';
+import { CHAT_URL, fantasyCompetitors } from '../../data/fantasy-competitors.js';
+
+const PAGE_URL = `${SITE.url}/character-generators`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'CollectionPage',
+      name: 'Fantasy and Anime Character Generator Reviews | EggerMath',
+      url: PAGE_URL,
+      description:
+        'Reviews of fantasy and anime character generators: what each tool produces, what it costs, and whether you can chat with the character afterwards.',
+      isPartOf: { '@type': 'WebSite', name: SITE.name, url: SITE.url },
+      breadcrumb: {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+          { '@type': 'ListItem', position: 2, name: 'Character Generators', item: PAGE_URL },
+        ],
+      },
+    },
+    {
+      '@type': 'ItemList',
+      name: 'Character generator reviews',
+      itemListElement: fantasyCompetitors.map((tool, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: `${tool.name} review`,
+        url: `${SITE.url}/character-generators/${tool.slug}`,
+      })),
+    },
+  ],
+};
+---
+
+<GeneratorLayout
+  title="Fantasy and Anime Character Generator Reviews | EggerMath"
+  description="Nine fantasy and anime character generators reviewed: what each one makes, what the free tier gives you, and whether you can chat with the character after."
+  canonical={PAGE_URL}
+  jsonLd={jsonLd}
+  crumbs={[{ name: 'Home', href: '/' }, { name: 'Character Generators' }]}
+>
+  <section class="gen-hero">
+    <p class="gen-kicker">Character generator reviews</p>
+    <h1>Fantasy and Anime Character Generator Reviews</h1>
+    <p class="gen-lede">
+      Nine tools, one question: after you create the character, what can you actually do with it?
+      Each review covers the output, the free tier, the limits and the honest verdict. The
+      comparison hub is on <a href="/fantasy-character-maker">the fantasy character maker page</a>.
+    </p>
+    <div class="gen-cta">
+      <a class="gen-btn" href="/fantasy-character-maker">Compare all tools</a>
+      <a class="gen-btn gen-btn--ghost" href={CHAT_URL}>Try text-first character chat</a>
+    </div>
+  </section>
+
+  <section class="gen-section">
+    <h2>All character generator reviews</h2>
+    <div class="gen-grid">
+      {fantasyCompetitors.map((tool) => (
+        <article class="gen-card">
+          <h3><a href={`/character-generators/${tool.slug}`} style="color:var(--accent-amber,#f0b35b)">{tool.name}</a></h3>
+          <p><strong>{tool.category}.</strong> {tool.tagline}</p>
+          <p style="margin-top:10px;font-size:0.85rem">
+            <a href={`/character-generators/alternatives/${tool.slug}`}>Alternatives</a>
+          </p>
+        </article>
+      ))}
+      <article class="gen-card">
+        <h3><a href={CHAT_URL} style="color:var(--accent-amber,#f0b35b)">EggerMath character chat</a></h3>
+        <p><strong>Text-first character chat.</strong> Describe a character, get a personality and a greeting, then talk with per-character memory. No account.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="gen-section">
+    <h2>How to read these reviews</h2>
+    <p>
+      We separate what a tool is built to do from what people hope it does. An art generator is not
+      a bad character tool because it has no chat; it is the wrong tool for a story. Each review
+      names the job the product is good at, then the job it cannot do.
+    </p>
+    <p class="gen-note">
+      Details come from each product's public pages in November 2026. Free tiers and prices change
+      often, so confirm on the official site before paying.
+    </p>
+  </section>
+
+  <section class="gen-final">
+    <h2>Skip the credits: create with words</h2>
+    <p>If the next step is a conversation, start with a text-first character chat.</p>
+    <a class="gen-btn" href={CHAT_URL}>Open the free chat</a>
+  </section>
+</GeneratorLayout>

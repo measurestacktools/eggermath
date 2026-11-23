@@ -13,8 +13,29 @@
   </a>
   <div class="nav-links">
     <a href="/" class="nav-link" data-i18n="allGames">All Games</a>
+    <a href="/sudoku" class="nav-link">Sudoku</a>
+    <a href="/puzzle" class="nav-link">Puzzle</a>
+    <a href="/character-play" class="nav-link">Stories</a>
+    <a href="/character-chat" class="nav-link">Chat</a>
+    <a href="/character-generators" class="nav-link">Generators</a>
   </div>
 </nav>
+<style>
+  @media (max-width: 640px) {
+    .nav-links {
+      gap: 4px;
+    }
+    .nav-link {
+      padding: 6px 9px;
+      font-size: 0.78rem;
+    }
+  }
+  @media (max-width: 380px) {
+    .brand-name {
+      display: none;
+    }
+  }
+</style>
 <script is:inline>
 (function(){
   var dict={

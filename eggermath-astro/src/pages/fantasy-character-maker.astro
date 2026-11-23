@@ -1,0 +1,238 @@
+---
+import GeneratorLayout from '../layouts/GeneratorLayout.astro';
+import { SITE } from '../data/games.js';
+import { CHAT_URL, fantasyCompetitors, fantasyHubFaq } from '../data/fantasy-competitors.js';
+
+const PAGE_URL = `${SITE.url}/fantasy-character-maker`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      name: 'Fantasy Character Maker - Create and Chat With a Character | EggerMath',
+      url: PAGE_URL,
+      description:
+        'A fantasy character maker comparison: art generators, tabletop tools and text-first character chat. Create a character and talk to it in one place.',
+      isPartOf: { '@type': 'WebSite', name: SITE.name, url: SITE.url },
+      breadcrumb: {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+          { '@type': 'ListItem', position: 2, name: 'Fantasy Character Maker', item: PAGE_URL },
+        ],
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: fantasyHubFaq.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a },
+      })),
+    },
+    {
+      '@type': 'ItemList',
+      name: 'Fantasy character makers compared',
+      itemListElement: fantasyCompetitors.map((tool, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: tool.name,
+        url: `${SITE.url}/character-generators/${tool.slug}`,
+      })),
+    },
+    {
+      '@type': 'SoftwareApplication',
+      name: 'Unlimited AI Character Chat',
+      url: CHAT_URL,
+      applicationCategory: 'EntertainmentApplication',
+      operatingSystem: 'Web',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+  ],
+};
+---
+
+<GeneratorLayout
+  title="Fantasy Character Maker - Create and Chat With a Character | EggerMath"
+  description="Compare fantasy character makers: art generators, tabletop tools and text-first character chat. Create a character and talk to it in one place, no sign-up."
+  canonical={PAGE_URL}
+  jsonLd={jsonLd}
+  crumbs={[{ name: 'Home', href: '/' }, { name: 'Fantasy Character Maker' }]}
+>
+  <section class="gen-hero">
+    <p class="gen-kicker">Fantasy character maker</p>
+    <h1>Fantasy Character Maker: Create the Character, Then Talk to It</h1>
+    <p class="gen-lede">
+      Most fantasy character makers stop at a picture. A character is more than a portrait:
+      it needs a personality, a first line and a memory that survives the next scene. This page
+      compares the art-first tools honestly, and shows where a text-first character chat fits.
+    </p>
+    <div class="gen-cta">
+      <a class="gen-btn" href={CHAT_URL}>Create a character and chat</a>
+      <a class="gen-btn gen-btn--ghost" href="#compare">Compare the tools</a>
+    </div>
+    <ul class="gen-badges">
+      <li>9 tools compared</li>
+      <li>Art-first and text-first</li>
+      <li>No account to chat</li>
+      <li>Updated November 2026</li>
+    </ul>
+  </section>
+
+  <p class="gen-byline" style="margin-top:20px">
+    Reviewed by the EggerMath editorial team. We read each product's public pages, feature list
+    and free-tier limits in November 2026. Prices and allowances change: check the official site
+    before paying. <a href="/pages/about">How we work</a>.
+  </p>
+
+  <section class="gen-section">
+    <h2>What is a fantasy character maker?</h2>
+    <p>
+      A fantasy character maker is a tool that turns a short description into something usable:
+      a portrait, a personality, a backstory or a chat persona. Art generators return images.
+      Tabletop tools return portraits and tokens. Text-first tools return a character that answers
+      and remembers the conversation.
+    </p>
+    <p>
+      The right choice depends on the next step. If the character goes on a sheet, pick a tabletop
+      tool. If it goes on a cover, pick an art tool. If it has to speak, the text layer is the part
+      that matters, and most of the tools below do not have one.
+    </p>
+  </section>
+
+  <section class="gen-section" id="compare">
+    <h2>Fantasy character makers compared</h2>
+    <div class="gen-table-wrap">
+      <table class="gen-table">
+        <thead>
+          <tr>
+            <th>Tool</th>
+            <th>Type</th>
+            <th>What you get</th>
+            <th>Chat with it?</th>
+            <th>Free tier</th>
+          </tr>
+        </thead>
+        <tbody>
+          {fantasyCompetitors.map((tool) => (
+            <tr>
+              <td><a href={`/character-generators/${tool.slug}`}>{tool.name}</a></td>
+              <td>{tool.category}</td>
+              <td>{tool.facts[0][1]}</td>
+              <td>No</td>
+              <td>{tool.pricing}</td>
+            </tr>
+          ))}
+          <tr>
+            <td><a href={CHAT_URL}>EggerMath character chat</a></td>
+            <td>Text-first character chat</td>
+            <td>Personality, greeting, memory, conversation</td>
+            <td><strong>Yes</strong></td>
+            <td>Free, no message cap</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="gen-note">
+      Free-tier details are a summary of each product's public pages at the time of writing.
+      They are not a quote and can change without notice.
+    </p>
+  </section>
+
+  <section class="gen-section">
+    <h2>Art-first vs text-first character makers</h2>
+    <div class="gen-grid">
+      <article class="gen-card">
+        <h3>Art-first</h3>
+        <p>
+          You prompt an image and get a portrait, token or concept sheet. The strength is visual
+          control. The limit is that the character has no voice, no relationships and no memory.
+          Everything after the image lives in another tool.
+        </p>
+      </article>
+      <article class="gen-card">
+        <h3>Text-first</h3>
+        <p>
+          You describe the character in words and get a personality, a greeting and a conversation.
+          The strength is that creation and use are the same step. The limit is that you get no
+          generated portrait, only the character itself.
+        </p>
+      </article>
+      <article class="gen-card">
+        <h3>Both</h3>
+        <p>
+          The practical workflow is a hybrid: generate the portrait in an art tool, then paste the
+          same description into a chat tool. The look and the voice match because both come from
+          the same paragraph.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="gen-section">
+    <h2>How to create a fantasy character in three steps</h2>
+    <ol class="gen-steps">
+      <li>
+        <strong>Write the character in one paragraph.</strong> Name, role, what they want, what
+        they hide, and how they speak. This paragraph is portable: it works as an art prompt and
+        as a chat description.
+      </li>
+      <li>
+        <strong>Choose the output you actually need.</strong> A token for a table, a portrait for a
+        cover, or a persona that answers. Do not pay for art credits if the next step is dialogue.
+      </li>
+      <li>
+        <strong>Open the chat and continue the scene.</strong>
+        <a href={CHAT_URL}> The free character chat</a> turns the paragraph into a character card
+        with a greeting, and keeps the memory per character on your device.
+      </li>
+    </ol>
+  </section>
+
+  <section class="gen-section">
+    <h2>What to check before paying for credits</h2>
+    <ul class="gen-list">
+      <li><strong>Commercial licence.</strong> Whether you can publish the art in a book or a paid campaign.</li>
+      <li><strong>Resolution on the free tier.</strong> Many tools watermark or downscale until you pay.</li>
+      <li><strong>Consistency across a cast.</strong> Can the same settings produce a matching party, or does every character look unrelated?</li>
+      <li><strong>What happens after export.</strong> If the character has to speak, budget for a second tool.</li>
+    </ul>
+  </section>
+
+  <section class="gen-section">
+    <h2>Guides for each fantasy character maker</h2>
+    <ul class="gen-links">
+      {fantasyCompetitors.map((tool) => (
+        <li>
+          <a href={`/character-generators/${tool.slug}`}>{tool.name} review</a>
+          {' · '}
+          <a href={`/character-generators/alternatives/${tool.slug}`}>{tool.name} alternatives</a>
+        </li>
+      ))}
+      <li><a href="/ai-character-generator">Free AI character generator (anime, fantasy, original)</a></li>
+      <li><a href="/ai-character-chat-no-sign-up">AI character chat with no sign-up</a></li>
+      <li><a href="/ai-chat-with-memory">AI chat with long-term memory</a></li>
+      <li><a href="/ai-roleplay-character-play">AI roleplay character play</a></li>
+      <li><a href="/ai-roleplay-character-alternatives">Roleplay platforms compared</a></li>
+    </ul>
+  </section>
+
+  <section class="gen-section">
+    <h2>Fantasy character maker questions</h2>
+    <div class="gen-faq">
+      {fantasyHubFaq.map((item) => (
+        <details>
+          <summary>{item.q}</summary>
+          <p>{item.a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <section class="gen-final">
+    <h2>Make the character, then talk to it</h2>
+    <p>Describe the fantasy character in your own words. No account, no credit counter, no image prompt.</p>
+    <a class="gen-btn" href={CHAT_URL}>Open the free character chat</a>
+  </section>
+</GeneratorLayout>

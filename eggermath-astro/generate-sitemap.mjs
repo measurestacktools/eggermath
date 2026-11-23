@@ -1,5 +1,7 @@
 ﻿import { writeFileSync, readFileSync, unlinkSync } from 'fs';
 import { join } from 'path';
+import { fantasyCompetitors } from './src/data/fantasy-competitors.js';
+import { roleplayCompetitors } from './src/data/roleplay-competitors.js';
 
 const SITE = 'https://www.eggermath.com';
 const TODAY = new Date().toISOString().split('T')[0];
@@ -217,6 +219,11 @@ const contentPages = [
   { path: '/c-ai-alternative', priority: '0.8', changefreq: 'monthly' },
   { path: '/ai-chat-with-memory', priority: '0.8', changefreq: 'monthly' },
   { path: '/ai-character-chat-no-sign-up', priority: '0.8', changefreq: 'monthly' },
+  { path: '/fantasy-character-maker', priority: '0.9', changefreq: 'weekly' },
+  { path: '/ai-character-generator', priority: '0.9', changefreq: 'weekly' },
+  { path: '/character-generators', priority: '0.8', changefreq: 'weekly' },
+  { path: '/ai-roleplay-character-play', priority: '0.9', changefreq: 'weekly' },
+  { path: '/ai-roleplay-character-alternatives', priority: '0.8', changefreq: 'weekly' },
   { path: '/is-emulator-legal', priority: '0.6', changefreq: 'yearly' },
   { path: '/pages/about', priority: '0.4', changefreq: 'yearly' },
   { path: '/pages/contact', priority: '0.4', changefreq: 'yearly' },
@@ -232,6 +239,41 @@ const contentUrls = contentPages.map((p) =>
     images: [OG_IMAGE],
   })
 );
+
+// ============================================================
+// 5a. CHARACTER GENERATOR REVIEW + ALTERNATIVES PAGES
+//     Generated from src/data/fantasy-competitors.js
+// ============================================================
+for (const tool of fantasyCompetitors) {
+  contentUrls.push(
+    urlEntry(`${SITE}/character-generators/${tool.slug}`, {
+      priority: '0.7',
+      changefreq: 'monthly',
+      images: [OG_IMAGE],
+    })
+  );
+  contentUrls.push(
+    urlEntry(`${SITE}/character-generators/alternatives/${tool.slug}`, {
+      priority: '0.7',
+      changefreq: 'monthly',
+      images: [OG_IMAGE],
+    })
+  );
+}
+
+// ============================================================
+// 5b. ROLEPLAY ALTERNATIVE PAGES
+//     Generated from src/data/roleplay-competitors.js
+// ============================================================
+for (const tool of roleplayCompetitors) {
+  contentUrls.push(
+    urlEntry(`${SITE}/roleplay-alternatives/${tool.slug}`, {
+      priority: '0.7',
+      changefreq: 'monthly',
+      images: [OG_IMAGE],
+    })
+  );
+}
 writeFileSync(join(DIST, 'sitemap-content.xml'), sitemapXml(contentUrls));
 allSitemaps.push({ loc: `${SITE}/sitemap-content.xml`, lastmod: TODAY });
 totalUrls += contentUrls.length;
