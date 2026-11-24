@@ -10,6 +10,20 @@ GA4 is already on the site, so the campaign report will show which channel conve
 Canonical landing page: `https://www.eggermath.com/ai-roleplay-character-play`
 Comparison page for data-seekers: `https://www.eggermath.com/ai-roleplay-character-alternatives`
 
+## Status log
+
+**Done (24 Nov 2026):**
+- Site deployed and verified live — `/ai-roleplay-character-play` and the alternatives pages return 200.
+- Reddit: comment posted in the r/CharacterAIrunaways **November 2026 megathread** from u/Electrical-Power4217, with disclosure and both links. It is the subreddit's designated place for recommendations.
+- Directory: submitted to **aitoolsdirectory.com** via their Paperform; confirmation page reached, now in manual review.
+
+**Blocked — needs you:**
+- **Quora:** the browser session is logged out. Log in once and the 10 answers in section 3 can be pasted directly.
+- **Second Reddit comment:** auto-dropped by Reddit's new-account CQS filter. The account is 3 months old with 3 comment karma; it needs normal participation for a few weeks before more promo comments land.
+- **Other directories:** all checked ones require login, account creation, or payment (see section 4).
+- **r/AIRoleplay:** banned. Removed from the plan.
+
+
 ---
 
 ## 1. Weekly cadence (6 weeks)
@@ -37,12 +51,18 @@ Verify current rules before posting; subreddit policies change and self-promo ru
 
 | Subreddit | Why | Approach |
 |---|---|---|
-| r/AIRoleplay | Direct intent | Craft post, link in comment |
-| r/CharacterAI | Biggest complaint volume: memory, caps, queues | Answer-shaped post, no link in body |
+| **r/CharacterAIrunaways** | Monthly "Best Character AI Alternatives" megathread is the designated place | Comment in megathread with disclosure |
+| r/CharacterAI | Biggest complaint volume: memory, caps, queues | Answer-shaped post, no link in body (rule 5 bans self-promo) |
 | r/roleplay | Writers and tabletop players | Craft advice, no link |
 | r/writing | Long-form writers using characters | Advice post, link only if asked |
 | r/DnD | NPC between sessions | Comment answers only |
 | r/ChatGPT | Adjacent curiosity about character chats | Comment answers only |
+| r/perchance | Perchance generator community, showcase posts with links are normal | Showcase post with link |
+| r/SideProject | Share what you built | Showcase post, disclosure first |
+
+Dead or unusable targets, verified 24 Nov 2026:
+- **r/AIRoleplay** — subreddit is banned ("unmoderated"), do not use.
+- **r/CharacterAI** — rule 5 forbids advertising/self-promotion. Value posts only; never link there.
 
 Search queries to find live threads worth answering (sort by new, last 7 days):
 - `"character ai" alternative`
@@ -51,7 +71,7 @@ Search queries to find live threads worth answering (sort by new, last 7 days):
 - `"unlimited" roleplay ai`
 - `"ai character" forget`
 
-### Post A — r/AIRoleplay
+### Post A — r/perchance or r/SideProject (showcase, link allowed)
 
 Title: `I compared 6 roleplay platforms on the two things that actually break a scene: caps and memory`
 
@@ -297,21 +317,24 @@ consistent.
 - **Name:** Unlimited AI Character Chat
 - **URL:** `https://perchance.org/unlimited-ai-character-chat`
 - **Category:** AI Tools / Chatbots / Entertainment
-- **Short description (150 chars):** Free AI roleplay character chat with no sign-up and no message cap. Describe a character and play; memory is kept per character on your device.
+- **Short description (20-30 words, as submitted):** Browser-based AI character chat for written roleplay. Describe a character to generate a personality and opening scene; memory is stored per character on the visitor's device. No account or message cap.
 - **Long description:** Free browser-based AI character chat for roleplay. Create a character from one sentence, get a personality and an opening scene, and continue the story with memory kept per character on your device. Anime, fantasy and original characters. No account, no credits, no message counter. Explicit content is blocked for every character.
 - **Tags:** ai roleplay, ai character chat, character ai alternative, no signup, unlimited, fantasy, anime
 - **Pricing:** Free
 
 Targets to check (rules and free/paid placement vary — skip any that demand payment):
 
-| Directory | URL | Notes |
+| Directory | URL | Status 24 Nov 2026 |
 |---|---|---|
-| There's An AI For That | theresanaiforthat.com | Submit; free queue is slow |
-| Futurepedia | futurepedia.io | Free submission form |
-| AI Tool Directory | aitoolsdirectory.com | Free tier available |
-| Toolify | toolify.ai | Free listing |
+| AI Tool Directory | aitoolsdirectory.com | **Submitted — accepted pending manual review** (free tier, no login needed) |
+| There's An AI For That | theresanaiforthat.com | Needs account |
+| Futurepedia | futurepedia.io | Submit URLs 404; needs sign-in |
+| Toolify | toolify.ai | Login required |
+| AIxploria | aixploria.com | Paid only ($79+) |
+| Aitoolnet | aitoolnet.com | Paid only ($9.9) |
+| OpenFuture | openfuture.ai | Login required |
 | Insidr | insidr.ai | Curated, apply |
-| AI Scout | aiscout.net | Free listing |
+| AI Scout | aiscout.net | Free listing, not yet tried |
 | Perchance itself | perchance.org | Listing already exists; keep description current |
 
 Also do these one-time items:
