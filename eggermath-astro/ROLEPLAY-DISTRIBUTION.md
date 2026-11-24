@@ -20,11 +20,13 @@ Comparison page for data-seekers: `https://www.eggermath.com/ai-roleplay-charact
   1. What are the best character AI alternatives? — `quora.com/What-are-the-best-character-AI-alternatives/answer/RAYAN-B-39`
   2. What is the best AI roleplay platform? — `quora.com/What-is-the-best-AI-roleplay-platform/answer/RAYAN-B-39`
   3. Why did the AI companion remember … then forget after more talking? — `quora.com/Why-did-the-AI-companion-remember-what-we-were-talking-about-yesterday-at-first-but-then-forgot-after-more-talking/answer/RAYAN-B-39`
+  4. How do you ask AI to make a character? — `quora.com/How-do-you-ask-AI-to-make-a-character/answer/RAYAN-B-39`
+  5. How do I keep AI to have a good memory? — `quora.com/How-do-I-keep-AI-to-have-a-good-memory/answer/RAYAN-B-39`
 
 **Next Quora batch (post 2–3/day, do not batch all at once):**
-- How do you ask AI to make a character? (Answer 4)
-- How do I keep AI to have a good memory? (Answer 10)
 - Is character AI safe? (Answer 8, PG angle)
+- How do I make an anime character for roleplay? (Answer 7)
+- What is the difference between a character generator and character chat? (Answer 9)
 
 
 **Blocked — needs you:**
@@ -152,8 +154,9 @@ disclosure line. 90-150 words each. Do not answer questions older than a year un
 get traffic.
 
 Posted already (see Status log): the character-AI-alternatives question (Answer 5), the best
-AI roleplay platform question (Answers 1+6 merged), and the "why did it forget" question
-(Answer 3). Post the rest at 2–3 per day from the same account.
+AI roleplay platform question (Answers 1+6 merged), the "why did it forget" question
+(Answer 3), the character-creation question (Answer 4) and the good-memory question
+(Answer 10). Five total. Post the rest at 2–3 per day from the same account.
 
 1. **What is the best free AI roleplay site?**
 2. **Is there an AI roleplay site without sign-up?**
