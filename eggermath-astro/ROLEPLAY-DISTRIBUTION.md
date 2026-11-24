@@ -16,9 +16,18 @@ Comparison page for data-seekers: `https://www.eggermath.com/ai-roleplay-charact
 - Site deployed and verified live — `/ai-roleplay-character-play` and the alternatives pages return 200.
 - Reddit: comment posted in the r/CharacterAIrunaways **November 2026 megathread** from u/Electrical-Power4217, with disclosure and both links. It is the subreddit's designated place for recommendations.
 - Directory: submitted to **aitoolsdirectory.com** via their Paperform; confirmation page reached, now in manual review.
+- Quora: 3 answers published and public from the logged-in account (RAYAN B):
+  1. What are the best character AI alternatives? — `quora.com/What-are-the-best-character-AI-alternatives/answer/RAYAN-B-39`
+  2. What is the best AI roleplay platform? — `quora.com/What-is-the-best-AI-roleplay-platform/answer/RAYAN-B-39`
+  3. Why did the AI companion remember … then forget after more talking? — `quora.com/Why-did-the-AI-companion-remember-what-we-were-talking-about-yesterday-at-first-but-then-forgot-after-more-talking/answer/RAYAN-B-39`
+
+**Next Quora batch (post 2–3/day, do not batch all at once):**
+- How do you ask AI to make a character? (Answer 4)
+- How do I keep AI to have a good memory? (Answer 10)
+- Is character AI safe? (Answer 8, PG angle)
+
 
 **Blocked — needs you:**
-- **Quora:** the browser session is logged out. Log in once and the 10 answers in section 3 can be pasted directly.
 - **Second Reddit comment:** auto-dropped by Reddit's new-account CQS filter. The account is 3 months old with 3 comment karma; it needs normal participation for a few weeks before more promo comments land.
 - **Other directories:** all checked ones require login, account creation, or payment (see section 4).
 - **r/AIRoleplay:** banned. Removed from the plan.
@@ -141,6 +150,10 @@ Body:
 Answer in this order. Each answer: definition sentence, then mechanism, then the link, then a
 disclosure line. 90-150 words each. Do not answer questions older than a year unless they still
 get traffic.
+
+Posted already (see Status log): the character-AI-alternatives question (Answer 5), the best
+AI roleplay platform question (Answers 1+6 merged), and the "why did it forget" question
+(Answer 3). Post the rest at 2–3 per day from the same account.
 
 1. **What is the best free AI roleplay site?**
 2. **Is there an AI roleplay site without sign-up?**
