@@ -2,6 +2,7 @@
 import { join } from 'path';
 import { fantasyCompetitors } from './src/data/fantasy-competitors.js';
 import { roleplayCompetitors } from './src/data/roleplay-competitors.js';
+import { html5Games, html5Categories } from './src/data/html5-games.js';
 
 const SITE = 'https://www.eggermath.com';
 const TODAY = new Date().toISOString().split('T')[0];
@@ -349,6 +350,27 @@ if (blogLocUrls.length > 0) {
   writeFileSync(join(DIST, 'sitemap-blog-localized.xml'), sitemapXml(blogLocUrls));
   allSitemaps.push({ loc: `${SITE}/sitemap-blog-localized.xml`, lastmod: TODAY });
   totalUrls += blogLocUrls.length;
+}
+
+// ============================================================
+// 5d. HTML5 GAMES (GameMonetize publisher feed) — EN only
+// ============================================================
+let html5Urls = [];
+try {
+  html5Urls.push(urlEntry(`${SITE}/games`, { priority: '0.8', changefreq: 'weekly', images: [OG_IMAGE] }));
+  html5Categories.forEach(c => {
+    html5Urls.push(urlEntry(`${SITE}/games/${c.slug}`, { priority: '0.8', changefreq: 'monthly', images: [OG_IMAGE] }));
+  });
+  html5Games.forEach(g => {
+    html5Urls.push(urlEntry(`${SITE}/games/${g.slug}`, {
+      priority: '0.7', changefreq: 'monthly', images: g.thumbnail ? [g.thumbnail] : [OG_IMAGE],
+    }));
+  });
+} catch (e) { console.log('html5 sitemap skipped:', e.message); }
+if (html5Urls.length > 0) {
+  writeFileSync(join(DIST, 'sitemap-html5.xml'), sitemapXml(html5Urls));
+  allSitemaps.push({ loc: `${SITE}/sitemap-html5.xml`, lastmod: TODAY });
+  totalUrls += html5Urls.length;
 }
 
 // ============================================================
